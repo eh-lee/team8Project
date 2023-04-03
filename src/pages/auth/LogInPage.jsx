@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
+import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 
 const LogInPage = () => {
   const navi = useNavigate();
@@ -31,42 +32,46 @@ const LogInPage = () => {
   };
 
   return (
-    <Container onSubmit={submitButtonHandler}>
-      <div
-        css={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <div>
-          <div css={{ marginBottom: "5px" }}>이메일</div>
-          <input
-            type="text"
-            value={user.email}
-            name="email"
-            onChange={changeInputHandler}
-            placeholder="이메일을 입력해 주세요."
-          />
-        </div>
+    <>
+      <Container onSubmit={submitButtonHandler}>
+        <div
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          <div>
+            <div css={{ marginBottom: "5px" }}>이메일</div>
+            <input
+              type="text"
+              value={user.email}
+              name="email"
+              onChange={changeInputHandler}
+              placeholder="이메일을 입력해 주세요."
+            />
+          </div>
 
-        <div>
-          <div css={{ marginTop: "10px", marginBottom: "5px" }}>비밀번호</div>
-          <input
-            type="password"
-            value={user.password}
-            name="password"
-            onChange={changeInputHandler}
-            placeholder="비밀번호를 입력해 주세요."
-          />
+          <div>
+            <div css={{ marginTop: "10px", marginBottom: "5px" }}>비밀번호</div>
+            <input
+              type="password"
+              value={user.password}
+              name="password"
+              onChange={changeInputHandler}
+              placeholder="비밀번호를 입력해 주세요."
+            />
+          </div>
         </div>
-      </div>
-      <button text={"로그인"} />
-      <LoginContainer>
-        {/* <StyledLink to="/signup">회원가입 하러 가기</StyledLink> */}
-      </LoginContainer>
-    </Container>
+        <button text={"로그인"} />
+        <LoginContainer>
+          <StyledLink to="/signup">회원가입 하러 가기</StyledLink>
+        </LoginContainer>
+      </Container>
+
+      <KakaoLoginBtn />
+    </>
   );
 };
 

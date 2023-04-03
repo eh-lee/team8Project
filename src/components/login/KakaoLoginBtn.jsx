@@ -1,15 +1,25 @@
-// import React from "react";
-// import kakao from "../../assets/icons/kakao-icon.png";
-// import LoginButton from "../common/LoginButton";
+import React from "react";
+import kakao from "../../assets/icons/kakao-icon.png";
 
-// function KakaoLoginBtn() {
-//   const LOGIN_URL = {
-//     KAKAO_LOGIN_URL: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_BASE_URL}/login/kakao&response_type=code`,
-//   };
+function KakaoLoginBtn() {
+  const REST_API_KEY = "a5cd0f6d81237b9b30804bf56fabe6d0";
+  const REDIRECT_URI = "http://localhost:3000/kakaoLogin";
+  const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
-//   return (
-//     <LoginButton src={kakao} sns="kakao" url={LOGIN_URL.KAKAO_LOGIN_URL} />
-//   );
-// }
+  const KaKaoLoginHandler = () => {
+    window.location.href = KAKAO_LOGIN_URL;
+  };
 
-// export default KakaoLoginBtn;
+  return (
+    <button
+      src={kakao}
+      sns="kakao"
+      url={KAKAO_LOGIN_URL}
+      onClick={KaKaoLoginHandler}
+    >
+      카카오로 로그인하기
+    </button>
+  );
+}
+
+export default KakaoLoginBtn;
