@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# hooks
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    - hook(use머시기)을 사용하여 만든 커스텀 훅
 
-## Available Scripts
+# utils
 
-In the project directory, you can run:
+    - cookie나 잡다한 기능들(bgm, downloadImage, )
 
-### `yarn start`
+# app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    - stack: redux
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# api
 
-### `yarn test`
+    - stack: axios
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Commit Rule
 
-### `yarn build`
+    - [feat]
+      - 새로운 기능 추가
+    - [fix]
+      - 수정
+    - [chore]
+      - 빌드 업무 수정, 패키지 매니저 수정, 의존성 설치 등
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - [test]
+      - 테스트 코드, 미완인 코드 커밋 시
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    - [remove]
+      - 기능과 관련된 삭제
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - [design]
+      - CSS 전반
+      - 디자인 추가, 수정, 삭제 등 전부
 
-### `yarn eject`
+    - [style]
+      - 공백, 문장 부호 제거-추가, 코드 포맷 변경 등 (내용 수정이 없는 경우)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    - [refactor]
+      - 리팩토링, 각주 제거, 지저분한 거 지울 때도..
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    - [docs] ~ README.md
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    - 커밋 머시기가 중복될 경우, 중요한 것을 헤드에 적기. 헷갈리는 경우 상의하기.
 
-## Learn More
+# CLI command
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    - 줄 바꿈: option + enter
