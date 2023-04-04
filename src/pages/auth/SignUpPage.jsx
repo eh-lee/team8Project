@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { instance } from "../../api/axios";
+import AuthButton from "../../components/elem/AuthButton";
+import AuthInput from "../../components/elem/AuthInput";
+
 const SignUpPage = () => {
   const dispatch = useDispatch();
   const navi = useNavigate();
-  // const [usernameMsg, setUsernameMsg] = useState("");
 
   const [user, setUser] = useState({
     email: "",
@@ -21,6 +23,45 @@ const SignUpPage = () => {
     setUser((prev) => {
       return { ...prev, [name]: value };
     });
+  };
+
+  // ================ 비밀번호 유효성 검사 ===================
+  const [passwordMsg, setPasswordMsg] = useState("");
+  const validPassword = (e) => {
+    const password = e.target.value;
+    const isValidPassword = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$/.test(password);
+    if (isValidPassword) {
+      setPasswordMsg("올바른 형식입니다.");
+    } else {
+      setPasswordMsg(
+        "비밀번호는 6~12글자, 알파벳과 숫자를 최소 하나씩 입력해야 합니다."
+      );
+    }
+  };
+
+  //================== 이메일 유효성 검사 ===================
+  const [emailMsg, setEmailMsg] = useState("");
+  const validEmail = (e) => {
+    const email = e.target.value;
+    const isValidEmail =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+    if (isValidEmail) {
+      setEmailMsg("올바른 형식입니다.");
+    } else {
+      setEmailMsg("이메일 형식에 맞지 않습니다.");
+    }
+  };
+
+  //================== 닉네임 유효성 검사 ===================
+  const [nicknameMsg, setNicknameMsg] = useState("");
+  const validNickname = (e) => {
+    const nickname = e.target.value;
+    const isValidNickname = /^[가-힣a-zA-Z0-9]{2,15}$/.test(nickname);
+    if (isValidNickname) {
+      setNicknameMsg("올바른 형식입니다.");
+    } else {
+      setNicknameMsg("닉네임은 2~15글자, 한글, 알파벳, 숫자만 입력 가능합니다");
+    }
   };
 
   // ================= 비밀번호 일치 검사 ====================
@@ -56,7 +97,7 @@ const SignUpPage = () => {
     //     .post(`/api/user/signup`, user)
     //     .then((response) => {
     //       alert(response.data); // 경로 찾기
-    //       // navigate("/");
+    //       // navi("/");
     //     })
     //     .catch((error) => {
     //       alert(error.response.data.message);
@@ -66,51 +107,47 @@ const SignUpPage = () => {
 
   return (
     <Container onSubmit={submitButtonHandler}>
-      <div
-        css={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          marginBottom: "20px",
-        }}
-      >
+      <div>
         <div>
-          <div css={{ marginBottom: "5px" }}>이메일</div>
-          <input
+          <div>이메일</div>
+          <AuthInput
             type="email"
             value={user.email}
             name="email"
             onChange={(e) => {
-              // validUsername(e);
+              validEmail(e);
               changeInputHandler(e);
             }}
             placeholder="이메일을 입력해 주세요."
           />
-          {/* <Validation match={usernameMsg === "올바른 형식입니다."}>
-            {usernameMsg}
-          </Validation> */}
+          <Validation match={emailMsg === "올바른 형식입니다."}>
+            {emailMsg}
+          </Validation>
         </div>
+
         <div>
-          <div css={{ marginTop: "10px", marginBottom: "5px" }}>비밀번호</div>
-          <input
+          <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+            비밀번호
+          </div>
+          <AuthInput
             type="password"
             value={user.password}
             name="password"
             onChange={(e) => {
-              // validPassword(e);
+              validPassword(e);
               changeInputHandler(e);
             }}
             placeholder="비밀번호를 입력해 주세요."
           />
-          {/* <Validation match={passwordMsg === "올바른 형식입니다."}>
+          <Validation match={passwordMsg === "올바른 형식입니다."}>
             {passwordMsg}
-          </Validation> */}
+          </Validation>
         </div>
         <div>
-          <div css={{ marginTop: "10px", marginBottom: "5px" }}>
+          <div style={{ marginTop: "10px", marginBottom: "5px" }}>
             비밀번호 확인
           </div>
-          <input
+          <AuthInput
             type="password"
             value={user.passwordConfirm}
             name="passwordConfirm"
@@ -125,27 +162,49 @@ const SignUpPage = () => {
           </Validation>
         </div>
         <div>
-          <div css={{ marginTop: "10px", marginBottom: "5px" }}>닉네임</div>
-          <input
+          <div style={{ marginTop: "10px", marginBottom: "5px" }}>닉네임</div>
+          <AuthInput
             type="text"
             value={user.nickname}
             name="nickname"
             onChange={(e) => {
               changeInputHandler(e);
-              // validNickname(e);
+              validNickname(e);
             }}
             placeholder="닉네임을 입력해 주세요."
           />
-          {/* <Validation match={nicknameMsg === "올바른 형식입니다."}>
+          <Validation match={nicknameMsg === "올바른 형식입니다."}>
             {nicknameMsg}
-          </Validation> */}
+          </Validation>
         </div>
       </div>
-      <button text={"회원가입 완료"} />
-      <LoginContainer>
-        <LoginP>이미 계정이 있나요?</LoginP>
-        <StyledLink to="/login">로그인</StyledLink>
-      </LoginContainer>
+      <div style={{ marginTop: "1.5rem" }}>
+        <AuthButton text={"회원가입 완료"} />
+        <LoginContainer>
+          <LoginP>이미 계정이 있나요?</LoginP>
+          <StyledLink to="/login">로그인</StyledLink>
+        </LoginContainer>
+      </div>
+      {/* <div style={{ fontSize: "1.5rem" }}>
+        asdasd sadasdsa asdasd asdasd asdasd sadasdsa asdasd asdasdasdasd
+        sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
+        asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
+        asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
+        sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
+        asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
+        asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
+        sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
+        asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
+        asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
+        sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
+        asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
+        asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
+        sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
+        asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
+        asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
+        sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
+        asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasd
+      </div> */}
     </Container>
   );
 };
@@ -180,20 +239,22 @@ const LoginP = styled.p`
   padding-right: 5px;
 `;
 const LoginContainer = styled.div`
-  font-size: 15px;
+  margin-top: 1rem;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
 `;
 
 const Container = styled.form`
-  gap: 20px;
+  gap: 1rem;
   height: 100vh;
   min-width: 200px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 const StyledLink = styled(Link)`
@@ -220,7 +281,7 @@ const StyledImg = styled.img`
 `;
 
 const Validation = styled.p`
-  font-size: 12px;
+  font-size: 0.6rem;
   color: ${({ match }) => (match ? "black" : "red")};
 `;
 
