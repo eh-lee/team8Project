@@ -78,8 +78,9 @@ const LogInPage = () => {
           </LoginContainer>
         </div>
       </Container>
-
-      <Footer />
+      {/* 카카오 로그인 */}
+      <KakaoLoginBtn />
+          <Footer />
     </MobileLayout>
   );
 };
