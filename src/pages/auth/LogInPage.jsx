@@ -7,6 +7,7 @@ import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
+import MobileLayout from "../../layout/MobileLayout";
 
 const LogInPage = () => {
   const navi = useNavigate();
@@ -35,7 +36,7 @@ const LogInPage = () => {
   };
 
   return (
-    <>
+    <MobileLayout>
       <Container onSubmit={submitButtonHandler}>
         <div>
           <div>
@@ -79,7 +80,7 @@ const LogInPage = () => {
       </Container>
 
       <Footer />
-    </>
+    </MobileLayout>
   );
 };
 

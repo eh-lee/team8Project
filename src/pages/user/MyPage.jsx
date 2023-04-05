@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { isLoginActions } from "../../app/modules/authSlice";
 import Footer from "../../components/footer/Footer";
+import MobileLayout from "../../layout/MobileLayout";
 
 const MyPage = () => {
   const navi = useNavigate();
@@ -17,8 +18,12 @@ const MyPage = () => {
   };
 
   return (
-    <>
+    <MobileLayout>
       <div>My page</div>
+      <div>
+        Scrolling Issue could be solved with set: "min-height:
+        calc(100vh-00vh)?"
+      </div>
       <div>
         <>
           {isLogin ? (
@@ -37,7 +42,7 @@ const MyPage = () => {
         </>
       </div>
       <Footer />
-    </>
+    </MobileLayout>
   );
 };
 
