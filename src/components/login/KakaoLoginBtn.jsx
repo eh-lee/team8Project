@@ -3,9 +3,9 @@ import kakao from "../../assets/icons/kakao-icon.png";
 import { KAKAO_LOGIN_URL } from "../../api/login";
 
 function KakaoLoginBtn() {
-
   const KaKaoLoginHandler = () => {
     window.location.href = KAKAO_LOGIN_URL;
+    console.log("btnPage--------->", KAKAO_LOGIN_URL);
   };
 
   return (
