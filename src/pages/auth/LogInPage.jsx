@@ -69,7 +69,8 @@ const LogInPage = () => {
           <StyledLink to="/signup">회원가입 하러 가기</StyledLink>
         </LoginContainer>
       </Container>
-
+      
+      {/* 카카오 로그인 */}
       <KakaoLoginBtn />
     </>
   );
