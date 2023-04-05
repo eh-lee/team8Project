@@ -10,12 +10,12 @@ function KakaoLoginBtn() {
 
   return (
     <button
-      src={kakao}
       sns="kakao"
       url={KAKAO_LOGIN_URL}
       onClick={KaKaoLoginHandler}
+      style={{ border: "none" }}
     >
-      카카오로 로그인하기
+      <img src={kakao} width="30vh" height="30vh" />
     </button>
   );
 }

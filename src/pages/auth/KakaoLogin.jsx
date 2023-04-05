@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import MobileLayout from "../../layout/MobileLayout";
 
 const KakaoLogin = () => {
   // 통신중인 페이지 => 꾸밈 / isLoading, isError
@@ -27,7 +28,11 @@ const KakaoLogin = () => {
     }
   }, []);
 
-  return <div>KakaoLogin</div>;
+  return (
+    <MobileLayout>
+      <div>KakaoLogin</div>
+    </MobileLayout>
+  );
 };
 
 export default KakaoLogin;
