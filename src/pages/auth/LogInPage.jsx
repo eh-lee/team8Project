@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
+import axios from "axios";
 import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
+import Footer from "../../components/footer/Footer";
+import AuthButton from "../../components/elem/AuthButton";
+import AuthInput from "../../components/elem/AuthInput";
+import MobileLayout from "../../layout/MobileLayout";
 
 const LogInPage = () => {
   const navi = useNavigate();
@@ -22,8 +27,20 @@ const LogInPage = () => {
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await instance.post("/api/user/login", user);
-      cookies.set("token", response.headers.authorization, { path: "/" });
+      // const response = await instance.post("/user/login", user);
+      const response = await axios.post(
+        "http://52.78.166.176:3000/api/user/login",
+        user
+      );
+      cookies.set("access_token", response.headers.authorization, {
+        path: "/",
+      });
+      console.log(response.headers);
+      console.log(response);
+      cookies.set("refresh_token", response.headers.RefreshToken, {
+        path: "/",
+      });
+      cookies.set("nickname", response.data.nickname, { path: "/" });
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.msg;
@@ -32,20 +49,13 @@ const LogInPage = () => {
   };
 
   return (
-    <>
+    <MobileLayout>
       <Container onSubmit={submitButtonHandler}>
-        <div
-          css={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            marginBottom: "20px",
-          }}
-        >
+        <div>
           <div>
-            <div css={{ marginBottom: "5px" }}>이메일</div>
-            <input
-              type="text"
+            <div>이메일</div>
+            <AuthInput
+              type="email"
               value={user.email}
               name="email"
               onChange={changeInputHandler}
@@ -54,8 +64,10 @@ const LogInPage = () => {
           </div>
 
           <div>
-            <div css={{ marginTop: "10px", marginBottom: "5px" }}>비밀번호</div>
-            <input
+            <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+              비밀번호
+            </div>
+            <AuthInput
               type="password"
               value={user.password}
               name="password"
@@ -64,14 +76,25 @@ const LogInPage = () => {
             />
           </div>
         </div>
-        <button text={"로그인"} />
-        <LoginContainer>
-          <StyledLink to="/signup">회원가입 하러 가기</StyledLink>
-        </LoginContainer>
-      </Container>
 
+        <div
+          style={{
+            marginTop: "1.5rem",
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <AuthButton text={"로그인"} />
+            <KakaoLoginBtn />
+          </div>
+          <LoginContainer>
+            <StyledLink to="/signup">회원가입 하러 가기</StyledLink>
+          </LoginContainer>
+        </div>
+      </Container>
+      {/* 카카오 로그인 */}
       <KakaoLoginBtn />
-    </>
+      <Footer />
+    </MobileLayout>
   );
 };
 
@@ -107,7 +130,8 @@ const GreetingWrapperSub = styled.div`
 `;
 
 const LoginContainer = styled.div`
-  font-size: 15px;
+  margin-top: 1rem;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -118,13 +142,14 @@ const StyledLink = styled(Link)`
 `;
 
 const Container = styled.form`
-  gap: 20px;
-  height: 95vh;
+  gap: 1rem;
+  height: 100vh;
   min-width: 200px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 const StyledImg = styled.img`

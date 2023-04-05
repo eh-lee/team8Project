@@ -57,18 +57,21 @@ const DivLayout2 = styled.div`
   @media screen and (max-width: 420px) {
     width: 100%;
     margin: auto;
-    background-color: #f9f3ea;
+    background-color: #bebebe;
   }
   width: 460px;
   height: 100vh;
   position: relative;
+  /* position: absolute; */
+  /* position: fixed; */
   margin-left: 0 auto;
-  background-color: #f9f3ea;
+  background-color: #f3f3f3;
   display: flex;
   flex-direction: column;
   z-index: 1;
   /* margin: auto; */
   box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 0.4);
+  overflow: auto;
 `;
 
 // =======================================================================
