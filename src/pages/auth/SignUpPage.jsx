@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import { instance } from "../../api/axios";
+import axios from "axios";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
@@ -93,17 +93,15 @@ const SignUpPage = () => {
       alert("빈 칸을 작성해 주세요.");
       return;
     }
-    // async (user) => {
-    //   const response = await instance
-    //     .post(`/api/user/signup`, user)
-    //     .then((response) => {
-    //       alert(response.data); // 경로 찾기
-    //       // navi("/");
-    //     })
-    //     .catch((error) => {
-    //       alert(error.response.data.message);
-    //     });
-    // };
+    try {
+      // await instance.post("/user/signup", user);
+      await axios.post("http://52.78.166.176:3000/api/user/signup", user);
+      alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
+      navi("/login");
+    } catch (e) {
+      const errorMsg = e.response.data.msg;
+      alert(`${errorMsg}`);
+    }
   };
 
   return (

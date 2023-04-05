@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
+import axios from "axios";
 import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
@@ -26,8 +27,20 @@ const LogInPage = () => {
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await instance.post("/api/user/login", user);
-      cookies.set("token", response.headers.authorization, { path: "/" });
+      // const response = await instance.post("/user/login", user);
+      const response = await axios.post(
+        "http://52.78.166.176:3000/api/user/login",
+        user
+      );
+      cookies.set("access_token", response.headers.authorization, {
+        path: "/",
+      });
+      console.log(response.headers);
+      console.log(response);
+      cookies.set("refresh_token", response.headers.RefreshToken, {
+        path: "/",
+      });
+      cookies.set("nickname", response.data.nickname, { path: "/" });
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.msg;
@@ -80,7 +93,7 @@ const LogInPage = () => {
       </Container>
       {/* 카카오 로그인 */}
       <KakaoLoginBtn />
-          <Footer />
+      <Footer />
     </MobileLayout>
   );
 };
