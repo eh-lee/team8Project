@@ -9,36 +9,61 @@ import { HiOutlinePencil } from "react-icons/hi";
 
 function Nav() {
   const navi = useNavigate();
+
   return (
-    <StyledNav>
-      <FooterUl>
-        <Footer_Box onClick={() => navi("/")}>
-          <Footer_Box_Column>
-            <CgHome size="1.75em" />홈
-          </Footer_Box_Column>
-        </Footer_Box>
-        <Footer_Box onClick={() => navi("/board")}>
-          <Footer_Box_Column>
-            <TbHandFinger size="1.75em" />
-            훈수게시판
-          </Footer_Box_Column>
-        </Footer_Box>
-        <Footer_Box onClick={() => navi("/battle")}>
-          <Footer_Box_Column>
-            <RiSwordLine size="1.75em" />
-            훈수배틀
-          </Footer_Box_Column>
-        </Footer_Box>
-        <Footer_Box onClick={() => navi("/write")}>
-          <Footer_Box_Column>
-            <HiOutlinePencil size="1.75em" />
-            글쓰기
-          </Footer_Box_Column>
-        </Footer_Box>
-      </FooterUl>
-    </StyledNav>
+    <StyledColumn>
+      <StyledNav>
+        <FooterUl>
+          <Footer_Box onClick={() => navi("/")}>
+            <Footer_Box_Column>
+              <CgHome size="1.75em" />홈
+            </Footer_Box_Column>
+          </Footer_Box>
+          <Footer_Box onClick={() => navi("/board")}>
+            <Footer_Box_Column>
+              <TbHandFinger size="1.75em" />
+              훈수게시판
+            </Footer_Box_Column>
+          </Footer_Box>
+          <Footer_Box onClick={() => navi("/battle")}>
+            <Footer_Box_Column>
+              <RiSwordLine size="1.75em" />
+              훈수배틀
+            </Footer_Box_Column>
+          </Footer_Box>
+          <Footer_Box onClick={() => navi("/write")}>
+            <Footer_Box_Column>
+              <HiOutlinePencil size="1.75em" />
+              글쓰기
+            </Footer_Box_Column>
+          </Footer_Box>
+        </FooterUl>
+      </StyledNav>
+      <FooCont>
+        <FooBar />
+      </FooCont>
+    </StyledColumn>
   );
 }
+
+const FooCont = styled.div`
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+`;
+
+const FooBar = styled.div`
+  width: 40%;
+  height: 20%;
+  border-radius: 2rem;
+  margin-top: 0.75rem;
+  background-color: rgb(80, 80, 80);
+`;
+
+const StyledColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledNav = styled.nav`
   display: flex;

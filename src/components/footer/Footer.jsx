@@ -34,7 +34,7 @@ const StyledFooter = styled.div`
   bottom: 0;
   max-width: 400px;
   /* StMobileLayout의 width와 동일하게 처리 */
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 0.01rem solid rgba(0, 0, 0, 0.2);
   width: 100%;
   font-size: 0.75rem;
   font-weight: bold;
