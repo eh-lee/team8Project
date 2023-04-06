@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
-import axios from "axios";
+// import axios from "axios";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
@@ -94,8 +94,8 @@ const SignUpPage = () => {
       return;
     }
     try {
-      // await instance.post("/user/signup", user);
-      await axios.post("http://52.78.166.176:3000/api/user/signup", user);
+      await instance.post("/user/signup", user);
+      // await axios.post("http://52.78.166.176:3000/api/user/signup", user);
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");
     } catch (e) {
