@@ -1,18 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostCard from "../components/Post/PostCard";
 import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
+import { instance } from "../api/axios";
 
 const Home = () => {
+
+  const [page, setPage] = useState(1);
+
+  const [postCards, setPostCards] = useState([]);
+  const [hotPostCards, setHotPostCards] = useState([]);
+
+  useEffect(()=>{
+    const getHotPost = async() => {
+      const response = await instance.get('/postCards/hotPostCard')
+      setHotPostCards(response.data.postCards)
+    }
+
+    const getPost = async() => {
+      const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=10&splitPageNumber=${page}`)
+      setPostCards(response.data.postCards)
+    }
+    
+    getHotPost();
+    getPost();
+  }, [])
+
+  console.log('postCards', postCards);
+
   return (
     <>
       <MobileLayout>
-    <PostCard 
-    // title={title} nickname={nickname} content={content}
-    title="타이틀을 막 바꿀 수 있지요하하하하하" nickname="하하하하하하하하하하하하하하하" 
-    content="컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요컨텐츠 길어지면 어떻게 될까요" 
-    viewCount="viewCount" commentCount="commentCount"
-    />
+        <h1>Hot 게시물</h1>
+        {
+          hotPostCards?.map((hotPostCard) => {
+            return (
+              <PostCard
+                key={hotPostCard.postIdx}
+                title={hotPostCard.title} nickname={hotPostCard.nickname} content={hotPostCard.desc}
+                viewCount={hotPostCard.postViewCount} commentCount={hotPostCard.commentCount}
+              />
+            )
+          })
+        }
+
+        <h1>실시간 게시물</h1>
+        {
+          postCards?.map((postCard) => {
+            return (
+              <PostCard
+                key={postCard.postIdx}
+                title={postCard.title} nickname={postCard.nickname} content={postCard.desc}
+                viewCount={postCard.postViewCount} commentCount={postCard.commentCount}
+              />
+            )
+          })
+        }
         <Footer />
       </MobileLayout>
     </>

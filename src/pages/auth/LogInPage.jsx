@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
-import axios from "axios";
 import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
@@ -27,11 +26,11 @@ const LogInPage = () => {
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {
-      // const response = await instance.post("/user/login", user);
-      const response = await axios.post(
-        "http://52.78.166.176:3000/api/user/login",
-        user
-      );
+      const response = await instance.post("/user/login", user);
+      // const response = await axios.post(
+      //   "http://52.78.166.176:3000/api/user/login",
+      //   user
+      // );
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
       });
