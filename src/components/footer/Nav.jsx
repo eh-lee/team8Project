@@ -6,21 +6,26 @@ function Nav() {
   return (
     <StyledNav>
       <FooterUl>
-        <FooterLi>
+        <Footer_Box>
+          {/* <FooterLi> */}
           <FooterLink to="/">홈</FooterLink>
-        </FooterLi>
-        <FooterLi>
-          <FooterLink to="/">검색</FooterLink>
-        </FooterLi>
-        <FooterLi>
-          <FooterLink to="/">글쓰기</FooterLink>
-        </FooterLi>
-        <FooterLi>
-          <FooterLink to="/board">게시판</FooterLink>
-        </FooterLi>
-        <FooterLi>
-          <FooterLink to="/mypage">마이페이지</FooterLink>
-        </FooterLi>
+          {/* </FooterLi> */}
+        </Footer_Box>
+        <Footer_Box>
+          {/* <FooterLi> */}
+          <FooterLink to="/">훈수게시판</FooterLink>
+          {/* </FooterLi> */}
+        </Footer_Box>
+        <Footer_Box>
+          {/* <FooterLi> */}
+          <FooterLink to="/">훈수배틀</FooterLink>
+          {/* </FooterLi> */}
+        </Footer_Box>
+        <Footer_Box>
+          {/* <FooterLi> */}
+          <FooterLink to="/board">글쓰기</FooterLink>
+          {/* </FooterLi> */}
+        </Footer_Box>
       </FooterUl>
     </StyledNav>
   );
@@ -29,18 +34,27 @@ function Nav() {
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
+  padding: 2rem 1rem;
 `;
 
 const FooterUl = styled.ul`
   display: flex;
   width: 100%;
+  gap: 1%;
 `;
 
-const FooterLi = styled.li`
-  width: 20%;
+const Footer_Box = styled.div`
+  display: flex;
+  /* flex-direction: column;아이콘 추가 시 */
+  width: 25%;
   text-align: center;
-  font-size: 1rem;
+  justify-content: space-evenly;
 `;
+
+// const FooterLi = styled.li`
+//   width: 25%;
+//   text-align: center;
+// `;
 
 const FooterLink = styled(Link)`
   color: rgb(70, 70, 70);
