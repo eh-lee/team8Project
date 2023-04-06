@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -25,8 +26,17 @@ const Board = () => {
 
   // 아직 dummy 없넹..
   useEffect(() => {
-    const response = instance.get("/postCards");
-    console.log(response);
+    const sth = async () => {
+      // const response1 = await instance.get("/postCards");
+      // const response2 = await instance.get("/postCards/hotPostCard");
+      // console.log("PostCard----->", response1.data);
+      // console.log("hotPostCard----->", response2);
+      const response3 = await instance.get(
+        "/postCards?category=스포츠&splitNumber=2&splitPageNumber=1"
+      );
+      console.log("category---->", response3.data.postCards);
+    };
+    sth();
   }, []);
 
   return (
