@@ -36,9 +36,10 @@ const StyledFooter = styled.div`
   /* StMobileLayout의 width와 동일하게 처리 */
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: bold;
   background-color: rgba(255, 255, 255);
-  opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0.5)};
+  opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 `;
 
