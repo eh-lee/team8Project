@@ -50,7 +50,6 @@ const HeaderUl = styled.ul`
 `;
 
 const Header_Box = styled.div`
-  /* background-color: rgba(217, 0, 0, 0.1); */
   gap: 0.75rem;
   padding: 0.75rem 0;
   display: flex;
@@ -62,7 +61,6 @@ const Header_Box = styled.div`
 `;
 
 const Header_Title_Box = styled.div`
-  /* background-color: rgba(217, 0, 0, 0.1); */
   font-size: 1.25rem;
   display: flex;
   width: 15%;
@@ -72,15 +70,6 @@ const Header_Title_Box = styled.div`
     color: rgb(180, 180, 180);
     cursor: pointer;
   }
-
-  /* cursor: pointer; */
-`;
-
-const Footer_Box_Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
 `;
 
 export default HeaderNav;

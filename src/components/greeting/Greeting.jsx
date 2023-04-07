@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 
 const Greeting = () => {
+  const navi = useNavigate();
   return (
+    // isLogin? : ver 두 개 만들기
     <GreetingCont>
       <GreetingText1>
         <Row>
@@ -13,7 +16,11 @@ const Greeting = () => {
         <Greeting1>훈수 능력치는?</Greeting1>
       </GreetingText1>
       <GreetingLevelImgCont>
-        <GreetingLevelImg src="img/testImg1.jpg" />
+        <GreetingLevelImg
+          src="img/testImg1.jpg"
+          style={{ filter: "grayscale(100%)" }}
+          onClick={() => navi("/mypage")}
+        />
       </GreetingLevelImgCont>
     </GreetingCont>
   );
@@ -35,17 +42,20 @@ const GreetingCont = styled.div`
 
 const GreetingLevelImgCont = styled.div`
   display: flex;
-  align-items: center; /* 이미지 세로 중앙 정렬 */
-  justify-content: center; /* 이미지 가로 중앙 정렬 */
+  align-items: center;
+  justify-content: center;
   width: 20%;
-  aspect-ratio: 1; /* 가로 세로 비율을 유지하면서 크기 지정 */
-  border-radius: 50%; /* 원 모양으로 만들기 */
-  overflow: hidden; /* border-radius 적용하기 위한 설정 */
+  /* aspect-ratio: 1; */
+  /* height: 74px; */
+  height: 4.6rem;
+  border-radius: 50%;
+  overflow: hidden;
 `;
 
 const GreetingLevelImg = styled.img`
   height: 100%;
   border: none;
+  cursor: pointer;
 `;
 
 const GreetingText1 = styled.div`
@@ -58,7 +68,8 @@ const GreetingText1 = styled.div`
 const Greeting1 = styled.div``;
 
 const GreetingNickname = styled.div`
-  color: rgb(76, 76, 198);
+  /* color: rgb(76, 76, 198); */
+  color: rgb(213, 135, 135);
 `;
 
 export default Greeting;

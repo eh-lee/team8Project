@@ -185,59 +185,10 @@ const SignUpPage = () => {
             <StyledLink to="/login">로그인</StyledLink>
           </LoginContainer>
         </div>
-        {/* ========================= Scroll Issue ========================= */}
-        {/* <div style={{ fontSize: "1.5rem" }}>
-          asdasd sadasdsa asdasd asdasd asdasd sadasdsa asdasd asdasdasdasd
-          sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
-          asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
-          asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
-          sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
-          asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
-          asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
-          sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
-          asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
-          asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
-          sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
-          asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
-          asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
-          sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
-          asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
-          asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd
-          sadasdsa asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa
-          asdasd asdasdasdasd sadasdsa asdasd asdasdasdasd sadasdsa asdasd
-          asdasd
-        </div> */}
-        {/* ========================= Scroll Issue ========================= */}
       </Container>
     </MobileLayout>
   );
 };
-
-const GreetingWrapper = styled.div`
-  display: flex;
-  gap: 15px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const GreetingWrapperSub = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 15px;
-`;
-
-const GreetingMain = styled.div`
-  font-size: 50px;
-  font-weight: bold;
-  color: rgb(76, 76, 198);
-`;
-
-const GreetingSub = styled.div`
-  font-size: 50px;
-`;
 
 const LoginP = styled.p`
   padding-right: 5px;
@@ -263,25 +214,6 @@ const Container = styled.form`
 
 const StyledLink = styled(Link)`
   color: inherit;
-`;
-
-const StyledImg = styled.img`
-  border-radius: 50%;
-  border: 1px solid rgb(0, 0, 0);
-  /* scale */
-  animation-name: scale;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-timing-function: linear;
-  @keyframes scale {
-    from {
-      transform: scale(0.8);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
 `;
 
 const Validation = styled.p`

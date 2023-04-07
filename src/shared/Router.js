@@ -9,6 +9,7 @@ import KakaoLogin from '../pages/auth/KakaoLogin'
 import Board from '../pages/board/Board'
 import SeriousBoard from '../pages/board/SeriousBoard'
 import HumourousBoard from '../pages/board/HumourousBoard'
+import Battle from '../pages/Battle'
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/:sthId/profileedit" element={<ProfileEditPage />} />
         <Route path="/KaKaoLogin" element={<KakaoLogin />} />
+        <Route path="/battle" element={<Battle />} />
       </Routes>
     </BrowserRouter>
   )
