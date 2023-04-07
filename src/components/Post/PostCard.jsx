@@ -24,13 +24,18 @@ export default PostCard;
 const PostCardWrap = styled.div`
   border: 1px solid black;
   border-radius: 10px;
+  /* border-radius: 0.75rem; */
+  /* rem으로 단위 통일하면 어떨까요!? */
   /* width: 360px; 
-    height: 150px; */
+  height: 150px; */
   width: 80%;
 
   margin: auto;
   margin-top: 40px;
+  /* margin-top: 2rem; */
   padding: 20px;
+  /* padding: 1rem; */
+  /* rem으로 단위 통일하면 어떨까요!? */
 
   display: flex;
   flex-direction: column;

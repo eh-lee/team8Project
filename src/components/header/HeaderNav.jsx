@@ -6,7 +6,7 @@ import { BiBell } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
 import { BiUser } from "react-icons/bi";
 
-function Nav() {
+function HeaderNav() {
   const navi = useNavigate();
 
   return (
@@ -68,7 +68,6 @@ const Header_Title_Box = styled.div`
   width: 15%;
   text-align: center;
   align-items: center;
-  justify-content: center;
   &:hover {
     color: rgb(180, 180, 180);
     cursor: pointer;
@@ -84,4 +83,4 @@ const Footer_Box_Column = styled.div`
   align-items: center;
 `;
 
-export default Nav;
+export default HeaderNav;

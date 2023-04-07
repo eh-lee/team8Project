@@ -7,7 +7,7 @@ import { TbHandFinger } from "react-icons/tb";
 import { RiSwordLine } from "react-icons/ri";
 import { HiOutlinePencil } from "react-icons/hi";
 
-function Nav() {
+function FooterNav() {
   const navi = useNavigate();
 
   return (
@@ -100,4 +100,4 @@ const Footer_Box_Column = styled.div`
   align-items: center;
 `;
 
-export default Nav;
+export default FooterNav;

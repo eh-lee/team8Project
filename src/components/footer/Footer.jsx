@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Nav from "./Nav";
+import FooterNav from "./FooterNav";
 
 const Footer = () => {
   //================== Footer Scroll Event =================
@@ -24,7 +24,7 @@ const Footer = () => {
 
   return (
     <StyledFooter isOpaque={isHeaderOpaque}>
-      <Nav />
+      <FooterNav />
     </StyledFooter>
   );
 };

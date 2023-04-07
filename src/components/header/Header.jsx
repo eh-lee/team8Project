@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Nav from "./Nav";
+import HeaderNav from "./HeaderNav";
 
 const Header = () => {
   return (
     <StyledHeader>
-      <Nav />
+      <HeaderNav />
     </StyledHeader>
   );
 };

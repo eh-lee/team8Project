@@ -4,13 +4,17 @@ import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
 import Header from "../components/header/Header";
 import styled from "styled-components";
+import Greeting from "../components/greeting/Greeting";
+import GreetingLv from "../components/greeting/GreetingLv";
 
 const Home = () => {
   return (
     <>
       <MobileLayout>
         <Header />
-        <HeaderWrapper>
+        <PageWithHeaderWrapper>
+          <Greeting />
+          <GreetingLv />
           <PostCard
             // title={title} nickname={nickname} content={content}
             title="타이틀을 막 바꿀 수 있지요하하하하하"
@@ -59,7 +63,7 @@ const Home = () => {
             viewCount="viewCount"
             commentCount="commentCount"
           />
-        </HeaderWrapper>
+        </PageWithHeaderWrapper>
         <Footer />
       </MobileLayout>
     </>
@@ -68,6 +72,6 @@ const Home = () => {
 
 export default Home;
 
-const HeaderWrapper = styled.div`
-  margin-top: 3.5rem;
+const PageWithHeaderWrapper = styled.div`
+  margin: 3.5rem 0 15rem 0;
 `;
