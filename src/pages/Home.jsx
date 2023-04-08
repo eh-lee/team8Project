@@ -2,15 +2,13 @@ import Header from "../components/header/Header";
 import styled from "styled-components";
 import Greeting from "../components/greeting/Greeting";
 import GreetingLv from "../components/greeting/GreetingLv";
-import React, { useEffect, useState } from "react";
-import PostCard from "../components/post/PostCard";
+import React from "react";
 import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
-import { instance } from "../api/axios";
+// import { instance } from "../api/axios";
 import PostCardSlider from "../components/post/PostCardSlider";
 
 const Home = () => {
-
   // const [page, setPage] = useState(1);
 
   // const [postCards, setPostCards] = useState([]);
@@ -26,7 +24,7 @@ const Home = () => {
   //     const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=10&splitPageNumber=${page}`)
   //     setPostCards(response.data.postCards)
   //   }
-    
+
   //   getHotPost();
   //   getPost();
   // }, [])
@@ -40,9 +38,9 @@ const Home = () => {
         <PageWithHeaderAndFooterWrapper>
           <Greeting />
           <GreetingLv />
-{/* * ================ Young ============== * */}
+          {/* * ================ Young ============== * */}
           <PostCardSlider />
-        {/* <h1>Hot 게시물</h1>
+          {/* <h1>Hot 게시물</h1>
         {
           hotPostCards?.map((hotPostCard) => {
             return (
@@ -67,7 +65,7 @@ const Home = () => {
             )
           })
         } */}
-{/* * ================ Young ============== *    */}
+          {/* * ================ Young ============== *    */}
         </PageWithHeaderAndFooterWrapper>
         <Footer />
       </MobileLayout>

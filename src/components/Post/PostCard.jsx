@@ -32,6 +32,7 @@ const PostCardWrap = styled.div`
 
   margin: auto;
   margin-top: 40px;
+
   /* margin-top: 2rem; */
   padding: 20px;
   /* padding: 1rem; */

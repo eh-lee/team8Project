@@ -9,29 +9,62 @@ const GreetingLv = () => {
   return (
     // isLogin? : ver 두 개 만들기
     <GreetingLvCont>
-      <GreetingText1>
-        <GreetingLvContSub>
-          <GreetingLevelImgCont>
-            <GreetingLevelImg
-              src="img/testImg2.jpg"
-              style={{ filter: "grayscale(100%)" }}
-            />
-          </GreetingLevelImgCont>
-          <GreetingLvText1>야만을 벗어난 훈수꾼</GreetingLvText1>
-          <GreetingLvText2>이 되기까지</GreetingLvText2>
-        </GreetingLvContSub>
-        <LvExperienceBar>
-          <ColoredExperienceBar exp={exp} />
-        </LvExperienceBar>
-      </GreetingText1>
+      <RowMain>
+        <GreetingText1>
+          <GreetingLvContSub>
+            <GreetingLevelImgCont>
+              <GreetingLevelImg
+                src="img/testImg2.jpg"
+                style={{ filter: "grayscale(100%)" }}
+              />
+            </GreetingLevelImgCont>
+            <GreetingLvText1>야만을 벗어난 훈수꾼</GreetingLvText1>
+            <GreetingLvText2>이 되기까지</GreetingLvText2>
+          </GreetingLvContSub>
+          <LvExperienceBar>
+            <ColoredExperienceBar exp={exp} />
+          </LvExperienceBar>
+        </GreetingText1>
 
-      <Row>
-        <GreetingLvPoint1>{currExp}</GreetingLvPoint1>
-        <GreetingLvPoint2>/{goalExp}</GreetingLvPoint2>
-      </Row>
+        <Row>
+          <GreetingLvPoint1>{currExp}</GreetingLvPoint1>
+          <GreetingLvPoint2>/{goalExp}</GreetingLvPoint2>
+        </Row>
+      </RowMain>
     </GreetingLvCont>
   );
 };
+
+const RowMain = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const GreetingLvText1 = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  /* color: rgb(213, 135, 135); */
+  color: rgb(160, 160, 160);
+`;
+const GreetingLvText2 = styled.div`
+  font-size: 1rem;
+  color: rgb(160, 160, 160);
+  letter-spacing: 0rem;
+`;
+
+const GreetingLvPoint1 = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+const GreetingLvPoint2 = styled.div`
+  display: flex;
+  align-items: center;
+  color: rgb(160, 160, 160);
+  font-size: 1.5rem;
+`;
 
 const LvExperienceBar = styled.div`
   width: 105%;
@@ -78,19 +111,6 @@ const GreetingLvCont = styled.div`
   /* StMobileLayout과 동일 */
 `;
 
-const GreetingLvPoint1 = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
-  font-weight: bold;
-`;
-const GreetingLvPoint2 = styled.div`
-  display: flex;
-  align-items: center;
-  color: rgb(160, 160, 160);
-  font-size: 1.5rem;
-`;
-
 const GreetingLevelImgCont = styled.div`
   display: flex;
   align-items: center; /* 이미지 세로 중앙 정렬 */
@@ -113,17 +133,6 @@ const GreetingText1 = styled.div`
   align-items: stretch;
   max-width: 65%;
   letter-spacing: 0.025rem;
-`;
-const GreetingLvText1 = styled.div`
-  font-size: 1rem;
-  font-weight: bold;
-  /* color: rgb(213, 135, 135); */
-  color: rgb(160, 160, 160);
-`;
-const GreetingLvText2 = styled.div`
-  font-size: 1rem;
-  color: rgb(160, 160, 160);
-  letter-spacing: 0rem;
 `;
 
 export default GreetingLv;
