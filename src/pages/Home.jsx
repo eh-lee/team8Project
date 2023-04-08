@@ -1,3 +1,7 @@
+import Header from "../components/header/Header";
+import styled from "styled-components";
+import Greeting from "../components/greeting/Greeting";
+import GreetingLv from "../components/greeting/GreetingLv";
 import React, { useEffect, useState } from "react";
 import PostCard from "../components/Post/PostCard";
 import Footer from "../components/footer/Footer";
@@ -32,7 +36,12 @@ const Home = () => {
   return (
     <>
       <MobileLayout>
-        <PostCardSlider />
+        <Header />
+        <PageWithHeaderAndFooterWrapper>
+          <Greeting />
+          <GreetingLv />
+// * ================ Young ============== *
+          <PostCardSlider />
         {/* <h1>Hot 게시물</h1>
         {
           hotPostCards?.map((hotPostCard) => {
@@ -57,11 +66,17 @@ const Home = () => {
               />
             )
           })
-        }
-        <Footer /> */}
+        } */}
+// * ================ Young ============== *   
+        </PageWithHeaderAndFooterWrapper>
+        <Footer />
       </MobileLayout>
     </>
-  )
+  );
 };
 
 export default Home;
+
+const PageWithHeaderAndFooterWrapper = styled.div`
+  margin: 3.5rem 0 15rem 0;
+`;

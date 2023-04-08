@@ -1,14 +1,14 @@
-import React from "react";
+// import React from "react";
 import styled from "styled-components";
 
-const Flex = ({ children, css }) => {
-  return <StyledFlex css={css}>{children}</StyledFlex>;
-};
+// const Flex = ({ children, css }) => {
+//   return <StyledFlex css={css}>{children}</StyledFlex>;
+// };
 
-const StyledFlex = styled.div`
-  ${({ css }) => ({ ...css })}
-  display: flex;
-`;
+// const StyledFlex = styled.div`
+//   ${({ css }) => ({ ...css })}
+//   display: flex;
+// `;
 
 export const Column = styled.div`
   display: flex;
@@ -20,4 +20,4 @@ export const Row = styled.div`
   flex-direction: row;
 `;
 
-export default Flex;
+// export default Flex;

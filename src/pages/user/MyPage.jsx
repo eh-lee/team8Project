@@ -1,8 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { isLoginActions } from "../../app/modules/authSlice";
 import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
 import MobileLayout from "../../layout/MobileLayout";
 
 const MyPage = () => {
@@ -19,31 +21,34 @@ const MyPage = () => {
 
   return (
     <MobileLayout>
-      <div>My page</div>
-      <div>
-        Scrolling Issue could be solved with set: "min-height:
-        calc(100vh-00vh)?"
-      </div>
-      <div>
-        <>
-          {isLogin ? (
-            <p type="button" style={{ cursor: "pointer" }} onClick={logout}>
-              로그아웃
-            </p>
-          ) : (
-            <p
-              type="button"
-              style={{ cursor: "pointer" }}
-              onClick={() => navi("/login")}
-            >
-              로그인
-            </p>
-          )}
-        </>
-      </div>
+      <Header />
+      <PageWithHeaderAndFooterWrapper>
+        <div>My page</div>
+        <div>
+          <>
+            {isLogin ? (
+              <p type="button" style={{ cursor: "pointer" }} onClick={logout}>
+                로그아웃
+              </p>
+            ) : (
+              <p
+                type="button"
+                style={{ cursor: "pointer" }}
+                onClick={() => navi("/login")}
+              >
+                로그인
+              </p>
+            )}
+          </>
+        </div>
+      </PageWithHeaderAndFooterWrapper>
       <Footer />
     </MobileLayout>
   );
 };
 
 export default MyPage;
+
+const PageWithHeaderAndFooterWrapper = styled.div`
+  margin: 3.5rem 0 15rem 0;
+`;
