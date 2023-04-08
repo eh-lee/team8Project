@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Greeting from "../components/greeting/Greeting";
 import GreetingLv from "../components/greeting/GreetingLv";
 import React, { useEffect, useState } from "react";
-import PostCard from "../components/Post/PostCard";
+import PostCard from "../components/post/PostCard";
 import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
 import { instance } from "../api/axios";
-import PostCardSlider from "../components/Post/PostCardSlider";
+import PostCardSlider from "../components/post/PostCardSlider";
 
 const Home = () => {
 
