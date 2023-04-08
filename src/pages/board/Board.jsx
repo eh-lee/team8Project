@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
 import Footer from "../../components/footer/Footer";
@@ -9,6 +9,7 @@ import PostCard from "../../components/post/PostCard";
 import MobileLayout from "../../layout/MobileLayout";
 
 const Board = () => {
+  const navi = useNavigate();
   // *============ req.heaeders에 token 있을 때, ==========*
   // const token = cookies.get("access_token");
   // console.log(token);
@@ -25,19 +26,23 @@ const Board = () => {
   // *============ req.heaeders에 token 있을 때, ==========*
 
   // 아직 dummy 없넹..
+
   useEffect(() => {
     const sth = async () => {
-      // const response1 = await instance.get("/postCards");
-      // const response2 = await instance.get("/postCards/hotPostCard");
-      // console.log("PostCard----->", response1.data);
-      // console.log("hotPostCard----->", response2);
-      const response3 = await instance.get(
-        "/postCards?category=스포츠&splitNumber=2&splitPageNumber=1"
+      // const response = await instance.get("/postCards?maincategory=전체");
+      const response = await instance.get(
+        "/postCards?maincategory=전체&category=전체&splitNumber=4&splitPageNumber=3"
+        // ----> 1페이지당 4장씩 나눴을 때, 3페이지에 해당하는 postCards
+        // "/postCards?maincategory=전체&category=전체&splitNumber=4"
       );
-      console.log("category---->", response3.data.postCards);
+      console.log("WholeBoard---->", response.data.postCards);
+      // return response.data.postCards;
     };
     sth();
   }, []);
+
+  // PostCards-> title, nickname, content, viewCount, commentCount
+  // res.data->  title, nickname, desc,
 
   return (
     <MobileLayout>
@@ -47,13 +52,19 @@ const Board = () => {
             <BoardTitle>훈수게시판</BoardTitle>
             <Row>
               {/* if문으로 색상 & axios | with state bool */}
-              <BoardCategory>유머</BoardCategory>
-              <BoardCategory>진지</BoardCategory>
+              <BoardCategory onClick={() => navi("/board/humour")}>
+                유머
+              </BoardCategory>
+              <BoardCategory onClick={() => navi("/board/serious")}>
+                진지
+              </BoardCategory>
             </Row>
           </BoardHeaderSub>
         </BoardHeader>
         {/*  */}
-        <PostCard />
+        <PostCard
+        // title={title} nickname={nickname} content={desc}
+        />
         <PostCard />
         <PostCard />
         <PostCard />
@@ -119,7 +130,7 @@ const BoardCategory = styled.div`
   &:hover {
     color: rgb(180, 180, 180);
     cursor: pointer;
-    border-bottom: 0.1rem solid rgb(180, 180, 180); /* 새로 추가된 코드 */
+    border-bottom: 0.1rem solid rgb(180, 180, 180);
   }
 `;
 

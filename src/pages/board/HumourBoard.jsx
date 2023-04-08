@@ -14,9 +14,9 @@ const Board = () => {
   useEffect(() => {
     const sth = async () => {
       const response = await instance.get(
-        "/postCards?maincategory=진지&category=전체&splitNumber=4"
+        "/postCards?maincategory=유머&category=전체&splitNumber=4"
       );
-      console.log("SeriousBoard---->", response.data.postCards);
+      console.log("HumourBoard---->", response.data.postCards);
     };
     sth();
   }, []);
@@ -29,10 +29,10 @@ const Board = () => {
             <BoardTitle>훈수게시판</BoardTitle>
             <Row>
               {/* if문으로 색상 & axios | with state bool */}
-              <BoardCategory onClick={() => navi("/board/humour")}>
-                유머
+              <BoardCategory>유머</BoardCategory>
+              <BoardCategory onClick={() => navi("/board/serious")}>
+                진지
               </BoardCategory>
-              <BoardCategory>진지</BoardCategory>
             </Row>
           </BoardHeaderSub>
         </BoardHeader>
