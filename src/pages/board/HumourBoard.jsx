@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
 import Footer from "../../components/footer/Footer";
-import PostCard from "../../components/post/PostCard";
+import PostCard from "../../components/Post/PostCard";
 import MobileLayout from "../../layout/MobileLayout";
 
 const Board = () => {

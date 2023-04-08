@@ -40,7 +40,7 @@ const Home = () => {
         <PageWithHeaderAndFooterWrapper>
           <Greeting />
           <GreetingLv />
-// * ================ Young ============== *
+{/* * ================ Young ============== * */}
           <PostCardSlider />
         {/* <h1>Hot 게시물</h1>
         {
@@ -67,7 +67,7 @@ const Home = () => {
             )
           })
         } */}
-// * ================ Young ============== *   
+{/* * ================ Young ============== *    */}
         </PageWithHeaderAndFooterWrapper>
         <Footer />
       </MobileLayout>
