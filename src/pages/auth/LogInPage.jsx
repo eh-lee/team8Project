@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
-// import axios from "axios";
+import { instance } from "../../api/axios";
 import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
-import { instance } from "../../api/axios";
 
 const LogInPage = () => {
   const submitButtonHandler = async (e) => {
