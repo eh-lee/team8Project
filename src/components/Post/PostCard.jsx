@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const PostCard = ({ title, nickname, content, viewCount, commentCount }) => {
+const PostCard = ({ category, title, nickname, content, viewCount, commentCount }) => {
   return (
     <PostCardWrap>
       <PostCard_TitleBox>
+        <PostCard_Category>{category}</PostCard_Category>
         <PostCard_Title>{title}</PostCard_Title>
         <PostCard_Nickname>{nickname}</PostCard_Nickname>
       </PostCard_TitleBox>
@@ -47,6 +48,11 @@ const PostCard_TitleBox = styled.ul`
 
   margin-bottom: 1rem;
 `;
+
+const PostCard_Category = styled.li`
+  font-size: 0.6rem;
+  color: gray;
+`
 
 const PostCard_Title = styled.li`
   /* border: 1px solid black; */
