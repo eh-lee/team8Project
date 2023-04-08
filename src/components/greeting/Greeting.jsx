@@ -26,28 +26,31 @@ const Greeting = () => {
   );
 };
 
-const Row = styled.div`
-  display: flex;
-  justify-content: row;
-`;
 
 const GreetingCont = styled.div`
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
-  margin: 4.5rem 1rem 0 1rem;
+  // postCard와 라인 맞추기 위해 margin값 수정
+  margin: 4.5rem 2rem 0 2rem;
   /* HeaderNav padding 좌우 값과 동일 */
   max-width: 400px;
   /* StMobileLayout과 동일 */
+  `;
+
+const Row = styled.div`
+  display: flex;
+  justify-content: row;
 `;
 
 const GreetingLevelImgCont = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
-  /* aspect-ratio: 1; */
+  /* width: 20%; */ //넓이 설정시 이미지 잘림
   /* height: 74px; */
-  height: 4.6rem;
+  aspect-ratio: 1;
+  height: 4.2rem;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -57,6 +60,7 @@ const GreetingLevelImg = styled.img`
   border: none;
   cursor: pointer;
 `;
+// 스크롤시 이미지 올라오는 문제 확인 => backGround-image로 줄 수 있는지 확인해보기
 
 const GreetingText1 = styled.div`
   display: flex;

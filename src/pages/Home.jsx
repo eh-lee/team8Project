@@ -11,27 +11,27 @@ import PostCardSlider from "../components/post/PostCardSlider";
 
 const Home = () => {
 
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
-  // const [postCards, setPostCards] = useState([]);
-  // const [hotPostCards, setHotPostCards] = useState([]);
+  const [postCards, setPostCards] = useState([]);
+  const [hotPostCards, setHotPostCards] = useState([]);
 
-  // useEffect(()=>{
-  //   const getHotPost = async() => {
-  //     const response = await instance.get('/postCards/hotPostCard')
-  //     setHotPostCards(response.data.postCards)
-  //   }
+  useEffect(()=>{
+    const getHotPost = async() => {
+      const response = await instance.get('/postCards/hotPostCard')
+      setHotPostCards(response.data.postCards)
+    }
 
-  //   const getPost = async() => {
-  //     const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=10&splitPageNumber=${page}`)
-  //     setPostCards(response.data.postCards)
-  //   }
+    const getPost = async() => {
+      const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=10&splitPageNumber=${page}`)
+      setPostCards(response.data.postCards)
+    }
     
-  //   getHotPost();
-  //   getPost();
-  // }, [])
+    getHotPost();
+    getPost();
+  }, [])
 
-  // console.log('postCards', postCards);
+  console.log('postCards', postCards);
 
   return (
     <>
@@ -53,9 +53,9 @@ const Home = () => {
               />
             )
           })
-        }
+        } */}
 
-        <h1>실시간 게시물</h1>
+        {/* <h1>실시간 게시물</h1> */}
         {
           postCards?.map((postCard) => {
             return (
@@ -66,7 +66,7 @@ const Home = () => {
               />
             )
           })
-        } */}
+        }
 {/* * ================ Young ============== *    */}
         </PageWithHeaderAndFooterWrapper>
         <Footer />

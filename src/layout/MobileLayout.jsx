@@ -43,7 +43,6 @@ const StMobileLayout = styled.div`
   @media screen and (min-width: 400px) {
     /* min-width로 반응형 width 조절 */
     /* 520px: 카카오 로그인 max-width와 통일 */
-    /* 임시 min-width: 400px  */
     width: 400px;
   }
 `;
