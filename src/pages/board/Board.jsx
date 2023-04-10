@@ -6,7 +6,7 @@ import PostCard from "../../components/post/PostCard";
 import MobileLayout from "../../layout/MobileLayout";
 
 const Board = () => {
-  const [mainCategory, setMainCategory] = useState("유머");
+  const [mainCategory, setMainCategory] = useState("전체");
   const [category, setCategory] = useState("전체");
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -88,6 +88,13 @@ const Board = () => {
             <BoardTitle>훈수게시판</BoardTitle>
 
             <Row>
+              <MainCategory
+                isActive={mainCategory === "전체"}
+                onClick={() => handleMainCategoryClick("전체")}
+              >
+                전체
+              </MainCategory>
+
               <MainCategory
                 isActive={mainCategory === "유머"}
                 onClick={() => handleMainCategoryClick("유머")}
