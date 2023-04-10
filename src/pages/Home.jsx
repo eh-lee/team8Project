@@ -1,18 +1,16 @@
-import Header from "../components/header/Header";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { instance } from "../api/axios";
+import Header from "../components/header/Header";
 import Greeting from "../components/greeting/Greeting";
 import GreetingLv from "../components/greeting/GreetingLv";
-import React, { useEffect, useState } from "react";
 import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
-// import { instance } from "../api/axios";
-import PostCardSlider from "../components/post/PostCardSlider";
 import PostCardJr from "../components/post/PostCardJr";
-import { instance } from "../api/axios";
 import PostCard from "../components/post/PostCard";
+import PostCardSlider from "../components/post/PostCardSlider";
 
 const Home = () => {
-  const [page, setPage] = useState(1);
   const [hotPostCards, setHotPostCards] = useState([]);
 
   useEffect(() => {
@@ -20,11 +18,10 @@ const Home = () => {
       const response = await instance.get("/postCards/hotPostCard");
       setHotPostCards(response.data.postCards);
     };
-
     getHotPost();
   }, []);
+  console.log(hotPostCards)
 
-  console.log("postCards", hotPostCards);
 
   return (
     <>
@@ -33,16 +30,17 @@ const Home = () => {
         <PageWithHeaderAndFooterWrapper>
           <Greeting />
           <GreetingLv />
-          {/* * ================ Young ============== * */}
-          <PostCardSlider />
 
+          {/* * ================ Young ============== * */}
+          <br />
+          <PostCardSlider />
+          <h1>Hot 게시물</h1>
           {hotPostCards?.map((hotPostCard) => {
             return (
               <PostCard
                 key={hotPostCard.postIdx}
-                category={hotPostCard.category}
+                mainCategory={hotPostCard.maincategory}
                 title={hotPostCard.title}
-                nickname={hotPostCard.nickname}
                 content={hotPostCard.desc}
                 viewCount={hotPostCard.postViewCount}
                 commentCount={hotPostCard.commentCount}
@@ -50,18 +48,7 @@ const Home = () => {
             );
           })}
 
-          {/* <h1>실시간 게시물</h1> */}
-          {/* {
-          postCards?.map((postCard) => {
-            return (
-              <PostCard
-                key={postCard.postIdx}
-                category={postCard.category} title={postCard.title} nickname={postCard.nickname} content={postCard.desc}
-                viewCount={postCard.postViewCount} commentCount={postCard.commentCount}
-              />
-            )
-          })
-        } */}
+          <h1>실시간 게시물</h1>
           <PostCardJr />
           {/* * ================ Young ============== *    */}
         </PageWithHeaderAndFooterWrapper>

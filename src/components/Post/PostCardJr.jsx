@@ -4,30 +4,28 @@ import { instance } from '../../api/axios';
 
 const PostCardJr = () => {
     const [page, setPage] = useState(1);
-    const [postCards, setPostCards] = useState([]);
+    const [newPostCards, setnewPostCards] = useState([]);
 
     useEffect(() => {
         const getPost = async () => {
             const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=10&splitPageNumber=${page}`)
-            setPostCards(response.data.postCards)
+            setnewPostCards(response.data.postCards)
         }
         getPost();
     }, [])
 
-    console.log('postCards==>',postCards)
-
   return (
     <PostCardJrContainer>
     {
-        postCards?.map((postCard) => {
+        newPostCards?.map((newPostCard) => {
         return (
-            <PostCardJrWrap key={postCard.postIdx}>
+            <PostCardJrWrap key={newPostCard.postIdx}>
                 <PostCardJr_TitleBox>
-                    <PostCardJr_Category>{postCard.category}</PostCardJr_Category>
-                    <PostCardJr_Title>{postCard.title}</PostCardJr_Title>
+                    <PostCardJr_Category>{newPostCard.category}</PostCardJr_Category>
+                    <PostCardJr_Title>{newPostCard.title}</PostCardJr_Title>
                 </PostCardJr_TitleBox>
                 <PostCardJr_ContentBox>
-                    <PostCardJr_Content>{postCard.desc}</PostCardJr_Content>
+                    <PostCardJr_Content>{newPostCard.desc}</PostCardJr_Content>
                 </PostCardJr_ContentBox>
             </PostCardJrWrap>
             )

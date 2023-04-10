@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const PostCardSlider = () => {
 
   return (
-    <div>
-      
-    </div>
+    <div>캐러셀 테스트</div>
   )
 }
 
