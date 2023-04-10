@@ -40,7 +40,7 @@ const RowMain = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const LvExperienceBar = styled.div`
   /* border: 1px solid red; */

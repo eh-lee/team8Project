@@ -2,16 +2,14 @@ import Header from "../components/header/Header";
 import styled from "styled-components";
 import Greeting from "../components/greeting/Greeting";
 import GreetingLv from "../components/greeting/GreetingLv";
-import React, { useEffect, useState } from "react";
-import PostCard from "../components/post/PostCard";
+import React from "react";
 import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
-import { instance } from "../api/axios";
+// import { instance } from "../api/axios";
 import PostCardSlider from "../components/post/PostCardSlider";
 import PostCardJr from "../components/post/PostCardJr";
 
 const Home = () => {
-
   const [page, setPage] = useState(1);
   const [hotPostCards, setHotPostCards] = useState([]);
 
@@ -33,9 +31,9 @@ const Home = () => {
         <PageWithHeaderAndFooterWrapper>
           <Greeting />
           <GreetingLv />
-{/* * ================ Young ============== * */}
+          {/* * ================ Young ============== * */}
           <PostCardSlider />
-        {/* <h1>Hot 게시물</h1> */}
+
         {
           hotPostCards?.map((hotPostCard) => {
             return (
@@ -62,6 +60,7 @@ const Home = () => {
         } */}
         <PostCardJr />
 {/* * ================ Young ============== *    */}
+
         </PageWithHeaderAndFooterWrapper>
         <Footer />
       </MobileLayout>
