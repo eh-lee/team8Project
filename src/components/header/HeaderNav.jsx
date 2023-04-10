@@ -39,7 +39,8 @@ const Header_Box_Item = styled.div`
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
-  padding: 0 1rem;
+  padding: 0 2rem;
+  // PostCard와 라인 정렬을 위해 padding값 수정
   color: rgb(70, 70, 70);
 `;
 
