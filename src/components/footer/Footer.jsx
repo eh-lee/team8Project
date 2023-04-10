@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Nav from "./Nav";
+import FooterNav from "./FooterNav";
 
 const Footer = () => {
   //================== Footer Scroll Event =================
@@ -24,7 +24,7 @@ const Footer = () => {
 
   return (
     <StyledFooter isOpaque={isHeaderOpaque}>
-      <Nav />
+      <FooterNav />
     </StyledFooter>
   );
 };
@@ -34,12 +34,12 @@ const StyledFooter = styled.div`
   bottom: 0;
   max-width: 400px;
   /* StMobileLayout의 width와 동일하게 처리 */
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 0.01rem solid rgba(0, 0, 0, 0.2);
   width: 100%;
-  padding: 25px 0;
-  font-size: 1.3rem;
+  font-size: 0.75rem;
+  font-weight: bold;
   background-color: rgba(255, 255, 255);
-  opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0.5)};
+  opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 `;
 

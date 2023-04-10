@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
-import axios from "axios";
 import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
@@ -11,27 +10,14 @@ import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 
 const LogInPage = () => {
-  const navi = useNavigate();
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
-
-  const changeInputHandler = (e) => {
-    const { value, name } = e.target;
-    setUser((prev) => {
-      return { ...prev, [name]: value };
-    });
-  };
-
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {
-      // const response = await instance.post("/user/login", user);
-      const response = await axios.post(
-        "http://52.78.166.176:3000/api/user/login",
-        user
-      );
+      const response = await instance.post("/user/login", user);
+      // const response = await axios.post(
+      // "http://52.78.166.176:3000/api/user/login",
+      // user
+      // );
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
       });
@@ -46,6 +32,19 @@ const LogInPage = () => {
       const errorMsg = e.response.data.msg;
       alert(`${errorMsg}`);
     }
+  };
+
+  const navi = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const changeInputHandler = (e) => {
+    const { value, name } = e.target;
+    setUser((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   return (
