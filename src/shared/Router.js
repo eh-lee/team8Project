@@ -8,6 +8,7 @@ import Home from '../pages/Home'
 import KakaoLogin from '../pages/auth/KakaoLogin'
 import Board from '../pages/board/Board'
 import Battle from '../pages/Battle'
+import DetailPost from '../pages/detailPost/DetailPost'
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/board" element={<Board />} />
+        <Route path="/board/:postIdx" element={<DetailPost />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/:sthId/profileedit" element={<ProfileEditPage />} />
         <Route path="/KaKaoLogin" element={<KakaoLogin />} />

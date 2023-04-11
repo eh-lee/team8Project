@@ -9,9 +9,11 @@ import MobileLayout from "../layout/MobileLayout";
 import PostCardJr from "../components/post/PostCardJr";
 import PostCard from "../components/post/PostCard";
 import PostCardSlider from "../components/post/PostCardSlider";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [hotPostCards, setHotPostCards] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getHotPost = async () => {
@@ -20,8 +22,6 @@ const Home = () => {
     };
     getHotPost();
   }, []);
-  console.log(hotPostCards)
-
 
   return (
     <>
@@ -39,6 +39,7 @@ const Home = () => {
             return (
               <PostCard
                 key={hotPostCard.postIdx}
+                postCardIdx={hotPostCard.postIdx}
                 mainCategory={hotPostCard.maincategory}
                 title={hotPostCard.title}
                 content={hotPostCard.desc}
