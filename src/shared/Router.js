@@ -8,6 +8,7 @@ import Home from '../pages/Home'
 import KakaoLogin from '../pages/auth/KakaoLogin'
 import Board from '../pages/board/Board'
 import Battle from '../pages/Battle'
+import Write from '../pages/Write'
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
         <Route path="/:sthId/profileedit" element={<ProfileEditPage />} />
         <Route path="/KaKaoLogin" element={<KakaoLogin />} />
         <Route path="/battle" element={<Battle />} />
+        <Route path="/write" element={<Write />} />
       </Routes>
     </BrowserRouter>
   )
