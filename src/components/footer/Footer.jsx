@@ -4,26 +4,28 @@ import FooterNav from "./FooterNav";
 
 const Footer = () => {
   //================== Footer Scroll Event =================
-  const [scrollPosition, setScrollPosition] = useState(0);
+  // const [scrollPosition, setScrollPosition] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const position = window.pageYOffset;
-      setScrollPosition(position);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const position = window.pageYOffset;
+  //     setScrollPosition(position);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
-  const isHeaderOpaque = scrollPosition < 100;
+  // const isHeaderOpaque = scrollPosition < 100;
   //================== Footer Scroll Event =================
+  //================== layout에 적용 안 됨 =================
 
   return (
-    <StyledFooter isOpaque={isHeaderOpaque}>
+    // <StyledFooter isOpaque={isHeaderOpaque}>
+    <StyledFooter>
       <FooterNav />
     </StyledFooter>
   );
@@ -39,8 +41,8 @@ const StyledFooter = styled.div`
   font-size: 0.75rem;
   font-weight: bold;
   background-color: rgba(255, 255, 255);
-  opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0)};
-  transition: opacity 0.3s ease-in-out;
+  /* opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0)}; */
+  /* transition: opacity 0.3s ease-in-out; */
 `;
 
 export default Footer;

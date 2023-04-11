@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../api/axios";
 import { access_token } from "../api/token";
+import WriteFooter from "../components/footer/WriteFooter";
 import FalseGuard from "../components/hook/guard/FalseGuard";
 import MobileLayout from "../layout/MobileLayout";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Write = () => {
   FalseGuard();
@@ -71,6 +73,9 @@ const Write = () => {
     }
   };
 
+  // IoIosArrowDown
+  // SlArrowDown
+
   const handleCanc = () => {
     navi(-1);
   };
@@ -81,16 +86,22 @@ const Write = () => {
         <WriteHeader>
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
-            <WriteCategory>카테고리</WriteCategory>
+            <WriteCategory>
+              카테고리
+              <IoIosArrowDown />
+            </WriteCategory>
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
         </WriteHeader>
         <WriteForm>
-          <WriteTitle autoFocus placeholder="제목 (3~25자) "></WriteTitle>
+          {/* <WriteTitle autoFocus placeholder="제목 (3~25자)"></WriteTitle> */}
+          <WriteTitle autoFocus placeholder="제목"></WriteTitle>
           <WriteContent
-            placeholder="훈수 받고 싶은 내용을 입력하세요.&#13;&#10;(최대 2000자)"
+            // placeholder="훈수 받고 싶은 내용을 입력하세요.&#13;&#10;(최대 2000자)"
+            placeholder="훈수 받고 싶은 내용을 입력하세요."
           ></WriteContent>
         </WriteForm>
+        <WriteFooter />
       </PageWithFooterWrapper>
     </MobileLayout>
   );
@@ -121,7 +132,8 @@ const WriteContent = styled.textarea`
   font-size: 1rem;
   width: 80%;
   padding: 1rem 1rem 0 1rem;
-  height: 75vh;
+  height: 70vh;
+  /* scroll issue */
   border: none;
   overflow-y: scroll;
   resize: none;
@@ -143,18 +155,20 @@ const WriteContent = styled.textarea`
 const WriteForm = styled.form`
   padding-top: 1rem;
   display: flex;
+  width: 100%;
+  max-width: 400px;
+  max-height: 75vh;
   flex-direction: column;
   align-items: center;
-  /* min-height: 30rem; */
-  border: 1px solid red;
   gap: 0.5rem;
 `;
 
 const PageWithFooterWrapper = styled.div`
-  margin: 3.5rem 0 15rem 0;
+  margin-top: 3.5rem;
 `;
 
 const WriteCategory = styled.div`
+  gap: 0.25rem;
   display: flex;
   font-size: 1.25rem;
   font-weight: bold;
