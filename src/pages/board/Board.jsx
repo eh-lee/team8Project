@@ -118,8 +118,9 @@ const Board = () => {
         {data?.map((item) => (
           <PostCard
             key={item.postIdx}
+            postCardIdx={item.postIdx}
+            mainCategory={item.maincategory}
             title={item.title}
-            nickname={item.nickname}
             content={item.desc}
             viewCount={item.postViewCount}
             commentCount={item.commentCount}

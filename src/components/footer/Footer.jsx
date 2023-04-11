@@ -29,6 +29,7 @@ const Footer = () => {
   );
 };
 
+// footer 높이 5.55~56?rem
 const StyledFooter = styled.div`
   position: fixed;
   bottom: 0;

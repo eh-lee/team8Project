@@ -39,26 +39,9 @@ function FooterNav() {
           </Footer_Box>
         </FooterUl>
       </StyledNav>
-      <FooCont>
-        <FooBar />
-      </FooCont>
     </StyledColumn>
   );
 }
-
-const FooCont = styled.div`
-  height: 1.5rem;
-  display: flex;
-  justify-content: center;
-`;
-
-const FooBar = styled.div`
-  width: 40%;
-  height: 20%;
-  border-radius: 2rem;
-  margin-top: 0.75rem;
-  background-color: rgb(80, 80, 80);
-`;
 
 const StyledColumn = styled.div`
   display: flex;
