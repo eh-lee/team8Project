@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { instance } from "../api/axios";
 import Header from "../components/header/Header";
-import Greeting from "../components/greeting/Greeting";
-import GreetingLv from "../components/greeting/GreetingLv";
+import TrueGreeting from "../components/greeting/trueGreeting/TrueGreeting";
+import TrueGreetingLv from "../components/greeting/trueGreeting/TrueGreetingLv";
 import Footer from "../components/footer/Footer";
 import MobileLayout from "../layout/MobileLayout";
 import PostCardJr from "../components/post/PostCardJr";
 import PostCard from "../components/post/PostCard";
 import PostCardSlider from "../components/post/PostCardSlider";
+import { useSelector } from "react-redux";
+import FalseGreeting from "../components/greeting/falseGreeting/FalseGreeting";
+import FalseGreetingLv from "../components/greeting/falseGreeting/FalseGreetingLv";
 
 const Home = () => {
+  const isLogin = useSelector((state) => state.auth.isLogin);
   const [hotPostCards, setHotPostCards] = useState([]);
 
   useEffect(() => {
@@ -20,41 +24,47 @@ const Home = () => {
     };
     getHotPost();
   }, []);
-  console.log(hotPostCards)
-
+  console.log(hotPostCards);
 
   return (
-    <>
-      <MobileLayout>
-        <Header />
-        <PageWithHeaderAndFooterWrapper>
-          <Greeting />
-          <GreetingLv />
+    <MobileLayout>
+      <Header />
+      <PageWithHeaderAndFooterWrapper>
+        {isLogin ? (
+          <>
+            <TrueGreeting />
+            <TrueGreetingLv />
+          </>
+        ) : (
+          <>
+            <FalseGreeting />
+            <FalseGreetingLv />
+          </>
+        )}
 
-          {/* * ================ Young ============== * */}
-          <br />
-          <PostCardSlider />
-          <h1>Hot 게시물</h1>
-          {hotPostCards?.map((hotPostCard) => {
-            return (
-              <PostCard
-                key={hotPostCard.postIdx}
-                mainCategory={hotPostCard.maincategory}
-                title={hotPostCard.title}
-                content={hotPostCard.desc}
-                viewCount={hotPostCard.postViewCount}
-                commentCount={hotPostCard.commentCount}
-              />
-            );
-          })}
+        {/* * ================ Young ============== * */}
+        <br />
+        <PostCardSlider />
+        <h1>Hot 게시물</h1>
+        {hotPostCards?.map((hotPostCard) => {
+          return (
+            <PostCard
+              key={hotPostCard.postIdx}
+              mainCategory={hotPostCard.maincategory}
+              title={hotPostCard.title}
+              content={hotPostCard.desc}
+              viewCount={hotPostCard.postViewCount}
+              commentCount={hotPostCard.commentCount}
+            />
+          );
+        })}
 
-          <h1>실시간 게시물</h1>
-          <PostCardJr />
-          {/* * ================ Young ============== *    */}
-        </PageWithHeaderAndFooterWrapper>
-        <Footer />
-      </MobileLayout>
-    </>
+        <h1>실시간 게시물</h1>
+        <PostCardJr />
+        {/* * ================ Young ============== *    */}
+      </PageWithHeaderAndFooterWrapper>
+      <Footer />
+    </MobileLayout>
   );
 };
 

@@ -1,16 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { cookies } from "../../api/cookies";
+import { cookies } from "../../../api/cookies";
 
-const Greeting = () => {
+const TrueGreeting = () => {
   const navi = useNavigate();
   return (
-    // isLogin? : ver 두 개 만들기
     <GreetingCont>
       <GreetingText1>
         <Row>
           <GreetingNickname>{cookies.get("nickname")}</GreetingNickname>
+          {/* // *=========== 04/11 12:13 bug 발견 ===========*/}
+          {/* cookies.get 렌더링 이슈. 리로딩해야 적용됨 */}
+          {/* // *=========== 04/11 12:13 bug 발견 ===========*/}
           <Greeting1>님의</Greeting1>
         </Row>
         <Greeting1>훈수 능력치는?</Greeting1>
@@ -26,7 +28,6 @@ const Greeting = () => {
   );
 };
 
-
 const GreetingCont = styled.div`
   /* border: 1px solid red; */
   display: flex;
@@ -36,7 +37,7 @@ const GreetingCont = styled.div`
   /* HeaderNav padding 좌우 값과 동일 */
   max-width: 400px;
   /* StMobileLayout과 동일 */
-  `;
+`;
 
 const Row = styled.div`
   display: flex;
@@ -76,4 +77,4 @@ const GreetingNickname = styled.div`
   color: rgb(213, 135, 135);
 `;
 
-export default Greeting;
+export default TrueGreeting;

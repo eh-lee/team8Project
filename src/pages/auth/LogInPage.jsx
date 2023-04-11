@@ -8,8 +8,11 @@ import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
+import TrueGuard from "../../components/hook/guard/TrueGuard";
 
 const LogInPage = () => {
+  TrueGuard();
+
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {

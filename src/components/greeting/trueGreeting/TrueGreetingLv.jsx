@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const GreetingLv = () => {
+const TrueGreetingLv = () => {
   const currExp = 170;
   const goalExp = 200;
   const exp = (currExp / goalExp) * 100;
@@ -144,11 +144,10 @@ const GreetingLvText1 = styled.div`
 //   }
 // `;
 
-
 const GreetingLvText2 = styled.div`
   font-size: 0.9rem;
   color: rgb(160, 160, 160);
   letter-spacing: 0rem;
 `;
 
-export default GreetingLv;
+export default TrueGreetingLv;

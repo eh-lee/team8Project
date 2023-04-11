@@ -12,6 +12,10 @@ const MyPage = () => {
   const dispatch = useDispatch();
 
   const isLogin = useSelector((state) => state.auth.isLogin);
+  console.log("isLogin??", isLogin);
+  // *=========== 04/11 11:56 bug 발견 ============*
+  // 렌더링 문제 있음. reloading해 줘야 함.
+  // *=========== 04/11 11:56 bug 발견 ============*
 
   const logout = () => {
     dispatch(isLoginActions.logout());
@@ -36,7 +40,7 @@ const MyPage = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => navi("/login")}
               >
-                로그인
+                먼저 로그인해 주세요.
               </p>
             )}
           </>

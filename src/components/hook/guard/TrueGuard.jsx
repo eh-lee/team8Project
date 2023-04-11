@@ -8,6 +8,7 @@ const TrueGuard = () => {
   useEffect(() => {
     const token = cookies.get("access_token");
     if (token) {
+      alert("먼저 로그아웃을 해 주세요.");
       navigate("/");
     }
   }, []);
