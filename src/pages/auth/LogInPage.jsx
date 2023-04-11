@@ -17,18 +17,14 @@ const LogInPage = () => {
     e.preventDefault();
     try {
       const response = await instance.post("/user/login", user);
-      // const response = await axios.post(
-      // "http://52.78.166.176:3000/api/user/login",
-      // user
-      // );
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
       });
-      console.log(response.headers);
-      console.log(response);
-      cookies.set("refresh_token", response.headers.RefreshToken, {
-        path: "/",
-      });
+      // console.log("response.headers------->", response.headers);
+      // console.log("response--------------->", response);
+      // cookies.set("refresh_token", response.headers., {
+      //   path: "/",
+      // });
       cookies.set("nickname", response.data.nickname, { path: "/" });
       navi("/");
     } catch (e) {

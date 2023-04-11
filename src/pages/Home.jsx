@@ -9,12 +9,12 @@ import MobileLayout from "../layout/MobileLayout";
 import PostCardJr from "../components/post/PostCardJr";
 import PostCard from "../components/post/PostCard";
 import PostCardSlider from "../components/post/PostCardSlider";
-import { useSelector } from "react-redux";
 import FalseGreeting from "../components/greeting/falseGreeting/FalseGreeting";
 import FalseGreetingLv from "../components/greeting/falseGreeting/FalseGreetingLv";
+import { cookies } from "../api/cookies";
 
 const Home = () => {
-  const isLogin = useSelector((state) => state.auth.isLogin);
+  const isLogin = cookies.get("access_token") ? true : false;
   const [hotPostCards, setHotPostCards] = useState([]);
 
   useEffect(() => {

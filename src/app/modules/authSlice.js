@@ -1,7 +1,8 @@
+// *===================== 사용 안 함. 나중에 정리. =====================*
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { cookies } from "../../api/cookies"
 import { instance } from "../../api/axios"
-
 
 export const __signUp = createAsyncThunk("signUp", async (newUser, thunk) => {
     try {

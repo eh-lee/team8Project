@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
-// import axios from "axios";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 
 const SignUpPage = () => {
-  const dispatch = useDispatch();
   const navi = useNavigate();
 
   const [user, setUser] = useState({
