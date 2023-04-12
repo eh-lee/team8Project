@@ -1,7 +1,14 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import styled from "styled-components";
 
-const PostCard = ({ mainCategory, title, content, viewCount, commentCount }) => {
+const PostCard = ({
+  mainCategory,
+  title,
+  content,
+  viewCount,
+  commentCount,
+}) => {
   return (
     <PostCardWrap>
       <PostCard_TitleBox>
@@ -26,11 +33,12 @@ const PostCardWrap = styled.div`
   border-radius: 0.75rem;
   margin: 1.5rem 2rem;
   // greeting 컴포넌트들과 margin값 통일
-
   padding: 1rem;
-
   display: flex;
   flex-direction: column;
+
+  /* for infinite scroll test */
+  /* height: 10rem; */
 `;
 
 const PostCard_TitleBox = styled.ul`
@@ -39,7 +47,7 @@ const PostCard_TitleBox = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
+
   width: 100%;
   height: 30%;
 
@@ -51,7 +59,7 @@ const PostCard_TitleBox = styled.ul`
 const PostCard_MainCategory = styled.li`
   font-size: 0.6rem;
   color: gray;
-`
+`;
 
 const PostCard_Title = styled.li`
   /* border: 1px solid black; */
@@ -103,4 +111,3 @@ const PostCard_CommentCount = styled.li`
   /* border: 1px solid black; */
   height: 1rem;
 `;
-

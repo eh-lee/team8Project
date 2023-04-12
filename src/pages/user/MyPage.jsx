@@ -10,7 +10,7 @@ import MobileLayout from "../../layout/MobileLayout";
 
 const MyPage = () => {
   const navi = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // const isLogin = useSelector((state) => state.auth.isLogin);
   const isLogin = cookies.get("access_token") ? true : false;

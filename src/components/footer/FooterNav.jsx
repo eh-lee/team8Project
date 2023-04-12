@@ -19,7 +19,7 @@ function FooterNav() {
               <CgHome size="1.75em" />홈
             </Footer_Box_Column>
           </Footer_Box>
-          <Footer_Box onClick={() => navi("/board")}>
+          <Footer_Box onClick={() => navi("/totalboard")}>
             <Footer_Box_Column>
               <TbHandFinger size="1.75em" />
               훈수게시판
