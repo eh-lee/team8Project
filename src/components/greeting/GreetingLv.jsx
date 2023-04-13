@@ -36,7 +36,6 @@ const GreetingLv = () => {
 };
 
 const RowMain = styled.div`
-  /* border: 1px solid green; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -82,11 +81,12 @@ const GreetingLvContSub = styled.div`
 
 const GreetingLvCont = styled.div`
   display: flex;
+  width: 21rem;
   justify-content: space-between;
   // postCard와 라인 맞추기 위해 margin값 수정
-  margin: 1rem 2rem 0 2rem;
+  margin: 1rem 0 0 2rem;
   /* HeaderNav padding 좌우 값과 동일 */
-  max-width: 400px;
+  /* max-width: 400px; */
   /* StMobileLayout과 동일 */
 `;
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
 import Footer from "../../components/footer/Footer";
-import PostCard from "../../components/post/PostCard";
+import PostCard from "../../components/post/HotPostCard";
 import MobileLayout from "../../layout/MobileLayout";
 
 const Board = () => {
@@ -115,6 +115,7 @@ const Board = () => {
             </CategorySlider>
           </BoardHeaderSub>
         </BoardHeader>
+        <PostCardCont>
         {data?.map((item) => (
           <PostCard
             key={item.postIdx}
@@ -126,17 +127,24 @@ const Board = () => {
             commentCount={item.commentCount}
           />
         ))}
+        </PostCardCont>
       </PageWithFooterWrapper>
       <Footer />
     </MobileLayout>
   );
 };
 
+const PostCardCont = styled.div`
+  /* border: 1px solid orange; */
+  padding: 0 2rem;
+`
+
 const CategorySlider = styled.div`
   padding: 1rem 0;
   width: 400px;
   background-color: white;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
+  overflow-y: scroll;
   white-space: nowrap;
   /* margin-left: 1rem; */
 

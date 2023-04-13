@@ -3,19 +3,17 @@ import styled from 'styled-components';
 import { instance } from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 
-const PostCardJr = () => {
-    const [page, setPage] = useState(1);
+const NewPostCard = () => {
     const [newPostCards, setnewPostCards] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         const getPost = async () => {
-            const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=10&splitPageNumber=${page}`)
+            const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`)
             setnewPostCards(response.data.postCards)
         }
         getPost();
-    }, [])
-
+    }, []);
 
   return (
     <PostCardJrContainer >
@@ -38,22 +36,18 @@ const PostCardJr = () => {
   )
 }
 
-export default PostCardJr;
+export default NewPostCard;
 
 const PostCardJrContainer = styled.div`
+    border: 1px solid green;
     display: flex;
-    /* flex-direction: row; */
-    /* flex-wrap: wrap;
-    justify-content: center; */
     float: left;
     gap: 1rem;
-    margin-bottom: 3rem;
-`
+`;
 
 const PostCardJrWrap = styled.div`
     border: 1px solid black;
     border-radius: 0.75rem;
-    /* margin: 1.5rem 2rem; */
     
     padding: 1.2rem;
     width: 8rem;
@@ -61,8 +55,7 @@ const PostCardJrWrap = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
-    /* margin-left: 2rem; */
-`
+`;
 
 const PostCardJr_TitleBox = styled.ul`
     border: 1px solid black;
@@ -72,16 +65,16 @@ const PostCardJr_TitleBox = styled.ul`
     gap: 0.2rem;
     margin-bottom: 1rem;
     width: 100%;
-`
+`;
 
 const PostCardJr_Category = styled.li`
     font-size: 0.6rem;
     color: gray;
-`
+`;
 
 const PostCardJr_Title = styled.li`
     font-size: 1.3rem;
-`
+`;
 
 const PostCardJr_ContentBox = styled.div`
     border: 1px solid black;
@@ -90,8 +83,8 @@ const PostCardJr_ContentBox = styled.div`
     width: 100%;
     overflow-y: scroll;
     word-wrap: break-word;
-`
+`;
 
 const PostCardJr_Content = styled.div`
     display: flex;
-`
+`;

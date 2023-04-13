@@ -5,7 +5,7 @@ import styled from "styled-components";
 const PostCard = ({ mainCategory, title, content, viewCount, commentCount, postCardIdx }) => {
   const navigate = useNavigate();
   return (
-    <PostCardWrap onClick={()=> { navigate(`/board/${postCardIdx}`) }}>
+    <PostCardWrap onClick={()=> { navigate(`/board/${postCardIdx}`) }} className="no-hover">
       <PostCard_TitleBox>
         <PostCard_MainCategory>{mainCategory}</PostCard_MainCategory>
         <PostCard_Title>{title}</PostCard_Title>
@@ -24,16 +24,22 @@ const PostCard = ({ mainCategory, title, content, viewCount, commentCount, postC
 export default PostCard;
 
 const PostCardWrap = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 0.75rem;
-  margin: 1.5rem 2rem;
+  background-color: #F4F4F5;
+
+  width: 18.75rem;
+
+  /* margin: 1.5rem 0 1.5rem 2rem; */
+  margin: 1.5rem 0 1.5rem 0;
   // greeting 컴포넌트들과 margin값 통일
 
-  padding: 1rem;
+  padding: 1rem 0;
 
   display: flex;
   flex-direction: column;
 `;
+
 
 const PostCard_TitleBox = styled.ul`
   /* border: 1px solid orange; */
@@ -42,10 +48,12 @@ const PostCard_TitleBox = styled.ul`
   flex-direction: column;
   justify-content: space-between;
   
-  width: 100%;
-  height: 30%;
+  width: 18.8rem;
+  height: 2.5rem;
 
   gap: 0.5rem;
+
+  margin-left: 1rem;
 
   margin-bottom: 0.3rem;
 `;
@@ -64,12 +72,13 @@ const PostCard_ContentBox = styled.div`
   /* border: 1px solid blue; */
   max-height: 30vh;
   /* height을 안 정해서 스크롤이 안 먹힌 것 */
-  width: 100%;
+  width: 18.8rem;
   overflow-y: scroll;
   word-wrap: break-word;
   /* 줄바꿈 기능 */
   display: flex;
   margin-bottom: 0.5rem;
+  margin-left: 1rem;
 
   ::-webkit-scrollbar {
     display: none;
@@ -86,7 +95,7 @@ const PostCard_InfoBox = styled.ul`
   /* border: 1px solid green; */
   border-top: 1px solid gray;
 
-  width: 100%;
+  width: 16.8rem;
   height: 1.5rem;
 
   display: flex;
@@ -94,6 +103,7 @@ const PostCard_InfoBox = styled.ul`
   justify-content: flex-start;
   align-items: flex-end;
   gap: 5rem;
+  margin-left: 1rem;
 `;
 
 const PostCard_ViewCount = styled.li`
