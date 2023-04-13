@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../api/axios";
@@ -7,34 +7,12 @@ import WriteFooter from "../components/footer/WriteFooter";
 import FalseGuard from "../components/hook/guard/FalseGuard";
 import MobileLayout from "../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";
+import CateogryModal from "../components/modal/CateogryModal";
 
 const Write = () => {
   FalseGuard();
   const navi = useNavigate();
-  console.log("access_token----->", access_token);
-
-  //와이어프레임 -> 메인 카테고리 -> 유머 진지 없음
-  //일단 디폴트 유머로 진행..
-
-  //클라이언트 단에서 글자 수 validation해서 alert 실시간으로 띄우기
-  //helper text
-
-  const categories = [
-    "전체",
-    "패션/뷰티",
-    "맛집/요리/음식",
-    "경제/재테크",
-    "취미/운동",
-    "스포츠",
-    "여행",
-    "결혼",
-    "게임",
-    "반려동물",
-    "가족",
-    "취업/자격증",
-    "일상",
-    "기타",
-  ];
+  // console.log("access_token----->", access_token);
 
   const [createPost, setCreatePost] = useState({
     title: "",
@@ -73,11 +51,19 @@ const Write = () => {
     }
   };
 
-  // IoIosArrowDown
-  // SlArrowDown
-
   const handleCanc = () => {
     navi(-1);
+  };
+
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+
+  const categoryModalOpenHandler = () => {
+    setIsCategoryModalOpen(true);
+    console.log("모달 트리깅 true? ---->", isCategoryModalOpen);
+  };
+  const categoryModalCloseHandler = () => {
+    setIsCategoryModalOpen(false);
+    console.log("모달 트리깅 false? ---->", isCategoryModalOpen);
   };
 
   return (
@@ -86,10 +72,15 @@ const Write = () => {
         <WriteHeader>
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
+            {/* <Cateogry /> */}
+            {/* ============origin category set========= */}
             <WriteCategory>
               카테고리
-              <IoIosArrowDown />
+              <IconCont>
+                <IoIosArrowDown onClick={categoryModalOpenHandler} />
+              </IconCont>
             </WriteCategory>
+            {/* ============origin category set========= */}
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
         </WriteHeader>
@@ -103,12 +94,22 @@ const Write = () => {
         </WriteForm>
         <WriteFooter />
       </PageWithFooterWrapper>
+
+      <ModalCont>
+        {isCategoryModalOpen && (
+          <CateogryModal
+            open={isCategoryModalOpen}
+            close={categoryModalCloseHandler}
+          />
+        )}
+      </ModalCont>
     </MobileLayout>
   );
 };
 
 export default Write;
 
+const ModalCont = styled.div``;
 const WriteTitle = styled.input`
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
@@ -167,13 +168,6 @@ const PageWithFooterWrapper = styled.div`
   margin-top: 3.5rem;
 `;
 
-const WriteCategory = styled.div`
-  gap: 0.25rem;
-  display: flex;
-  font-size: 1.25rem;
-  font-weight: bold;
-`;
-
 const WriteCanc = styled.div`
   color: rgb(180, 180, 180);
 
@@ -210,4 +204,20 @@ const WriteHeaderCont = styled.div`
   justify-content: space-around;
   align-items: flex-end;
   border-bottom: 0.1rem solid rgb(180, 180, 180);
+`;
+
+const WriteCategory = styled.div`
+  gap: 0.25rem;
+  display: flex;
+  font-size: 1.25rem;
+  font-weight: bold;
+`;
+
+const IconCont = styled.div`
+  color: rgb(180, 180, 180);
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(70, 70, 70);
+  }
 `;

@@ -152,7 +152,8 @@ const CategorySlider = styled.div`
   padding: 1rem 0;
   width: 400px;
   background-color: white;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
+  overflow-y: scroll;
   white-space: nowrap;
 
   & > button {
@@ -192,7 +193,11 @@ const CategorySlider = styled.div`
 `;
 
 const PageWithFooterWrapper = styled.div`
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
   margin-top: 10rem;
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
 `;
 
 const Row = styled.div`

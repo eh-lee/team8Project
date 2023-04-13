@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { instance } from "../../api/axios";
 import Footer from "../../components/footer/Footer";
+// import HorizontalScroll from "../../components/hook/scroll/HorizontalScroll";
 import PostCard from "../../components/post/PostCard";
 import MobileLayout from "../../layout/MobileLayout";
 
@@ -14,6 +15,10 @@ const TotalBoard = () => {
   const navi = useNavigate();
 
   // const [isFirstRender, setIsFirstRender] = useState(true);
+  // 처음 렌더링시 개별 카테고리의 전체에 포커싱 주기
+
+  // const scrollRef = HorizontalScroll();
+  // 카테고리 슬라이더에 호리즌탈 커스텀 스크롤 주기
 
   const categories = [
     "전체",
@@ -109,6 +114,7 @@ const TotalBoard = () => {
               </MainCategory>
             </Row>
             <CategorySlider>
+              {/* <CategorySlider ref={scrollRef}> */}
               {/* <CategorySlider isFirstRender={isFirstRender}> */}
               {categories.map((item, index) => (
                 <button
@@ -152,7 +158,8 @@ const CategorySlider = styled.div`
   padding: 1rem 0;
   width: 400px;
   background-color: white;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
+  overflow-y: scroll;
   white-space: nowrap;
 
   & > button {
@@ -191,8 +198,59 @@ const CategorySlider = styled.div`
   }
 `;
 
+// ================= for horizontal scroll ===================
+// const CategorySlider = styled.div`
+//   padding: 1rem 0;
+//   width: 400px;
+//   background-color: white;
+//   /* overflow-x: scroll; */
+//   overflow: auto;
+//   white-space: nowrap;
+
+//   & > button {
+//     display: inline-block;
+//     background-color: white;
+//     border: 0.1rem solid rgb(120, 120, 120);
+//     margin-right: 0.5rem;
+//     border-radius: 1.75rem;
+//     padding: 0.25rem 1rem;
+
+//     // 처음 렌더링될 때 "전체" 버튼이 active 상태
+//     /* ${(props) =>
+//       props.isFirstRender
+//         ? props.index === 0 &&
+//           css`
+//             background-color: rgb(120, 120, 120);
+//             color: white;
+//             outline: none;
+//           `
+//         : props.isActive &&
+//           css`
+//             background-color: rgb(120, 120, 120);
+//             color: white;
+//             outline: none;
+//           `} */
+//   }
+
+//   & > button:focus {
+//     background-color: rgb(120, 120, 120);
+//     color: white;
+//     outline: none;
+//   }
+
+//   ::-webkit-scrollbar {
+//     display: none;
+//   }
+// `;
+
+// ================= for horizontal scroll ===================
+
 const PageWithFooterWrapper = styled.div`
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
   margin-top: 10rem;
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
+  /* 9.9rem으로 하면 인피니티 스크롤 안 되니 refactor할 때 주의 */
 `;
 
 const Row = styled.div`
