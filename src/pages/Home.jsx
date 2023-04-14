@@ -34,7 +34,7 @@ const Home = () => {
         <PostCardSliders>
           {/* Hot 게시글 */}
           <HotPostCardSliderCont>
-            <PostCardSlider_Info title="HOT 훈수" more="더보기" />
+            <PostCardSlider_Info title="HOT 훈수" />
             <HotPostCardSlider />
           </HotPostCardSliderCont>
 
