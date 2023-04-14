@@ -1,49 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import PostCard from './HotPostCard';
-import { instance } from '../../api/axios';
-import { BsChevronLeft } from 'react-icons/bs'
-import { BsChevronRight } from 'react-icons/bs'
-import NewPostCard from './NewPostCard';
-
-
-// =================== 상기매니저님 코드 ==========================
-
+import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+import { instance } from "../../api/axios";
+import { BsChevronLeft } from "react-icons/bs";
+import NewPostCard from "./NewPostCard";
 
 const NewPostCardSlider = () => {
+  // newPostCard 불러오기
+  useEffect(() => {
+    const getPost = async () => {
+      const response = await instance.get(
+        `/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
+      );
+      setNewPostCards(response.data.postCards);
+    };
+    getPost();
+  }, []);
 
-    useEffect(() => {
-        const getPost = async () => {
-            const response = await instance.get(`/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`)
-            setNewPostCards(response.data.postCards)
-        }
-        getPost();
-    }, []);
-  
+  // NewPostCard 저장
   const [newPostCards, setNewPostCards] = useState([]);
-  
+
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
-    value: "310px"
+    value: "19.375rem",
   });
 
-  
   const genPostCardsArray = (target) => {
+    if (target === 3) {
+      return [1, 2, target, 4, 0].map((el) => newPostCards?.at(el));
+    }
     if (target === 4) {
-      return [3, target, 0].map((el) => newPostCards?.at(el));
+      return [2, 3, target, 0, 1].map((el) => newPostCards?.at(el));
     }
     if (target === -4) {
-      return [0, target, -3].map((el) => newPostCards?.at(el));
+      return [-1, 0, target, -3, -2].map((el) => newPostCards?.at(el));
     }
-    return [target - 1, target, target + 1].map((el) => newPostCards?.at(el));
+    return [target - 2, target - 1, target, target + 1, target + 2].map((el) =>
+      newPostCards?.at(el)
+    );
   };
-  
-  
+
   const clickLeftHandler = () => {
-    setAnimate(() => ({ on: true, value: "310px" }));
+    setAnimate(() => ({ on: true, value: "19.375rem" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "310px" }));
+      setAnimate(() => ({ on: false, value: "19.375rem" }));
       setIndex((pre) => {
         if (pre === -4) return (pre = 0);
         else return pre - 1;
@@ -52,89 +52,72 @@ const NewPostCardSlider = () => {
   };
 
   const clickRightHandler = () => {
-    setAnimate(() => ({ on: true, value: "-310px" }));
+    setAnimate(() => ({ on: true, value: "-19.375rem" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "-310px" }));
+      setAnimate(() => ({ on: false, value: "-19.375rem" }));
       setIndex((pre) => {
         if (pre === 4) return (pre = 0);
         else return pre + 1;
       });
-    }, 400);
+    }, 350);
   };
 
   return (
-    // <div>test</div>
-      <SliderContainer>
-        <Button dir="left" onClick={clickLeftHandler} />
-        <Button dir="right" onClick={clickRightHandler} />
-        <PostCards animate={animate}>
-          {/* {
-            genPostCardsArray(index)?.map((el) => (
-              // <div>Test{index}</div>
-              <PostCard
-                key={el?.postIdx}
-                postCardIdx={el?.postIdx}
-                mainCategory={el?.maincategory}
-                title={el?.title}
-                content={el?.desc}
-                viewCount={el?.postViewCount}
-                commentCount={el?.commentCount}
-              />
-            ))
-          } */}
-          {
-            genPostCardsArray(index)?.map((el) => (
-                <NewPostCard
-                    key={el?.postIdx}
-                    mainCategory={el?.maincategory}
-                    title={el?.title}
-                    content={el?.desc}
-                />
-            ))
-          }
-        </PostCards>
-      </SliderContainer>
+    <SliderContainer>
+      <Button dir="left" onClick={clickLeftHandler} />
+      <Button dir="right" onClick={clickRightHandler} />
+      <NewPostCards animate={animate}>
+        {genPostCardsArray(index)?.map((el) => (
+          <NewPostCard
+            key={el?.postIdx}
+            mainCategory={el?.maincategory}
+            title={el?.title}
+            content={el?.desc}
+          />
+        ))}
+      </NewPostCards>
+    </SliderContainer>
   );
 };
 
 export default NewPostCardSlider;
-
 
 const SliderContainer = styled.div`
   /* border: 1px solid green; */
   /* width: 400px; */
   width: 25rem;
   height: 10rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   position: relative;
   overflow-x: hidden;
 `;
 
-const PostCards = styled.div`
-  /* height: 200px; */
+const NewPostCards = styled.div`
   display: flex;
-  gap: 10px;
+
+  gap: 1rem;
 
   ${({ animate }) => {
     if (animate.on) {
       return css`
         transform: translate(${({ animate }) => animate.value});
-        transition: transform 300ms ease-in-out;
+        transition: transform 350ms ease-in-out;
       `;
     }
   }};
 
-& :hover {
+  /* & :hover {
   // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
   transform: scale(1.05);
-  };
+  }; */
 `;
 
-
 // 버튼
-const Button = ({ children, dir, onClick }) => {
+const Button = ({ dir, onClick }) => {
   return (
     <Stbutton dir={dir} onClick={onClick}>
       <BsChevronLeft />

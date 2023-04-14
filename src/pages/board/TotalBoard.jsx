@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { instance } from "../../api/axios";
 import Footer from "../../components/footer/Footer";
 // import HorizontalScroll from "../../components/hook/scroll/HorizontalScroll";
-import PostCard from "../../components/post/PostCard";
+import PostCard from "../../components/post/HotPostCard";
 import MobileLayout from "../../layout/MobileLayout";
 
 const TotalBoard = () => {
