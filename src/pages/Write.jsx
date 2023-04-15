@@ -81,6 +81,7 @@ const Write = () => {
     <MobileLayout>
       <PageWithFooterWrapper>
         <WriteHeader>
+          {/* <WriteHeaderLeftMargin /> */}
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
             <WriteCategory>
@@ -92,8 +93,8 @@ const Write = () => {
             </WriteCategory>
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
+          {/* <WriteHeaderRightMargin /> */}
         </WriteHeader>
-
         <WriteForm
           onSubmit={(e) => {
             e.preventDefault();
@@ -117,7 +118,6 @@ const Write = () => {
             placeholder="훈수 받고 싶은 내용을 입력하세요."
           ></WriteContent>
         </WriteForm>
-
         <WriteFooter />
       </PageWithFooterWrapper>
 
@@ -205,6 +205,7 @@ const PageWithFooterWrapper = styled.div`
 `;
 
 const WriteCanc = styled.div`
+  margin-left: 2rem;
   color: rgb(180, 180, 180);
 
   &:hover {
@@ -214,6 +215,7 @@ const WriteCanc = styled.div`
 `;
 
 const WritePost = styled.div`
+  margin-right: 2rem;
   color: rgb(180, 180, 180);
 
   &:hover {
@@ -237,7 +239,8 @@ const WriteHeaderCont = styled.div`
   /* padding-top: 2rem; */
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: space-between;
   align-items: flex-end;
   border-bottom: 0.1rem solid rgb(180, 180, 180);
 `;
