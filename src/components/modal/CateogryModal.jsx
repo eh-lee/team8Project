@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { BsCheckLg } from "react-icons/bs";
 
 const CateogryModal = ({ open, close }) => {
   const modalRef = useRef();
@@ -43,13 +44,10 @@ const CateogryModal = ({ open, close }) => {
   const [isActive, setIsActive] = useState({ main: null, sub: null });
 
   const handleMainClick = (index) => {
-    // setIsActive((prev) => ({ main: index, sub: null }));
     setIsActive({ main: index, sub: null });
   };
-  console.log("유머면 0, 진지면 1----->", isActive.main);
 
   const handleSubClick = (index) => {
-    // setIsActive((prev) => ({ ...prev, sub: index }));
     setIsActive((prev) => ({ ...prev, sub: index }));
     console.log(isActive);
   };
@@ -82,6 +80,7 @@ const CateogryModal = ({ open, close }) => {
                 isClicked={isActive.sub}
               >
                 {item}
+                <BsCheckLg display={isActive.sub === idx ? "inline" : "none"} />
               </SubCat>
             ))}
           </ModalSubCat>
@@ -139,7 +138,6 @@ const ModalMainCat = styled.div`
   width: 6rem;
   height: 100vh;
   background-color: rgb(245, 245, 245);
-  /* background-color: tomato; */
 `;
 
 const MainCat = styled.div`
@@ -154,8 +152,11 @@ const MainCat = styled.div`
   /* letter-spacing 보정 */
   font-weight: bold;
   font-size: 1.05rem;
+  color: "rgb(160,160,160)";
+  ${({ isFirst }) => isFirst && `border-top-left-radius: 1rem;`};
 
-  ${({ isFirst }) => isFirst && `border-top-left-radius: 1rem;`}
+  color: ${(props) =>
+    props.isClicked === props.mainCatIdx ? "black" : "rgb(160, 160, 160)"};
 
   background-color: ${(props) =>
     props.isClicked === props.mainCatIdx ? "white" : "rgb(245, 245, 245)"};
@@ -165,6 +166,7 @@ const MainCat = styled.div`
   /* key, input태그에서도 엌저구가 있음 */
 
   &:hover {
+    color: black;
     background-color: white;
     cursor: pointer;
   }
@@ -189,20 +191,20 @@ const SubCat = styled.div`
   display: flex;
   align-items: center;
   padding-left: 1.75rem;
+  padding-right: 1.75rem;
   font-weight: bold;
   font-size: 1.05rem;
+  /* border: 1px solid red; */
+  justify-content: space-between;
+  color: rgb(160, 160, 160);
 
-  ${({ isFirst }) => isFirst && `border-top-right-radius: 1rem;`}
+  ${({ isFirst }) => isFirst && `border-top-right-radius: 1rem;`};
 
-  background-color: ${(props) =>
-    props.isClicked === props.subCatIdx ? "gray" : "white"};
+  color: ${(props) =>
+    props.isClicked === props.subCatIdx ? "black" : "rgb(160, 160, 160)"};
 
   &:hover {
-    background-color: gray;
+    color: black;
     cursor: pointer;
   }
-  /* &:focus {
-    outline: none;
-    background-color: white;
-  } */
 `;
