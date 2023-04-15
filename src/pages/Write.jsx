@@ -15,9 +15,6 @@ const Write = () => {
   FalseGuard();
   const navi = useNavigate();
 
-  // const [headerMainCat, setHeaderMainCat] = useState("카테고리");
-  // const [headerSubCat, setHeaderSubCat] = useState("");
-
   // parentFunction
   const WriteCallback = (x, y) => {
     console.log("지옥에서 돌아온 데이터 x==========>", x);

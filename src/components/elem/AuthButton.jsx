@@ -19,13 +19,13 @@ export default function Button({
 }
 
 const AuthButton = styled.button`
-  border: 0.1rem solid black ${(props) => props.borderColor};
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.borderColor};
+  border: none ${(props) => props.borderColor};
+  background-color: #ef3f61 ${(props) => props.backgroundColor};
+  color: white ${(props) => props.borderColor};
   border-radius: 0.5rem;
   padding: 1vh;
-  height: 4vh;
-  width: 20vh;
+  height: 4.75vh;
+  width: 33vh;
   font-size: 1rem;
 
   &:hover {

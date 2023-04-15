@@ -168,7 +168,7 @@ const CategorySlider = styled.div`
 
   & > button {
     display: inline-block;
-    color: rgb(255, 12, 61);
+    color: #ef3f61;
     background-color: white;
     border: 0.1rem solid rgb(180, 180, 180);
     margin-right: 1%;

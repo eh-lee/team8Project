@@ -15,15 +15,14 @@ const AuthInput = ({ type, placeholder, value, onChange, name }) => {
 };
 
 const StyledInput = styled.input`
-  border: none;
   border-radius: 0.5rem;
-  border-bottom: 0.1rem solid #333333;
+  /* border-bottom: 0.1rem solid #333333; */
   height: 4vh;
   width: 30vh;
-  outline: none;
-  padding: 0 1.5vh;
+  /* outline: none; */
+  padding: 0.5vh 1.5vh;
   margin: 1vh 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  border: 0.1rem solid rgb(220, 220, 220);
 
   &:focus-within {
     border-radius: 0.5rem;
