@@ -2,55 +2,36 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../api/axios";
-// import { access_token } from "../api/token";
+import { access_token } from "../api/token";
+// 이미 삭제된 이전 쿠키에 담겨 있던 값을 왜 기억해서 불러오지???
 import WriteFooter from "../components/footer/WriteFooter";
 import FalseGuard from "../components/hook/guard/FalseGuard";
 import MobileLayout from "../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../components/modal/CateogryModal";
-import ModalPortal from "../components/modal/ModalPortal";
-
-// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUzNDk3MywiZXhwIjoxNjgxNTM4NTczfQ.GoAru7-wrkMLl9LvCN7w6urWkCNU1XupqwtALlPpT_w
-//이게 뉴
-
-// cookie
-// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyODU0NSwiZXhwIjoxNjgxNTMyMTQ1fQ   .rnuRvuZxLr9Cj0o1NiYVTPFwOPxSTmVVyH5b4yykxtM
-
-// res
-// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyODU0NSwiZXhwIjoxNjgxNTMyMTQ1fQ.rnuRvuZxLr9Cj0o1NiYVTPFwOPxSTmVVyH5b4yykxtM
-
-// req
-// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyMzU1NywiZXhwIjoxNjgxNTI3MTU3fQ   .XZkfOj4B5_FFj1NeSoS1JJHknKt2_wrG6xeIB-F7NlE
-
-export const access_token = decodeURI(document.cookie)
-  .replace("access_token=", "")
-  .replace(/; nickname=([^;]*)/, "");
-
-console.log(access_token);
+// import ModalPortal from "../components/modal/ModalPortal";
 
 const Write = () => {
   FalseGuard();
   const navi = useNavigate();
 
+  // const [headerMainCat, setHeaderMainCat] = useState("카테고리");
+  // const [headerSubCat, setHeaderSubCat] = useState("");
+
+  // parentFunction
+  const WriteCallback = (x, y) => {
+    console.log("지옥에서 돌아온 데이터 x==========>", x);
+    setMaincategory(x);
+    console.log("지옥에서 돌아온 데이터 y==========>", y);
+    setCategory(y);
+  };
+
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   // SubCat & MainCat은 modal에 있는 state라
   // 일단 portal로 옮기고 나서 생각
-  const [maincategory, setMaincategory] = useState("유머");
-  const [category, setCategory] = useState("일상");
-
-  console.log("title===>", title);
-  console.log("desc===>", desc);
-
-  // const [createPost, setCreatePost] = useState({
-  //   title,
-  //   desc,
-  //   mainCategory: "",
-  //   category: "",
-  //   tag: [],
-  //   imgUrl: [],
-  //   pollTitle: "",
-  // });
+  const [maincategory, setMaincategory] = useState("카테고리");
+  const [category, setCategory] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -72,13 +53,11 @@ const Write = () => {
         {
           headers: {
             Authorization: `${access_token}`,
-            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyODU0NSwiZXhwIjoxNjgxNTMyMTQ1fQ.rnuRvuZxLr9Cj0o1NiYVTPFwOPxSTmVVyH5b4yykxtM`,
           },
         }
       );
       alert("글 작성에 성공하였습니다.");
-      // prompt(""); 커스텀 프롬프트
-      // navi("/board/{mainCategory}{Category}엌저구의 디테일로 넘어가게?")
+      navi("/totalboard");
     } catch (e) {
       const errorMsg = e.response.data.msg;
       alert(`${errorMsg}`);
@@ -105,7 +84,8 @@ const Write = () => {
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
             <WriteCategory>
-              카테고리
+              <MainCat>{maincategory}</MainCat>
+              <SubCat>{category}</SubCat>
               <IconCont>
                 <IoIosArrowDown onClick={categoryModalOpenHandler} />
               </IconCont>
@@ -141,16 +121,18 @@ const Write = () => {
         <WriteFooter />
       </PageWithFooterWrapper>
 
-      <ModalPortal>
-        <ModalCont>
-          {isCategoryModalOpen && (
-            <CateogryModal
-              open={isCategoryModalOpen}
-              close={categoryModalCloseHandler}
-            />
-          )}
-        </ModalCont>
-      </ModalPortal>
+      {/* <ModalPortal> */}
+      <ModalCont>
+        {isCategoryModalOpen && (
+          <CateogryModal
+            open={isCategoryModalOpen}
+            close={categoryModalCloseHandler}
+            parentFunction={WriteCallback}
+            // CategoryModal(child) to write.jsx(parent)
+          />
+        )}
+      </ModalCont>
+      {/* </ModalPortal> */}
     </MobileLayout>
   );
 };
@@ -175,6 +157,12 @@ const WriteTitle = styled.input`
   ::placeholder {
     color: rgb(180, 180, 180);
   }
+`;
+
+const MainCat = styled.div``;
+
+const SubCat = styled.div`
+  color: rgb(180, 180, 180);
 `;
 
 const WriteContent = styled.textarea`

@@ -1,14 +1,32 @@
-import reactDom from "react-dom";
-// import { css } from "styled-components";
+// import reactDom from "react-dom";
 
-const ModalPortal = ({ children }) => {
-  // <div className="Modal">{ children }</div>
-  const el = document.getElementById("modal");
-  return reactDom.createPortal(children, el);
-};
+// const ModalPortal = ({ children }) => {
+//   const el = document.getElementById("modal");
+//   return reactDom.createPortal(children, el);
+// };
 
-// .Modal {
-//   margin: 1rem;
-// }
+// export default ModalPortal;
 
-export default ModalPortal;
+//Portal에 mobile layout 먹히기가 안 됨.. 나중에 다시 트라이
+
+// =========== try (failed) ================
+
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import styled from "styled-components";
+
+// const ModalPortal = ({ children }) => {
+//   const el = document.getElementById("modal");
+//   return ReactDOM.createPortal(
+//     <StMobileLayout>
+// {children}
+//     </StMobileLayout>,
+//     el
+//   );
+// };
+
+// const StMobileLayout = styled.div`
+// (...)
+// `;
+
+// export default ModalPortal;

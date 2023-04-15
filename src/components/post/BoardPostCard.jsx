@@ -24,7 +24,7 @@ const BoardPostCard = ({
       className="no-hover"
     >
       <PostCardTitleBox>
-        <PostCardMainCategory>{mainCategory}</PostCardMainCategory>
+        <PostCardMainCategory>{mainCategory}🤮</PostCardMainCategory>
         <PostCardRow>
           <PostCardTitle>{title}</PostCardTitle>
           <PostCardTitleIcon></PostCardTitleIcon>

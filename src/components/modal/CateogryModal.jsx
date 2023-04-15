@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { BsCheckLg } from "react-icons/bs";
+import { BiSelectMultiple } from "react-icons/bi";
 
-const CateogryModal = ({ open, close }) => {
+const CateogryModal = ({ parentFunction, open, close }) => {
   const modalRef = useRef();
 
   const closeModal = () => {
@@ -43,18 +44,32 @@ const CateogryModal = ({ open, close }) => {
 
   const [isActive, setIsActive] = useState({ main: null, sub: null });
 
+  // 부모로 상태 보내기
+  const [mainCat, setMainCat] = useState("카테고리");
+  const [subCat, setSubCat] = useState("");
+
+  parentFunction(mainCat, subCat);
+  // 부모로 상태 보내기
+
   const handleMainClick = (index) => {
     setIsActive({ main: index, sub: null });
+    setMainCat(mainCategories[index]);
+    console.log("mainCat-------->", mainCategories[index]);
   };
 
   const handleSubClick = (index) => {
     setIsActive((prev) => ({ ...prev, sub: index }));
-    console.log(isActive);
+    setSubCat(categories[index]);
+    console.log("subCat-------->", categories[index]);
   };
 
   return open ? (
     <>
       <FooBG onClick={close} />
+      {/* <선택완료어쩌구아이콘 onClick={close} /> */}
+      <Selected>
+        <BiSelectMultiple onClick={close} />
+      </Selected>
       <CategoryModalOverlay open={open} close={close} ref={modalRef}>
         <CategoryModalRow>
           <ModalMainCat>
@@ -98,6 +113,15 @@ const FooBG = styled.div`
   width: 400px;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const Selected = styled.div`
+  /* position: relative; */
+  /* top: 0;
+  right: 0;
+  width: 10px;
+  height: 100vh;
+  border: 1px solid red; */
 `;
 
 const CategoryModalOverlay = styled.div`
