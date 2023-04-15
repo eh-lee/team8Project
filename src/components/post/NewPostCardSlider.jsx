@@ -70,6 +70,7 @@ const NewPostCardSlider = () => {
         {genPostCardsArray(index)?.map((el) => (
           <NewPostCard
             key={el?.postIdx}
+            postIdx={el?.postIdx}
             mainCategory={el?.maincategory}
             title={el?.title}
             content={el?.desc}

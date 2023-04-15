@@ -1,47 +1,81 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../api/axios";
-import { access_token } from "../api/token";
+// import { access_token } from "../api/token";
 import WriteFooter from "../components/footer/WriteFooter";
 import FalseGuard from "../components/hook/guard/FalseGuard";
 import MobileLayout from "../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../components/modal/CateogryModal";
+import ModalPortal from "../components/modal/ModalPortal";
+
+// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUzNDk3MywiZXhwIjoxNjgxNTM4NTczfQ.GoAru7-wrkMLl9LvCN7w6urWkCNU1XupqwtALlPpT_w
+//이게 뉴
+
+// cookie
+// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyODU0NSwiZXhwIjoxNjgxNTMyMTQ1fQ   .rnuRvuZxLr9Cj0o1NiYVTPFwOPxSTmVVyH5b4yykxtM
+
+// res
+// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyODU0NSwiZXhwIjoxNjgxNTMyMTQ1fQ.rnuRvuZxLr9Cj0o1NiYVTPFwOPxSTmVVyH5b4yykxtM
+
+// req
+// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyMzU1NywiZXhwIjoxNjgxNTI3MTU3fQ   .XZkfOj4B5_FFj1NeSoS1JJHknKt2_wrG6xeIB-F7NlE
+
+export const access_token = decodeURI(document.cookie)
+  .replace("access_token=", "")
+  .replace(/; nickname=([^;]*)/, "");
+
+console.log(access_token);
 
 const Write = () => {
   FalseGuard();
   const navi = useNavigate();
-  // console.log("access_token----->", access_token);
 
-  const [createPost, setCreatePost] = useState({
-    title: "",
-    desc: "",
-    mainCategory: "",
-    category: "",
-    imgUrl: false,
-    // tag: "",
-  });
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  // SubCat & MainCat은 modal에 있는 state라
+  // 일단 portal로 옮기고 나서 생각
+  const [maincategory, setMaincategory] = useState("유머");
+  const [category, setCategory] = useState("일상");
+
+  console.log("title===>", title);
+  console.log("desc===>", desc);
+
+  // const [createPost, setCreatePost] = useState({
+  //   title,
+  //   desc,
+  //   mainCategory: "",
+  //   category: "",
+  //   tag: [],
+  //   imgUrl: [],
+  //   pollTitle: "",
+  // });
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     // *=============== 글자 수 검사 ===============*
-    if (createPost.title.length < 3 || createPost.title.length > 25) {
+    if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
     }
-    if (createPost.desc.length < 10 || createPost.desc.length > 2000) {
+    if (desc.length < 10 || desc.length > 2000) {
       alert("내용은 10자 이상, 2000자 이하여야 합니다!");
       return;
     }
 
     try {
-      await instance.post("/postCards/post/createPost", createPost, {
-        headers: {
-          Authorization: `${access_token}`,
-        },
-      });
+      await instance.post(
+        "/postCards/post/createPost",
+        { title, desc, maincategory, category },
+        {
+          headers: {
+            Authorization: `${access_token}`,
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTUyODU0NSwiZXhwIjoxNjgxNTMyMTQ1fQ.rnuRvuZxLr9Cj0o1NiYVTPFwOPxSTmVVyH5b4yykxtM`,
+          },
+        }
+      );
       alert("글 작성에 성공하였습니다.");
       // prompt(""); 커스텀 프롬프트
       // navi("/board/{mainCategory}{Category}엌저구의 디테일로 넘어가게?")
@@ -59,11 +93,9 @@ const Write = () => {
 
   const categoryModalOpenHandler = () => {
     setIsCategoryModalOpen(true);
-    console.log("모달 트리깅 true? ---->", isCategoryModalOpen);
   };
   const categoryModalCloseHandler = () => {
     setIsCategoryModalOpen(false);
-    console.log("모달 트리깅 false? ---->", isCategoryModalOpen);
   };
 
   return (
@@ -72,37 +104,53 @@ const Write = () => {
         <WriteHeader>
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
-            {/* <Cateogry /> */}
-            {/* ============origin category set========= */}
             <WriteCategory>
               카테고리
               <IconCont>
                 <IoIosArrowDown onClick={categoryModalOpenHandler} />
               </IconCont>
             </WriteCategory>
-            {/* ============origin category set========= */}
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
         </WriteHeader>
-        <WriteForm>
-          {/* <WriteTitle autoFocus placeholder="제목 (3~25자)"></WriteTitle> */}
-          <WriteTitle autoFocus placeholder="제목"></WriteTitle>
+
+        <WriteForm
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <WriteTitle
+            type="text"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            autoFocus
+            placeholder="제목"
+          ></WriteTitle>
           <WriteContent
-            // placeholder="훈수 받고 싶은 내용을 입력하세요.&#13;&#10;(최대 2000자)"
+            type="text"
+            value={desc}
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
             placeholder="훈수 받고 싶은 내용을 입력하세요."
           ></WriteContent>
         </WriteForm>
+
         <WriteFooter />
       </PageWithFooterWrapper>
 
-      <ModalCont>
-        {isCategoryModalOpen && (
-          <CateogryModal
-            open={isCategoryModalOpen}
-            close={categoryModalCloseHandler}
-          />
-        )}
-      </ModalCont>
+      <ModalPortal>
+        <ModalCont>
+          {isCategoryModalOpen && (
+            <CateogryModal
+              open={isCategoryModalOpen}
+              close={categoryModalCloseHandler}
+            />
+          )}
+        </ModalCont>
+      </ModalPortal>
     </MobileLayout>
   );
 };

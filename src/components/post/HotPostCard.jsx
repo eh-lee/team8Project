@@ -8,14 +8,14 @@ const PostCard = ({
   content,
   viewCount,
   commentCount,
-  postCardIdx,
+  postIdx,
 }) => {
   const navigate = useNavigate();
 
   return (
     <PostCardWrap
       onClick={() => {
-        navigate(`/board/${postCardIdx}`);
+        navigate(`/board/${postIdx}`);
       }}
       className="no-hover"
     >

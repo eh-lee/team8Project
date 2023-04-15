@@ -39,8 +39,7 @@ const StMobileLayout = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
   background-color: white;
 
-  @media screen and (min-width: 520px) {
-    /* @media screen and (min-width: 400px) { */
+  @media screen and (min-width: 400px) {
     /* min-width로 반응형 width 조절 */
     /* 520px: 카카오 로그인 max-width와 통일 */
     width: 400px;
