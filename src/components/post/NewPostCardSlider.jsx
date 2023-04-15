@@ -22,7 +22,8 @@ const NewPostCardSlider = () => {
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
-    value: "19.375rem",
+    // value: "310px",
+    value: "180px"
   });
 
   const genPostCardsArray = (target) => {
@@ -41,9 +42,11 @@ const NewPostCardSlider = () => {
   };
 
   const clickLeftHandler = () => {
-    setAnimate(() => ({ on: true, value: "19.375rem" }));
+    // setAnimate(() => ({ on: true, value: "310px" }));
+    setAnimate(() => ({ on: true, value: "180px" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "19.375rem" }));
+      // setAnimate(() => ({ on: false, value: "310px" }));
+      setAnimate(() => ({ on: false, value: "180px" }));
       setIndex((pre) => {
         if (pre === -4) return (pre = 0);
         else return pre - 1;
@@ -52,9 +55,11 @@ const NewPostCardSlider = () => {
   };
 
   const clickRightHandler = () => {
-    setAnimate(() => ({ on: true, value: "-19.375rem" }));
+    // setAnimate(() => ({ on: true, value: "-310px" }));
+    setAnimate(() => ({ on: true, value: "-180px" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "-19.375rem" }));
+      // setAnimate(() => ({ on: false, value: "-310px" }));
+      setAnimate(() => ({ on: false, value: "-180px" }));
       setIndex((pre) => {
         if (pre === 4) return (pre = 0);
         else return pre + 1;
@@ -70,6 +75,8 @@ const NewPostCardSlider = () => {
         {genPostCardsArray(index)?.map((el) => (
           <NewPostCard
             key={el?.postIdx}
+            postIdx={el?.postIdx}
+            category={el?.category}
             mainCategory={el?.maincategory}
             title={el?.title}
             content={el?.desc}
@@ -84,9 +91,8 @@ export default NewPostCardSlider;
 
 const SliderContainer = styled.div`
   /* border: 1px solid green; */
-  /* width: 400px; */
-  width: 25rem;
-  height: 10rem;
+  width: 400px;
+  height: 160px;
 
   display: flex;
   align-items: center;
@@ -99,7 +105,7 @@ const SliderContainer = styled.div`
 const NewPostCards = styled.div`
   display: flex;
 
-  gap: 1rem;
+  gap: 30px;
 
   ${({ animate }) => {
     if (animate.on) {
@@ -110,10 +116,10 @@ const NewPostCards = styled.div`
     }
   }};
 
-  /* & :hover {
+  & :hover {
   // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
   transform: scale(1.05);
-  }; */
+  };
 `;
 
 // 버튼
@@ -139,7 +145,7 @@ const Stbutton = styled.button`
   ${({ dir }) => {
     if (dir === "left") {
       return css`
-        left: 0.5rem;
+        left: 90px;
         top: 50%;
         transform: translateY(-50%);
       `;
@@ -147,7 +153,7 @@ const Stbutton = styled.button`
 
     if (dir === "right") {
       return css`
-        right: 0.5rem;
+        right: 90px;
         top: 50%;
         transform: translateY(-50%) scaleX(-1);
       `;

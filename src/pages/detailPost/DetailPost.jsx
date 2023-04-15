@@ -11,7 +11,7 @@ import DetailPostContents from '../../components/detail/DetailPostContents';
 
 const DetailPost = () => {
     const nav = useNavigate();
-    
+
     const {postIdx} = useParams();
 
     // 상세 게시글을 담을 state
@@ -21,10 +21,9 @@ const DetailPost = () => {
         const getDetailPost = async () => {
             const { data } = await instance.get(`/postCards/post/${postIdx}`)
             setDetailPost(data.post)
-        }
+        };
         getDetailPost();
     }, []);
-    
 
     return (
         <> 

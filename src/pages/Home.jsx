@@ -76,7 +76,7 @@ const PostCardSlider_Info = ({ title, more }) => {
       <PostCardSliderTitle>{title}</PostCardSliderTitle>
       <PostCardSliderMore
         onClick={() => {
-          nav("/board");
+          nav("/totalboard");
         }}
       >
         {more}

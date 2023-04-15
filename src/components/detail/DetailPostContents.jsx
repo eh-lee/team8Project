@@ -1,15 +1,52 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components';
 import { IoChatbubbleOutline } from 'react-icons/io5'
-import { AiOutlineHeart, AiOutlineEye } from 'react-icons/ai'
+import { AiOutlineEye } from 'react-icons/ai'
+import Like from '../like/Like';
+import { instance, instanceWithAuth } from '../../api/axios';
 
-const DetailPostContents = ({ detailPost }) => {
-    const nav = useNavigate();
+const DetailPostContents = () => {
+    const {postIdx} = useParams();
 
-    // 게시글을 작성한 시간
+    // 상세 게시글을 담을 state
+    const [detailPost, setDetailPost] = useState([]);
+    
+    // 게시글 작성한 시간
     // 참고: '\u00A0'는 공백을 표현하는 유니코드 문자
     const createdAt = `${detailPost.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${detailPost.createdAt?.split('T')[1].slice(0, 5)}`
+    
+    // 좋아요 관리 state
+    const [postLikesCount, setPostLikesCount] = useState(null);
+    const [isLike, setIsLike] = useState(null);
+    
+    
+    // 상세 게시글 정보 불러오기
+    useEffect(() => {
+        const getDetailPost = async () => {
+            console.log("get요청 postIdx", {postIdx});
+            const { data } = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
+            setDetailPost(data.post);
+            setPostLikesCount(data.post.likesCount);
+            setIsLike(data.post.IsLike);
+        };
+        getDetailPost();
+    }, []);
+    console.log("변경 전 isLike###################", isLike)
+    
+    const clickPostLike = () => {
+        console.log("좋아요 눌렀다고!!!")
+        console.log("좋아요 요청 postIdx", {postIdx})
+        instanceWithAuth.put(`/prefer/post/${postIdx}?property=post&prefer=like`);
+        setIsLike((prev)=>!prev)
+        setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+    }
+    
+    console.log("변경 후 isLike###################", isLike)
+
+    // /api/prefer/post/{postIdx}?property=<value>&prefer=<value>
+    // property<value> : post , comment
+    // prefer<value> :  like , dislike
 
     return (
         <>
@@ -38,13 +75,14 @@ const DetailPostContents = ({ detailPost }) => {
                     {/* 좋아요 버튼, 개수 */}
                     <DetailPost_Content>
                         <DetailPost_Content_Icon
-                            onClick={() => { nav('/') }}
+                            onClick={()=>clickPostLike()}
                             pointerOn="on"
                         >
-                            <AiOutlineHeart />
+                            <Like isLike={isLike} />
+
                         </DetailPost_Content_Icon>
                         <DetailPost_Content_Count>
-                            {detailPost.likesCount}
+                            {postLikesCount}
                         </DetailPost_Content_Count>
                     </DetailPost_Content>
                     {/* 조회수 */}
@@ -153,6 +191,7 @@ const DetailPost_Content_Info = styled.ul`
 `;
 
 const DetailPost_Content_MarginLeft = styled.li`
+    /* border: 1px solid blue; */
     width: 10rem;
 `;
 
