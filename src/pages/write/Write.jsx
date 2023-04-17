@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { instance } from "../api/axios";
-import { access_token } from "../api/token";
+import { instance } from "../../api/axios";
+import { access_token } from "../../api/token";
 // 이미 삭제된 이전 쿠키에 담겨 있던 값을 왜 기억해서 불러오지???
-import WriteFooter from "../components/footer/WriteFooter";
-import FalseGuard from "../components/hook/guard/FalseGuard";
-import MobileLayout from "../layout/MobileLayout";
+import WriteFooter from "../../components/footer/WriteFooter";
+import FalseGuard from "../../components/hook/guard/FalseGuard";
+import MobileLayout from "../../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";
-import CateogryModal from "../components/modal/CateogryModal";
+import CateogryModal from "../../components/modal/CateogryModal";
 // import ModalPortal from "../components/modal/ModalPortal";
 
 const Write = () => {
@@ -77,8 +77,12 @@ const Write = () => {
   return (
     <MobileLayout>
       <PageWithFooterWrapper>
+
+
         <WriteHeader>
           {/* <WriteHeaderLeftMargin /> */}
+
+
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
             <WriteCategory>
@@ -90,8 +94,12 @@ const Write = () => {
             </WriteCategory>
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
+
+
           {/* <WriteHeaderRightMargin /> */}
         </WriteHeader>
+
+
         <WriteForm
           onSubmit={(e) => {
             e.preventDefault();
@@ -136,9 +144,11 @@ const Write = () => {
 
 export default Write;
 
-const ModalCont = styled.div``;
+const ModalCont = styled.div`
+`;
+
 const WriteTitle = styled.input`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem 1rem;
   width: 80%;
   min-height: 5vh;
@@ -163,7 +173,7 @@ const SubCat = styled.div`
 `;
 
 const WriteContent = styled.textarea`
-  font-size: 1rem;
+  font-size: 0.85rem;
   width: 80%;
   padding: 1rem 1rem 0 1rem;
   height: 70vh;
@@ -202,9 +212,9 @@ const PageWithFooterWrapper = styled.div`
 `;
 
 const WriteCanc = styled.div`
-  margin-left: 2rem;
+  margin-left: 5vw;
   color: rgb(180, 180, 180);
-
+  font-size: 0.9rem;
   &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
@@ -212,9 +222,9 @@ const WriteCanc = styled.div`
 `;
 
 const WritePost = styled.div`
-  margin-right: 2rem;
+  margin-right: 5vw;
   color: rgb(180, 180, 180);
-
+  font-size: 0.9rem;
   &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
@@ -225,27 +235,28 @@ const WriteHeader = styled.div`
   background-color: white;
   position: fixed;
   top: 0;
-  padding-top: 0.75rem;
   width: 100%;
   max-width: 400px;
   color: rgb(70, 70, 70);
 `;
 
 const WriteHeaderCont = styled.div`
-  padding-bottom: 0.75rem;
-  /* padding-top: 2rem; */
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-around; */
-  justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-`;
+/* border: 1px solid tomato; */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-end;
+border-bottom: 0.1rem solid rgb(180, 180, 180);
+// *============ HEADER 높이 ===============*
+  padding-bottom: 2vh;
+  height: 5vh;
+  // *============ HEADER 높이 ===============*
+`
 
 const WriteCategory = styled.div`
   gap: 0.25rem;
   display: flex;
-  font-size: 1.25rem;
+  font-size: 0.95rem;
   font-weight: bold;
 `;
 

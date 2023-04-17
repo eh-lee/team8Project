@@ -5,6 +5,7 @@ import { IoChatbubbleOutline } from 'react-icons/io5'
 import { AiOutlineEye } from 'react-icons/ai'
 import Like from '../like/Like';
 import { instance, instanceWithAuth } from '../../api/axios';
+import axios from 'axios';
 
 const DetailPostContents = () => {
     const {postIdx} = useParams();
@@ -17,15 +18,15 @@ const DetailPostContents = () => {
     const createdAt = `${detailPost.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${detailPost.createdAt?.split('T')[1].slice(0, 5)}`
     
     // 좋아요 관리 state
-    const [postLikesCount, setPostLikesCount] = useState(null);
-    const [isLike, setIsLike] = useState(null);
+    const [postLikesCount, setPostLikesCount] = useState(0);
+    const [isLike, setIsLike] = useState(0);
     
     
     // 상세 게시글 정보 불러오기
     useEffect(() => {
         const getDetailPost = async () => {
-            console.log("get요청 postIdx", {postIdx});
-            const { data } = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
+            const {data} = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
+            // const {data} = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
             setDetailPost(data.post);
             setPostLikesCount(data.post.likesCount);
             setIsLike(data.post.IsLike);
@@ -33,20 +34,17 @@ const DetailPostContents = () => {
         getDetailPost();
     }, []);
     console.log("변경 전 isLike###################", isLike)
+    console.log("detailPost", detailPost)
     
     const clickPostLike = () => {
         console.log("좋아요 눌렀다고!!!")
-        console.log("좋아요 요청 postIdx", {postIdx})
-        instanceWithAuth.put(`/prefer/post/${postIdx}?property=post&prefer=like`);
+        instanceWithAuth.put(`/postlike/post/${postIdx}`,
+        )
         setIsLike((prev)=>!prev)
         setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
-    }
+    };
     
-    console.log("변경 후 isLike###################", isLike)
-
-    // /api/prefer/post/{postIdx}?property=<value>&prefer=<value>
-    // property<value> : post , comment
-    // prefer<value> :  like , dislike
+    // console.log("변경 후 isLike###################", isLike)
 
     return (
         <>

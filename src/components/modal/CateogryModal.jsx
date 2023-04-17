@@ -6,22 +6,37 @@ import { BiSelectMultiple } from "react-icons/bi";
 const CateogryModal = ({ parentFunction, open, close }) => {
   const modalRef = useRef();
 
-  const closeModal = () => {
-    close();
-  };
+  // useEffect(()=> {
+  //   const closeModal = () => {
+  //     if (isActive.main !== null && isActive.sub !== null) {
+  //       close();
+  //     }};
+  //   closeModal();
+  // }, [isActive] )
 
+  const [isActive, setIsActive] = useState({ main: null, sub: null });
+  
+  const closeModal = () => {
+      close();
+  };
+  
   useEffect(() => {
+    function handleCategorySetUp() {
+      if (isActive.main !== null && isActive.sub !== null) {
+        return closeModal() };
+    };
+    handleCategorySetUp();
+
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         closeModal();
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
+    };
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [modalRef]);
+  }, [modalRef, isActive]);
 
   const mainCategories = ["유머", "진지"];
   const categories = [
@@ -42,8 +57,9 @@ const CateogryModal = ({ parentFunction, open, close }) => {
     "기타",
   ];
 
-  const [isActive, setIsActive] = useState({ main: null, sub: null });
 
+  console.log(isActive.main);
+  console.log(isActive.sub);
   // 부모로 상태 보내기
   const [mainCat, setMainCat] = useState("카테고리");
   const [subCat, setSubCat] = useState("");

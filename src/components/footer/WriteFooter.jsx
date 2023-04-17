@@ -20,7 +20,6 @@ const StyledFooter = styled.div`
   font-size: 0.75rem;
   font-weight: bold;
   background-color: rgba(255, 255, 255);
-  /* border: 1px solid green; */
 `;
 
 export default WriteFooter;

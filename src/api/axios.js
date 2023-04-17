@@ -12,7 +12,9 @@ export const instance = axios.create({
 
 export const instanceWithAuth = axios.create({
     baseURL: REACT_APP_SERVER_URL,
+    // http://43.201.18.179:3000/api/postlike/post/0c2efa60-00c1-4ab3-b3e1-afbf6d73776b
+    // baseURL: 'http://43.201.18.179:3000/api',
     headers: {
-        Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQG5hdmVyLmNvbSIsImlhdCI6MTY4MTU3ODE1NCwiZXhwIjoxNjgxNTgxNzU0fQ.ooLdkLc9g1HV5WII1ErBV52kIfTVOuM9FhwvVjp9lXM`
-    }
+        Authorization: `${access_token}`
+    },
 });

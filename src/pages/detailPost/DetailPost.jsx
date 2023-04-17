@@ -17,13 +17,13 @@ const DetailPost = () => {
     // 상세 게시글을 담을 state
     const [detailPost, setDetailPost] = useState([]);
 
-    useEffect(() => {
-        const getDetailPost = async () => {
-            const { data } = await instance.get(`/postCards/post/${postIdx}`)
-            setDetailPost(data.post)
-        };
-        getDetailPost();
-    }, []);
+    // useEffect(() => {
+    //     const getDetailPost = async () => {
+    //         const { data } = await instance.get(`/postCards/post/${postIdx}`)
+    //         setDetailPost(data.post)
+    //     };
+    //     getDetailPost();
+    // }, []);
 
     return (
         <> 
@@ -45,7 +45,7 @@ const DetailPost = () => {
                 {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
 
                 {/* 상세페이지 내용 */}
-                <DetailPostContents detailPost={detailPost} />
+                <DetailPostContents />
 
                 {/* 게시글페이지 푸터 */}
                 <Footer />
