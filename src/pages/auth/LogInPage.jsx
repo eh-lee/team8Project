@@ -4,11 +4,12 @@ import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
 import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
-import Footer from "../../components/footer/Footer";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 import TrueGuard from "../../components/hook/guard/TrueGuard";
+import NaverLoginBtn from "../../components/login/NaverLoginBtn";
+import GoogleLoginBtn from "../../components/login/GoogleLoginBtn";
 
 const LogInPage = () => {
   TrueGuard();
@@ -20,8 +21,6 @@ const LogInPage = () => {
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
       });
-      // console.log("response.headers------->", response.headers);
-      // console.log("response--------------->", response);
       // cookies.set("refresh_token", response.headers., {
       //   path: "/",
       // });
@@ -48,53 +47,62 @@ const LogInPage = () => {
 
   return (
     <MobileLayout>
+      <FooLogo>훈수</FooLogo>
       <Container onSubmit={submitButtonHandler}>
-        <div>
-          <div>
-            <div>이메일</div>
-            <AuthInput
-              type="email"
-              value={user.email}
-              name="email"
-              onChange={changeInputHandler}
-              placeholder="이메일을 입력해 주세요."
-            />
-          </div>
+        <InputColumn>
+          <AuthInput
+            type="email"
+            value={user.email}
+            name="email"
+            onChange={changeInputHandler}
+            placeholder="이메일을 입력해 주세요."
+          />
+          <AuthInput
+            type="password"
+            value={user.password}
+            name="password"
+            onChange={changeInputHandler}
+            placeholder="비밀번호를 입력해 주세요."
+          />
+        </InputColumn>
 
-          <div>
-            <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-              비밀번호
-            </div>
-            <AuthInput
-              type="password"
-              value={user.password}
-              name="password"
-              onChange={changeInputHandler}
-              placeholder="비밀번호를 입력해 주세요."
-            />
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginTop: "1.5rem",
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <AuthButton text={"로그인"} />
+        <Column>
+          <AuthButton text={"로그인"} />
+          <Row>
+            <NaverLoginBtn />
             <KakaoLoginBtn />
-          </div>
-          <LoginContainer>
-            <StyledLink to="/signup">회원가입 하러 가기</StyledLink>
-          </LoginContainer>
-        </div>
+            <GoogleLoginBtn />
+          </Row>
+        </Column>
+
+        <LoginContainer>
+          <NeedSignUp>계정이 없으신가요?</NeedSignUp>
+          <StyledLink to="/signup">회원가입</StyledLink>
+        </LoginContainer>
       </Container>
-      {/* 카카오 로그인 */}
-      <KakaoLoginBtn />
-      <Footer />
     </MobileLayout>
   );
 };
+
+const NeedSignUp = styled.div`
+  color: rgb(180, 180, 180);
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1.5vw;
+`;
+const FooLogo = styled.div`
+  margin: 20vh 0 7.5vh 0;
+  align-items: center;
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+`;
 
 const GreetingWrapper = styled.div`
   display: flex;
@@ -128,7 +136,8 @@ const GreetingWrapperSub = styled.div`
 `;
 
 const LoginContainer = styled.div`
-  margin-top: 1rem;
+  margin-top: 27.5vh;
+  gap: 0.25rem;
   font-size: 0.75rem;
   display: flex;
   flex-direction: row;
@@ -141,8 +150,8 @@ const StyledLink = styled(Link)`
 
 const Container = styled.form`
   gap: 1rem;
-  height: 100vh;
-  min-width: 200px;
+  /* height: 100vh; */
+  /* min-width: 200px; */
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -153,6 +162,19 @@ const Container = styled.form`
 const StyledImg = styled.img`
   border-radius: 50%;
   border: 1px solid rgb(0, 0, 0);
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5vh;
+`;
+
+const InputColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1vh;
 `;
 
 export default LogInPage;
