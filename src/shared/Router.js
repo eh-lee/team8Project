@@ -26,7 +26,7 @@ const Router = () => {
         <Route path="/board/:postIdx" element={<DetailPost />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/:sthId/profileedit" element={<ProfileEditPage />} />
-        <Route path="/KaKaoLogin" element={<KakaoLogin />} />
+        <Route path="/kakaoLogin" element={<KakaoLogin />} />
         <Route path="/battle" element={<Battle />} />
         <Route path="/write" element={<Write />} />
       </Routes>

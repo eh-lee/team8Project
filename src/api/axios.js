@@ -13,6 +13,6 @@ export const instance = axios.create({
 export const instanceWithAuth = axios.create({
     baseURL: REACT_APP_SERVER_URL,
     headers: {
-        Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQG5hdmVyLmNvbSIsImlhdCI6MTY4MTU3ODE1NCwiZXhwIjoxNjgxNTgxNzU0fQ.ooLdkLc9g1HV5WII1ErBV52kIfTVOuM9FhwvVjp9lXM`
+        Authorization: `${access_token}`
     }
 });

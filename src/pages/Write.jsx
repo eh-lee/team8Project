@@ -30,6 +30,11 @@ const Write = () => {
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
 
+  // const access_token = decodeURI(document.cookie)
+  //   .replace("access_token=", "")
+  //   .replace(/; nickname=([^;]*)/, "");
+  // ...
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
