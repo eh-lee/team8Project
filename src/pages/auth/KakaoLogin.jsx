@@ -5,7 +5,7 @@ import MobileLayout from "../../layout/MobileLayout";
 const KakaoLogin = () => {
   // 통신중인 페이지 => 꾸밈 / isLoading, isError
   const code = new URL(window.location.href).searchParams.get("code");
-  console.log(code);
+  console.log("카카오 인가 코드==========>", code);
 
   useEffect(() => {
     if (code) {

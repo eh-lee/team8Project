@@ -6,6 +6,7 @@ import styled from "styled-components";
 function GoogleLoginBtn() {
   const GoogleLoginHandler = () => {
     // window.location.href = GOOGLE_LOGIN_URL;
+    alert("구현 중인 기능입니다");
   };
 
   return (
@@ -26,6 +27,7 @@ const GoogleButton = styled.button`
   border-radius: 50%;
   background: url(${google}) no-repeat center/120%;
   cursor: pointer;
+  filter: grayscale(100%);
 `;
 
 const Icon = styled.img`
