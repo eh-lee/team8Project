@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const PostCard = ({
+const HotPostCard = ({
   mainCategory,
+  category,
   title,
   content,
   viewCount,
@@ -14,13 +15,15 @@ const PostCard = ({
 
   return (
     <PostCardWrap
+      mainCategory={mainCategory}
+      category={category}
       onClick={() => {
         navigate(`/board/${postIdx}`);
       }}
-      className="no-hover"
+      // className="no-hover"
     >
       <PostCard_TitleBox>
-        <PostCard_MainCategory>{mainCategory}</PostCard_MainCategory>
+        <PostCard_MainCategory>{mainCategory}🌝{category}</PostCard_MainCategory>
         <PostCard_Title>{title}</PostCard_Title>
       </PostCard_TitleBox>
       <PostCard_ContentBox>
@@ -34,15 +37,15 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default HotPostCard;
 
 const PostCardWrap = styled.div`
   /* border: 1px solid black; */
   border-radius: 0.75rem;
   background-color: #f4f4f5;
 
-  /* width: 280px; */
-  width: 17.5rem;
+  width: 280px;
+  height: 100px;
 
   padding: 1rem 0;
 
@@ -57,7 +60,8 @@ const PostCard_TitleBox = styled.ul`
   flex-direction: column;
   justify-content: space-between;
 
-  width: 15.5rem;
+  /* width: 15.5rem; */
+  width: 248px;
   height: 2.5rem;
 
   gap: 0.5rem;

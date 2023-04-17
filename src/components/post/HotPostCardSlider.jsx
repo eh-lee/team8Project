@@ -17,10 +17,11 @@ const PostCardSlider = () => {
   // hotPostCard 저장
   const [postCards, setPostCards] = useState([]);
 
+  // 인덱스, 애니메이션 상태 저장
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
-    value: "19.375rem",
+    value: "310px",
   });
 
   const genPostCardsArray = (target) => {
@@ -40,10 +41,9 @@ const PostCardSlider = () => {
   };
 
   const clickLeftHandler = () => {
-    // setAnimate(() => ({ on: true, value: "310px" }));
-    setAnimate(() => ({ on: true, value: "19.375rem" }));
+    setAnimate(() => ({ on: true, value: "310px" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "19.375rem" }));
+      setAnimate(() => ({ on: false, value: "310px" }));
       setIndex((pre) => {
         if (pre === -4) return (pre = 0);
         else return pre - 1;
@@ -52,9 +52,9 @@ const PostCardSlider = () => {
   };
 
   const clickRightHandler = () => {
-    setAnimate(() => ({ on: true, value: "-19.375rem" }));
+    setAnimate(() => ({ on: true, value: "-310px" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "-19.375rem" }));
+      setAnimate(() => ({ on: false, value: "-310px" }));
       setIndex((pre) => {
         if (pre === 4) return (pre = 0);
         else return pre + 1;
@@ -72,6 +72,7 @@ const PostCardSlider = () => {
             key={el?.postIdx}
             postIdx={el?.postIdx}
             mainCategory={el?.maincategory}
+            category={el?.category}
             title={el?.title}
             content={el?.desc}
             viewCount={el?.postViewCount}
@@ -87,10 +88,8 @@ export default PostCardSlider;
 
 const SliderContainer = styled.div`
   /* border: 1px solid green; */
-  /* width: 400px; */
-  width: 25rem;
-  /* height: 160px; */
-  height: 10rem;
+  width: 400px;
+  height: 160px;
 
   display: flex;
   align-items: center;
@@ -105,8 +104,7 @@ const PostCards = styled.div`
   /* height: 10rem; */
   display: flex;
 
-  /* gap: 30px; */
-  gap: 1.875rem;
+  gap: 30px;
 
   ${({ animate }) => {
     if (animate.on) {

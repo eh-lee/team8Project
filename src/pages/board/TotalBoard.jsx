@@ -137,6 +137,7 @@ const TotalBoard = () => {
             <BoardPostCard
               key={item.postIdx}
               postIdx={item.postIdx}
+              // postCardIdx={item.postIdx}
               title={item.title}
               nickname={item.nickname}
               content={item.desc}
@@ -270,7 +271,8 @@ const BoardHeader = styled.div`
   position: fixed;
   top: 0;
   padding-top: 0.75rem;
-  width: 100%;
+  /* width: 100%; */
+  width: 100vw;
   max-width: 400px;
   font-size: 1.25rem;
   color: rgb(70, 70, 70);
