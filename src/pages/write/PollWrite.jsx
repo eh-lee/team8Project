@@ -77,7 +77,7 @@ display: flex;
 flex-direction: column;
 gap: 2.5vh;
 margin: 10vh 0;
-align-items: ;
+/* align-items: ; */
 `
 
 
