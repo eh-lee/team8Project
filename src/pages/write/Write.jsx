@@ -3,17 +3,22 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
 import { access_token } from "../../api/token";
-// 이미 삭제된 이전 쿠키에 담겨 있던 값을 왜 기억해서 불러오지???
-import WriteFooter from "../../components/footer/WriteFooter";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../../components/modal/CateogryModal";
 // import ModalPortal from "../components/modal/ModalPortal";
+import { FaVoteYea } from "react-icons/fa";
+import { AiOutlineCamera } from "react-icons/ai";
+import WriteFooter from "../../components/footer/WriteFooter";
+import ModalPortal from "../../components/modal/ModalPortal";
 
 const Write = () => {
   FalseGuard();
   const navi = useNavigate();
+  // const makePollHandler = () => {
+  //   navi("/write/pollwrite");
+  // };
 
   // parentFunction
   const WriteCallback = (x, y) => {
@@ -77,11 +82,8 @@ const Write = () => {
   return (
     <MobileLayout>
       <PageWithFooterWrapper>
-
-
         <WriteHeader>
           {/* <WriteHeaderLeftMargin /> */}
-
 
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
@@ -95,10 +97,8 @@ const Write = () => {
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
 
-
           {/* <WriteHeaderRightMargin /> */}
         </WriteHeader>
-
 
         <WriteForm
           onSubmit={(e) => {
@@ -126,18 +126,18 @@ const Write = () => {
         <WriteFooter />
       </PageWithFooterWrapper>
 
-      {/* <ModalPortal> */}
-      <ModalCont>
-        {isCategoryModalOpen && (
-          <CateogryModal
-            open={isCategoryModalOpen}
-            close={categoryModalCloseHandler}
-            parentFunction={WriteCallback}
-            // CategoryModal(child) to write.jsx(parent)
-          />
-        )}
-      </ModalCont>
-      {/* </ModalPortal> */}
+      <ModalPortal>
+        <ModalCont>
+          {isCategoryModalOpen && (
+            <CateogryModal
+              open={isCategoryModalOpen}
+              close={categoryModalCloseHandler}
+              parentFunction={WriteCallback}
+              // CategoryModal(child) to write.jsx(parent)
+            />
+          )}
+        </ModalCont>
+      </ModalPortal>
     </MobileLayout>
   );
 };
@@ -145,6 +145,8 @@ const Write = () => {
 export default Write;
 
 const ModalCont = styled.div`
+  margin: 0 auto;
+  width: 400px;
 `;
 
 const WriteTitle = styled.input`
@@ -212,7 +214,7 @@ const PageWithFooterWrapper = styled.div`
 `;
 
 const WriteCanc = styled.div`
-  margin-left: 5vw;
+  margin-left: 7.5%;
   color: rgb(180, 180, 180);
   font-size: 0.9rem;
   &:hover {
@@ -222,7 +224,7 @@ const WriteCanc = styled.div`
 `;
 
 const WritePost = styled.div`
-  margin-right: 5vw;
+  margin-right: 7.5%;
   color: rgb(180, 180, 180);
   font-size: 0.9rem;
   &:hover {
@@ -241,17 +243,17 @@ const WriteHeader = styled.div`
 `;
 
 const WriteHeaderCont = styled.div`
-/* border: 1px solid tomato; */
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: flex-end;
-border-bottom: 0.1rem solid rgb(180, 180, 180);
-// *============ HEADER 높이 ===============*
+  /* border: 1px solid tomato; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  // *============ HEADER 높이 ===============*
   padding-bottom: 2vh;
   height: 5vh;
   // *============ HEADER 높이 ===============*
-`
+`;
 
 const WriteCategory = styled.div`
   gap: 0.25rem;
@@ -267,4 +269,76 @@ const IconCont = styled.div`
     cursor: pointer;
     color: rgb(70, 70, 70);
   }
+`;
+
+const StyledColumn = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: flex-start;
+  min-height: 30px;
+  height: 7vh;
+  align-items: center;
+`;
+
+const StyledNav = styled.nav`
+  width: 100vw;
+  display: flex;
+  // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
+  margin: 0 10%;
+  // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  color: rgb(70, 70, 70);
+`;
+
+const StyledPoll = styled.button`
+  gap: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3.5vh;
+  min-width: 11vh;
+  padding: 3px 5px;
+  border: 1px solid #3a3a59;
+  border-radius: 2rem;
+  background-color: white;
+  color: #3a3a59;
+  font-size: 0.7rem;
+
+  &:hover {
+    color: white;
+    background-color: #3a3a59;
+    outline: none;
+    cursor: pointer;
+  }
+`;
+
+const StyledImageBtn = styled.button`
+  width: 30px;
+  display: flex;
+  padding: 0;
+  justify-content: flex-end;
+  outline: none;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  color: #d8d8de;
+
+  &:hover {
+    cursor: pointer;
+    color: #3a3a59;
+  }
+`;
+
+const StyledFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  max-width: 400px;
+  /* StMobileLayout의 width와 동일하게 처리 */
+  border-top: 0.01rem solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+  font-size: 0.75rem;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255);
 `;

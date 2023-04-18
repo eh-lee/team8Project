@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { FaVoteYea } from "react-icons/fa"
-import { AiOutlineCamera } from "react-icons/ai"
-import { useNavigate } from "react-router-dom";
+import { FaVoteYea } from "react-icons/fa";
+import { AiOutlineCamera } from "react-icons/ai";
+import PollModal from "../modal/PollModal";
 
 function WriteFooterNav() {
-  const navi = useNavigate();
-  const makePollHandler = () => {
-    navi("/write/pollwrite");
-  }
+  const [isPollModalOpen, setIsPollModalOpen] = useState(false);
+
+  const pollModalOpenHandler = () => {
+    setIsPollModalOpen(true);
+  };
+  const pollModalCloseHandler = () => {
+    setIsPollModalOpen(false);
+  };
 
   return (
-    <StyledColumn>
-      <StyledNav>
-        <StyledPoll onClick={()=>makePollHandler()}>
-          <FaVoteYea />투표 생성
-        </StyledPoll>
-        <StyledImageBtn>
-          <AiOutlineCamera />
-        </StyledImageBtn>
-      </StyledNav>
-    </StyledColumn>
+    <>
+      <StyledColumn>
+        <StyledNav>
+          <StyledPoll onClick={() => pollModalOpenHandler()}>
+            <FaVoteYea />
+            투표 생성
+          </StyledPoll>
+          <StyledImageBtn>
+            <AiOutlineCamera />
+          </StyledImageBtn>
+        </StyledNav>
+      </StyledColumn>
+
+      {/* <ModalPortal> */}
+      <ModalCont>
+        {isPollModalOpen && (
+          <PollModal open={isPollModalOpen} close={pollModalCloseHandler} />
+        )}
+      </ModalCont>
+      {/* </ModalPortal> */}
+    </>
   );
 }
+
+const ModalCont = styled.div``;
 
 const StyledColumn = styled.div`
   width: 100%;
@@ -37,7 +54,7 @@ const StyledNav = styled.nav`
   width: 100vw;
   display: flex;
   // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
-  margin: 0 5vw;
+  margin: 0 10%;
   // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
   align-items: center;
   justify-content: space-between;
@@ -53,19 +70,18 @@ const StyledPoll = styled.button`
   min-height: 3.5vh;
   min-width: 11vh;
   padding: 3px 5px;
-  border: 1px solid #3A3A59;
+  border: 1px solid #3a3a59;
   border-radius: 2rem;
   background-color: white;
-  color:#3A3A59;
+  color: #3a3a59;
   font-size: 0.7rem;
 
   &:hover {
     color: white;
-    background-color: #3A3A59;
+    background-color: #3a3a59;
     outline: none;
     cursor: pointer;
   }
-
 `;
 
 const StyledImageBtn = styled.button`
@@ -77,13 +93,12 @@ const StyledImageBtn = styled.button`
   font-size: 20px;
   border: none;
   background-color: transparent;
-  color: #D8D8DE;
+  color: #d8d8de;
 
   &:hover {
     cursor: pointer;
-    color: #3A3A59;
+    color: #3a3a59;
   }
-  
-`
+`;
 
 export default WriteFooterNav;

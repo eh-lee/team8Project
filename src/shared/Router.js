@@ -11,8 +11,6 @@ import HumourBoard from '../pages/board/HumourBoard'
 import SeriousBoard from '../pages/board/SeriousBoard'
 import Battle from '../pages/Battle'
 import Write from '../pages/write/Write'
-import PollWrite from '../pages/write/PollWrite'
-// import ImgWrite from '../pages/write/ImgWrite'
 import DetailPost from '../pages/detailPost/DetailPost'
 
 const Router = () => {
@@ -31,8 +29,6 @@ const Router = () => {
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
         <Route path="/battle" element={<Battle />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/write/pollwrite" element={<PollWrite />} />
-        {/* <Route path="/write/imagewrite" element={<ImgWrite />} /> */}
       </Routes>
     </BrowserRouter>
   )
