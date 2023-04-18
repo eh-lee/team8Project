@@ -17,6 +17,8 @@ const PostCardSlider = () => {
   // hotPostCard 저장
   const [postCards, setPostCards] = useState([]);
 
+  console.log("*****postCards****", postCards)
+
   // 인덱스, 애니메이션 상태 저장
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
@@ -75,6 +77,7 @@ const PostCardSlider = () => {
             category={el?.category}
             title={el?.title}
             content={el?.desc}
+            likesCount={el?.likesCount}
             viewCount={el?.postViewCount}
             commentCount={el?.commentCount}
           />

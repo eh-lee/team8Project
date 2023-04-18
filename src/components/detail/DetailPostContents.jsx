@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components';
-import { IoChatbubbleOutline } from 'react-icons/io5'
+import { BiCommentDetail } from 'react-icons/bi'
 import { AiOutlineEye } from 'react-icons/ai'
 import Like from '../like/Like';
-import { instance, instanceWithAuth } from '../../api/axios';
-import axios from 'axios';
+import { instanceWithAuth } from '../../api/axios';
 
 const DetailPostContents = () => {
     const {postIdx} = useParams();
@@ -36,10 +35,10 @@ const DetailPostContents = () => {
     console.log("변경 전 isLike###################", isLike)
     console.log("detailPost", detailPost)
     
+    // 좋아요 버튼
     const clickPostLike = () => {
         console.log("좋아요 눌렀다고!!!")
-        instanceWithAuth.put(`/postlike/post/${postIdx}`,
-        )
+        instanceWithAuth.put(`/postlike/post/${postIdx}`)
         setIsLike((prev)=>!prev)
         setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
     };
@@ -57,7 +56,7 @@ const DetailPostContents = () => {
                 <DetailPost_InfoCont>
                     <DetailPost_UserInfoCont>
                         <DetailPost_UserInfo_Nickname>{detailPost.nickname}</DetailPost_UserInfo_Nickname>
-                        <DetailPost_UserInfo_UserLevel>{detailPost.userLevel}</DetailPost_UserInfo_UserLevel>
+                        <DetailPost_UserInfo_UserLevel>{detailPost.userLevel}레벨</DetailPost_UserInfo_UserLevel>
                     </DetailPost_UserInfoCont>
                     <DetailPost_UserInfo_CreatedAt>{createdAt}</DetailPost_UserInfo_CreatedAt>
                 </DetailPost_InfoCont>
@@ -68,8 +67,6 @@ const DetailPostContents = () => {
                 <DetailPost_Content_Desc>{detailPost.desc}</DetailPost_Content_Desc>
                 {/* 게시글 정보 */}
                 <DetailPost_Content_Info>
-                    {/* 위치 정렬을 위한 div */}
-                    <DetailPost_Content_MarginLeft />
                     {/* 좋아요 버튼, 개수 */}
                     <DetailPost_Content>
                         <DetailPost_Content_Icon
@@ -95,7 +92,7 @@ const DetailPostContents = () => {
                     {/* 댓글 버튼, 개수 */}
                     <DetailPost_Content>
                         <DetailPost_Content_Icon>
-                            <IoChatbubbleOutline />
+                            <BiCommentDetail />
                         </DetailPost_Content_Icon>
                         <DetailPost_Content_Count>
                             {detailPost.commentCount}
@@ -112,24 +109,25 @@ export default DetailPostContents
 // 상세 게시글 정보
 const DetailPost_InfoWrap = styled.ul`
     /* border: 1px solid green; */
-    margin: 4rem 2rem 0 2rem;
+    margin: 4rem 7.5% 0 7.5%;
     display: flex;
     flex-direction: row;
 `;
 
-const DetailPost_InfoCont = styled.div`
+const DetailPost_InfoCont = styled.li`
     /* border: 1px solid violet; */
     display: flex;
     flex-direction: column;
     justify-content: center;
 `;
 
-const DetailPost_UserInfo_LvImg = styled.div`
-    border: 1px solid gray;
+const DetailPost_UserInfo_LvImg = styled.li`
+    /* border: 1px solid gray; */
+    background-color: #E1E2E4;
     margin: 0 0.7rem 0 0;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
 `;
 
 const DetailPost_UserInfoCont = styled.ul`
@@ -142,18 +140,18 @@ const DetailPost_UserInfoCont = styled.ul`
 
 const DetailPost_UserInfo_Nickname = styled.li`
     /* border: 1px solid black; */
-    font-size: 1.2rem;
+    font-size: 14px;
 `;
 
 const DetailPost_UserInfo_UserLevel = styled.li`
     /* border: 1px solid black; */
-    font-size: 0.8rem;
+    font-size: 10px;
     color: red;
 `;
 
 const DetailPost_UserInfo_CreatedAt = styled.li`
     /* border: 1px solid black; */
-    font-size: 0.8rem;
+    font-size: 10px;
     color: gray;
 `;
 
@@ -162,35 +160,32 @@ const DetailPost_ContentWrap = styled.ul`
     border-bottom: 1px solid lightgray;
     /* border: 1px solid blue; */
     margin: 2rem 0 0 0;
-    padding: 0 2rem 2rem 2rem;
+    padding: 0 7.5% 2rem 7.5%;
     display: flex;
     flex-direction: column;
 `;
 
 const DetailPost_Content_Title = styled.li`
+    /* border: 1px solid blue; */
     border-bottom: 1px solid lightgray;
     display: flex;
-    font-size: 2rem;
-    padding: 0 0 1rem 0.5rem;
+    font-size: 24px;
+    padding-bottom: 15px;
 `;
 
 const DetailPost_Content_Desc = styled.li`
     /* border: 1px solid violet; */
     display: flex;
-    padding: 1.5rem 0 2rem 0.5rem;
+    margin: 20px 0 40px 0;
+    font-size: 16px;
 `;
 
 const DetailPost_Content_Info = styled.ul`
     /* border: 1px solid green; */
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-
-`;
-
-const DetailPost_Content_MarginLeft = styled.li`
-    /* border: 1px solid blue; */
-    width: 10rem;
+    gap: 12px;
+    justify-content: flex-end;
 `;
 
 const DetailPost_Content = styled.li`
@@ -198,13 +193,16 @@ const DetailPost_Content = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    color: gray;
+    color: #8A8A8A;
 `;
 
 const DetailPost_Content_Icon = styled.div`
     /* border: 1px solid tomato; */
-    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    height: 18px;
+    width: 18px;
+    font-size: 20px;
 
     ${({ pointerOn }) => {
         if (pointerOn === "on") {
@@ -217,4 +215,11 @@ const DetailPost_Content_Icon = styled.div`
 
 const DetailPost_Content_Count = styled.div`
     /* border: 1px solid tomato; */
+    margin-left: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
 `;

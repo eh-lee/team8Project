@@ -1,17 +1,24 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { AiOutlineHeart } from 'react-icons/ai'
+import { AiOutlineEye } from 'react-icons/ai'
+import { IoChatbubbleOutline } from 'react-icons/io5'
 
 const HotPostCard = ({
   mainCategory,
   category,
   title,
   content,
+  likesCount,
   viewCount,
   commentCount,
   postIdx,
 }) => {
+
   const navigate = useNavigate();
+
+  console.log("likesCount=========================##", likesCount)
 
   return (
     <PostCardWrap
@@ -30,8 +37,33 @@ const HotPostCard = ({
         <PostCard_Content>{content}</PostCard_Content>
       </PostCard_ContentBox>
       <PostCard_InfoBox>
-        <PostCard_ViewCount>{viewCount}</PostCard_ViewCount>
-        <PostCard_CommentCount>{commentCount}</PostCard_CommentCount>
+        {/* 좋아요수 */}
+        <PostCard_Info_Content>
+          <PostCard_Info_Content_Icon>
+            <AiOutlineHeart/>
+          </PostCard_Info_Content_Icon>
+          <PostCard_Info_Content_Count>
+            {likesCount}
+          </PostCard_Info_Content_Count>
+        </PostCard_Info_Content>
+        {/* 조회수 */}
+        <PostCard_Info_Content>
+          <PostCard_Info_Content_Icon>
+            <AiOutlineEye />
+          </PostCard_Info_Content_Icon>
+          <PostCard_Info_Content_Count>
+            {viewCount}
+          </PostCard_Info_Content_Count>
+        </PostCard_Info_Content>
+        {/* 댓글 버튼, 개수 */}
+        <PostCard_Info_Content>
+          <PostCard_Info_Content_Icon>
+            <IoChatbubbleOutline />
+          </PostCard_Info_Content_Icon>
+          <PostCard_Info_Content_Count>
+            {commentCount}
+          </PostCard_Info_Content_Count>
+        </PostCard_Info_Content>
       </PostCard_InfoBox>
     </PostCardWrap>
   );
@@ -47,10 +79,11 @@ const PostCardWrap = styled.div`
   width: 280px;
   height: 100px;
 
-  padding: 1rem 0;
+  padding: 1rem 0 0.55rem 0;
 
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
 `;
 
 const PostCard_TitleBox = styled.ul`
@@ -72,6 +105,7 @@ const PostCard_TitleBox = styled.ul`
 `;
 
 const PostCard_MainCategory = styled.li`
+  /* border: 1px solid black; */
   font-size: 0.6rem;
   color: gray;
 `;
@@ -114,17 +148,34 @@ const PostCard_InfoBox = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-end;
-  gap: 5rem;
+  align-items: center;
+  gap: 1.9rem;
   margin-left: 1rem;
 `;
 
-const PostCard_ViewCount = styled.li`
-  /* border: 1px solid black; */
-  height: 1rem;
+
+const PostCard_Info_Content = styled.li`
+    /* border: 1px solid tomato; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: gray;
 `;
 
-const PostCard_CommentCount = styled.li`
-  /* border: 1px solid black; */
-  height: 1rem;
+const PostCard_Info_Content_Icon = styled.div`
+    /* border: 1px solid tomato; */
+    font-size: 1rem;
+
+    ${({ pointerOn }) => {
+        if (pointerOn === "on") {
+            return css`
+                cursor: pointer;
+            `;
+        }
+    }}
+    `;
+
+const PostCard_Info_Content_Count = styled.div`
+    /* border: 1px solid tomato; */
 `;

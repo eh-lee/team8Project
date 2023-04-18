@@ -7,6 +7,7 @@ import Footer from '../../components/footer/Footer';
 import { FiMoreVertical } from 'react-icons/fi'
 import { MdArrowBackIosNew } from "react-icons/md"
 import DetailPostContents from '../../components/detail/DetailPostContents';
+import DetailPostComments from '../../components/detail/DetailPostCommentsList';
 
 
 const DetailPost = () => {
@@ -17,16 +18,15 @@ const DetailPost = () => {
     // 상세 게시글을 담을 state
     const [detailPost, setDetailPost] = useState([]);
 
-    // useEffect(() => {
-    //     const getDetailPost = async () => {
-    //         const { data } = await instance.get(`/postCards/post/${postIdx}`)
-    //         setDetailPost(data.post)
-    //     };
-    //     getDetailPost();
-    // }, []);
-
+    useEffect(() => {
+        const getDetailPost = async () => {
+            const { data } = await instance.get(`/postCards/post/category/${postIdx}`)
+            setDetailPost(data);
+        };
+        getDetailPost();
+    }, []);
     return (
-        <> 
+        <>
             {/* Mobile Layout setting */}
             <MobileLayout>
                 {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
@@ -36,7 +36,7 @@ const DetailPost = () => {
                         <DetailPost_BackBtn onClick={() => { nav(-1) }}>
                             <MdArrowBackIosNew size="1rem" />
                         </DetailPost_BackBtn>
-                        <DetailPost_Category>{detailPost.category}</DetailPost_Category>
+                        <DetailPost_Category>{detailPost.maincategory}{detailPost.category}</DetailPost_Category>
                         <DetailPost_MenuBtn onClick={() => { nav(-1) }} >
                             <FiMoreVertical size="1rem" />
                         </DetailPost_MenuBtn>
@@ -46,9 +46,8 @@ const DetailPost = () => {
 
                 {/* 상세페이지 내용 */}
                 <DetailPostContents />
-
-                {/* 게시글페이지 푸터 */}
-                <Footer />
+                {/* 댓글 답글 */}
+                <DetailPostComments />
             </MobileLayout>
         </>
     )
@@ -57,30 +56,40 @@ const DetailPost = () => {
 export default DetailPost
 
 // 상세 게시글 페이지 헤더
-const DetailPost_Header = styled.div`
+const DetailPost_Header = styled.header`
     background-color: white;
     position: fixed;
-    top: 0;
+    /* top: 0; */
 
-    margin-top: 0.75rem;
-    width: 25rem;
+    width: 100%;
+    min-width: 200px;
     max-width: 400px;
-    color: rgb(70, 70, 70);
-`;
-
-const DetailPost_HeaderCont = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    
-    padding: 0 1.8rem 0.75rem 1.8rem;
+    height: 48px;
+    z-index: 1;
 
     border-bottom: 0.1rem solid rgb(180, 180, 180);
+`
+
+const DetailPost_HeaderCont = styled.div`
+    /* border: 1px solid tomato; */
+    display: flex;
+
+    height: 48px;
+
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 7.5%;
 `;
 
 const DetailPost_BackBtn = styled.div`
+    /* border: 1px solid green; */
     color: rgb(180, 180, 180);
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
     cursor: pointer;
@@ -89,11 +98,20 @@ const DetailPost_BackBtn = styled.div`
     `;
 
 const DetailPost_Category = styled.div`
+    /* border: 1px solid blue; */
+    height: 24px;
     display: flex;
-    font-size: 1.2rem;
+    align-items: center;
+    font-size: 18px;
 `;
 
 const DetailPost_MenuBtn = styled.div`
+    /* border: 1px solid burlywood; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
     color: rgb(180, 180, 180);
 
     &:hover {

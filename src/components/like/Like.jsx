@@ -17,7 +17,7 @@ const LikeIcon = styled.div`
   ${({isLike}) => {
     if (isLike) {
       return css`
-        color: tomato;
+        color: #F26581;
       `
     }
   }}
