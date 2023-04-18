@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaVoteYea } from "react-icons/fa";
 import { AiOutlineCamera } from "react-icons/ai";
 import PollModal from "../modal/PollModal";
+import ModalPortal from "../modal/ModalPortal";
 
 function WriteFooterNav() {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
@@ -28,18 +29,22 @@ function WriteFooterNav() {
         </StyledNav>
       </StyledColumn>
 
-      {/* <ModalPortal> */}
-      <ModalCont>
-        {isPollModalOpen && (
-          <PollModal open={isPollModalOpen} close={pollModalCloseHandler} />
-        )}
-      </ModalCont>
-      {/* </ModalPortal> */}
+      <ModalPortal>
+        <ModalCont>
+          {isPollModalOpen && (
+            <PollModal open={isPollModalOpen} close={pollModalCloseHandler} />
+          )}
+        </ModalCont>
+      </ModalPortal>
     </>
   );
 }
 
-const ModalCont = styled.div``;
+const ModalCont = styled.div`
+  width: 400px;
+  margin: 0 auto;
+  border: 1px solid green;
+`;
 
 const StyledColumn = styled.div`
   width: 100%;
@@ -54,7 +59,7 @@ const StyledNav = styled.nav`
   width: 100vw;
   display: flex;
   // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
-  margin: 0 10%;
+  margin: 0 7.5%;
   // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
   align-items: center;
   justify-content: space-between;
@@ -74,7 +79,7 @@ const StyledPoll = styled.button`
   border-radius: 2rem;
   background-color: white;
   color: #3a3a59;
-  font-size: 0.7rem;
+  font-size: 0.825rem;
 
   &:hover {
     color: white;

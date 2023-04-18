@@ -15,23 +15,24 @@ const CateogryModal = ({ parentFunction, open, close }) => {
   // }, [isActive] )
 
   const [isActive, setIsActive] = useState({ main: null, sub: null });
-  
+
   const closeModal = () => {
-      close();
+    close();
   };
-  
+
   useEffect(() => {
     function handleCategorySetUp() {
       if (isActive.main !== null && isActive.sub !== null) {
-        return closeModal() };
-    };
+        return closeModal();
+      }
+    }
     handleCategorySetUp();
 
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         closeModal();
       }
-    };
+    }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -57,10 +58,6 @@ const CateogryModal = ({ parentFunction, open, close }) => {
     "기타",
   ];
 
-
-  console.log(isActive.main);
-  console.log(isActive.sub);
-  // 부모로 상태 보내기
   const [mainCat, setMainCat] = useState("카테고리");
   const [subCat, setSubCat] = useState("");
 
@@ -70,13 +67,11 @@ const CateogryModal = ({ parentFunction, open, close }) => {
   const handleMainClick = (index) => {
     setIsActive({ main: index, sub: null });
     setMainCat(mainCategories[index]);
-    console.log("mainCat-------->", mainCategories[index]);
   };
 
   const handleSubClick = (index) => {
     setIsActive((prev) => ({ ...prev, sub: index }));
     setSubCat(categories[index]);
-    console.log("subCat-------->", categories[index]);
   };
 
   return open ? (

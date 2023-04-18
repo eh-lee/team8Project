@@ -30,7 +30,7 @@ const AuthButton = styled.button`
 
   &:hover {
     border: 0.1rem solid ${(props) => props.borderColor};
-    background-color: rgba(170, 170, 170, 0.1);
+    background-color: pink;
     cursor: pointer;
   }
 `;

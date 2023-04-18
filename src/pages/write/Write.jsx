@@ -7,9 +7,6 @@ import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../../components/modal/CateogryModal";
-// import ModalPortal from "../components/modal/ModalPortal";
-import { FaVoteYea } from "react-icons/fa";
-import { AiOutlineCamera } from "react-icons/ai";
 import WriteFooter from "../../components/footer/WriteFooter";
 import ModalPortal from "../../components/modal/ModalPortal";
 
@@ -20,18 +17,14 @@ const Write = () => {
   //   navi("/write/pollwrite");
   // };
 
-  // parentFunction
+  // parentFunction1
   const WriteCallback = (x, y) => {
-    console.log("지옥에서 돌아온 데이터 x==========>", x);
     setMaincategory(x);
-    console.log("지옥에서 돌아온 데이터 y==========>", y);
     setCategory(y);
   };
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  // SubCat & MainCat은 modal에 있는 state라
-  // 일단 portal로 옮기고 나서 생각
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
 
@@ -83,8 +76,6 @@ const Write = () => {
     <MobileLayout>
       <PageWithFooterWrapper>
         <WriteHeader>
-          {/* <WriteHeaderLeftMargin /> */}
-
           <WriteHeaderCont>
             <WriteCanc onClick={handleCanc}>취소</WriteCanc>
             <WriteCategory>
@@ -96,10 +87,7 @@ const Write = () => {
             </WriteCategory>
             <WritePost onClick={submitHandler}>등록</WritePost>
           </WriteHeaderCont>
-
-          {/* <WriteHeaderRightMargin /> */}
         </WriteHeader>
-
         <WriteForm
           onSubmit={(e) => {
             e.preventDefault();
@@ -123,9 +111,10 @@ const Write = () => {
             placeholder="훈수 받고 싶은 내용을 입력하세요."
           ></WriteContent>
         </WriteForm>
+        {/* pollModal은 요 안에 */}
         <WriteFooter />
+        {/* pollModal은 요 안에 */}
       </PageWithFooterWrapper>
-
       <ModalPortal>
         <ModalCont>
           {isCategoryModalOpen && (
@@ -269,76 +258,4 @@ const IconCont = styled.div`
     cursor: pointer;
     color: rgb(70, 70, 70);
   }
-`;
-
-const StyledColumn = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: flex-start;
-  min-height: 30px;
-  height: 7vh;
-  align-items: center;
-`;
-
-const StyledNav = styled.nav`
-  width: 100vw;
-  display: flex;
-  // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
-  margin: 0 10%;
-  // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  color: rgb(70, 70, 70);
-`;
-
-const StyledPoll = styled.button`
-  gap: 0.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 3.5vh;
-  min-width: 11vh;
-  padding: 3px 5px;
-  border: 1px solid #3a3a59;
-  border-radius: 2rem;
-  background-color: white;
-  color: #3a3a59;
-  font-size: 0.7rem;
-
-  &:hover {
-    color: white;
-    background-color: #3a3a59;
-    outline: none;
-    cursor: pointer;
-  }
-`;
-
-const StyledImageBtn = styled.button`
-  width: 30px;
-  display: flex;
-  padding: 0;
-  justify-content: flex-end;
-  outline: none;
-  font-size: 20px;
-  border: none;
-  background-color: transparent;
-  color: #d8d8de;
-
-  &:hover {
-    cursor: pointer;
-    color: #3a3a59;
-  }
-`;
-
-const StyledFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  max-width: 400px;
-  /* StMobileLayout의 width와 동일하게 처리 */
-  border-top: 0.01rem solid rgba(0, 0, 0, 0.2);
-  width: 100%;
-  font-size: 0.75rem;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255);
 `;
