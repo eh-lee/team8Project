@@ -30,6 +30,6 @@ export const writeSlice = createSlice({
     },
 });
 
-export const { setPollType, setPollTitle, setTag } = writeSlice.actions;
+export const { setPollType, setPollTitle, setTag, pollCanc } = writeSlice.actions;
 
 export default writeSlice.reducer;
