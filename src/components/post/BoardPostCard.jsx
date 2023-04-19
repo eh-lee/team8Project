@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineEye } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
+import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useEffect } from "react";
 import { instance } from "../../api/axios";
 import { useState } from "react";
+import { MdOutlineHowToVote } from "react-icons/md";
+import { setPollType } from "../../app/modules/writeSlice";
 
 const BoardPostCard = ({
   mainCategory,
@@ -22,20 +25,28 @@ const BoardPostCard = ({
 }) => {
   const navigate = useNavigate();
 
-  // //  포스트 투표 등 GET
+  //  포스트 투표 등 GET
 
-  // useEffect(() => {
-  //   const fetchPoll = async () => {
-  //     try {
-  //       const res = await instance.get(`/postCards/post/contents/${postIdx}`);
-  //       console.log("투표 등 정보========>", res);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchPoll();
-  // }, []);
-  // Detail.jsx 쪽으로
+  const [pollData, setPollData] = useState({});
+  const [pollType, setPollType] = useState("");
+
+  useEffect(() => {
+    const fetchPoll = async () => {
+      try {
+        const res = await instance.get(`/postCards/post/contents/${postIdx}`);
+        console.log("투표 등 정보========>", res.data.contents);
+        setPollData(res.data.contents);
+        setPollType(res.data.contents.pollType);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPoll();
+  }, []);
+
+  console.log("data=====>", pollData);
+
+  // 여기서 pollType이 ""이 아니면 투표 이미지 뜨게.
 
   const categories = [
     "패션/뷰티",
@@ -81,7 +92,6 @@ const BoardPostCard = ({
       onClick={() => {
         navigate(`/board/${postIdx}`);
       }}
-      className="no-hover"
     >
       <PostCardTitleBox>
         <PostCardRow>
@@ -90,28 +100,44 @@ const BoardPostCard = ({
             {categoryIconsMap[category]}
           </PostCardCatBtn>
         </PostCardRow>
+
         <PostCardRow>
           <PostCardTitle>{title}</PostCardTitle>
           <PostCardTitleIcon></PostCardTitleIcon>
-          <PostCardTitleIcon></PostCardTitleIcon>
+          {pollType !== "" ? (
+            <>
+              <PostCardTitleIcon>
+                <MdOutlineHowToVote />
+              </PostCardTitleIcon>
+            </>
+          ) : null}
         </PostCardRow>
       </PostCardTitleBox>
+
       <PostCardContentBox>
         <PostCardContent>{content}</PostCardContent>
       </PostCardContentBox>
       <PostCardInfoBox>
-        <PostCardCount>
-          <AiOutlineHeart />
-          {likesCount}
-        </PostCardCount>
-        <PostCardCount>
-          <AiOutlineEye />
-          {viewCount}
-        </PostCardCount>
-        <PostCardCount>
-          <IoChatbubbleOutline />
-          {commentCount}
-        </PostCardCount>
+        <DetailPostContent>
+          <DetailPostContentIcon>
+            <AiOutlineHeart />
+          </DetailPostContentIcon>
+          <DetailPostContentCount>{likesCount}</DetailPostContentCount>
+        </DetailPostContent>
+
+        <DetailPostContent>
+          <DetailPostContentIcon>
+            <AiOutlineEye />
+          </DetailPostContentIcon>
+          <DetailPostContentCount>{viewCount}</DetailPostContentCount>
+        </DetailPostContent>
+
+        <DetailPostContent>
+          <DetailPostContentIcon>
+            <BiCommentDetail />
+          </DetailPostContentIcon>
+          <DetailPostContentCount>{commentCount}</DetailPostContentCount>
+        </DetailPostContent>
       </PostCardInfoBox>
     </PostCardWrap>
   );
@@ -119,21 +145,56 @@ const BoardPostCard = ({
 
 export default BoardPostCard;
 
+const DetailPostContentCount = styled.div`
+  /* border: 1px solid tomato; */
+  margin-left: 4px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+`;
+
+const DetailPostContentIcon = styled.div`
+  /* border: 1px solid tomato; */
+  display: flex;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  font-size: 20px;
+`;
+
+const DetailPostContent = styled.li`
+  /* border: 1px solid tomato; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8a8a8a;
+`;
+
 const PostCardCatBtn = styled.button`
   color: white;
   background: #3a3a59;
   border-radius: 100px;
-  padding: 2px 4px 2px 6px;
+  padding: 0 4px 0px 6px;
   border: none;
+  font-size: 0.5rem;
 `;
 
 const PostCardRow = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 const PostCardTitleIcon = styled.div`
-  width: 10%;
+  width: 5.5%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8a8a8a;
 `;
 
 const PostCardWrap = styled.div`
@@ -143,15 +204,19 @@ const PostCardWrap = styled.div`
   display: flex;
   flex-direction: column;
   /* ${({ isFirst }) => isFirst && `border-top-radius: 1rem;`}; */
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const PostCardTitleBox = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 90%;
   /* 아이콘 10% 10% */
   gap: 0.5rem;
+  /* border: 1px solid green; */
 `;
 
 const PostCardMainCategory = styled.li`
@@ -162,16 +227,17 @@ const PostCardMainCategory = styled.li`
 
 const PostCardTitle = styled.li`
   width: 80%;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 `;
 
 const PostCardContentBox = styled.div`
   max-height: 4vh;
+  /* max-height: 1%; */
   /* 최대 2줄 */
   width: 90%;
   margin-top: 2.5%;
   overflow-y: scroll;
-  
+
   word-wrap: break-word;
   display: flex;
   margin-bottom: 5%;
@@ -185,7 +251,7 @@ const PostCardContentBox = styled.div`
 `;
 
 const PostCardContent = styled.div`
-  color: gray;
+  color: #8a8a8a;
   display: flex;
 `;
 

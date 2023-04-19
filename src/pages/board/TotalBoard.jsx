@@ -158,7 +158,7 @@ const PostCardCont = styled.div`
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -172,7 +172,7 @@ const CategorySlider = styled.div`
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
