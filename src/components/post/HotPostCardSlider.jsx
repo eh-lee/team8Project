@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import PostCard from "./HotPostCard";
+import HotPostCard from "./HotPostCard";
 import { instance } from "../../api/axios";
 import { BsChevronLeft } from "react-icons/bs";
 
@@ -70,7 +70,7 @@ const PostCardSlider = () => {
       <Button dir="right" onClick={clickRightHandler} />
       <PostCards animate={animate}>
         {genPostCardsArray(index)?.map((el) => (
-          <PostCard
+          <HotPostCard
             key={el?.postIdx}
             postIdx={el?.postIdx}
             mainCategory={el?.maincategory}

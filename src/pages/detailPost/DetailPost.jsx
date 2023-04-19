@@ -7,7 +7,7 @@ import Footer from '../../components/footer/Footer';
 import { FiMoreVertical } from 'react-icons/fi'
 import { MdArrowBackIosNew } from "react-icons/md"
 import DetailPostContents from '../../components/detail/DetailPostContents';
-import DetailPostComments from '../../components/detail/DetailPostCommentsList';
+import DetailPostCommentsList from '../../components/detail/DetailPostCommentsList';
 
 
 const DetailPost = () => {
@@ -25,6 +25,7 @@ const DetailPost = () => {
         };
         getDetailPost();
     }, []);
+
     return (
         <>
             {/* Mobile Layout setting */}
@@ -36,7 +37,7 @@ const DetailPost = () => {
                         <DetailPost_BackBtn onClick={() => { nav(-1) }}>
                             <MdArrowBackIosNew size="1rem" />
                         </DetailPost_BackBtn>
-                        <DetailPost_Category>{detailPost.maincategory}{detailPost.category}</DetailPost_Category>
+                        <DetailPost_Category>{detailPost.maincategory}🌝{detailPost.category}</DetailPost_Category>
                         <DetailPost_MenuBtn onClick={() => { nav(-1) }} >
                             <FiMoreVertical size="1rem" />
                         </DetailPost_MenuBtn>
@@ -46,8 +47,8 @@ const DetailPost = () => {
 
                 {/* 상세페이지 내용 */}
                 <DetailPostContents />
-                {/* 댓글 답글 */}
-                <DetailPostComments />
+                {/* 댓글, 답글 */}
+                <DetailPostCommentsList postIdx={postIdx} />
             </MobileLayout>
         </>
     )

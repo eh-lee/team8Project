@@ -2,7 +2,14 @@ import React from 'react'
 import styled, { css } from 'styled-components';
 import Like from '../like/Like';
 
-const DetailPostCommentReply = () => {
+const DetailPostCommentReply = ({reply}) => {
+    // postIdx
+    // commentIdx,
+    // replyIdx,
+    // createdAt,
+    // nickname,
+    // comment,
+
     return (
         <>
             {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
@@ -12,16 +19,16 @@ const DetailPostCommentReply = () => {
                 </CommentReply_Info_ProfileCont>
                 <CommentReply_Info_UserInfoWrap>
                     <CommentReply_Info_UserInfoCont>
-                        <CommentReply_Info_Nickname> 닉네임 </CommentReply_Info_Nickname>
-                        <CommentReply_Info_UserLevel> 유저레벨 </CommentReply_Info_UserLevel>
+                        <CommentReply_Info_Nickname> {reply.nickname} </CommentReply_Info_Nickname>
+                        <CommentReply_Info_UserLevel> 레벨 </CommentReply_Info_UserLevel>
                     </CommentReply_Info_UserInfoCont>
-                    <CommentReply_Info_UserInfo_CreatedAt> 작성시간 </CommentReply_Info_UserInfo_CreatedAt>
+                    <CommentReply_Info_UserInfo_CreatedAt> {reply.createdAt}작성시간 </CommentReply_Info_UserInfo_CreatedAt>
                 </CommentReply_Info_UserInfoWrap>
             </CommentReply_InfoWrap>
 
             {/* 댓글, 댓글 좋아요 */}
             <CommentReplyWrap>
-                <CommentReply>천방지축 어리둥절 빙글빙글 돌아가는</CommentReply>
+                <CommentReply> {reply.comment} </CommentReply>
             </CommentReplyWrap>
         </>
     )

@@ -18,7 +18,7 @@ const DetailPostContents = () => {
     
     // 좋아요 관리 state
     const [postLikesCount, setPostLikesCount] = useState(0);
-    const [isLike, setIsLike] = useState(0);
+    const [isLike, setIsLike] = useState(null);
     
     
     // 상세 게시글 정보 불러오기
@@ -32,12 +32,12 @@ const DetailPostContents = () => {
         };
         getDetailPost();
     }, []);
-    console.log("변경 전 isLike###################", isLike)
-    console.log("detailPost", detailPost)
+    // console.log("변경 전 isLike###################", isLike)
+    // console.log("detailPost", detailPost)
     
     // 좋아요 버튼
     const clickPostLike = () => {
-        console.log("좋아요 눌렀다고!!!")
+        // console.log("좋아요 눌렀다고!!!")
         instanceWithAuth.put(`/postlike/post/${postIdx}`)
         setIsLike((prev)=>!prev)
         setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));

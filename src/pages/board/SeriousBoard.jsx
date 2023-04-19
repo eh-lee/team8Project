@@ -156,6 +156,12 @@ const TotalBoard = () => {
 const PostCardCont = styled.div`
   height: 45.28rem;
   overflow-y: scroll;
+  /* 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+  display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const CategorySlider = styled.div`
@@ -165,6 +171,12 @@ const CategorySlider = styled.div`
   /* overflow-x: scroll; */
   overflow-y: scroll;
   white-space: nowrap;
+  /* 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+  display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   & > button {
     display: inline-block;

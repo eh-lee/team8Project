@@ -127,9 +127,12 @@ const PostCard_ContentBox = styled.div`
   margin-bottom: 0.5rem;
   margin-left: 1rem;
 
+  /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
     display: none;
   }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const PostCard_Content = styled.div`

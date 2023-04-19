@@ -1,70 +1,80 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components';
 import DetailPostComment from './DetailPostComment';
-import DetailPostCommentReply from './DetailPostCommentReply';
+import { instanceWithAuth } from '../../api/axios';
 
-const DetailPostComments = () => {
+const DetailPostCommentsList = ({postIdx}) => {
+  
+  // 훈수 리스트 관리 state
+  const [commentList, setCommentList] = useState(null);
 
-  const [commentsList, setCommentList] = useState([]);
-  const [newComment, setNewComment] = useState({
-    // 애초에 댓글은 작성시간을 client단에서 만들어보내나?
-  });
+  // 댓글 get요청
+  useEffect( () => {
+    const getCommentList = async () => {
+      const {data} = await instanceWithAuth.get(`/comment/${postIdx}`);
+      setCommentList(data.comments);
+    }
+    getCommentList();
+  },[]);
 
-  // 답훈수 관리 state
-  const [replyisActive, setReplyIsActive] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
+  console.log("commentList", commentList);
 
-  const ReplyisActiveHandler = () => {
-    setReplyIsActive(!replyisActive);
-    setIsHidden(!isHidden);
-  };
+  // 댓글 작성 요청
+  const newCommentsubmitHandler = (e) => {
+    e.preventDefault();
 
-  // 새로운 댓글 핸들러
-  const newCommentHandler = (e) => {
-    setNewComment(e.target.value);
-  };
-  console.log("*******newComment", newComment);
+    // // 댓글 작성시간
+    // const currentTime = new Date().toLocaleString('ko-KR', { hour12: false }).replace(/\. /g, '. 0');
+    // setNewCommentTime(currentTime);
+
+    // const commentData = { comment: newComment }
+    // const url = isReplying ? `/reply/${postIdx}/${commentIdx}` : `/comment/${postIdx}`
+
+    // instanceWithAuth.post(url, commentData)
+    //   .then(response => {
+    //     console.log(response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+  }
 
   return (
     <DetailPostComments_Wrap>
-      {/* 댓글컴포넌트 */}
-      <DetailPostComment />
-      {/* 답훈수 */}
-      <DetailPostCommentReplyWrap>
-        <DetailPostCommentReplyCreate>답훈수 달기</DetailPostCommentReplyCreate>
-        {!isHidden && (
-          <DetailPostCommentReplyMore
-            onClick={ReplyisActiveHandler}
-            isHidden={isHidden}
-            isActive={replyisActive}
-          >
-            ----- 답훈수 더 보기
-          </DetailPostCommentReplyMore >
-        )}
-        {replyisActive && (
-          <DetailPostCommentReplyList >
-            <DetailPostCommentReply />
-          </DetailPostCommentReplyList>
-        )}
-      </DetailPostCommentReplyWrap>
+      {/* ========================== 댓글 리스트 ========================== */}
+      {
+        commentList?.map((comment)=> (
+            <DetailPostComment 
+            key={comment.commentIdx}
+            comment={comment}
+            />)
+        )
+      }
 
-      {/* 댓글, 답글 입력 푸터 */}
+      {/* ========================== 댓글, 답글 입력 푸터 ========================== */}
       <DetailPostComments_Footer>
-        <DetailPostComments_FooterInputCont>
+        <DetailPostComments_FooterInputCont onSubmit={(e)=>newCommentsubmitHandler(e)}>
           <DetailPostComments_Input
             type='text'
-            placeholder='훈수를 남겨보세요'
-            onChange={(e)=>newCommentHandler(e)}
+            placeholder='훈수를 남겨주세요.'
           // maxLength=
           />
-          <DetailPostComments_InputBtn>등록</DetailPostComments_InputBtn>
+          <DetailPostComments_InputBtn
+            type='submit'
+            onClick={(e)=>newCommentsubmitHandler(e)}
+          >
+            등록
+          </DetailPostComments_InputBtn>
         </DetailPostComments_FooterInputCont>
       </DetailPostComments_Footer>
     </DetailPostComments_Wrap>
-  )
+  );
+
 };
 
-export default DetailPostComments;
+export default DetailPostCommentsList;
+
+// =========================================* Styled Components *==========================================
 
 const DetailPostComments_Wrap = styled.section`
   /* border: 1px solid violet; */
@@ -72,53 +82,12 @@ const DetailPostComments_Wrap = styled.section`
   height: 1000px;
   background-color: #F2F2F7;
   overflow-y: scroll;
-`;
-
-const DetailPostCommentReplyWrap = styled.div`
-  margin-left: 7.5%;  
-`;
-
-const DetailPostCommentReplyCreate = styled.div`
-  /* border: 1px solid blueviolet; */
-  width: 100px;
-  font-size: 12px;
-  display: flex;
-  color: #8A8A8A;
-  margin: 10px 0 20px 40px;
-  cursor: pointer;
-  /* &:active {
-    color: #3A3A59;
-  } */
-`
-
-const DetailPostCommentReplyMore = styled.div`
-  /* border: 1px solid blueviolet; */
-  width: 100px;
-  font-size: 12px;
-  display: flex;
-  color: #8A8A8A;
-  margin: 10px 0 0 40px;
-  cursor: pointer;
-  /* &:active {
-    color: #3A3A59;
-  } */
-`;
-
-const DetailPostCommentReplyList = styled.div`
-  /* height: 0;
-  width: 0;
-  overflow: hidden;
-  transition: height 0.5s ease-out; */
-  display: flex;
-  flex-direction: column;
-
-  // 애니메이션 주기는 다음에 다시 시도!
-  /* ${({isActive}) => 
-    !isActive &&
-    css`
-      height: auto;
-      width: 100px;
-    `} */
+  /* 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const DetailPostComments_Footer = styled.footer`
@@ -138,7 +107,7 @@ const DetailPostComments_Footer = styled.footer`
   z-index: 1;
 `;
 
-const DetailPostComments_FooterInputCont = styled.nav`
+const DetailPostComments_FooterInputCont = styled.form`
   /* border: 1px solid green; */
   width: 100vw;
   display: flex;
@@ -161,6 +130,12 @@ const DetailPostComments_Input = styled.textarea`
   display: flex;
   padding: 10px 16px 0 16px;
   overflow-y: scroll;
+  /* 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const DetailPostComments_InputBtn = styled.button`
