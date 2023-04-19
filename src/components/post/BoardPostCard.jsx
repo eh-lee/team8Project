@@ -7,14 +7,59 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 const BoardPostCard = ({
   mainCategory,
+  category,
   title,
   content,
   viewCount,
   commentCount,
   postIdx,
+  likesCount,
+  nickname,
   // isFirst, 자식의 자식이 돼 벌임
 }) => {
   const navigate = useNavigate();
+
+  console.log("category==========>", category);
+  console.log("category==========>", nickname);
+
+  const categories = [
+    "패션/뷰티",
+    "맛집/요리/음식",
+    "경제/재테크",
+    "썸/연애",
+    "취미/운동",
+    "스포츠",
+    "여행",
+    "결혼",
+    "게임",
+    "반려동물",
+    "가족",
+    "취업/자격증",
+    "일상",
+    "기타",
+  ];
+
+  const icons = [
+    "👗",
+    "🍱",
+    "💰",
+    "💘",
+    "🎨",
+    "⚽️",
+    "✈️",
+    "👩‍❤️‍👨",
+    "🎮",
+    "🐶",
+    "👨‍👩‍👧‍👦",
+    "💼",
+    "💬",
+    "🎸",
+  ];
+
+  const categoryIconsMap = categories.reduce((acc, cur, idx) => {
+    acc[cur] = icons[idx];
+    return acc;
+  }, {});
 
   return (
     <PostCardWrap
@@ -24,7 +69,12 @@ const BoardPostCard = ({
       className="no-hover"
     >
       <PostCardTitleBox>
-        <PostCardMainCategory>{mainCategory}🤮</PostCardMainCategory>
+        <PostCardRow>
+          <PostCardCatBtn>
+            {mainCategory}
+            {categoryIconsMap[category]}
+          </PostCardCatBtn>
+        </PostCardRow>
         <PostCardRow>
           <PostCardTitle>{title}</PostCardTitle>
           <PostCardTitleIcon></PostCardTitleIcon>
@@ -37,7 +87,7 @@ const BoardPostCard = ({
       <PostCardInfoBox>
         <PostCardCount>
           <AiOutlineHeart />
-          {viewCount}
+          {likesCount}
         </PostCardCount>
         <PostCardCount>
           <AiOutlineEye />
@@ -53,6 +103,14 @@ const BoardPostCard = ({
 };
 
 export default BoardPostCard;
+
+const PostCardCatBtn = styled.button`
+  color: white;
+  background: #3a3a59;
+  border-radius: 100px;
+  padding: 2px 10px 2px 10px;
+  border: none;
+`;
 
 const PostCardRow = styled.div`
   display: flex;

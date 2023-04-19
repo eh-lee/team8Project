@@ -132,7 +132,6 @@ const TotalBoard = () => {
           </BoardHeaderSub>
         </BoardHeader>
         <PostCardCont ref={postCardContRef}>
-          {/* {data?.map((item, idx) => ( */}
           {data?.map((item) => (
             <BoardPostCard
               key={item.postIdx}
@@ -140,9 +139,11 @@ const TotalBoard = () => {
               title={item.title}
               nickname={item.nickname}
               content={item.desc}
+              likesCount={item.likesCount}
               viewCount={item.postViewCount}
               commentCount={item.commentCount}
               mainCategory={item.maincategory}
+              category={item.category}
               // isFirst={idx === 0}
             />
           ))}

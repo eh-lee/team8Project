@@ -141,8 +141,10 @@ const TotalBoard = () => {
               nickname={item.nickname}
               content={item.desc}
               viewCount={item.postViewCount}
+              likesCount={item.likesCount}
               commentCount={item.commentCount}
               mainCategory={item.maincategory}
+              category={item.category}
               // isFirst={idx === 0}
             />
           ))}

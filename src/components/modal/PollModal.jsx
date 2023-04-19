@@ -29,7 +29,6 @@ const PollModal = ({ open, close }) => {
   };
 
   const changePollTitleHandler = (e) => {
-    // setPollTitle(e.target.value);
     dispatch(setPollTitle(e.target.value));
   };
 
@@ -51,16 +50,22 @@ const PollModal = ({ open, close }) => {
     }
 
     if (isProConClicked) {
+      if (pollTitle.length >= 20) {
+        return alert("투표 제목은 20자 이내로 작성해 주세요.");
+      }
       dispatch(setPollType("proCon"));
-      // setPollType("proCon");
     }
 
     if (isSelectClicked) {
+      if (pollTitle.length >= 20) {
+        return alert("투표 제목은 20자 이내로 작성해 주세요.");
+      }
+      if (tag.some((tagText) => tagText.length >= 20)) {
+        return alert("태그는 각각 20자 이내로 작성해 주세요.");
+      }
       dispatch(setPollType("select"));
-      // setPollType("select");
     }
-    return closeModal();
-    // return console.log("투표 타입=====>", pollType);
+    closeModal();
   };
 
   // 이제 이것들을..
@@ -83,12 +88,16 @@ const PollModal = ({ open, close }) => {
   };
 
   const handleSelectClick = () => {
+    // alert("구현 중인 기능입니다.");
+    // return;
+    // * ============ 구현 중 ============= *
     if (isProConClicked) {
       setIsProConClicked(!isProConClicked);
       setIsSelectClicked(!isSelectClicked);
     } else {
       setIsSelectClicked(!isSelectClicked);
     }
+    // * ============ 구현 중 ============= *
   };
 
   return open ? (
@@ -131,7 +140,7 @@ const PollModal = ({ open, close }) => {
               <PollTitleText>투표 제목</PollTitleText>
               <PollInput
                 id={pollTitle}
-                placeholder="제목을 입력해 주세요 (50자 이내)"
+                placeholder="제목을 입력해 주세요 (20자 이내)"
                 onChange={(e) => changePollTitleHandler(e)}
               ></PollInput>
             </PollTitle>
@@ -143,30 +152,28 @@ const PollModal = ({ open, close }) => {
                 <PollTitleText>투표 제목</PollTitleText>
                 <PollInput
                   id={pollTitle}
-                  placeholder="제목을 입력해 주세요 (50자 이내)"
+                  placeholder="제목을 입력해 주세요 (20자 이내)"
                   onChange={(e) => changePollTitleHandler(e)}
                 ></PollInput>
               </PollTitle>
 
               <PollSelect>
-                <PollSelectText placeholder="보기를 입력해 주세요(50자 이내).">
-                  보기
-                </PollSelectText>
+                <PollSelectText>보기</PollSelectText>
                 <PollCandid
                   onChange={(e) => changePollTagHandler(e, 0)}
-                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                  placeholder="보기를 입력해 주세요 (20자 이내)"
                 ></PollCandid>
                 <PollCandid
                   onChange={(e) => changePollTagHandler(e, 1)}
-                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                  placeholder="보기를 입력해 주세요 (20자 이내)"
                 ></PollCandid>
                 <PollCandid
                   onChange={(e) => changePollTagHandler(e, 2)}
-                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                  placeholder="보기를 입력해 주세요 (20자 이내)"
                 ></PollCandid>
                 <PollCandid
                   onChange={(e) => changePollTagHandler(e, 3)}
-                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                  placeholder="보기를 입력해 주세요 (20자 이내)"
                 ></PollCandid>
               </PollSelect>
             </>
@@ -227,6 +234,7 @@ const PollRow = styled.div`
   flex-direction: row;
   margin: 10px 20px;
 `;
+
 const PollProConType = styled.div`
   background-color: white;
   border: 1px solid black;
@@ -310,7 +318,7 @@ const PollWriteMain = styled.form`
   flex-direction: column;
 
   /* align-items: ; */
-  border: 1px solid red;
+  border: 1px solid green;
   /* width: 340px; */
   /* width: 100%; */
   /* margin: 25% 7.5%; */

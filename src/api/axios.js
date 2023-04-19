@@ -17,7 +17,7 @@ export const instanceWithAuth = axios.create({
 
 instanceWithAuth.interceptors.request.use(
     function (config) {
-        config.headers.Authorization = access_token
+        config.headers.Authorization = access_token;
         return config;
     }
 );

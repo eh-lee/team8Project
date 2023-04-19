@@ -47,6 +47,16 @@ const Write = () => {
       return;
     }
 
+    if (maincategory === "카테고리") {
+      alert("카테고리를 선택해 주세요.");
+      return;
+    }
+
+    if (maincategory !== "카테고리" && category === "") {
+      alert("상세 카테고리를 선택해 주세요.");
+      return;
+    }
+
     try {
       await instance.post(
         "/postCards/post/createPost",
@@ -57,6 +67,7 @@ const Write = () => {
           },
         }
       );
+      dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
       navi("/totalboard");
     } catch (e) {
@@ -66,6 +77,7 @@ const Write = () => {
   };
 
   const handleCanc = () => {
+    dispatch(pollCanc());
     navi(-1);
   };
 

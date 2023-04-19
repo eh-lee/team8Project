@@ -44,6 +44,7 @@ const ModalCont = styled.div`
   width: 400px;
   margin: 0 auto;
   border: 1px solid green;
+  min-height: 400px;
 `;
 
 const StyledColumn = styled.div`
