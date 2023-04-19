@@ -9,15 +9,21 @@ import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../../components/modal/CateogryModal";
 import WriteFooter from "../../components/footer/WriteFooter";
 import ModalPortal from "../../components/modal/ModalPortal";
+import { useSelector } from "react-redux";
 
 const Write = () => {
   FalseGuard();
-  const navi = useNavigate();
-  // const makePollHandler = () => {
-  //   navi("/write/pollwrite");
-  // };
 
-  // parentFunction1
+  const { pollType, pollTitle, tag } = useSelector((state) => state.write);
+
+  console.log("polltype========>", pollType);
+  console.log("polltitle========>", pollTitle);
+  console.log("tag========>", tag);
+
+  // optional chaining으로 전역 받아서 post
+
+  const navi = useNavigate();
+
   const WriteCallback = (x, y) => {
     setMaincategory(x);
     setCategory(y);
@@ -44,10 +50,12 @@ const Write = () => {
     try {
       await instance.post(
         "/postCards/post/createPost",
-        { title, desc, maincategory, category },
+        // { title, desc, maincategory, category },
+        { title, desc, maincategory, category, pollType, pollTitle, tag },
         {
           headers: {
             Authorization: `${access_token}`,
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTg2ODcwOCwiZXhwIjoxNjgyNDczNTA4fQ.xx4HF2-AeHNPh4OrqaB5zjXbQSRFZCZHxELeQH_Zeac`,
           },
         }
       );

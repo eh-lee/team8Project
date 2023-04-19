@@ -6,6 +6,7 @@ import {
   setPollType,
   setPollTitle,
   setTag,
+  pollCanc,
 } from "../../app/modules/writeSlice";
 
 const PollModal = ({ open, close }) => {
@@ -14,9 +15,14 @@ const PollModal = ({ open, close }) => {
 
   const [isProConClicked, setIsProConClicked] = useState(false);
   const [isSelectClicked, setIsSelectClicked] = useState(false);
-  // const [pollType, setPollType] = useState("");
-  // const [pollTitle, setPollTitle] = useState("");
-  // const [tag, setTag] = useState([]);
+
+  const cancHandler = () => {
+    dispatch(pollCanc());
+    console.log("123", pollType);
+    console.log("123123", pollTitle);
+    console.log("123123232", tag);
+    closeModal();
+  };
 
   const closeModal = () => {
     close();
@@ -29,6 +35,7 @@ const PollModal = ({ open, close }) => {
 
   const changePollTagHandler = (e, index) => {
     const newTag = [...tag];
+    // const newTag = (...tag);
     newTag[index] = e.target.value;
     // setTag(newTag);
     dispatch(setTag(newTag));
@@ -57,7 +64,7 @@ const PollModal = ({ open, close }) => {
   };
 
   // 이제 이것들을..
-  // 1. [V] closeModal() && [ ]전역 상태 관리 (슬라이스 반영)
+  // 1. [V] closeModal() && [V] 전역 상태 관리 (슬라이스 반영)
   // 2. [ ] 전역 상태를 렌더링해서 closeModal()한 상태에서의 Write.jsx에 컴포넌트로 그래프 반영되게 할 수 있을까??
   // 3. 그다음에 "등록"할 때 POST에 전역 상태 (pollType, tag, pollTitle 같이 POST)
 
@@ -89,13 +96,14 @@ const PollModal = ({ open, close }) => {
       <PollWriteWrap>
         <PollWriteHeader>
           <PollWriteHeaderCont>
-            <PollWriteCanc onClick={close}>
+            <PollWriteCanc onClick={cancHandler}>
               <MdOutlineClose />
+              {/* <IoIosArrowBack/> */}
             </PollWriteCanc>
             <PollWriteCategory>
               <PollWirteTitle>투표</PollWirteTitle>
             </PollWriteCategory>
-            <PollMarginRight />
+            <PollMarginRight></PollMarginRight>
           </PollWriteHeaderCont>
         </PollWriteHeader>
 

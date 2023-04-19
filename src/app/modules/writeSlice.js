@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     pollType: "",
     pollTitle: "",
-    tag: [],
+    tag: "",
 };
 
 export const writeSlice = createSlice({
@@ -19,6 +19,14 @@ export const writeSlice = createSlice({
         setTag: (state, action) => {
             state.tag = action.payload;
         },
+        // pollCanc: (state) => {
+        //     state.pollType = "";
+        //     state.pollTitle = "";
+        //     state.tag = [];
+        // },
+        pollCanc: () => {
+            return initialState;
+        }
     },
 });
 
