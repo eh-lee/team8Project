@@ -5,15 +5,6 @@ import { BiSelectMultiple } from "react-icons/bi";
 
 const CateogryModal = ({ parentFunction, open, close }) => {
   const modalRef = useRef();
-
-  // useEffect(()=> {
-  //   const closeModal = () => {
-  //     if (isActive.main !== null && isActive.sub !== null) {
-  //       close();
-  //     }};
-  //   closeModal();
-  // }, [isActive] )
-
   const [isActive, setIsActive] = useState({ main: null, sub: null });
 
   const closeModal = () => {

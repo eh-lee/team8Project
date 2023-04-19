@@ -125,37 +125,51 @@ const PollModal = ({ open, close }) => {
               </PollSelectType>
             </PollRow>
           </PollType>
-          <PollTitle>
-            <PollTitleText>투표 제목</PollTitleText>
-            <PollInput
-              id={pollTitle}
-              placeholder="제목을 입력해 주세요 (50자 이내)"
-              onChange={(e) => changePollTitleHandler(e)}
-            ></PollInput>
-          </PollTitle>
+
+          {isProConClicked && (
+            <PollTitle>
+              <PollTitleText>투표 제목</PollTitleText>
+              <PollInput
+                id={pollTitle}
+                placeholder="제목을 입력해 주세요 (50자 이내)"
+                onChange={(e) => changePollTitleHandler(e)}
+              ></PollInput>
+            </PollTitle>
+          )}
 
           {isSelectClicked && (
-            <PollSelect>
-              <PollSelectText placeholder="보기를 입력해 주세요(50자 이내).">
-                보기
-              </PollSelectText>
-              <PollCandid
-                onChange={(e) => changePollTagHandler(e, 0)}
-                placeholder="보기를 입력해 주세요 (50자 이내)"
-              ></PollCandid>
-              <PollCandid
-                onChange={(e) => changePollTagHandler(e, 1)}
-                placeholder="보기를 입력해 주세요 (50자 이내)"
-              ></PollCandid>
-              <PollCandid
-                onChange={(e) => changePollTagHandler(e, 2)}
-                placeholder="보기를 입력해 주세요 (50자 이내)"
-              ></PollCandid>
-              <PollCandid
-                onChange={(e) => changePollTagHandler(e, 3)}
-                placeholder="보기를 입력해 주세요 (50자 이내)"
-              ></PollCandid>
-            </PollSelect>
+            <>
+              <PollTitle>
+                <PollTitleText>투표 제목</PollTitleText>
+                <PollInput
+                  id={pollTitle}
+                  placeholder="제목을 입력해 주세요 (50자 이내)"
+                  onChange={(e) => changePollTitleHandler(e)}
+                ></PollInput>
+              </PollTitle>
+
+              <PollSelect>
+                <PollSelectText placeholder="보기를 입력해 주세요(50자 이내).">
+                  보기
+                </PollSelectText>
+                <PollCandid
+                  onChange={(e) => changePollTagHandler(e, 0)}
+                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                ></PollCandid>
+                <PollCandid
+                  onChange={(e) => changePollTagHandler(e, 1)}
+                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                ></PollCandid>
+                <PollCandid
+                  onChange={(e) => changePollTagHandler(e, 2)}
+                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                ></PollCandid>
+                <PollCandid
+                  onChange={(e) => changePollTagHandler(e, 3)}
+                  placeholder="보기를 입력해 주세요 (50자 이내)"
+                ></PollCandid>
+              </PollSelect>
+            </>
           )}
           <Gap />
           <PollButton>투표 만들기</PollButton>
