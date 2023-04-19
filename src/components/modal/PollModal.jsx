@@ -18,11 +18,11 @@ const PollModal = ({ open, close }) => {
 
   const cancHandler = () => {
     dispatch(pollCanc());
-    console.log("123", pollType);
-    console.log("123123", pollTitle);
-    console.log("123123232", tag);
     closeModal();
   };
+  // 이게 나중에 write.jsx에서 poll component가 나올 때, 이때
+  // poll component에 있는 삭제 버튼 누를 대도 dispatch(pollCanc())로 하는 거야
+  // 그러면 클라이언트 단에서 만들고 삭제 오오오!
 
   const closeModal = () => {
     close();

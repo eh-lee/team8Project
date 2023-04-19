@@ -9,24 +9,24 @@ import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../../components/modal/CateogryModal";
 import WriteFooter from "../../components/footer/WriteFooter";
 import ModalPortal from "../../components/modal/ModalPortal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { BsTrash } from "react-icons/bs";
+import { pollCanc } from "../../app/modules/writeSlice";
+import ProCon from "../../components/poll/ProCon";
 
 const Write = () => {
   FalseGuard();
-
+  const dispatch = useDispatch();
   const { pollType, pollTitle, tag } = useSelector((state) => state.write);
-
-  console.log("polltype========>", pollType);
-  console.log("polltitle========>", pollTitle);
-  console.log("tag========>", tag);
-
-  // optional chaining으로 전역 받아서 post
-
   const navi = useNavigate();
 
   const WriteCallback = (x, y) => {
     setMaincategory(x);
     setCategory(y);
+  };
+
+  const proConDelHandler = () => {
+    dispatch(pollCanc());
   };
 
   const [title, setTitle] = useState("");
@@ -50,12 +50,10 @@ const Write = () => {
     try {
       await instance.post(
         "/postCards/post/createPost",
-        // { title, desc, maincategory, category },
         { title, desc, maincategory, category, pollType, pollTitle, tag },
         {
           headers: {
             Authorization: `${access_token}`,
-            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQG5hdmVyLmNvbSIsImlhdCI6MTY4MTg2ODcwOCwiZXhwIjoxNjgyNDczNTA4fQ.xx4HF2-AeHNPh4OrqaB5zjXbQSRFZCZHxELeQH_Zeac`,
           },
         }
       );
@@ -119,9 +117,26 @@ const Write = () => {
             placeholder="훈수 받고 싶은 내용을 입력하세요."
           ></WriteContent>
         </WriteForm>
-        {/* pollModal은 요 안에 */}
+
+        {/* ========= 찬반형 투표 미리보기 ========= */}
+        {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
+        {/* ========= 찬반형 투표 미리보기 ========= */}
+
+        {pollType === "select" ? (
+          <>
+            <div>선택형 투표 미리보기입니다.</div>
+            <div>{pollTitle}</div>
+            <div>{tag}</div>
+            <div>
+              <BsTrash onClick={proConDelHandler} />
+            </div>
+            {/* tag map 돌려야 하나? */}
+          </>
+        ) : null}
+
+        {/* ======= pollModal은 요 안에 ======== */}
         <WriteFooter />
-        {/* pollModal은 요 안에 */}
+        {/* ======= pollModal은 요 안에 ======== */}
       </PageWithFooterWrapper>
       <ModalPortal>
         <ModalCont>
@@ -148,10 +163,9 @@ const ModalCont = styled.div`
 
 const WriteTitle = styled.input`
   font-size: 1.3rem;
+  margin: 1rem 0;
   padding: 0.5rem 1rem;
   width: 80%;
-  min-height: 5vh;
-  max-height: 10vh;
   border: none;
   border-bottom: 0.1rem solid rgb(180, 180, 180);
 
@@ -174,11 +188,10 @@ const SubCat = styled.div`
 const WriteContent = styled.textarea`
   font-size: 0.85rem;
   width: 80%;
-  padding: 1rem 1rem 0 1rem;
-  height: 70vh;
+  padding: 0 1rem 1rem 1rem;
   /* scroll issue */
   border: none;
-  overflow-y: scroll;
+  min-height: 40vh;
   resize: none;
   white-space: pre-wrap;
   /* 줄바꿈과 공백 인식하여 출력 ~ 댓글에도*/
@@ -200,10 +213,11 @@ const WriteForm = styled.form`
   display: flex;
   width: 100%;
   max-width: 400px;
-  max-height: 75vh;
+  /* height: 60vh; */
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  /* border: 1px solid green; */
 `;
 
 const PageWithFooterWrapper = styled.div`
