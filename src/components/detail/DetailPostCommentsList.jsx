@@ -1,43 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components';
 import DetailPostComment from './DetailPostComment';
 import { instanceWithAuth } from '../../api/axios';
+import { cookies } from '../../api/cookies';
 
 const DetailPostCommentsList = ({postIdx}) => {
   
   // 훈수 리스트 관리 state
   const [commentList, setCommentList] = useState(null);
 
+  // new훈수 관리 state
+  const [newComment, setNewComment] = useState();
+  const [newCommentTime, setNewCommentTime] = useState('');
+  const [curNickname, setCurNickname] = useState('');
+  // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
+  console.log("현재 내 닉네임은?", curNickname)
+
   // 댓글 get요청
   useEffect( () => {
     const getCommentList = async () => {
       const {data} = await instanceWithAuth.get(`/comment/${postIdx}`);
       setCommentList(data.comments);
-    }
+    };
+    const nickname = cookies.get("nickname")
     getCommentList();
+    setCurNickname(nickname)
   },[]);
-
   console.log("commentList", commentList);
+
+  // 새로운 댓글 핸들러
+  const newCommentHandler = (e) => {
+    setNewComment(e.target.value);
+  };
 
   // 댓글 작성 요청
   const newCommentsubmitHandler = (e) => {
     e.preventDefault();
 
-    // // 댓글 작성시간
-    // const currentTime = new Date().toLocaleString('ko-KR', { hour12: false }).replace(/\. /g, '. 0');
-    // setNewCommentTime(currentTime);
+    // 댓글 작성시간
+    const currentTime = new Date().toLocaleString('ko-KR', { hour12: false }).replace(/\. /g, '. 0');
+    setNewCommentTime(currentTime);
 
-    // const commentData = { comment: newComment }
-    // const url = isReplying ? `/reply/${postIdx}/${commentIdx}` : `/comment/${postIdx}`
-
-    // instanceWithAuth.post(url, commentData)
-    //   .then(response => {
-    //     console.log(response.data);
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-  }
+    instanceWithAuth.post(`/comment/${postIdx}`, { comment: newComment })
+      .then(response => {
+        console.log("댓글작성",response.data);
+      })
+      .catch(error => {
+        console.error("댓글작성",error);
+      });
+  };
 
   return (
     <DetailPostComments_Wrap>
@@ -55,8 +66,11 @@ const DetailPostCommentsList = ({postIdx}) => {
       <DetailPostComments_Footer>
         <DetailPostComments_FooterInputCont onSubmit={(e)=>newCommentsubmitHandler(e)}>
           <DetailPostComments_Input
+            required
             type='text'
             placeholder='훈수를 남겨주세요.'
+            value={newComment}
+            onChange={(e)=>newCommentHandler(e)}
           // maxLength=
           />
           <DetailPostComments_InputBtn

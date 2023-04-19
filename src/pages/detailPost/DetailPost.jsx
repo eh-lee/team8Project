@@ -38,7 +38,7 @@ const DetailPost = () => {
                             <MdArrowBackIosNew size="1rem" />
                         </DetailPost_BackBtn>
                         <DetailPost_Category>{detailPost.maincategory}🌝{detailPost.category}</DetailPost_Category>
-                        <DetailPost_MenuBtn onClick={() => { nav(-1) }} >
+                        <DetailPost_MenuBtn onClick={() => { alert("구현중인 기능입니다.")}} >
                             <FiMoreVertical size="1rem" />
                         </DetailPost_MenuBtn>
                     </DetailPost_HeaderCont>

@@ -20,7 +20,6 @@ const DetailPostContents = () => {
     const [postLikesCount, setPostLikesCount] = useState(0);
     const [isLike, setIsLike] = useState(null);
     
-    
     // 상세 게시글 정보 불러오기
     useEffect(() => {
         const getDetailPost = async () => {
@@ -32,8 +31,6 @@ const DetailPostContents = () => {
         };
         getDetailPost();
     }, []);
-    // console.log("변경 전 isLike###################", isLike)
-    // console.log("detailPost", detailPost)
     
     // 좋아요 버튼
     const clickPostLike = () => {
@@ -42,8 +39,6 @@ const DetailPostContents = () => {
         setIsLike((prev)=>!prev)
         setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
     };
-    
-    // console.log("변경 후 isLike###################", isLike)
 
     return (
         <>

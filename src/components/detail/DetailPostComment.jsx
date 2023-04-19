@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Like from '../like/Like';
 import DetailPostCommentReply from './DetailPostCommentReply';
 import { instanceWithAuth } from '../../api/axios';
+import { BsTrash } from "react-icons/bs";
 
 const DetailPostComment = ({comment}) => {
     // postIdx: UUID,
@@ -14,16 +15,52 @@ const DetailPostComment = ({comment}) => {
     // likesCount: NUMBER,
     // proInputValue: BOOLEAN(아직),
     // conInputValue: BOOLEAN(아직),
-    
-    // 좋아요 수 관리
-    const [isLike, setIsLike] = useState(null);
 
+    // 댓글 삭제 요청
+    const deleteCommentHandler = () => {
+        instanceWithAuth.delete(`comment/${comment.postIdx}/${comment.commentIdx}`)
+            .then(response => {
+                console.log("댓글삭제",response.data);
+            })
+            .catch(error => {
+                console.error("댓글삭제", error.response.data.errorMessage);
+            });
+    };
+    
     // 답훈수 관리 state
     const [replyList, setReplyList] = useState([]);
+    
+    // 좋아요 관리 state
+    const [commentLikesCount, setCommentLikesCount] = useState(0);
+    const [isLike, setIsLike] = useState(null);
 
     // 답훈수 더 보기 관리 state
     const [replyisActive, setReplyIsActive] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
+
+    // 댓글 작성한 시간
+    // 참고: '\u00A0'는 공백을 표현하는 유니코드 문자
+    const createdAt = `${comment.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${comment.createdAt?.split('T')[1].slice(0, 5)}`
+
+    // =================== S2 ===================
+    // 좋아요 수
+    useEffect(()=> {
+        const getCommentLike = async() => {
+            const {data} = await instanceWithAuth.get(`/commentLike/${comment.commentIdx}`);
+            setCommentLikesCount(data.likes.totalLikes);
+        };
+        getCommentLike();
+    }, []);
+    console.log("commentLikesCount", commentLikesCount)
+    // =================== S2 ===================
+
+    // 좋아요 버튼
+    const clickCommentLike = () => {
+        console.log("댓글좋아요 눌렀다고!!!")
+        instanceWithAuth.put(`/commentLike/${comment.commentIdx}`);
+        // setIsLike((prev) => !prev)
+        // setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+    };
 
     // 답훈수 get요청
     useEffect(()=> {
@@ -47,16 +84,31 @@ const DetailPostComment = ({comment}) => {
             <Comment_InfoWrap>
                 <Comment_Info_ProfileCont>
                     <Comment_Info_UserLvImg>  </Comment_Info_UserLvImg>
-                    <Comment_Info_UserSide>
-                        찬성
-                    </Comment_Info_UserSide>
+                    {
+                        comment.proInputValue ?
+                            <Comment_Info_UserSide>
+                                찬성
+                            </Comment_Info_UserSide> 
+                            :
+                            comment.conInputValue ?
+                                <Comment_Info_UserSide>
+                                    반대
+                                </Comment_Info_UserSide> 
+                                :
+                                null
+                    }
                 </Comment_Info_ProfileCont>
                 <Comment_Info_UserInfoWrap>
                     <Comment_Info_UserInfoCont>
                         <Comment_Info_Nickname> {comment.nickname} </Comment_Info_Nickname>
                         <Comment_Info_UserLevel> 레벨 </Comment_Info_UserLevel>
                     </Comment_Info_UserInfoCont>
-                    <Comment_Info_UserInfo_CreatedAt> {comment.createdAt}작성시간 </Comment_Info_UserInfo_CreatedAt>
+                    <Comment_Info_UserInfo_CreatedAt>
+                        {createdAt}
+                        <CommentDelete onClick={deleteCommentHandler}>
+                            <BsTrash />
+                        </CommentDelete>
+                    </Comment_Info_UserInfo_CreatedAt>
                 </Comment_Info_UserInfoWrap>
             </Comment_InfoWrap>
 
@@ -64,12 +116,16 @@ const DetailPostComment = ({comment}) => {
             <CommentWrap>
                 <Comment> {comment.comment} </Comment>
                 <CommentLikeCont>
-                    <CommentLikeIcon pointerOn="on">
-                        <Like isLike={isLike} />
+                    <CommentLikeIcon 
+                    pointerOn="on"
+                    onClick={clickCommentLike}
+                    >
+                        <Like 
+                            isLike={isLike} 
+                        />
                     </CommentLikeIcon>
                     <CommentLikeCount>
-                        {/* {comment.likesCount} */}
-                        123
+                        {commentLikesCount}
                     </CommentLikeCount>
                 </CommentLikeCont>
             </CommentWrap>
@@ -83,6 +139,7 @@ const DetailPostComment = ({comment}) => {
 
                 {/* 답훈수 더 보기 버튼 */}
                 {
+                    (replyList.length > 0) &&
                     !isHidden && (
                         <DetailPostCommentReplyMore
                             onClick={ReplyisActiveHandler}
@@ -192,7 +249,20 @@ const Comment_Info_UserInfo_CreatedAt = styled.div`
     /* border: 1px solid black; */
     font-size: 10px;
     color: #8A8A8A;
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `;
+
+
+const CommentDelete = styled.div`
+    /* border: 1px solid violet; */
+    display: flex;
+    font-size: 12px;
+    cursor: pointer;
+`
 
 // ========================= 댓글 =========================
 const CommentWrap = styled.div`
@@ -241,13 +311,15 @@ const CommentLikeIcon = styled.div`
 
 const CommentLikeCount = styled.div`
     /* border: 1px solid violet; */
-    width: 26px;
+    /* width: 26px; */
+    width: 16px;
     height: 16px;
     display: flex;
     justify-items: flex-start;
     align-items: center;
     font-size: 12px;
 `;
+
 
 // ========================= 답훈수 =========================
 
