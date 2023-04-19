@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import PostCard from "./HotPostCard";
+import HotPostCard from "./HotPostCard";
 import { instance } from "../../api/axios";
 import { BsChevronLeft } from "react-icons/bs";
 
@@ -16,6 +16,8 @@ const PostCardSlider = () => {
 
   // hotPostCard 저장
   const [postCards, setPostCards] = useState([]);
+
+  console.log("*****postCards****", postCards)
 
   // 인덱스, 애니메이션 상태 저장
   const [index, setIndex] = useState(0);
@@ -68,13 +70,14 @@ const PostCardSlider = () => {
       <Button dir="right" onClick={clickRightHandler} />
       <PostCards animate={animate}>
         {genPostCardsArray(index)?.map((el) => (
-          <PostCard
+          <HotPostCard
             key={el?.postIdx}
             postIdx={el?.postIdx}
             mainCategory={el?.maincategory}
             category={el?.category}
             title={el?.title}
             content={el?.desc}
+            likesCount={el?.likesCount}
             viewCount={el?.postViewCount}
             commentCount={el?.commentCount}
           />

@@ -71,6 +71,12 @@ const PostCardJr_ContentBox = styled.div`
   max-height: 10vh;
   width: 88px;
   overflow-y: scroll;
+  /* 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+  display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   word-wrap: break-word;
 
   margin-left: 1rem;

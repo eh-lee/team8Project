@@ -204,6 +204,13 @@ const WriteContent = styled.textarea`
   /* scroll issue */
   border: none;
   min-height: 40vh;
+  overflow-y: scroll;
+  /* 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+  display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   resize: none;
   white-space: pre-wrap;
   /* 줄바꿈과 공백 인식하여 출력 ~ 댓글에도*/

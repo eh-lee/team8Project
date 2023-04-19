@@ -31,9 +31,12 @@ const StMobileLayout = styled.div`
   /* 컨텐츠가 없는 경우에도 화면이 잘리지 않도록 100vh */
   position: relative;
   overflow-y: scroll;
+  /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
     display: none;
   }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   /* 스크롤 */
   margin: 0 auto;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
