@@ -4,7 +4,6 @@ const {
     REACT_APP_SERVER_URL,
 } = process.env;
 
-// const access_token = document.cookie.replace("access_token=", "").replace(/; nickname=([^;]*)/, "");
 const access_token = decodeURI(document.cookie).replace("access_token=", "").replace(/; nickname=([^;]*)/, "");
 
 export const instance = axios.create({
@@ -14,16 +13,11 @@ export const instance = axios.create({
 
 export const instanceWithAuth = axios.create({
     baseURL: REACT_APP_SERVER_URL,
-
 });
-
-instanceWithAuth.interceptors.request.use(
-    function (config) {
-        config.headers.Authorization = access_token;
 
 instanceWithAuth.interceptors.request.use(
     function (config) {
         config.headers.Authorization = access_token;
         return config;
     }
-);
+)
