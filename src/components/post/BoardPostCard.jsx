@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { AiOutlineEye } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useEffect } from "react";
+import { instance } from "../../api/axios";
+import { useState } from "react";
 
 const BoardPostCard = ({
   mainCategory,
@@ -19,8 +22,20 @@ const BoardPostCard = ({
 }) => {
   const navigate = useNavigate();
 
-  console.log("category==========>", category);
-  console.log("category==========>", nickname);
+  // //  포스트 투표 등 GET
+
+  // useEffect(() => {
+  //   const fetchPoll = async () => {
+  //     try {
+  //       const res = await instance.get(`/postCards/post/contents/${postIdx}`);
+  //       console.log("투표 등 정보========>", res);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchPoll();
+  // }, []);
+  // Detail.jsx 쪽으로
 
   const categories = [
     "패션/뷰티",
@@ -71,7 +86,7 @@ const BoardPostCard = ({
       <PostCardTitleBox>
         <PostCardRow>
           <PostCardCatBtn>
-            {mainCategory}
+            {mainCategory}&nbsp;
             {categoryIconsMap[category]}
           </PostCardCatBtn>
         </PostCardRow>
@@ -108,7 +123,7 @@ const PostCardCatBtn = styled.button`
   color: white;
   background: #3a3a59;
   border-radius: 100px;
-  padding: 2px 10px 2px 10px;
+  padding: 2px 4px 2px 6px;
   border: none;
 `;
 
