@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsTrash } from "react-icons/bs";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
+import { Helmet } from "react-helmet";
 
 const Write = () => {
   FalseGuard();
@@ -90,78 +91,83 @@ const Write = () => {
   };
 
   return (
-    <MobileLayout>
-      <PageWithFooterWrapper>
-        <WriteHeader>
-          <WriteHeaderCont>
-            <WriteCanc onClick={handleCanc}>취소</WriteCanc>
-            <WriteCategory>
-              <MainCat>{maincategory}</MainCat>
-              <SubCat>{category}</SubCat>
-              <IconCont>
-                <IoIosArrowDown onClick={categoryModalOpenHandler} />
-              </IconCont>
-            </WriteCategory>
-            <WritePost onClick={submitHandler}>등록</WritePost>
-          </WriteHeaderCont>
-        </WriteHeader>
-        <WriteForm
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <WriteTitle
-            type="text"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
+    <>
+      <Helmet>
+        <title>훈수 — 글쓰기</title>
+      </Helmet>
+      <MobileLayout>
+        <PageWithFooterWrapper>
+          <WriteHeader>
+            <WriteHeaderCont>
+              <WriteCanc onClick={handleCanc}>취소</WriteCanc>
+              <WriteCategory>
+                <MainCat>{maincategory}</MainCat>
+                <SubCat>{category}</SubCat>
+                <IconCont>
+                  <IoIosArrowDown onClick={categoryModalOpenHandler} />
+                </IconCont>
+              </WriteCategory>
+              <WritePost onClick={submitHandler}>등록</WritePost>
+            </WriteHeaderCont>
+          </WriteHeader>
+          <WriteForm
+            onSubmit={(e) => {
+              e.preventDefault();
             }}
-            autoFocus
-            placeholder="제목"
-          ></WriteTitle>
-          <WriteContent
-            type="text"
-            value={desc}
-            onChange={(e) => {
-              setDesc(e.target.value);
-            }}
-            placeholder="훈수 받고 싶은 내용을 입력하세요."
-          ></WriteContent>
-        </WriteForm>
+          >
+            <WriteTitle
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              autoFocus
+              placeholder="제목"
+            ></WriteTitle>
+            <WriteContent
+              type="text"
+              value={desc}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+              placeholder="훈수 받고 싶은 내용을 입력하세요."
+            ></WriteContent>
+          </WriteForm>
 
-        {/* ========= 찬반형 투표 미리보기 ========= */}
-        {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
-        {/* ========= 찬반형 투표 미리보기 ========= */}
+          {/* ========= 찬반형 투표 미리보기 ========= */}
+          {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
+          {/* ========= 찬반형 투표 미리보기 ========= */}
 
-        {pollType === "select" ? (
-          <>
-            <div>선택형 투표 미리보기입니다.</div>
-            <div>{pollTitle}</div>
-            <div>{tag}</div>
-            <div>
-              <BsTrash onClick={proConDelHandler} />
-            </div>
-            {/* tag map 돌려야 하나? */}
-          </>
-        ) : null}
+          {pollType === "select" ? (
+            <>
+              <div>선택형 투표 미리보기입니다.</div>
+              <div>{pollTitle}</div>
+              <div>{tag}</div>
+              <div>
+                <BsTrash onClick={proConDelHandler} />
+              </div>
+              {/* tag map 돌려야 하나? */}
+            </>
+          ) : null}
 
-        {/* ======= pollModal은 요 안에 ======== */}
-        <WriteFooter />
-        {/* ======= pollModal은 요 안에 ======== */}
-      </PageWithFooterWrapper>
-      <ModalPortal>
-        <ModalCont>
-          {isCategoryModalOpen && (
-            <CateogryModal
-              open={isCategoryModalOpen}
-              close={categoryModalCloseHandler}
-              parentFunction={WriteCallback}
-              // CategoryModal(child) to write.jsx(parent)
-            />
-          )}
-        </ModalCont>
-      </ModalPortal>
-    </MobileLayout>
+          {/* ======= pollModal은 요 안에 ======== */}
+          <WriteFooter />
+          {/* ======= pollModal은 요 안에 ======== */}
+        </PageWithFooterWrapper>
+        <ModalPortal>
+          <ModalCont>
+            {isCategoryModalOpen && (
+              <CateogryModal
+                open={isCategoryModalOpen}
+                close={categoryModalCloseHandler}
+                parentFunction={WriteCallback}
+                // CategoryModal(child) to write.jsx(parent)
+              />
+            )}
+          </ModalCont>
+        </ModalPortal>
+      </MobileLayout>
+    </>
   );
 };
 

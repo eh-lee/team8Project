@@ -6,6 +6,7 @@ import Footer from "../../components/footer/Footer";
 import BoardPostCard from "../../components/post/BoardPostCard";
 // import HorizontalScroll from "../../components/hook/scroll/HorizontalScroll";
 import MobileLayout from "../../layout/MobileLayout";
+import { Helmet } from "react-helmet";
 
 const TotalBoard = () => {
   const [category, setCategory] = useState("전체");
@@ -94,63 +95,68 @@ const TotalBoard = () => {
   }, []);
 
   return (
-    <MobileLayout>
-      <PageWithFooterWrapper>
-        <BoardHeader>
-          <BoardHeaderSub>
-            <BoardTitle>훈수게시판</BoardTitle>
+    <>
+      <Helmet>
+        <title>훈수 — 진지게시판</title>
+      </Helmet>
+      <MobileLayout>
+        <PageWithFooterWrapper>
+          <BoardHeader>
+            <BoardHeaderSub>
+              <BoardTitle>훈수게시판</BoardTitle>
 
-            <Row>
-              <MainCategory onClick={() => navi("/totalboard")}>
-                전체
-              </MainCategory>
+              <Row>
+                <MainCategory onClick={() => navi("/totalboard")}>
+                  전체
+                </MainCategory>
 
-              <MainCategory onClick={() => navi("/humourboard")}>
-                유머
-              </MainCategory>
+                <MainCategory onClick={() => navi("/humourboard")}>
+                  유머
+                </MainCategory>
 
-              <MainCategory isActive onClick={() => navi("/seriousboard")}>
-                진지
-              </MainCategory>
-            </Row>
-            <CategorySlider>
-              {/* <CategorySlider ref={scrollRef}> */}
-              {/* <CategorySlider isFirstRender={isFirstRender}> */}
-              {categories.map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleCategoryClick(item)}
-                  style={{ marginLeft: index === 0 ? "7%" : "2%" }}
-                  // index={index}
-                  // isActive={item === category}
-                  // onFocus={() => setIsFirstRender(false)}
-                >
-                  {item}
-                </button>
-              ))}
-            </CategorySlider>
-          </BoardHeaderSub>
-        </BoardHeader>
-        <PostCardCont ref={postCardContRef}>
-          {data?.map((item) => (
-            <BoardPostCard
-              key={item.postIdx}
-              postIdx={item.postIdx}
-              title={item.title}
-              nickname={item.nickname}
-              content={item.desc}
-              likesCount={item.likesCount}
-              viewCount={item.postViewCount}
-              commentCount={item.commentCount}
-              mainCategory={item.maincategory}
-              category={item.category}
-              // isFirst={idx === 0}
-            />
-          ))}
-        </PostCardCont>
-      </PageWithFooterWrapper>
-      <Footer />
-    </MobileLayout>
+                <MainCategory isActive onClick={() => navi("/seriousboard")}>
+                  진지
+                </MainCategory>
+              </Row>
+              <CategorySlider>
+                {/* <CategorySlider ref={scrollRef}> */}
+                {/* <CategorySlider isFirstRender={isFirstRender}> */}
+                {categories.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleCategoryClick(item)}
+                    style={{ marginLeft: index === 0 ? "7%" : "2%" }}
+                    // index={index}
+                    // isActive={item === category}
+                    // onFocus={() => setIsFirstRender(false)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </CategorySlider>
+            </BoardHeaderSub>
+          </BoardHeader>
+          <PostCardCont ref={postCardContRef}>
+            {data?.map((item) => (
+              <BoardPostCard
+                key={item.postIdx}
+                postIdx={item.postIdx}
+                title={item.title}
+                nickname={item.nickname}
+                content={item.desc}
+                likesCount={item.likesCount}
+                viewCount={item.postViewCount}
+                commentCount={item.commentCount}
+                mainCategory={item.maincategory}
+                category={item.category}
+                // isFirst={idx === 0}
+              />
+            ))}
+          </PostCardCont>
+        </PageWithFooterWrapper>
+        <Footer />
+      </MobileLayout>
+    </>
   );
 };
 

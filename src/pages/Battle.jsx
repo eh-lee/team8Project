@@ -3,14 +3,23 @@ import styled from "styled-components";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import MobileLayout from "../layout/MobileLayout";
+import { Helmet } from "react-helmet";
+import YetGuard from "../components/hook/guard/YetGuard.jsx";
 
 const Battle = () => {
+  YetGuard();
+
   return (
-    <MobileLayout>
-      <Header />
-      <PageWithHeaderAndFooterWrapper></PageWithHeaderAndFooterWrapper>
-      <Footer />
-    </MobileLayout>
+    <>
+      <Helmet>
+        <title>훈수배틀</title>
+      </Helmet>
+      <MobileLayout>
+        <Header />
+        <PageWithHeaderAndFooterWrapper></PageWithHeaderAndFooterWrapper>
+        <Footer />
+      </MobileLayout>
+    </>
   );
 };
 

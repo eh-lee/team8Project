@@ -11,42 +11,48 @@ import { cookies } from "../api/cookies";
 import HotPostCardSlider from "../components/post/HotPostCardSlider";
 import NewPostCardSlider from "../components/post/NewPostCardSlider";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const isLogin = cookies.get("access_token") ? true : false;
 
   return (
-    <MobileLayout>
-      <Header />
-      <PageWithHeaderAndFooterWrapper>
-        {isLogin ? (
-          <>
-            <TrueGreeting />
-            <TrueGreetingLv />
-          </>
-        ) : (
-          <>
-            <FalseGreeting />
-            <FalseGreetingLv />
-          </>
-        )}
+    <>
+      <Helmet>
+        <title>훈수</title>
+      </Helmet>
+      <MobileLayout>
+        <Header />
+        <PageWithHeaderAndFooterWrapper>
+          {isLogin ? (
+            <>
+              <TrueGreeting />
+              <TrueGreetingLv />
+            </>
+          ) : (
+            <>
+              <FalseGreeting />
+              <FalseGreetingLv />
+            </>
+          )}
 
-        <PostCardSliders>
-          {/* Hot 게시글 */}
-          <HotPostCardSliderCont>
-            <PostCardSlider_Info title="HOT 훈수" />
-            <HotPostCardSlider />
-          </HotPostCardSliderCont>
+          <PostCardSliders>
+            {/* Hot 게시글 */}
+            <HotPostCardSliderCont>
+              <PostCardSlider_Info title="HOT 훈수" />
+              <HotPostCardSlider />
+            </HotPostCardSliderCont>
 
-          {/* 실시간 게시글 */}
-          <NewPostCardSliderCont>
-            <PostCardSlider_Info title="실시간 훈수" more="더보기" />
-            <NewPostCardSlider />
-          </NewPostCardSliderCont>
-        </PostCardSliders>
-      </PageWithHeaderAndFooterWrapper>
-      <Footer />
-    </MobileLayout>
+            {/* 실시간 게시글 */}
+            <NewPostCardSliderCont>
+              <PostCardSlider_Info title="실시간 훈수" more="더보기" />
+              <NewPostCardSlider />
+            </NewPostCardSliderCont>
+          </PostCardSliders>
+        </PageWithHeaderAndFooterWrapper>
+        <Footer />
+      </MobileLayout>
+    </>
   );
 };
 

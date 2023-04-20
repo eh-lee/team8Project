@@ -7,6 +7,7 @@ import { cookies } from "../../api/cookies";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import MobileLayout from "../../layout/MobileLayout";
+import { Helmet } from "react-helmet";
 
 const MyPage = () => {
   const navi = useNavigate();
@@ -33,30 +34,35 @@ const MyPage = () => {
   };
 
   return (
-    <MobileLayout>
-      <Header />
-      <PageWithHeaderAndFooterWrapper>
-        <div>My page</div>
-        <div>
-          <>
-            {isLogin ? (
-              <p type="button" style={{ cursor: "pointer" }} onClick={logout}>
-                로그아웃
-              </p>
-            ) : (
-              <p
-                type="button"
-                style={{ cursor: "pointer" }}
-                onClick={() => navi("/login")}
-              >
-                먼저 로그인해 주세요.
-              </p>
-            )}
-          </>
-        </div>
-      </PageWithHeaderAndFooterWrapper>
-      <Footer />
-    </MobileLayout>
+    <>
+      <Helmet>
+        <title>훈수 — 마이페이지</title>
+      </Helmet>
+      <MobileLayout>
+        <Header />
+        <PageWithHeaderAndFooterWrapper>
+          <div>My page</div>
+          <div>
+            <>
+              {isLogin ? (
+                <p type="button" style={{ cursor: "pointer" }} onClick={logout}>
+                  로그아웃
+                </p>
+              ) : (
+                <p
+                  type="button"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navi("/login")}
+                >
+                  먼저 로그인해 주세요.
+                </p>
+              )}
+            </>
+          </div>
+        </PageWithHeaderAndFooterWrapper>
+        <Footer />
+      </MobileLayout>
+    </>
   );
 };
 
