@@ -155,6 +155,7 @@ const TotalBoard = () => {
 
 const PostCardCont = styled.div`
   height: 45.28rem;
+  /* height: 70vh; */
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {

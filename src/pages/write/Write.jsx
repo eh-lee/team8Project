@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { instance } from "../../api/axios";
+import { instance, instanceWithAuth } from "../../api/axios";
 import { access_token } from "../../api/token";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
@@ -58,15 +58,15 @@ const Write = () => {
     }
 
     try {
-      await instance.post(
-        "/postCards/post/createPost",
-        { title, desc, maincategory, category, pollType, pollTitle, tag },
-        {
-          headers: {
-            Authorization: `${access_token}`,
-          },
-        }
-      );
+      await instanceWithAuth.post("/postCards/post/createPost", {
+        title,
+        desc,
+        maincategory,
+        category,
+        pollType,
+        pollTitle,
+        tag,
+      });
       dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
       navi("/totalboard");
@@ -207,7 +207,7 @@ const WriteContent = styled.textarea`
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
