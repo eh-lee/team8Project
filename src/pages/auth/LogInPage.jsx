@@ -25,6 +25,12 @@ const LogInPage = () => {
       //   path: "/",
       // });
       cookies.set("nickname", response.data.nickname, { path: "/" });
+      cookies.set("refresh_token", response.data.refreshtoken, { path: "/" });
+      console.log("일반 로그인 res------>", response);
+      console.log("일반 로그인 res------>", response);
+      console.log("일반 로그인 rfrsh------>", response.headers["RefreshToken"]);
+      console.log("일반 로그인 rfrsh------>", response.headers["refreshtoken"]);
+      console.log("일반 로그인 rfrsh------>", response.headers.refreshtoken);
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.msg;

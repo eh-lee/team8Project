@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { instance, instanceWithAuth } from "../../api/axios";
-import { access_token } from "../../api/token";
+import { instanceWithAuth } from "../../api/axios";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
 import { IoIosArrowDown } from "react-icons/io";

@@ -9,11 +9,7 @@ const KakaoLogin = () => {
   const code = new URL(window.location.href).searchParams.get("code");
   console.log("카카오 인가 코드==========>", code);
   const navi = useNavigate();
-
   const { REACT_APP_SERVER_URL } = process.env;
-  console.log("URL==========>", REACT_APP_SERVER_URL);
-
-  //코드 보내는 부분
 
   //토큰 받는 부분
   useEffect(() => {
@@ -21,7 +17,6 @@ const KakaoLogin = () => {
       const kakao = async () => {
         const response = await axios.post(
           `${REACT_APP_SERVER_URL}/user/kakaoLogin`,
-          // `REACT_APP_SERVER_URL/user/kakaoLogin`,
           { code: code },
           {
             headers: {
@@ -34,6 +29,7 @@ const KakaoLogin = () => {
           console.log("리프레시 토큰을 찾아서…===========>", response);
           cookies.set("access_token", response.headers.authorization);
           cookies.set("refresh_token", response.headers.refreshtoken);
+          // 이거는 오성 님이 수정 중??
           cookies.set("nickname", response.data.nickname);
         }
         return navi("/");
@@ -41,14 +37,6 @@ const KakaoLogin = () => {
       kakao();
     }
   }, []);
-
-  // async function postKaKaoCode() {
-  //   const response = await axios.post(
-  //     "http://54.180.30.108:3002/api/user/kakaoLogin/",
-  //     KaKaocode
-  //   );
-  // }
-  // postKaKaoCode();
 
   return (
     <MobileLayout>

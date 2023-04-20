@@ -4,7 +4,7 @@ const {
     REACT_APP_SERVER_URL,
 } = process.env;
 
-const access_token = decodeURI(document.cookie).replace("access_token=", "").replace(/; nickname=([^;]*)/, "");
+const access_token = decodeURI(document.cookie).replace("access_token=", "").replace(/; nickname=([^;]*)/, "").replace(/; refresh_token=[^;]*/, "");
 
 export const instance = axios.create({
     baseURL: REACT_APP_SERVER_URL

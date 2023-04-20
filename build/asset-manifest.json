@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/static/js/main.b45300d4.js",
+    "main.js": "/static/js/main.a37062e5.js",
     "static/media/google-icon.png": "/static/media/google-icon.596afd5a94b9a1c6da6a.png",
     "static/media/kakao-icon.png": "/static/media/kakao-icon.75ebd791cfe77157dd1b.png",
     "index.html": "/index.html",
-    "main.b45300d4.js.map": "/static/js/main.b45300d4.js.map"
+    "main.a37062e5.js.map": "/static/js/main.a37062e5.js.map"
   },
   "entrypoints": [
-    "static/js/main.b45300d4.js"
+    "static/js/main.a37062e5.js"
   ]
 }
