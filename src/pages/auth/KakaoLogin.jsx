@@ -29,7 +29,6 @@ const KakaoLogin = () => {
           console.log("리프레시 토큰을 찾아서…===========>", response);
           cookies.set("access_token", response.headers.authorization);
           cookies.set("refresh_token", response.headers.refreshtoken);
-          // 이거는 오성 님이 수정 중??
           cookies.set("nickname", response.data.nickname);
         }
         return navi("/");
