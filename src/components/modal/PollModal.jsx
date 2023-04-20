@@ -88,15 +88,15 @@ const PollModal = ({ open, close }) => {
   };
 
   const handleSelectClick = () => {
-    // alert("구현 중인 기능입니다.");
-    // return;
+    alert("구현 중인 기능입니다.");
+    return;
     // * ============ 구현 중 ============= *
-    if (isProConClicked) {
-      setIsProConClicked(!isProConClicked);
-      setIsSelectClicked(!isSelectClicked);
-    } else {
-      setIsSelectClicked(!isSelectClicked);
-    }
+    // if (isProConClicked) {
+    //   setIsProConClicked(!isProConClicked);
+    //   setIsSelectClicked(!isSelectClicked);
+    // } else {
+    //   setIsSelectClicked(!isSelectClicked);
+    // }
     // * ============ 구현 중 ============= *
   };
 

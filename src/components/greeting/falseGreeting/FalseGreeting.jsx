@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { cookies } from "../../../api/cookies";
+import level1 from "../../../assets/icons/userLevel/level icon=초보, size=72.png";
 
 const FalseGreeting = () => {
   const navi = useNavigate();
@@ -16,15 +16,31 @@ const FalseGreeting = () => {
         </Row>
         <Greeting1>이용 가능한 기능입니다.</Greeting1>
       </GreetingText1>
-      <GreetingLevelImgCont>
-        <GreetingLevelImg
-          src="img/testImg1.jpg"
-          style={{ filter: "grayscale(100%)" }}
-        />
-      </GreetingLevelImgCont>
+
+      <Column>
+        <GreetingLevelImgCont>
+          <GreetingLevelImg src={level1} />
+        </GreetingLevelImgCont>
+        <GreetingLevelName>훈수 초보</GreetingLevelName>
+      </Column>
     </GreetingCont>
   );
 };
+
+const GreetingLevelName = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #ef3f61;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid green; */
+  gap: 5px;
+`;
 
 const GreetingCont = styled.div`
   /* border: 1px solid red; */
@@ -43,6 +59,7 @@ const Row = styled.div`
 `;
 
 const GreetingLevelImgCont = styled.div`
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,11 +85,12 @@ const GreetingText1 = styled.div`
   font-weight: bold;
   justify-content: space-evenly;
 `;
-const Greeting1 = styled.div``;
+const Greeting1 = styled.div`
+  color: #2d2d2d;
+`;
 
 const GreetingNickname = styled.div`
-  /* color: rgb(76, 76, 198); */
-  color: rgb(213, 135, 135);
+  color: #ef3f61;
   padding-right: 0.5rem;
 
   &:hover {

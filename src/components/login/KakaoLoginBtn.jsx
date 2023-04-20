@@ -1,5 +1,5 @@
 import React from "react";
-import kakao from "../../assets/icons/kakao-icon.png";
+import kakao from "../../assets/icons/socialLogin/kakao-icon.png";
 import { KAKAO_LOGIN_URL } from "../../api/login";
 import styled from "styled-components";
 

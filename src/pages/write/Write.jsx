@@ -13,12 +13,18 @@ import { BsTrash } from "react-icons/bs";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
 import { Helmet } from "react-helmet";
+// import { instance } from "../../api/axios";
 
 const Write = () => {
   FalseGuard();
   const dispatch = useDispatch();
   const { pollType, pollTitle, tag } = useSelector((state) => state.write);
   const navi = useNavigate();
+
+  // const access_token = decodeURI(document.cookie)
+  //   .replace("access_token=", "")
+  //   .replace(/; nickname=([^;]*)/, "")
+  //   .replace(/; refresh_token=[^;]*/, "");
 
   const WriteCallback = (x, y) => {
     setMaincategory(x);
@@ -36,7 +42,6 @@ const Write = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     // *=============== 글자 수 검사 ===============*
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
@@ -58,6 +63,7 @@ const Write = () => {
     }
 
     try {
+      // console.log("auth===========>", instanceWithAuth);
       await instanceWithAuth.post("/postCards/post/createPost", {
         title,
         desc,
@@ -67,6 +73,24 @@ const Write = () => {
         pollTitle,
         tag,
       });
+      // await instance.post(
+      //   "/postCards/post/createPost",
+      //   {
+      //     title,
+      //     desc,
+      //     maincategory,
+      //     category,
+      //     pollType,
+      //     pollTitle,
+      //     tag,
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `${access_token}`,
+      //     },
+      //   }
+      // );
+
       dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
       navi("/totalboard");

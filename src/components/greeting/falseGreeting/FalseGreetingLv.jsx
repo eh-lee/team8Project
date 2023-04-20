@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import level2 from "../../../assets/icons/userLevel/level icon=하수, size=18.png";
 
 const FalseGreetingLv = () => {
   const currExp = 0;
@@ -11,13 +12,10 @@ const FalseGreetingLv = () => {
         <GreetingText1>
           <GreetingLvContSub>
             <GreetingLevelImgCont>
-              <GreetingLevelImg
-                src="img/testImg2.jpg"
-                style={{ filter: "grayscale(100%)" }}
-              />
+              <GreetingLevelImg src={level2} />
             </GreetingLevelImgCont>
-            <GreetingLvText1>야만을 벗어난 훈수꾼</GreetingLvText1>
-            <GreetingLvText2>이 되기까지</GreetingLvText2>
+            <GreetingLvText1>훈수 하수</GreetingLvText1>
+            <GreetingLvText2>까지 앞으로</GreetingLvText2>
           </GreetingLvContSub>
           <LvExperienceBar>
             <ColoredExperienceBar exp={exp} />
@@ -42,7 +40,7 @@ const RowMain = styled.div`
 
 const LvExperienceBar = styled.div`
   /* border: 1px solid red; */
-  width: 100%;
+  width: 90%;
   /* width: ${(props) => props.goalExp}%; */
 
   height: 0.5rem;
@@ -59,14 +57,15 @@ const ColoredExperienceBar = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: rgb(200, 200, 200);
+  background-color: #2d2d2d;
   border-radius: 2rem;
   width: ${(props) => props.exp}%;
 `;
 
 const Row = styled.div`
+  /* border: 1px solid red; */
   display: flex;
-  justify-content: row;
+  align-items: baseline;
 `;
 
 const GreetingLvContSub = styled.div`
@@ -91,14 +90,15 @@ const GreetingLvCont = styled.div`
 const GreetingLvPoint1 = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: bold;
+  color: #2d2d2d;
 `;
 const GreetingLvPoint2 = styled.div`
   display: flex;
   align-items: center;
   color: rgb(160, 160, 160);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 `;
 
 const GreetingLevelImgCont = styled.div`
@@ -127,10 +127,9 @@ const GreetingText1 = styled.div`
 `;
 
 const GreetingLvText1 = styled.div`
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  /* color: rgb(213, 135, 135); */
-  color: rgb(160, 160, 160);
+  color: #ef3f61;
 `;
 
 // const GreetingLvText1 = styled.div`

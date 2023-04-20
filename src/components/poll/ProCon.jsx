@@ -7,7 +7,14 @@ import { TfiThumbUp } from "react-icons/tfi";
 import { TfiThumbDown } from "react-icons/tfi";
 import styled from "styled-components";
 
-const ProCon = ({ pollTitle }) => {
+const ProCon = ({
+  pollTitle,
+  // write.jsx 미리보기
+  detailPollTitle,
+  // detail.jsx
+  detailProCount,
+  detailConCount,
+}) => {
   const dispatch = useDispatch();
 
   const proConDelHandler = () => {
@@ -18,29 +25,72 @@ const ProCon = ({ pollTitle }) => {
     alert("구현 중인 기능입니다.");
   };
 
+  const proPerc = Math.round(
+    (detailProCount / (detailProCount + detailConCount)) * 100
+  );
+  const conPerc = Math.floor(
+    (detailConCount / (detailProCount + detailConCount)) * 100
+  );
+
   return (
     <ProConWrap>
       <ProConHeader>
-        <ProConTitle>{pollTitle}</ProConTitle>
-        <ProConIcon>
-          <ProConDelete>
-            <VscEdit onClick={proConEditHandler} />
-          </ProConDelete>
-          <ProConEdit>
-            <BsTrash onClick={proConDelHandler} />
-          </ProConEdit>
-        </ProConIcon>
+        {!pollTitle ? (
+          <>
+            <ProConTitle>{detailPollTitle}</ProConTitle>
+            <ProConTitle>{pollTitle}</ProConTitle>
+          </>
+        ) : (
+          <>
+            <ProConTitle>{pollTitle}</ProConTitle>
+            <ProConTitle>{detailPollTitle}</ProConTitle>
+          </>
+        )}
+
+        {pollTitle ? (
+          <ProConIcon>
+            <ProConDelete>
+              <VscEdit onClick={proConEditHandler} />
+            </ProConDelete>
+            <ProConEdit>
+              <BsTrash onClick={proConDelHandler} />
+            </ProConEdit>
+          </ProConIcon>
+        ) : null}
       </ProConHeader>
       <ProConBody>
-        <ProColumn>
-          <TfiThumbUp size={25} />
-          <ProBox>찬성 투표</ProBox>
-        </ProColumn>
+        {pollTitle ? (
+          <ProColumn>
+            <TfiThumbUp size={25} />
+            <ProBox>찬성 투표</ProBox>
+          </ProColumn>
+        ) : (
+          // onClick 걸고 state 관리
+          <DetailProColumn>
+            <TfiThumbUp size={25} />
+            <ProBox>찬성 투표</ProBox>
+          </DetailProColumn>
+        )}
 
-        <PollGraph>
-          <ProCount>50%</ProCount>
-          <ConCount>50%</ConCount>
-        </PollGraph>
+        {pollTitle ? (
+          <PollGraph>
+            <ProCount>50%</ProCount>
+            <ConCount>50%</ConCount>
+          </PollGraph>
+        ) : (
+          <PollGraph>
+            <ProCount>
+              {detailProCount === 0 && detailConCount === 0
+                ? "50%"
+                : `${proPerc}%`}
+            </ProCount>
+            <ConCount>
+              {detailProCount === 0 && detailConCount === 0
+                ? "50%"
+                : `${conPerc}%`}
+            </ConCount>
+          </PollGraph>
+        )}
 
         <ProColumn>
           <TfiThumbDown size={25} />
@@ -57,6 +107,19 @@ const ProColumn = styled.div`
   align-items: center;
   gap: 2px;
 `;
+
+const DetailProColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+
+  &:hover {
+    cursor: pointer;
+    color: #ef3f61;
+  }
+`;
+
 const ProBox = styled.div`
   /* border: 1px solid black; */
   color: #c4c4c4;

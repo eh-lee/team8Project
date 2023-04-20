@@ -1,5 +1,5 @@
 import React from "react";
-import google from "../../assets/icons/google-icon.png";
+import google from "../../assets/icons/socialLogin/google-icon.png";
 // import { GOOGLE_LOGIN_URL } from "../../api/login";
 import styled from "styled-components";
 
