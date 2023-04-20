@@ -14,7 +14,7 @@ const DetailPostCommentsList = ({postIdx}) => {
   const [newCommentTime, setNewCommentTime] = useState('');
   const [curNickname, setCurNickname] = useState('');
   // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
-  console.log("현재 내 닉네임은?", curNickname)
+  console.log("Comment컴프-현재 내 닉네임은?", curNickname)
 
   // 댓글 get요청
   useEffect( () => {
@@ -33,7 +33,7 @@ const DetailPostCommentsList = ({postIdx}) => {
     setNewComment(e.target.value);
   };
 
-  // 댓글 작성 요청
+  // 댓글 작성 핸들러
   const newCommentsubmitHandler = (e) => {
     e.preventDefault();
 
@@ -81,6 +81,7 @@ const DetailPostCommentsList = ({postIdx}) => {
           </DetailPostComments_InputBtn>
         </DetailPostComments_FooterInputCont>
       </DetailPostComments_Footer>
+
     </DetailPostComments_Wrap>
   );
 

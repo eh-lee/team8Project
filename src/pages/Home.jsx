@@ -11,9 +11,12 @@ import { cookies } from "../api/cookies";
 import HotPostCardSlider from "../components/post/HotPostCardSlider";
 import NewPostCardSlider from "../components/post/NewPostCardSlider";
 import { useNavigate } from "react-router-dom";
+import Chatting from "./chatting/Chatting";
 
 const Home = () => {
   const isLogin = cookies.get("access_token") ? true : false;
+
+  console.log("======* .env *=====", process.env)
 
   return (
     <MobileLayout>
@@ -34,16 +37,23 @@ const Home = () => {
         <PostCardSliders>
           {/* Hot 게시글 */}
           <HotPostCardSliderCont>
-            <PostCardSlider_Info title="HOT 훈수" />
+            <PostCardSlider_Info colored="HOT" title=" 훈수" />
             <HotPostCardSlider />
           </HotPostCardSliderCont>
 
+          {/* 실시간 훈수 배틀 */}
+          <NewChattingCont>
+            <PostCardSlider_Info title="실시간 훈수 배틀" more="더 보기" on="on" />
+            <Chatting />
+          </NewChattingCont>
+
           {/* 실시간 게시글 */}
           <NewPostCardSliderCont>
-            <PostCardSlider_Info title="실시간 훈수" more="더보기" />
+            <PostCardSlider_Info title="실시간 훈수" more="더 보기" />
             <NewPostCardSlider />
           </NewPostCardSliderCont>
         </PostCardSliders>
+
       </PageWithHeaderAndFooterWrapper>
       <Footer />
     </MobileLayout>
@@ -69,14 +79,21 @@ const HotPostCardSliderCont = styled.li`
 
 const NewPostCardSliderCont = styled.li``;
 
-const PostCardSlider_Info = ({ title, more }) => {
+const PostCardSlider_Info = ({ colored, title, more, on }) => {
   const nav = useNavigate();
   return (
     <PostCardSliderInfo>
-      <PostCardSliderTitle>{title}</PostCardSliderTitle>
+      <PostCardSliderTitle>
+        <span className="colored">{colored}</span>
+        {title}
+      </PostCardSliderTitle>
       <PostCardSliderMore
         onClick={() => {
-          nav("/totalboard");
+          if(on!=='on') {
+            nav("/totalboard")
+          } else {
+            nav("/battle")
+          }
         }}
       >
         {more}
@@ -98,11 +115,21 @@ const PostCardSliderInfo = styled.div`
 const PostCardSliderTitle = styled.h1`
   /* border: 1px solid red; */
   font-size: 1.5rem;
+  color: #2D2D2D;
+
+  /* colored에 스타일주기 */
+  span.colored {
+    color: #EF3F61;
+  }
 `;
 
 const PostCardSliderMore = styled.span`
   /* border: 1px solid blue; */
-  color: gray;
+  color: #EF3F61;
   font-size: 0.8rem;
   cursor: pointer;
 `;
+
+const NewChattingCont = styled.div`
+  
+`

@@ -8,12 +8,29 @@ import { FiMoreVertical } from 'react-icons/fi'
 import { MdArrowBackIosNew } from "react-icons/md"
 import DetailPostContents from '../../components/detail/DetailPostContents';
 import DetailPostCommentsList from '../../components/detail/DetailPostCommentsList';
+import ModalPortal from '../../components/modal/ModalPortal';
+import DetailMenuModal from '../../components/modal/DetailMenuModal';
 
 
 const DetailPost = () => {
     const nav = useNavigate();
 
     const {postIdx} = useParams();
+
+    // 메뉴바 모달 관리
+    const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
+    
+    const menuModalOpenHandler = () => {
+        setIsMenuModalOpen(true);
+        console.log('모달 연다');
+    };
+    console.log('모달 열렸나?', isMenuModalOpen);
+
+    const menuModalCloseHandler = () => {
+        setIsMenuModalOpen(false);
+        console.log('모달 닫혔다')
+    };
+
 
     // 상세 게시글을 담을 state
     const [detailPost, setDetailPost] = useState([]);
@@ -38,17 +55,32 @@ const DetailPost = () => {
                             <MdArrowBackIosNew size="1rem" />
                         </DetailPost_BackBtn>
                         <DetailPost_Category>{detailPost.maincategory}🌝{detailPost.category}</DetailPost_Category>
-                        <DetailPost_MenuBtn onClick={() => { alert("구현중인 기능입니다.")}} >
-                            <FiMoreVertical size="1rem" />
+                        <DetailPost_MenuBtn onClick={menuModalOpenHandler} >
+                            <FiMoreVertical />
                         </DetailPost_MenuBtn>
                     </DetailPost_HeaderCont>
                 </DetailPost_Header>
                 {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
 
+
                 {/* 상세페이지 내용 */}
                 <DetailPostContents />
                 {/* 댓글, 답글 */}
                 <DetailPostCommentsList postIdx={postIdx} />
+
+                {/* 메뉴모달 */}
+                <ModalPortal>
+                    <ModalCont>
+                        {
+                            isMenuModalOpen && (
+                                <DetailMenuModal
+                                    open={isMenuModalOpen}
+                                    close={menuModalCloseHandler}
+                                />
+                            )
+                        }
+                    </ModalCont>
+                </ModalPortal>
             </MobileLayout>
         </>
     )
@@ -114,9 +146,15 @@ const DetailPost_MenuBtn = styled.div`
     height: 24px;
     width: 24px;
     color: rgb(180, 180, 180);
+    font-size: 16px;
 
     &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
     }
 `;
+
+const ModalCont = styled.div`
+    width: 164px;
+    height: 80px;
+`
