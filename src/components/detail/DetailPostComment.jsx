@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components';
 import Like from '../like/Like';
 import DetailPostCommentReply from './DetailPostCommentReply';
@@ -6,9 +6,11 @@ import { instanceWithAuth } from '../../api/axios';
 import { BsTrash } from "react-icons/bs";
 import { cookies } from '../../api/cookies';
 import { FiEdit } from "react-icons/fi"
+import { useFormattingDate } from '../hook/useFormattingDate';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsComment } from '../../app/modules/detailSlice'
 
 const DetailPostComment = ({comment}) => {
-    console.log('이 Idx가 코멘트 Idx니라.',comment.commentIdx)
     // postIdx: UUID,
     // commentIdx: UUID,
     // nickname: STRING,
@@ -21,61 +23,56 @@ const DetailPostComment = ({comment}) => {
 
     // ======================= 댓글 =======================
     // 댓글 작성한 시간
-    // 참고: '\u00A0'는 공백을 표현하는 유니코드 문자
-    const CommentCreatedAt = `${comment.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${comment.createdAt?.split('T')[1].slice(0, 5)}`
+    const [createdDate, formattingDate] = useFormattingDate(comment.createdAt);
+
+    useEffect(()=> {
+        formattingDate();
+    },[]);
 
     // 댓글 삭제 요청
-    const deleteCommentHandler = () => {
-        instanceWithAuth.delete(`comment/${comment.postIdx}/${comment.commentIdx}`)
-            .then(response => {
-                console.log("댓글삭제",response.data);
-            })
-            .catch(error => {
-                console.error("댓글삭제", error.response.data.errorMessage);
-            });
+    const deleteCommentHandler = async () => {
+        try {
+            // const response = await instanceWithAuth.delete(`comment/${comment.postIdx}/${comment.commentIdx}`);
+            await instanceWithAuth.delete(`comment/${comment.postIdx}/${comment.commentIdx}`);
+        } catch(error) {
+            // console.error("댓글삭제", error.response.data.errorMessage);
+            console.error(error)
+        };
     };
 
+
     // 댓글 좋아요 관리 state
-    const [commentLikesCount, setCommentLikesCount] = useState(0);
+    const [commentLikesCount ,setCommentLikesCount] = useState(comment.likesCount);
     const [isLike, setIsLike] = useState(null);
 
-    // ====== S2 ======
-    // 좋아요 수
-    useEffect(() => {
-        const getCommentLike = async () => {
-            const { data } = await instanceWithAuth.get(`/commentLike/${comment.commentIdx}`);
-            setCommentLikesCount(data.likes.totalLikes);
-        };
-        getCommentLike();
-    }, []);
-    console.log("commentLikesCount", commentLikesCount)
-    // ====== S2 ======
-
-    // 좋아요 버튼
+    // 댓글 좋아요 버튼
     const clickCommentLike = () => {
-        console.log("댓글좋아요 눌렀다고!!!")
-        instanceWithAuth.put(`/commentLike/${comment.commentIdx}`);
-        // setIsLike((prev) => !prev)
-        // setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+        instanceWithAuth.put(`/commentLike/${comment.postIdx}/${comment.commentIdx}`);
+        setIsLike((prev) => !prev)
+        setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
     };
 
     // ======================= 답훈수 =======================
 
+    // isComment 불러오기
+    const { isComment } = useSelector ((state) => state.detail);
+    const dispatch = useDispatch();
+
     // 답훈수 관리 state
     const [replyList, setReplyList] = useState([]);
-
 
     // 답훈수 더 보기 관리 state
     const [replyisActive, setReplyIsActive] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
 
+    // const replyInputRef = useRef(null);
+
     // new답훈수 관리 state
     const [newReply, setNewReply] = useState();
     const [newReplyTime, setNewReplyTime] = useState('');
     const [curNickname, setCurNickname] = useState('');
-    const [curCommentIdx, setCurCommentIdx] = useState('');
+    const [curCommentIdx, setCurCommentIdx] = useState('초기값');
     // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
-    console.log("Comment컴프-현재 내 닉네임은?", curNickname)
 
     // 답훈수 get요청
     useEffect(() => {
@@ -86,13 +83,13 @@ const DetailPostComment = ({comment}) => {
         const nickname = cookies.get("nickname")
         getReplyList();
         setCurNickname(nickname);
-
     }, []);
 
-    // 답훈수 달기 핸들러
+    // 답훈수 달기 버튼 핸들러
     const replyCreateHandler = () => {
         setCurCommentIdx(comment.commentIdx);
-        console.log('이 Idx가 네 Idx냐?',comment.commentIdx)
+        dispatch(setIsComment(true));
+        // replyInputRef.current.focus();
     };
 
     // 답훈수 더 보기 핸들러
@@ -110,12 +107,13 @@ const DetailPostComment = ({comment}) => {
     const newReplysubmitHandler = (e) => {
         e.preventDefault();
 
-        // 답훈수 작성시간
+        //답훈수 작성시간
         const currentTime = new Date().toLocaleString('ko-KR', { hour12: false }).replace(/\. /g, '. 0');
         setNewReplyTime(currentTime);
 
         instanceWithAuth.post(`/reply/${comment.postIdx}/${curCommentIdx}`, { comment: newReply })
             .then(response => {
+                dispatch(setIsComment(!isComment))
                 console.log("댓글작성", response.data);
             })
             .catch(error => {
@@ -151,7 +149,7 @@ const DetailPostComment = ({comment}) => {
                         <Comment_Info_UserLevel> 레벨 </Comment_Info_UserLevel>
                     </Comment_Info_UserInfoCont>
                     <Comment_Info_UserInfo_CreatedAt>
-                        {CommentCreatedAt}
+                        {createdDate}
                         <CommentDelete onClick={deleteCommentHandler}>
                             <BsTrash />
                         </CommentDelete>
@@ -219,7 +217,8 @@ const DetailPostComment = ({comment}) => {
             {/* ========================== 답훈수 ========================== */}
 
             {/* ========================== 답글 입력 푸터 ========================== */}
-            <DetailPostComments_Footer>
+            { ( curCommentIdx !== '초기값' && isComment) ?
+                < DetailPostComments_Footer >
                 <DetailPostComments_FooterInputCont onSubmit={(e) => newReplysubmitHandler(e)}>
                     <DetailPostComments_Input
                         required
@@ -227,6 +226,7 @@ const DetailPostComment = ({comment}) => {
                         placeholder='답훈수를 남겨주세요.'
                         value={newReply}
                         onChange={(e) => newReplyHandler(e)}
+                        autoFocus
                     // maxLength=
                     />
                     <DetailPostComments_InputBtn
@@ -236,7 +236,9 @@ const DetailPostComment = ({comment}) => {
                         등록
                     </DetailPostComments_InputBtn>
                 </DetailPostComments_FooterInputCont>
-            </DetailPostComments_Footer>
+                    </DetailPostComments_Footer >
+                : null
+            }
 
         </>
     );

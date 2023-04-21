@@ -3,9 +3,13 @@ import styled, { css } from 'styled-components';
 import DetailPostComment from './DetailPostComment';
 import { instanceWithAuth } from '../../api/axios';
 import { cookies } from '../../api/cookies';
+import { useSelector } from 'react-redux';
 
 const DetailPostCommentsList = ({postIdx}) => {
   
+  // isComment 불러오기
+  const { isComment } = useSelector ((state) => state.detail);
+
   // 훈수 리스트 관리 state
   const [commentList, setCommentList] = useState(null);
 
@@ -14,7 +18,6 @@ const DetailPostCommentsList = ({postIdx}) => {
   const [newCommentTime, setNewCommentTime] = useState('');
   const [curNickname, setCurNickname] = useState('');
   // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
-  console.log("Comment컴프-현재 내 닉네임은?", curNickname)
 
   // 댓글 get요청
   useEffect( () => {
@@ -33,6 +36,7 @@ const DetailPostCommentsList = ({postIdx}) => {
     setNewComment(e.target.value);
   };
 
+
   // 댓글 작성 핸들러
   const newCommentsubmitHandler = (e) => {
     e.preventDefault();
@@ -41,9 +45,23 @@ const DetailPostCommentsList = ({postIdx}) => {
     const currentTime = new Date().toLocaleString('ko-KR', { hour12: false }).replace(/\. /g, '. 0');
     setNewCommentTime(currentTime);
 
+    // random한 key값 생성
+    // const key = Math.random().toString(36).substring(2, 15);
+
+    // 새로운 댓글 객체 생성
+    const newCommentDate = {
+      comment: newComment,
+      commentIdx: Math.random().toString(36).substring(2, 15),
+      createdAt: currentTime,
+      nickname: cookies.get('nickname'),
+      postIdx: postIdx,
+    };
+
     instanceWithAuth.post(`/comment/${postIdx}`, { comment: newComment })
       .then(response => {
         console.log("댓글작성",response.data);
+        setCommentList((prev)=> [...prev, newCommentDate]);
+        console.log('새댓글 객체 만든거 어케 생겼나', newCommentDate);
       })
       .catch(error => {
         console.error("댓글작성",error);
@@ -62,25 +80,27 @@ const DetailPostCommentsList = ({postIdx}) => {
         )
       }
 
-      {/* ========================== 댓글, 답글 입력 푸터 ========================== */}
-      <DetailPostComments_Footer>
-        <DetailPostComments_FooterInputCont onSubmit={(e)=>newCommentsubmitHandler(e)}>
-          <DetailPostComments_Input
-            required
-            type='text'
-            placeholder='훈수를 남겨주세요.'
-            value={newComment}
-            onChange={(e)=>newCommentHandler(e)}
-          // maxLength=
-          />
-          <DetailPostComments_InputBtn
-            type='submit'
-            onClick={(e)=>newCommentsubmitHandler(e)}
-          >
-            등록
-          </DetailPostComments_InputBtn>
-        </DetailPostComments_FooterInputCont>
-      </DetailPostComments_Footer>
+      {/* ========================== 댓글 입력 푸터 ========================== */}
+      {!isComment &&
+        <DetailPostComments_Footer>
+          <DetailPostComments_FooterInputCont onSubmit={(e) => newCommentsubmitHandler(e)}>
+            <DetailPostComments_Input
+              required
+              type='text'
+              placeholder='훈수를 남겨주세요.'
+              value={newComment}
+              onChange={(e) => newCommentHandler(e)}
+            // maxLength=
+            />
+            <DetailPostComments_InputBtn
+              type='submit'
+              onClick={(e) => newCommentsubmitHandler(e)}
+            >
+              등록
+            </DetailPostComments_InputBtn>
+          </DetailPostComments_FooterInputCont>
+        </DetailPostComments_Footer>
+      }
 
     </DetailPostComments_Wrap>
   );
