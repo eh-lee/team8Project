@@ -1,19 +1,23 @@
-import React from 'react'
-import chattingyet from '../../assets/cattingyet.png'
-import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import chattingyet from "../../assets/etc/cattingyet.png";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Chatting = () => {
-    const nav = useNavigate();
+  const nav = useNavigate();
   return (
-    <ChattingYet onClick={()=> {nav('/battle')}} >
-        <img src={chattingyet} />
+    <ChattingYet
+      onClick={() => {
+        nav("/battle");
+      }}
+    >
+      <img src={chattingyet} />
     </ChattingYet>
-  )
-}
+  );
+};
 
-export default Chatting
+export default Chatting;
 
 const ChattingYet = styled.div`
-    margin-top: 16px;
-`
+  margin-top: 16px;
+`;

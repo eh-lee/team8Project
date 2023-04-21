@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { BiBell } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
 import { BiUser } from "react-icons/bi";
-import logo from "../../assets/icons/main-logo-icon-2.png";
+import logo from "../../assets/icons/logo/main-logo-icon-2.png";
 function HeaderNav() {
   const navi = useNavigate();
 
