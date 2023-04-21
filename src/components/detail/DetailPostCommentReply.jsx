@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components';
-import Like from '../like/Like';
+import { BsTrash } from "react-icons/bs";
+import { instanceWithAuth } from '../../api/axios';
 
 const DetailPostCommentReply = ({reply}) => {
     // postIdx
@@ -9,6 +10,21 @@ const DetailPostCommentReply = ({reply}) => {
     // createdAt,
     // nickname,
     // comment,
+
+    // 답훈수 작성한 시간
+    // 참고: '\u00A0'는 공백을 표현하는 유니코드 문자
+    const ReplycreatedAt = `${reply.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${reply.createdAt?.split('T')[1].slice(0, 5)}`
+
+    // 답글 삭제 요청
+    const deleteReplytHandler = () => {
+        instanceWithAuth.delete(`reply/${reply.postIdx}/${reply.commentIdx}/${reply.replyIdx}`)
+            .then(response => {
+                console.log("답글삭제", response.data);
+            })
+            .catch(error => {
+                console.error("답글삭제", error.response.data.errorMessage);
+            });
+    };
 
     return (
         <>
@@ -22,7 +38,12 @@ const DetailPostCommentReply = ({reply}) => {
                         <CommentReply_Info_Nickname> {reply.nickname} </CommentReply_Info_Nickname>
                         <CommentReply_Info_UserLevel> 레벨 </CommentReply_Info_UserLevel>
                     </CommentReply_Info_UserInfoCont>
-                    <CommentReply_Info_UserInfo_CreatedAt> {reply.createdAt}작성시간 </CommentReply_Info_UserInfo_CreatedAt>
+                    <CommentReply_Info_UserInfo_CreatedAt> 
+                        {ReplycreatedAt} 
+                        <ReplyDelete onClick={deleteReplytHandler}>
+                            <BsTrash />
+                        </ReplyDelete>
+                    </CommentReply_Info_UserInfo_CreatedAt>
                 </CommentReply_Info_UserInfoWrap>
             </CommentReply_InfoWrap>
 
@@ -37,10 +58,10 @@ const DetailPostCommentReply = ({reply}) => {
 export default DetailPostCommentReply;
 
 
-// 코멘트 정보
+// 댓글 정보
 const CommentReply_InfoWrap = styled.ul`
     /* border: 1px solid green; */
-    height: 40px;
+    height: 34px;
     margin: 0 7.5% 0 7.5%;
     display: flex;
     flex-direction: row;
@@ -95,12 +116,25 @@ const CommentReply_Info_UserInfo_CreatedAt = styled.li`
     /* border: 1px solid black; */
     font-size: 10px;
     color: #8A8A8A;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `;
 
-// 댓글
+const ReplyDelete = styled.div`
+    /* border: 1px solid violet; */
+    display: flex;
+    font-size: 10px;
+    cursor: pointer;
+    margin-left: 3px;
+`;
+
+// 답글
 const CommentReplyWrap = styled.div`
     /* border: 1px solid purple; */
     margin-left: 7.5%;
+    margin-bottom: 10px;
     display: flex;
     align-items: flex-end;
     gap: 20px;

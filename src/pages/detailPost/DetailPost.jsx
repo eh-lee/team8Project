@@ -1,109 +1,116 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { instance } from "../../api/axios";
-import MobileLayout from "../../layout/MobileLayout";
-import Footer from "../../components/footer/Footer";
-import { FiMoreVertical } from "react-icons/fi";
-import { MdArrowBackIosNew } from "react-icons/md";
-import DetailPostContents from "../../components/detail/DetailPostContents";
-import DetailPostCommentsList from "../../components/detail/DetailPostCommentsList";
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import styled, { css } from 'styled-components';
+import { instance } from '../../api/axios';
+import MobileLayout from '../../layout/MobileLayout';
+import Footer from '../../components/footer/Footer';
+import { FiMoreVertical } from 'react-icons/fi'
+import { MdArrowBackIosNew } from "react-icons/md"
+import DetailPostContents from '../../components/detail/DetailPostContents';
+import DetailPostCommentsList from '../../components/detail/DetailPostCommentsList';
+import ModalPortal from '../../components/modal/ModalPortal';
+import DetailMenuModal from '../../components/modal/DetailMenuModal';
 import ProCon from "../../components/poll/ProCon";
 
+
 const DetailPost = () => {
-  const nav = useNavigate();
+    const nav = useNavigate();
 
-  const { postIdx } = useParams();
+    const {postIdx} = useParams();
 
-  // 상세 게시글을 담을 state
-  const [detailPost, setDetailPost] = useState([]);
-
-  useEffect(() => {
-    const getDetailPost = async () => {
-      const { data } = await instance.get(
-        `/postCards/post/category/${postIdx}`
-      );
-      setDetailPost(data);
+    // 메뉴바 모달 관리
+    const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
+    
+    const menuModalOpenHandler = () => {
+        setIsMenuModalOpen(true);
+        console.log('모달 연다');
     };
-    getDetailPost();
-  }, []);
+    console.log('모달 열렸나?', isMenuModalOpen);
 
-  const [detailPoll, setDetailPoll] = useState({});
-
-  useEffect(() => {
-    const getDetailPoll = async () => {
-      const { data } = await instance.get(
-        `/postCards/post/contents/${postIdx}`
-      );
-      setDetailPoll(data.contents);
+    const menuModalCloseHandler = () => {
+        setIsMenuModalOpen(false);
+        console.log('모달 닫혔다')
     };
-    getDetailPoll();
-  }, [postIdx]);
 
-  console.log("detailPoll=========>", detailPoll);
-  console.log("pollType=========>", detailPoll.pollTitle);
-  console.log("pollTitle=========>", detailPoll.pollType);
-  console.log("tag=========>", detailPoll.tag);
-  console.log("tag=========>", detailPoll.proCount);
 
-  return (
-    <>
-      {/* Mobile Layout setting */}
-      <MobileLayout>
-        {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
-        {/* 상세 게시글 페이지 헤더 */}
-        <DetailPost_Header>
-          <DetailPost_HeaderCont>
-            <DetailPost_BackBtn
-              onClick={() => {
-                nav(-1);
-              }}
-            >
-              <MdArrowBackIosNew size="1rem" />
-            </DetailPost_BackBtn>
-            <DetailPost_Category>
-              {detailPost.maincategory}🌝{detailPost.category}
-            </DetailPost_Category>
-            <DetailPost_MenuBtn
-              onClick={() => {
-                nav(-1);
-              }}
-            >
-              <FiMoreVertical size="1rem" />
-            </DetailPost_MenuBtn>
-          </DetailPost_HeaderCont>
-        </DetailPost_Header>
-        {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
+    // 상세 게시글을 담을 state
+    const [detailPost, setDetailPost] = useState([]);
 
-        {/* 상세페이지 내용 */}
-        <DetailPostContents />
+    useEffect(() => {
+        const getDetailPost = async () => {
+            const { data } = await instance.get(`/postCards/post/category/${postIdx}`)
+            setDetailPost(data);
+        };
+        getDetailPost();
+    }, []);
+    
+    // 상세 투표
+    const [detailPoll, setDetailPoll] = useState({});
 
-        <DetailPoll>
-          {detailPoll.pollType === "proCon" ? (
-            <ProCon
-              detailPollTitle={detailPoll.pollTitle}
-              detailProCount={detailPoll.proCount}
-              detailConCount={detailPoll.conCount}
-            />
-          ) : null}
-          {/* {pollType === select ? <> </> : null} */}
-        </DetailPoll>
+    useEffect(() => {
+      const getDetailPoll = async () => {
+        const { data } = await instance.get(
+          `/postCards/post/contents/${postIdx}`
+        );
+        setDetailPoll(data.contents);
+      };
+      getDetailPoll();
+    }, [postIdx]);
 
-        {/* <DetailPoll postIdx={postIdx}></DetailPoll> */}
-        {/* <DetailPostEtc postIdx={postIdx}></DetailPostEtc> */}
-        {/* <ProCon postIdx={postIdx}></ProCon> */}
-        {/* ======================= pseudo ======================= */}
-        {/* <DetailPoll>에서 postIdx로 instance.post /api/postCards/post/contents/{postIdx} 해서
-{ pollType === procon?  <></> : null }
-{ pollType === select?  <></> : null }
-*/}
-        {/* ======================= pseudo ======================= */}
+    return (
+        <>
+            {/* Mobile Layout setting */}
+            <MobileLayout>
+                {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
+                {/* 상세 게시글 페이지 헤더 */}
+                <DetailPost_Header>
+                    <DetailPost_HeaderCont>
+                        <DetailPost_BackBtn onClick={() => { nav(-1) }}>
+                            <MdArrowBackIosNew size="1rem" />
+                        </DetailPost_BackBtn>
+                        <DetailPost_Category>{detailPost.maincategory}🌝{detailPost.category}</DetailPost_Category>
+                        <DetailPost_MenuBtn onClick={menuModalOpenHandler} >
+                            <FiMoreVertical />
+                        </DetailPost_MenuBtn>
+                    </DetailPost_HeaderCont>
+                </DetailPost_Header>
+                {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
 
-        {/* 댓글, 답글 */}
-        <DetailPostCommentsList postIdx={postIdx} />
-      </MobileLayout>
-    </>
-  );
+
+                {/* 상세페이지 내용 */}
+                <DetailPostContents />
+                
+                {/* 상세페이지 투표 */}
+                        <DetailPoll>
+                          {detailPoll.pollType === "proCon" ? (
+                            <ProCon
+                              detailPollTitle={detailPoll.pollTitle}
+                              detailProCount={detailPoll.proCount}
+                              detailConCount={detailPoll.conCount}
+                            />
+                          ) : null}
+                          {/* {pollType === select ? <> </> : null} */}
+                        </DetailPoll>                
+                
+                {/* 댓글, 답글 */}
+                <DetailPostCommentsList postIdx={postIdx} />
+
+                {/* 메뉴모달 */}
+                <ModalPortal>
+                    <ModalCont>
+                        {
+                            isMenuModalOpen && (
+                                <DetailMenuModal
+                                    open={isMenuModalOpen}
+                                    close={menuModalCloseHandler}
+                                />
+                            )
+                        }
+                    </ModalCont>
+                </ModalPortal>
+            </MobileLayout>
+        </>
+    )
 };
 
 export default DetailPost;
@@ -163,16 +170,22 @@ const DetailPost_Category = styled.div`
 `;
 
 const DetailPost_MenuBtn = styled.div`
-  /* border: 1px solid burlywood; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  width: 24px;
-  color: rgb(180, 180, 180);
+    /* border: 1px solid burlywood; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    color: rgb(180, 180, 180);
+    font-size: 16px;
 
-  &:hover {
+    &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
   }
 `;
+
+const ModalCont = styled.div`
+    width: 164px;
+    height: 80px;
+`
