@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components';
 import { BsTrash } from "react-icons/bs";
 import { instanceWithAuth } from '../../api/axios';
 import { useFormattingDate } from '../hook/useFormattingDate';
 
 const DetailPostCommentReply = ({reply}) => {
+    // API명세
     // postIdx
     // commentIdx,
     // replyIdx,
     // createdAt,
     // nickname,
     // comment,
+
+    // 답훈수 삭제 관리 
+    const [isDelete, setIsDelete] = useState(false);
 
     // 답훈수 작성한 시간
     const [createdDate, formattingDate] = useFormattingDate(reply.createdAt)
@@ -22,14 +26,14 @@ const DetailPostCommentReply = ({reply}) => {
     // 답글 삭제 요청
     const deleteReplytHandler = async () => {
         try {
-            // const response = await instanceWithAuth.delete(`reply/${reply.postIdx}/${reply.commentIdx}/${reply.replyIdx}`);
             await instanceWithAuth.delete(`reply/${reply.postIdx}/${reply.commentIdx}/${reply.replyIdx}`);
+            setIsDelete(true);
         } catch(error) {
             console.error(error)
         };
     };
 
-    return (
+    return !isDelete && (
         <>
             {/* 유저정보(프로필사진, 닉네임, 레벨, 작성시간 */}
             <CommentReply_InfoWrap>

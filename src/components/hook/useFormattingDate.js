@@ -22,7 +22,6 @@ export function useFormattingDate (createdAt) {
         setCreatedDate(formattedDate);
     };
 
-
     return [createdDate, formattingDate];
 }
 

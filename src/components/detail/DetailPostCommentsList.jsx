@@ -14,22 +14,20 @@ const DetailPostCommentsList = ({postIdx}) => {
   const [commentList, setCommentList] = useState(null);
 
   // new훈수 관리 state
-  const [newComment, setNewComment] = useState();
-  const [newCommentTime, setNewCommentTime] = useState("");
-  const [curNickname, setCurNickname] = useState("");
   // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
+  const [curNickname, setCurNickname] = useState("");
+  const [newComment, setNewComment] = useState();
 
   // 댓글 get요청
   useEffect(() => {
     const getCommentList = async () => {
       const { data } = await instanceWithAuth.get(`/comment/${postIdx}`);
-      setCommentList(data.comments);
+      setCommentList([...data.comments].reverse());
     };
     const nickname = cookies.get("nickname");
     getCommentList();
     setCurNickname(nickname);
   }, []);
-  // console.log("commentList", commentList);
 
   // 새로운 댓글 핸들러
   const newCommentHandler = (e) => {
@@ -42,28 +40,22 @@ const DetailPostCommentsList = ({postIdx}) => {
     e.preventDefault();
 
     // 댓글 작성시간
-    const currentTime = new Date()
-      .toLocaleString("ko-KR", { hour12: false })
-      .replace(/\. /g, ". 0");
-    setNewCommentTime(currentTime);
-
-    // random한 key값 생성
-    // const key = Math.random().toString(36).substring(2, 15);
+    const curTime = new Date()
 
     // 새로운 댓글 객체 생성
-    const newCommentDate = {
+    const newCommentData = {
       comment: newComment,
+      // 임의로 달아줄 random한 key값 생성
       commentIdx: Math.random().toString(36).substring(2, 15),
-      createdAt: currentTime,
-      nickname: cookies.get('nickname'),
+      createdAt: curTime,
+      nickname: curNickname,
       postIdx: postIdx,
     };
 
     instanceWithAuth.post(`/comment/${postIdx}`, { comment: newComment })
       .then(response => {
-        console.log("댓글작성",response.data);
-        setCommentList((prev)=> [...prev, newCommentDate]);
-        console.log('새댓글 객체 만든거 어케 생겼나', newCommentDate);
+        setCommentList((prev)=> [...prev, newCommentData]);
+        setNewComment('');
       })
       .catch((error) => {
         console.error("댓글작성", error);
@@ -84,10 +76,10 @@ const DetailPostCommentsList = ({postIdx}) => {
             <DetailPostComments_Input
               required
               type='text'
-              placeholder='훈수를 남겨주세요.'
+              placeholder='훈수를 남겨주세요.(100자 이내)'
               value={newComment}
               onChange={(e) => newCommentHandler(e)}
-            // maxLength=
+              maxLength='100'
             />
             <DetailPostComments_InputBtn
               type='submit'

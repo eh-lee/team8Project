@@ -21,28 +21,27 @@ const DetailPost = () => {
 
   const menuModalOpenHandler = () => {
     setIsMenuModalOpen(true);
-    // console.log("모달 연다");
   };
-  // console.log("모달 열렸나?", isMenuModalOpen);
 
   const menuModalCloseHandler = () => {
     setIsMenuModalOpen(false);
-    // console.log("모달 닫혔다");
   };
 
-  // 상세 게시글을 담을 state
-  const [detailPost, setDetailPost] = useState([]);
+  // 상세 게시글 카테고리 관리
+  const [detailPostCat, setDetailPostCat] = useState([]);
 
-  // 명세 수정 반영 부분
+  // 상세 게시글 카테고리 get 
   useEffect(() => {
     const getDetailPost = async () => {
       const { data } = await instance.get(
         `/postCards/post/category/${postIdx}`
       );
-      setDetailPost(data);
+      setDetailPostCat(data);
+      console.log('진짜 데이터를 좀 보자' ,data)
     };
     getDetailPost();
   }, []);
+
 
   // 상세 투표
   const [detailPoll, setDetailPoll] = useState({});
@@ -56,8 +55,6 @@ const DetailPost = () => {
     };
     getDetailPoll();
   }, [postIdx]);
-
-  // console.log("Detail에서 PostIdx=========>", postIdx);
 
   console.log("명세 반영 잘 됐니?=========>", detailPoll);
   console.log("처음에 proInputValue?=========>", detailPoll.proInputValue);
@@ -79,7 +76,7 @@ const DetailPost = () => {
               <MdArrowBackIosNew size="1rem" />
             </DetailPost_BackBtn>
             <DetailPost_Category>
-              {detailPost.maincategory}🌝{detailPost.category}
+              {detailPostCat.maincategory}🌝{detailPostCat.category}
             </DetailPost_Category>
             <DetailPost_MenuBtn onClick={menuModalOpenHandler}>
               <FiMoreVertical />
@@ -96,6 +93,7 @@ const DetailPost = () => {
                             open={isMenuModalOpen}
                             close={menuModalCloseHandler}
                             postIdx={postIdx}
+                            detailPostCat={detailPostCat}
                         />
                     )
                 }

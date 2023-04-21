@@ -5,110 +5,105 @@ import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
-import { useFormattingDate } from "../hook/useFormattingDate";
 
 const DetailPostContents = () => {
-    const {postIdx} = useParams();
+  const { postIdx } = useParams();
 
-    // 상세 게시글을 담을 state
-    const [detailPost, setDetailPost] = useState([]);
-    
-    // 게시글 작성한 시간
-    const [createdDate, formattingDate] = useFormattingDate(detailPost.createdAt);
-    
-    // 좋아요 관리 state
-    const [postLikesCount, setPostLikesCount] = useState(null);
-    const [isLike, setIsLike] = useState(null);
-    
-    // 상세 게시글 정보 불러오기
-    useEffect(() => {
-        const getDetailPost = async () => {
-          try {
-            const {data} = await instanceWithAuth.get(`/postCards/post/${postIdx}`)
-            setDetailPost(data.post);
-            formattingDate();
-            setPostLikesCount(data.post.likesCount);
-            setIsLike(data.post.IsLike);
-          } catch(error) {
-            console.error('상세게시글get error', error)
-          }
-        };
-        getDetailPost();
-        // instanceWithAuth.get(`/postCards/post/${postIdx}`)
-        // .then((response)=>{
-        //   console.log('게시글조회중', response.data.post)
-        //   setDetailPost(response.data.post);
-        //   formattingDate();
-        //   setPostLikesCount(response.data.post.likesCount);
-        //   setIsLike(response.data.post.IsLike);}
-        // );
-    }, []);
-    
-    // 좋아요 버튼
-    const clickPostLike = () => {
-        // console.log("좋아요 눌렀다고!!!")
-        instanceWithAuth.put(`/postlike/post/${postIdx}`)
-        setIsLike((prev)=>!prev)
-        setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+  // 상세 게시글을 담을 state
+  const [detailPost, setDetailPost] = useState([]);
+
+  // 게시글 작성한 시간
+  const [createdDate, setCreatedDate] = useState("");
+
+  // 게시글 좋아요 관리 state
+  const [postLikesCount, setPostLikesCount] = useState(null);
+  const [isLike, setIsLike] = useState(null);
+
+  // 상세 게시글 정보 불러오기
+  useEffect(() => {
+    const getDetailPost = async () => {
+      try {
+        const { data } = await instanceWithAuth.get(`/postCards/post/${postIdx}`)
+        setDetailPost(data.post);
+
+        const formattingTime = data.post.createdAt.replace(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/, '$1.$2.$3 $4:$5')
+        setCreatedDate(formattingTime);
+        setPostLikesCount(data.post.likesCount);
+        setIsLike(data.post.IsLike);
+      } catch (error) {
+        console.error('상세게시글get error', error)
+      }
     };
+    getDetailPost();
+  }, []);
 
-    return (
-        <>
-            {/* 상세 게시글 정보 */}
-            <DetailPost_InfoWrap>
-                {/* 차후에 User Lv image 들어갈 예정 */}
-                <DetailPost_UserInfo_LvImg>
-                    {/* <img src="img/testImg1.jpg"/> */}
-                </DetailPost_UserInfo_LvImg>
-                <DetailPost_InfoCont>
-                    <DetailPost_UserInfoCont>
-                        <DetailPost_UserInfo_Nickname>{detailPost.nickname}</DetailPost_UserInfo_Nickname>
-                        <DetailPost_UserInfo_UserLevel>{detailPost.userLevel}레벨</DetailPost_UserInfo_UserLevel>
-                    </DetailPost_UserInfoCont>
-                    <DetailPost_UserInfo_CreatedAt>{createdDate}</DetailPost_UserInfo_CreatedAt>
-                </DetailPost_InfoCont>
-            </DetailPost_InfoWrap>
-            {/* 게시글 내용 */}
-            <DetailPost_ContentWrap>
-                <DetailPost_Content_Title>{detailPost.title}</DetailPost_Content_Title>
-                <DetailPost_Content_Desc>{detailPost.desc}</DetailPost_Content_Desc>
-                {/* 게시글 정보 */}
-                <DetailPost_Content_Info>
-                    {/* 좋아요 버튼, 개수 */}
-                    <DetailPost_Content>
-                        <DetailPost_Content_Icon
-                            onClick={()=>clickPostLike()}
-                            pointerOn="on"
-                        >
-                            <Like isLike={isLike} />
+  // 게시글 좋아요 버튼
+  const clickPostLike = () => {
+    // console.log("좋아요 눌렀다고!!!")
+    instanceWithAuth.put(`/postlike/post/${postIdx}`)
+    setIsLike((prev) => !prev)
+    setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+  };
 
-                        </DetailPost_Content_Icon>
-                        <DetailPost_Content_Count>
-                            {postLikesCount}
-                        </DetailPost_Content_Count>
-                    </DetailPost_Content>
-                    {/* 조회수 */}
-                    <DetailPost_Content>
-                        <DetailPost_Content_Icon>
-                            <AiOutlineEye />
-                        </DetailPost_Content_Icon>
-                        <DetailPost_Content_Count>
-                            {detailPost.postViewCount}
-                        </DetailPost_Content_Count>
-                    </DetailPost_Content>
-                    {/* 댓글 버튼, 개수 */}
-                    <DetailPost_Content>
-                        <DetailPost_Content_Icon>
-                            <BiCommentDetail />
-                        </DetailPost_Content_Icon>
-                        <DetailPost_Content_Count>
-                            {detailPost.commentCount}
-                        </DetailPost_Content_Count>
-                    </DetailPost_Content>
-                </DetailPost_Content_Info>
-            </DetailPost_ContentWrap>
-        </>
-    )
+  return (
+    <>
+      {/* 상세 게시글 정보 */}
+      <DetailPost_InfoWrap>
+        {/* 차후에 User Lv image 들어갈 예정 */}
+        <DetailPost_UserInfo_LvImg>
+          {/* <img src="img/testImg1.jpg"/> */}
+        </DetailPost_UserInfo_LvImg>
+        <DetailPost_InfoCont>
+          <DetailPost_UserInfoCont>
+            <DetailPost_UserInfo_Nickname>{detailPost.nickname}</DetailPost_UserInfo_Nickname>
+            <DetailPost_UserInfo_UserLevel>{detailPost.userLevel}레벨</DetailPost_UserInfo_UserLevel>
+          </DetailPost_UserInfoCont>
+          <DetailPost_UserInfo_CreatedAt>
+            {createdDate}
+          </DetailPost_UserInfo_CreatedAt>
+        </DetailPost_InfoCont>
+      </DetailPost_InfoWrap>
+      {/* 게시글 내용 */}
+      <DetailPost_ContentWrap>
+        <DetailPost_Content_Title>{detailPost.title}</DetailPost_Content_Title>
+        <DetailPost_Content_Desc>{detailPost.desc}</DetailPost_Content_Desc>
+        {/* 게시글 정보 */}
+        <DetailPost_Content_Info>
+          {/* 좋아요 버튼, 개수 */}
+          <DetailPost_Content>
+            <DetailPost_Content_Icon
+              onClick={() => clickPostLike()}
+              pointerOn="on"
+            >
+              <Like isLike={isLike} />
+
+            </DetailPost_Content_Icon>
+            <DetailPost_Content_Count>
+              {postLikesCount}
+            </DetailPost_Content_Count>
+          </DetailPost_Content>
+          {/* 조회수 */}
+          <DetailPost_Content>
+            <DetailPost_Content_Icon>
+              <AiOutlineEye />
+            </DetailPost_Content_Icon>
+            <DetailPost_Content_Count>
+              {detailPost.postViewCount}
+            </DetailPost_Content_Count>
+          </DetailPost_Content>
+          {/* 댓글 버튼, 개수 */}
+          <DetailPost_Content>
+            <DetailPost_Content_Icon>
+              <BiCommentDetail />
+            </DetailPost_Content_Icon>
+            <DetailPost_Content_Count>
+              {detailPost.commentCount}
+            </DetailPost_Content_Count>
+          </DetailPost_Content>
+        </DetailPost_Content_Info>
+      </DetailPost_ContentWrap>
+    </>
+  )
 }
 
 export default DetailPostContents

@@ -17,8 +17,6 @@ const HotPostCard = ({
 }) => {
   const navigate = useNavigate();
 
-  console.log("likesCount=========================##", likesCount);
-
   return (
     <PostCardWrap
       mainCategory={mainCategory}
@@ -122,13 +120,13 @@ const PostCard_TitleBox = styled.ul`
 
 const PostCard_MainCategory = styled.li`
   /* border: 1px solid black; */
-  font-size: 0.6rem;
+  font-size: 10px;
   color: gray;
 `;
 
 const PostCard_Title = styled.li`
   /* border: 1px solid black; */
-  font-size: 1.5rem;
+  font-size: 18px;
 `;
 
 const PostCard_ContentBox = styled.div`
@@ -155,6 +153,7 @@ const PostCard_Content = styled.div`
   /* border: 1px solid black; */
   color: gray;
   display: flex;
+  font-size: 14px;
 `;
 
 const PostCard_InfoBox = styled.ul`
@@ -170,6 +169,7 @@ const PostCard_InfoBox = styled.ul`
   align-items: center;
   gap: 1.9rem;
   margin-left: 1rem;
+  font-size: 10px;
 `;
 
 const PostCard_Info_Content = styled.li`

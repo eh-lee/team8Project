@@ -5,7 +5,7 @@ import {BsTrash} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 import { instanceWithAuth } from '../../api/axios';
 
-const DetailMenuModal = ({open, close, postIdx }) => {
+const DetailMenuModal = ({open, close, postIdx, detailPostCat }) => {
   const nav = useNavigate();
 
   // =========== 모달 창 바깥을 클릭하면 닫히는 기능 ===========
@@ -18,10 +18,6 @@ const DetailMenuModal = ({open, close, postIdx }) => {
       }
     };
 
-    // if (open) {
-    //   document.addEventListener("mousedown", handleClickOutside);
-    // }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -31,7 +27,7 @@ const DetailMenuModal = ({open, close, postIdx }) => {
   const editButtonHandler = () => {
     close();
     // 수정페이지 만들어서 이동
-    nav('/totalboard');
+    nav('/board/:postIdx/edit', { state: {postIdx, detailPostCat} });
   }
 
   // 삭제하기 버튼 클릭
