@@ -59,9 +59,9 @@ const DetailPost = () => {
 
   // console.log("Detail에서 PostIdx=========>", postIdx);
 
-  console.log("명세 반영 잘 됐니?=========>", detailPoll);
-  console.log("처음에 proInputValue?=========>", detailPoll.proInputValue);
-  console.log("처음에 conInputValue?***********>", detailPoll.conInputValue);
+  // console.log("명세 반영 잘 됐니?=========>", detailPoll);
+  // console.log("처음에 proInputValue?=========>", detailPoll.proInputValue);
+  // console.log("처음에 conInputValue?***********>", detailPoll.conInputValue);
 
   return (
     <>
@@ -89,17 +89,15 @@ const DetailPost = () => {
         {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
         {/* 메뉴모달 */}
         <ModalPortal>
-            <ModalCont>
-                {
-                    isMenuModalOpen && (
-                        <DetailMenuModal
-                            open={isMenuModalOpen}
-                            close={menuModalCloseHandler}
-                            postIdx={postIdx}
-                        />
-                    )
-                }
-            </ModalCont>
+          <ModalCont>
+            {isMenuModalOpen && (
+              <DetailMenuModal
+                open={isMenuModalOpen}
+                close={menuModalCloseHandler}
+                postIdx={postIdx}
+              />
+            )}
+          </ModalCont>
         </ModalPortal>
         {/* 상세페이지 내용 */}
         <DetailPostContents />
@@ -114,6 +112,7 @@ const DetailPost = () => {
               detailPollTitle={detailPoll.pollTitle}
               detailProCount={detailPoll.proCount}
               detailConCount={detailPoll.conCount}
+              // 서버에서 카운트 반대로 주는 것 같음
             />
           ) : null}
           {/* {pollType === select ? <> </> : null} */}
