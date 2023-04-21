@@ -34,7 +34,7 @@ const BoardPostCard = ({
     const fetchPoll = async () => {
       try {
         const res = await instance.get(`/postCards/post/contents/${postIdx}`);
-        console.log("투표 등 정보========>", res.data.contents);
+        // console.log("투표 등 정보========>", res.data.contents);
         setPollData(res.data.contents);
         setPollType(res.data.contents.pollType);
       } catch (error) {
@@ -44,7 +44,7 @@ const BoardPostCard = ({
     fetchPoll();
   }, []);
 
-  console.log("data=====>", pollData);
+  // console.log("data=====>", pollData);
 
   // 여기서 pollType이 ""이 아니면 투표 이미지 뜨게.
 

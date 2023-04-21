@@ -1,13 +1,13 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 
-const Background = ({ Children }) => {
-  return <LayoutBox>{Children}</LayoutBox>;
-};
+// const Background = ({ Children }) => {
+//   return <LayoutBox>{Children}</LayoutBox>;
+// };
 
-export default Background;
+// export default Background;
 
-const LayoutBox = styled.div`
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-`;
+// const LayoutBox = styled.div`
+//   display: flex;
+//   margin: 0 auto;
+//   justify-content: center;
+// `;

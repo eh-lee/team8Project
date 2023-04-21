@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { pollCanc } from "../../app/modules/writeSlice";
 import { BsTrash } from "react-icons/bs";
@@ -6,6 +6,8 @@ import { VscEdit } from "react-icons/vsc";
 import { TfiThumbUp } from "react-icons/tfi";
 import { TfiThumbDown } from "react-icons/tfi";
 import styled from "styled-components";
+import { useEffect } from "react";
+import { instanceWithAuth } from "../../api/axios";
 
 const ProCon = ({
   pollTitle,
@@ -14,6 +16,9 @@ const ProCon = ({
   // detail.jsx
   detailProCount,
   detailConCount,
+  detailPostIdx,
+  parentProInputValue,
+  parentConInputValue,
 }) => {
   const dispatch = useDispatch();
 
@@ -25,12 +30,91 @@ const ProCon = ({
     alert("구현 중인 기능입니다.");
   };
 
+  // 명세 관련
+
+  // [V]
+  // ++ 명세 추가 필요 ++
+  //  ~ <포스트 투표하기 여부 받기> (GET)  (건선 님)
+  // (포스트에 투표하기의 반대급부// 포스트에 투표하기(PUT)로 proInputValue랑 conInputValue 날리는데, 유저가 투표를 눌렀는지 반대를 눌렀는지에 대해 보내주는 것도 해야 함)
+  // postIdx로 req.headers token 같이 get 보내면 해당 postIdx에 대한 user-> proInputValue, conInputValue 주세요
+
   const proPerc = Math.round(
     (detailProCount / (detailProCount + detailConCount)) * 100
   );
   const conPerc = Math.floor(
     (detailConCount / (detailProCount + detailConCount)) * 100
   );
+
+  console.log("proInputValue 잘 내려왔니?=======>", parentProInputValue);
+  console.log("conInputValue 잘 내려왔니?*********>", parentConInputValue);
+
+  const voteProHandler = () => {
+    if (conInputValue) {
+      return alert("찬성/반대는 동시에 선택될 수 없습니다.");
+    }
+
+    if (!conInputValue) {
+      setProInputValue(!proInputValue);
+      putProVote(proInputValue);
+    }
+  };
+  const voteConHandler = () => {
+    if (proInputValue) {
+      return alert("찬성/반대는 동시에 선택될 수 없습니다.");
+    }
+
+    if (!proInputValue) {
+      setConInputValue(!conInputValue);
+      putConVote();
+    }
+  };
+
+  // 수정 부분
+  const [proInputValue, setProInputValue] = useState(parentProInputValue);
+  // const [proInputValue, setProInputValue] = useState("");
+  const [conInputValue, setConInputValue] = useState(parentConInputValue);
+  // const [conInputValue, setConInputValue] = useState("");
+  // 수정 부분
+
+  console.log("찬성==========>", proInputValue);
+  console.log("반대=============>", conInputValue);
+  console.log("ProCon에서 detailPostIdx=========>", detailPostIdx);
+
+  //proInputValue state 변화된 거 body.res에 ...엌저구
+  const putProVote = async (proInputValue) => {
+    const data = await instanceWithAuth.put(`/prefer/post/${detailPostIdx}`, {
+      proInputValue,
+    });
+    console.log(data);
+  };
+
+  const putConVote = async () => {
+    const data = await instanceWithAuth.put(`/prefer/post/${detailPostIdx}`, {
+      conInputValue,
+      // setIsVoted(!isVoted); 요런 식으러..
+    });
+    console.log(data);
+  };
+
+  // setProCount((prev) => prev +1)
+
+  //
+
+  // putVote();
+
+  // useEffect(() => {
+  // }, [proInputValue, conInputValue]);
+
+  //이거는 날린 거고,
+  //받아오는 건 들어올 때 하는데, 그때 반영해야징
+
+  // 찬반을 클릭하면 변환해 준다.
+  // 단, 두 값이 동시에 true일 수는 없다. if proInputValie
+
+  // // const
+  // if (proInputValue) {
+
+  // }
 
   return (
     <ProConWrap>
@@ -60,13 +144,13 @@ const ProCon = ({
       </ProConHeader>
       <ProConBody>
         {pollTitle ? (
-          <ProColumn>
+          <ProConColumn>
             <TfiThumbUp size={25} />
             <ProBox>찬성 투표</ProBox>
-          </ProColumn>
+          </ProConColumn>
         ) : (
           // onClick 걸고 state 관리
-          <DetailProColumn>
+          <DetailProColumn onClick={voteProHandler} isVoted={proInputValue}>
             <TfiThumbUp size={25} />
             <ProBox>찬성 투표</ProBox>
           </DetailProColumn>
@@ -92,16 +176,25 @@ const ProCon = ({
           </PollGraph>
         )}
 
-        <ProColumn>
-          <TfiThumbDown size={25} />
-          <ConBox>반대 투표</ConBox>
-        </ProColumn>
+        {pollTitle ? (
+          <ProConColumn>
+            <TfiThumbDown size={25} />
+            <ConBox>반대 투표</ConBox>
+          </ProConColumn>
+        ) : (
+          // onClick 걸고 state 관리
+
+          <DetailConColumn onClick={voteConHandler} isVoted={conInputValue}>
+            <TfiThumbDown size={25} />
+            <ConBox>반대 투표</ConBox>
+          </DetailConColumn>
+        )}
       </ProConBody>
     </ProConWrap>
   );
 };
 
-const ProColumn = styled.div`
+const ProConColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,11 +209,25 @@ const DetailProColumn = styled.div`
 
   &:hover {
     cursor: pointer;
-    color: #ef3f61;
   }
+
+  color: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
 `;
 
-const ProBox = styled.div`
+const DetailConColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  color: ${(props) => (props.isVoted ? "#42c8b7" : "black")};
+`;
+
+const ProBox = styled.p`
   /* border: 1px solid black; */
   color: #c4c4c4;
 `;
@@ -134,8 +241,8 @@ const PollGraph = styled.div`
   /* border: 1px solid violet; */
   width: 67.5%;
   display: flex;
-  flex-direction: row;
-  /* flex-direction: row-reverse; */
+  /* flex-direction: row; */
+  flex-direction: row-reverse;
   height: 65%;
 `;
 
@@ -217,8 +324,6 @@ const ProConTitle = styled.div`
 
 const ProConWrap = styled.div`
   padding: 5% 7.5%;
-  border-top: 0.01rem solid rgba(0, 0, 0, 0.2);
-  border-bottom: 0.01rem solid rgba(0, 0, 0, 0.2);
 `;
 
 export default ProCon;

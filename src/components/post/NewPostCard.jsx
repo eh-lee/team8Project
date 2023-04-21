@@ -12,7 +12,9 @@ const NewPostCard = ({ postIdx, mainCategory, category, title, content }) => {
       }}
     >
       <PostCardJr_TitleBox>
-        <PostCardJr_MainCategory>{mainCategory}🌝{category}</PostCardJr_MainCategory>
+        <PostCardJr_MainCategory>
+          {mainCategory}🌝{category}
+        </PostCardJr_MainCategory>
         <PostCardJr_Title>{title}</PostCardJr_Title>
       </PostCardJr_TitleBox>
       <PostCardJr_ContentBox>
@@ -27,7 +29,7 @@ export default NewPostCard;
 const PostCardJrWrap = styled.div`
   /* border: 1px solid black; */
   border-radius: 10px;
-  background-color: #f4f4f5;
+  background-color: white;
 
   width: 150px;
   height: 100px;
@@ -36,6 +38,8 @@ const PostCardJrWrap = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 const PostCardJr_TitleBox = styled.ul`
@@ -73,7 +77,7 @@ const PostCardJr_ContentBox = styled.div`
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;

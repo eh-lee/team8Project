@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { AiOutlineHeart } from 'react-icons/ai'
-import { AiOutlineEye } from 'react-icons/ai'
-import { IoChatbubbleOutline } from 'react-icons/io5'
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
+import { IoChatbubbleOutline } from "react-icons/io5";
 
 const HotPostCard = ({
   mainCategory,
@@ -15,10 +15,9 @@ const HotPostCard = ({
   commentCount,
   postIdx,
 }) => {
-
   const navigate = useNavigate();
 
-  console.log("likesCount=========================##", likesCount)
+  console.log("likesCount=========================##", likesCount);
 
   return (
     <PostCardWrap
@@ -30,9 +29,26 @@ const HotPostCard = ({
       // className="no-hover"
     >
       <PostCard_TitleBox>
-        <PostCard_MainCategory>{mainCategory}🌝{category}</PostCard_MainCategory>
+        <PostCard_MainCategory>
+          {mainCategory}🌝{category}
+        </PostCard_MainCategory>
         <PostCard_Title>{title}</PostCard_Title>
+
+        {/* 투표 유무 이미지 표시 */}
+        {/* <PostCardRow>
+          <PostCardTitle>{title}</PostCardTitle>
+          <PostCardTitleIcon></PostCardTitleIcon>
+          {pollType !== "" ? (
+            <>
+              <PostCardTitleIcon>
+                <MdOutlineHowToVote />
+              </PostCardTitleIcon>
+            </>
+          ) : null}
+        </PostCardRow> */}
+        {/* 투표 유무 이미지 표시 */}
       </PostCard_TitleBox>
+
       <PostCard_ContentBox>
         <PostCard_Content>{content}</PostCard_Content>
       </PostCard_ContentBox>
@@ -40,7 +56,7 @@ const HotPostCard = ({
         {/* 좋아요수 */}
         <PostCard_Info_Content>
           <PostCard_Info_Content_Icon>
-            <AiOutlineHeart/>
+            <AiOutlineHeart />
           </PostCard_Info_Content_Icon>
           <PostCard_Info_Content_Count>
             {likesCount}
@@ -51,9 +67,7 @@ const HotPostCard = ({
           <PostCard_Info_Content_Icon>
             <AiOutlineEye />
           </PostCard_Info_Content_Icon>
-          <PostCard_Info_Content_Count>
-            {viewCount}
-          </PostCard_Info_Content_Count>
+          <PostCard_Info_Content_Count>{viewCount}</PostCard_Info_Content_Count>
         </PostCard_Info_Content>
         {/* 댓글 버튼, 개수 */}
         <PostCard_Info_Content>
@@ -74,7 +88,7 @@ export default HotPostCard;
 const PostCardWrap = styled.div`
   /* border: 1px solid black; */
   border-radius: 0.75rem;
-  background-color: #f4f4f5;
+  background-color: #ffffff;
 
   width: 280px;
   height: 100px;
@@ -84,6 +98,8 @@ const PostCardWrap = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 const PostCard_TitleBox = styled.ul`
@@ -143,7 +159,7 @@ const PostCard_Content = styled.div`
 
 const PostCard_InfoBox = styled.ul`
   /* border: 1px solid green; */
-  border-top: 1px solid gray;
+  border-top: 1px solid #e1e2e4;
 
   width: 15.5rem;
   height: 1.5rem;
@@ -156,29 +172,28 @@ const PostCard_InfoBox = styled.ul`
   margin-left: 1rem;
 `;
 
-
 const PostCard_Info_Content = styled.li`
-    /* border: 1px solid tomato; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    color: gray;
+  /* border: 1px solid tomato; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: gray;
 `;
 
 const PostCard_Info_Content_Icon = styled.div`
-    /* border: 1px solid tomato; */
-    font-size: 1rem;
+  /* border: 1px solid tomato; */
+  font-size: 1rem;
 
-    ${({ pointerOn }) => {
-        if (pointerOn === "on") {
-            return css`
-                cursor: pointer;
-            `;
-        }
-    }}
-    `;
+  ${({ pointerOn }) => {
+    if (pointerOn === "on") {
+      return css`
+        cursor: pointer;
+      `;
+    }
+  }}
+`;
 
 const PostCard_Info_Content_Count = styled.div`
-    /* border: 1px solid tomato; */
+  /* border: 1px solid tomato; */
 `;

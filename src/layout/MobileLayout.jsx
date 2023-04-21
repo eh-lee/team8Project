@@ -17,7 +17,7 @@ const MobileLayout = ({ title, children }) => {
 
   return (
     <StMobileLayout>
-      <StMobileHeader>{/* <Header title={title} /> */}</StMobileHeader>
+      {/* <StMobileHeader><Header title={title} /></StMobileHeader> */}
       {children}
     </StMobileLayout>
   );
@@ -50,15 +50,15 @@ const StMobileLayout = styled.div`
   }
 `;
 
-const StMobileHeader = styled.div`
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  @media screen and (min-width: 950px) {
-    width: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-`;
+// const StMobileHeader = styled.div`
+//   width: 100%;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   z-index: 100;
+//   @media screen and (min-width: 950px) {
+//     width: 500px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//   }
+// `;
