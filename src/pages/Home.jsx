@@ -16,7 +16,7 @@ import Chatting from "./chatting/Chatting";
 
 const Home = () => {
   const isLogin = cookies.get("access_token") ? true : false;
-  console.log("======* .env *=====", process.env)
+  console.log("======* .env *=====", process.env);
 
   return (
     <>
@@ -37,29 +37,33 @@ const Home = () => {
               <FalseGreetingLv />
             </>
           )}
-        <PostCardSliders>
-          {/* Hot 게시글 */}
-          <HotPostCardSliderCont>
-            <PostCardSlider_Info colored="HOT" title=" 훈수" />
-            <HotPostCardSlider />
-          </HotPostCardSliderCont>
+          <PostCardSliders>
+            {/* Hot 게시글 */}
+            <HotPostCardSliderCont>
+              <PostCardSlider_Info colored="HOT" title=" 훈수" />
+              <HotPostCardSlider />
+            </HotPostCardSliderCont>
 
-          {/* 실시간 훈수 배틀 */}
-          <NewChattingCont>
-            <PostCardSlider_Info title="실시간 훈수 배틀" more="더 보기" on="on" />
-            <Chatting />
-          </NewChattingCont>
+            {/* 실시간 훈수 배틀 */}
+            <NewChattingCont>
+              <PostCardSlider_Info
+                title="실시간 훈수 배틀"
+                more="더 보기"
+                on="on"
+              />
+              <Chatting />
+            </NewChattingCont>
 
-          {/* 실시간 게시글 */}
-          <NewPostCardSliderCont>
-            <PostCardSlider_Info title="실시간 훈수" more="더 보기" />
-            <NewPostCardSlider />
-          </NewPostCardSliderCont>
-        </PostCardSliders>
-
-      </PageWithHeaderAndFooterWrapper>
-      <Footer />
-    </MobileLayout>
+            {/* 실시간 게시글 */}
+            <NewPostCardSliderCont>
+              <PostCardSlider_Info title="실시간 훈수" more="더 보기" />
+              <NewPostCardSlider />
+            </NewPostCardSliderCont>
+          </PostCardSliders>
+        </PageWithHeaderAndFooterWrapper>
+        <Footer />
+      </MobileLayout>
+    </>
   );
 };
 
@@ -92,10 +96,10 @@ const PostCardSlider_Info = ({ colored, title, more, on }) => {
       </PostCardSliderTitle>
       <PostCardSliderMore
         onClick={() => {
-          if(on!=='on') {
-            nav("/totalboard")
+          if (on !== "on") {
+            nav("/totalboard");
           } else {
-            nav("/battle")
+            nav("/battle");
           }
         }}
       >
@@ -118,21 +122,19 @@ const PostCardSliderInfo = styled.div`
 const PostCardSliderTitle = styled.h1`
   /* border: 1px solid red; */
   font-size: 1.5rem;
-  color: #2D2D2D;
+  color: #2d2d2d;
 
   /* colored에 스타일주기 */
   span.colored {
-    color: #EF3F61;
+    color: #ef3f61;
   }
 `;
 
 const PostCardSliderMore = styled.span`
   /* border: 1px solid blue; */
-  color: #EF3F61;
+  color: #ef3f61;
   font-size: 0.8rem;
   cursor: pointer;
 `;
 
-const NewChattingCont = styled.div`
-  
-`
+const NewChattingCont = styled.div``;
