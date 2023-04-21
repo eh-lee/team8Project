@@ -9,6 +9,7 @@ import { cookies } from '../../api/cookies';
 import { useFormattingDate } from '../hook/useFormattingDate';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsComment } from '../../app/modules/detailSlice'
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
 
 const DetailPostComment = ({comment}) => {
     // API명세
@@ -142,7 +143,7 @@ const DetailPostComment = ({comment}) => {
             {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
             <Comment_InfoWrap>
                 <Comment_Info_ProfileCont>
-                    <Comment_Info_UserLvImg>  </Comment_Info_UserLvImg>
+                    <Comment_Info_UserLvImg src={level1} /> 
                     {
                         comment.proInputValue ?
                             <Comment_Info_UserSide>
@@ -278,7 +279,7 @@ const Comment_Info_ProfileCont = styled.li`
   width: 32px;
 `;
 
-const Comment_Info_UserLvImg = styled.div`
+const Comment_Info_UserLvImg = styled.img`
   /* border: 1px solid gray; */
   background-color: #e1e2e4;
   border-radius: 50%;
@@ -348,13 +349,6 @@ const CommentDelete = styled.li`
   cursor: pointer;
   margin-left: 4px;
 `;
-
-// const CommentEdit = styled.li`
-//   display: flex;
-//   font-size: 12px;
-//   cursor: pointer;
-//   margin-left: 4px;
-// `;
 
 // ========================= 댓글 =========================
 const CommentWrap = styled.div`

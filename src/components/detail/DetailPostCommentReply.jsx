@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { BsTrash } from "react-icons/bs";
 import { instanceWithAuth } from '../../api/axios';
 import { useFormattingDate } from '../hook/useFormattingDate';
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=18.png";
 
 const DetailPostCommentReply = ({reply}) => {
     // API명세
@@ -38,7 +39,7 @@ const DetailPostCommentReply = ({reply}) => {
             {/* 유저정보(프로필사진, 닉네임, 레벨, 작성시간 */}
             <CommentReply_InfoWrap>
                 <CommentReply_Info_ProfileCont>
-                    <CommentReply_Info_UserLvImg>  </CommentReply_Info_UserLvImg>
+                    <CommentReply_Info_UserLvImg src={level1} />
                 </CommentReply_Info_ProfileCont>
                 <CommentReply_Info_UserInfoWrap>
                     <CommentReply_Info_UserInfoCont>
@@ -82,7 +83,7 @@ const CommentReply_Info_ProfileCont = styled.li`
     margin-left: 14px;
 `;
 
-const CommentReply_Info_UserLvImg = styled.div`
+const CommentReply_Info_UserLvImg = styled.img`
     /* border: 1px solid gray; */
     background-color: #E1E2E4;
     border-radius: 50%;

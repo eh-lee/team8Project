@@ -5,6 +5,7 @@ import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
 
 const DetailPostContents = () => {
   const { postIdx } = useParams();
@@ -50,9 +51,7 @@ const DetailPostContents = () => {
       {/* 상세 게시글 정보 */}
       <DetailPost_InfoWrap>
         {/* 차후에 User Lv image 들어갈 예정 */}
-        <DetailPost_UserInfo_LvImg>
-          {/* <img src="img/testImg1.jpg"/> */}
-        </DetailPost_UserInfo_LvImg>
+        <DetailPost_UserInfo_LvImg src={level1} />
         <DetailPost_InfoCont>
           <DetailPost_UserInfoCont>
             <DetailPost_UserInfo_Nickname>{detailPost.nickname}</DetailPost_UserInfo_Nickname>
@@ -123,7 +122,7 @@ const DetailPost_InfoCont = styled.li`
   justify-content: center;
 `;
 
-const DetailPost_UserInfo_LvImg = styled.li`
+const DetailPost_UserInfo_LvImg = styled.img`
   /* border: 1px solid gray; */
   background-color: #e1e2e4;
   margin: 0 0.7rem 0 0;
