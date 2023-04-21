@@ -10,6 +10,7 @@ import DetailPostContents from '../../components/detail/DetailPostContents';
 import DetailPostCommentsList from '../../components/detail/DetailPostCommentsList';
 import ModalPortal from '../../components/modal/ModalPortal';
 import DetailMenuModal from '../../components/modal/DetailMenuModal';
+import ProCon from "../../components/poll/ProCon";
 
 
 const DetailPost = () => {
@@ -42,6 +43,19 @@ const DetailPost = () => {
         };
         getDetailPost();
     }, []);
+    
+    // 상세 투표
+    const [detailPoll, setDetailPoll] = useState({});
+
+    useEffect(() => {
+      const getDetailPoll = async () => {
+        const { data } = await instance.get(
+          `/postCards/post/contents/${postIdx}`
+        );
+        setDetailPoll(data.contents);
+      };
+      getDetailPoll();
+    }, [postIdx]);
 
     return (
         <>
@@ -65,6 +79,19 @@ const DetailPost = () => {
 
                 {/* 상세페이지 내용 */}
                 <DetailPostContents />
+                
+                {/* 상세페이지 투표 */}
+                        <DetailPoll>
+                          {detailPoll.pollType === "proCon" ? (
+                            <ProCon
+                              detailPollTitle={detailPoll.pollTitle}
+                              detailProCount={detailPoll.proCount}
+                              detailConCount={detailPoll.conCount}
+                            />
+                          ) : null}
+                          {/* {pollType === select ? <> </> : null} */}
+                        </DetailPoll>                
+                
                 {/* 댓글, 답글 */}
                 <DetailPostCommentsList postIdx={postIdx} />
 
@@ -86,56 +113,60 @@ const DetailPost = () => {
     )
 };
 
-export default DetailPost
+export default DetailPost;
+
+const DetailPoll = styled.div`
+  width: 100%;
+`;
 
 // 상세 게시글 페이지 헤더
 const DetailPost_Header = styled.header`
-    background-color: white;
-    position: fixed;
-    /* top: 0; */
+  background-color: white;
+  position: fixed;
+  /* top: 0; */
 
-    width: 100%;
-    min-width: 200px;
-    max-width: 400px;
-    height: 48px;
-    z-index: 1;
+  width: 100%;
+  min-width: 200px;
+  max-width: 400px;
+  height: 48px;
+  z-index: 1;
 
-    border-bottom: 0.1rem solid rgb(180, 180, 180);
-`
+  border-bottom: 0.1rem solid rgb(180, 180, 180);
+`;
 
 const DetailPost_HeaderCont = styled.div`
-    /* border: 1px solid tomato; */
-    display: flex;
+  /* border: 1px solid tomato; */
+  display: flex;
 
-    height: 48px;
+  height: 48px;
 
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 7.5%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7.5%;
 `;
 
 const DetailPost_BackBtn = styled.div`
-    /* border: 1px solid green; */
-    color: rgb(180, 180, 180);
-    height: 24px;
-    width: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* border: 1px solid green; */
+  color: rgb(180, 180, 180);
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
+  &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
-    }
-    `;
+  }
+`;
 
 const DetailPost_Category = styled.div`
-    /* border: 1px solid blue; */
-    height: 24px;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
+  /* border: 1px solid blue; */
+  height: 24px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
 `;
 
 const DetailPost_MenuBtn = styled.div`
@@ -151,7 +182,7 @@ const DetailPost_MenuBtn = styled.div`
     &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
-    }
+  }
 `;
 
 const ModalCont = styled.div`

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../../api/cookies";
+import level1 from "../../../assets/icons/userLevel/level icon=초보, size=72.png";
 
 const TrueGreeting = () => {
   const navi = useNavigate();
@@ -10,23 +11,35 @@ const TrueGreeting = () => {
       <GreetingText1>
         <Row>
           <GreetingNickname>{cookies.get("nickname")}</GreetingNickname>
-          {/* // *=========== 04/11 12:13 bug 발견 ===========*/}
-          {/* cookies.get 렌더링 이슈. 리로딩해야 적용됨 */}
-          {/* // *=========== 04/11 12:13 bug 발견 ===========*/}
           <Greeting1>님의</Greeting1>
         </Row>
         <Greeting1>훈수 능력치는?</Greeting1>
       </GreetingText1>
-      <GreetingLevelImgCont>
-        <GreetingLevelImg
-          src="img/testImg1.jpg"
-          style={{ filter: "grayscale(100%)" }}
-          onClick={() => navi("/mypage")}
-        />
-      </GreetingLevelImgCont>
+
+      <Column>
+        <GreetingLevelImgCont>
+          <GreetingLevelImg src={level1} onClick={() => navi("/mypage")} />
+        </GreetingLevelImgCont>
+        <GreetingLevelName>훈수 초보</GreetingLevelName>
+      </Column>
     </GreetingCont>
   );
 };
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid green; */
+  gap: 5px;
+`;
+
+const GreetingLevelName = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #ef3f61;
+  font-size: 14px;
+  font-weight: bold;
+`;
 
 const GreetingCont = styled.div`
   /* border: 1px solid red; */
@@ -70,11 +83,12 @@ const GreetingText1 = styled.div`
   font-weight: bold;
   justify-content: space-evenly;
 `;
-const Greeting1 = styled.div``;
+const Greeting1 = styled.div`
+  color: #2d2d2d;
+`;
 
 const GreetingNickname = styled.div`
-  /* color: rgb(76, 76, 198); */
-  color: rgb(213, 135, 135);
+  color: #2d2d2d;
 `;
 
 export default TrueGreeting;

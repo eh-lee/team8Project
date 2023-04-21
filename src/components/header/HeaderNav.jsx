@@ -5,20 +5,26 @@ import styled from "styled-components";
 import { BiBell } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
 import { BiUser } from "react-icons/bi";
-
+import logo from "../../assets/icons/main-logo-icon-2.png";
 function HeaderNav() {
   const navi = useNavigate();
 
   return (
     <StyledNav>
       <HeaderUl>
-        <Header_Title_Box onClick={() => navi("/")}>훈수</Header_Title_Box>
+        <Header_Logo onClick={() => navi("/")} src={logo} />
         <Header_Box>
           <Header_Box_Item>
-            <BiSearch size="1.75em" />
+            <BiSearch
+              size="1.75em"
+              onClick={() => alert("구현 중인 기능입니다.")}
+            />
           </Header_Box_Item>
           <Header_Box_Item>
-            <BiBell size="1.75em" />
+            <BiBell
+              size="1.75em"
+              onClick={() => alert("구현 중인 기능입니다.")}
+            />
           </Header_Box_Item>
           <Header_Box_Item>
             <BiUser size="1.75em" onClick={() => navi("/mypage")} />
@@ -29,6 +35,14 @@ function HeaderNav() {
   );
 }
 
+const Header_Logo = styled.img`
+  height: 1.5rem;
+  margin-top: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const Header_Box_Item = styled.div`
   &:hover {
     color: rgb(180, 180, 180);
@@ -72,6 +86,17 @@ const Header_Title_Box = styled.div`
     color: rgb(180, 180, 180);
     cursor: pointer;
   }
+
+  /* &::before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    background-image: url(${logo});
+    background-repeat: no-repeat;
+    background-size: contain;
+  } */
 `;
 
 export default HeaderNav;

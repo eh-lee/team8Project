@@ -9,9 +9,7 @@ const KakaoLogin = () => {
   const code = new URL(window.location.href).searchParams.get("code");
   console.log("카카오 인가 코드==========>", code);
   const navi = useNavigate();
-  const REACT_APP_SERVER_URL = process.env;
-
-  //코드 보내는 부분
+  const { REACT_APP_SERVER_URL } = process.env;
 
   //토큰 받는 부분
   useEffect(() => {
@@ -38,14 +36,6 @@ const KakaoLogin = () => {
       kakao();
     }
   }, []);
-
-  // async function postKaKaoCode() {
-  //   const response = await axios.post(
-  //     "http://54.180.30.108:3002/api/user/kakaoLogin/",
-  //     KaKaocode
-  //   );
-  // }
-  // postKaKaoCode();
 
   return (
     <MobileLayout>

@@ -10,9 +10,12 @@ import MobileLayout from "../../layout/MobileLayout";
 import TrueGuard from "../../components/hook/guard/TrueGuard";
 import NaverLoginBtn from "../../components/login/NaverLoginBtn";
 import GoogleLoginBtn from "../../components/login/GoogleLoginBtn";
+import { Helmet } from "react-helmet";
 
 const LogInPage = () => {
   TrueGuard();
+
+  // 밸리데이션 걸기
 
   const submitButtonHandler = async (e) => {
     e.preventDefault();
@@ -25,6 +28,10 @@ const LogInPage = () => {
       //   path: "/",
       // });
       cookies.set("nickname", response.data.nickname, { path: "/" });
+      cookies.set("refresh_token", response.headers.refreshtoken, {
+        path: "/",
+      });
+      console.log("일반 로그인 rfrsh------>", response.headers.refreshtoken);
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.msg;
@@ -46,41 +53,46 @@ const LogInPage = () => {
   };
 
   return (
-    <MobileLayout>
-      <FooLogo>훈수</FooLogo>
-      <Container onSubmit={submitButtonHandler}>
-        <InputColumn>
-          <AuthInput
-            type="email"
-            value={user.email}
-            name="email"
-            onChange={changeInputHandler}
-            placeholder="이메일을 입력해 주세요."
-          />
-          <AuthInput
-            type="password"
-            value={user.password}
-            name="password"
-            onChange={changeInputHandler}
-            placeholder="비밀번호를 입력해 주세요."
-          />
-        </InputColumn>
+    <>
+      <Helmet>
+        <title>훈수 — 로그인</title>
+      </Helmet>
+      <MobileLayout>
+        <FooLogo>훈수</FooLogo>
+        <Container onSubmit={submitButtonHandler}>
+          <InputColumn>
+            <AuthInput
+              type="email"
+              value={user.email}
+              name="email"
+              onChange={changeInputHandler}
+              placeholder="이메일을 입력해 주세요."
+            />
+            <AuthInput
+              type="password"
+              value={user.password}
+              name="password"
+              onChange={changeInputHandler}
+              placeholder="비밀번호를 입력해 주세요."
+            />
+          </InputColumn>
 
-        <Column>
-          <AuthButton text={"로그인"} />
-          <Row>
-            <NaverLoginBtn />
-            <KakaoLoginBtn />
-            <GoogleLoginBtn />
-          </Row>
-        </Column>
+          <Column>
+            <AuthButton text={"로그인"} />
+            <Row>
+              <NaverLoginBtn />
+              <KakaoLoginBtn />
+              <GoogleLoginBtn />
+            </Row>
+          </Column>
 
-        <LoginContainer>
-          <NeedSignUp>계정이 없으신가요?</NeedSignUp>
-          <StyledLink to="/signup">회원가입</StyledLink>
-        </LoginContainer>
-      </Container>
-    </MobileLayout>
+          <LoginContainer>
+            <NeedSignUp>계정이 없으신가요?</NeedSignUp>
+            <StyledLink to="/signup">회원가입</StyledLink>
+          </LoginContainer>
+        </Container>
+      </MobileLayout>
+    </>
   );
 };
 

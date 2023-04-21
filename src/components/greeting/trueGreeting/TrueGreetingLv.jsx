@@ -1,25 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import level2 from "../../../assets/icons/userLevel/level icon=하수, size=18.png";
 
-const TrueGreetingLv = () => {
+const FalseGreetingLv = () => {
   const currExp = 170;
   const goalExp = 200;
   const exp = (currExp / goalExp) * 100;
-  //currExp, goalExp 동적 관리 셋업
   return (
-    // isLogin? : ver 두 개 만들기
     <GreetingLvCont>
       <RowMain>
         <GreetingText1>
           <GreetingLvContSub>
             <GreetingLevelImgCont>
-              <GreetingLevelImg
-                src="img/testImg2.jpg"
-                style={{ filter: "grayscale(100%)" }}
-              />
+              <GreetingLevelImg src={level2} />
             </GreetingLevelImgCont>
-            <GreetingLvText1>야만을 벗어난 훈수꾼</GreetingLvText1>
-            <GreetingLvText2>이 되기까지</GreetingLvText2>
+            <GreetingLvText1>훈수 하수</GreetingLvText1>
+            <GreetingLvText2>까지 앞으로</GreetingLvText2>
           </GreetingLvContSub>
           <LvExperienceBar>
             <ColoredExperienceBar exp={exp} />
@@ -36,16 +32,14 @@ const TrueGreetingLv = () => {
 };
 
 const RowMain = styled.div`
+  /* border: 1px solid green; */
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
 const LvExperienceBar = styled.div`
-  /* border: 1px solid red; */
-  width: 100%;
-  /* width: ${(props) => props.goalExp}%; */
-
+  width: 90%;
   height: 0.5rem;
   background-color: rgb(230, 230, 230);
   border-radius: 2rem;
@@ -60,14 +54,15 @@ const ColoredExperienceBar = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: rgb(200, 200, 200);
+  background-color: #2d2d2d;
   border-radius: 2rem;
   width: ${(props) => props.exp}%;
 `;
 
 const Row = styled.div`
+  /* border: 1px solid red; */
   display: flex;
-  justify-content: row;
+  align-items: baseline;
 `;
 
 const GreetingLvContSub = styled.div`
@@ -81,26 +76,26 @@ const GreetingLvContSub = styled.div`
 
 const GreetingLvCont = styled.div`
   display: flex;
-  width: 21rem;
   justify-content: space-between;
   // postCard와 라인 맞추기 위해 margin값 수정
-  margin: 1rem 0 0 2rem;
+  margin: 1rem 2rem 0 2rem;
   /* HeaderNav padding 좌우 값과 동일 */
-  /* max-width: 400px; */
+  max-width: 400px;
   /* StMobileLayout과 동일 */
 `;
 
 const GreetingLvPoint1 = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: bold;
+  color: #2d2d2d;
 `;
 const GreetingLvPoint2 = styled.div`
   display: flex;
   align-items: center;
   color: rgb(160, 160, 160);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 `;
 
 const GreetingLevelImgCont = styled.div`
@@ -129,10 +124,9 @@ const GreetingText1 = styled.div`
 `;
 
 const GreetingLvText1 = styled.div`
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  /* color: rgb(213, 135, 135); */
-  color: rgb(160, 160, 160);
+  color: #ef3f61;
 `;
 
 // const GreetingLvText1 = styled.div`
@@ -150,4 +144,4 @@ const GreetingLvText2 = styled.div`
   letter-spacing: 0rem;
 `;
 
-export default TrueGreetingLv;
+export default FalseGreetingLv;

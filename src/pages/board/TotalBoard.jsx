@@ -6,6 +6,7 @@ import Footer from "../../components/footer/Footer";
 import BoardPostCard from "../../components/post/BoardPostCard";
 // import HorizontalScroll from "../../components/hook/scroll/HorizontalScroll";
 import MobileLayout from "../../layout/MobileLayout";
+import { Helmet } from "react-helmet";
 
 const TotalBoard = () => {
   const [category, setCategory] = useState("전체");
@@ -94,71 +95,77 @@ const TotalBoard = () => {
   }, []);
 
   return (
-    <MobileLayout>
-      <PageWithFooterWrapper>
-        <BoardHeader>
-          <BoardHeaderSub>
-            <BoardTitle>훈수게시판</BoardTitle>
+    <>
+      <Helmet>
+        <title>훈수 — 전체게시판</title>
+      </Helmet>
+      <MobileLayout>
+        <PageWithFooterWrapper>
+          <BoardHeader>
+            <BoardHeaderSub>
+              <BoardTitle>훈수게시판</BoardTitle>
 
-            <Row>
-              <MainCategory isActive onClick={() => navi("/totalboard")}>
-                전체
-              </MainCategory>
+              <Row>
+                <MainCategory isActive onClick={() => navi("/totalboard")}>
+                  전체
+                </MainCategory>
 
-              <MainCategory onClick={() => navi("/humourboard")}>
-                유머
-              </MainCategory>
+                <MainCategory onClick={() => navi("/humourboard")}>
+                  유머
+                </MainCategory>
 
-              <MainCategory onClick={() => navi("/seriousboard")}>
-                진지
-              </MainCategory>
-            </Row>
-            <CategorySlider>
-              {/* <CategorySlider ref={scrollRef}> */}
-              {/* <CategorySlider isFirstRender={isFirstRender}> */}
-              {categories.map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleCategoryClick(item)}
-                  style={{ marginLeft: index === 0 ? "7%" : "2%" }}
-                  // index={index}
-                  // isActive={item === category}
-                  // onFocus={() => setIsFirstRender(false)}
-                >
-                  {item}
-                </button>
-              ))}
-            </CategorySlider>
-          </BoardHeaderSub>
-        </BoardHeader>
-        <PostCardCont ref={postCardContRef}>
-          {data?.map((item) => (
-            <BoardPostCard
-              key={item.postIdx}
-              postIdx={item.postIdx}
-              title={item.title}
-              nickname={item.nickname}
-              content={item.desc}
-              viewCount={item.postViewCount}
-              likesCount={item.likesCount}
-              commentCount={item.commentCount}
-              mainCategory={item.maincategory}
-              category={item.category}
-            />
-          ))}
-        </PostCardCont>
-      </PageWithFooterWrapper>
-      <Footer />
-    </MobileLayout>
+                <MainCategory onClick={() => navi("/seriousboard")}>
+                  진지
+                </MainCategory>
+              </Row>
+              <CategorySlider>
+                {/* <CategorySlider ref={scrollRef}> */}
+                {/* <CategorySlider isFirstRender={isFirstRender}> */}
+                {categories.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleCategoryClick(item)}
+                    style={{ marginLeft: index === 0 ? "7%" : "2%" }}
+                    // index={index}
+                    // isActive={item === category}
+                    // onFocus={() => setIsFirstRender(false)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </CategorySlider>
+            </BoardHeaderSub>
+          </BoardHeader>
+          <PostCardCont ref={postCardContRef}>
+            {data?.map((item) => (
+              <BoardPostCard
+                key={item.postIdx}
+                postIdx={item.postIdx}
+                title={item.title}
+                nickname={item.nickname}
+                content={item.desc}
+                viewCount={item.postViewCount}
+                likesCount={item.likesCount}
+                commentCount={item.commentCount}
+                mainCategory={item.maincategory}
+                category={item.category}
+              />
+            ))}
+          </PostCardCont>
+        </PageWithFooterWrapper>
+        <Footer />
+      </MobileLayout>
+    </>
   );
 };
 
 const PostCardCont = styled.div`
   height: 45.28rem;
+  /* height: 70vh; */
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -172,7 +179,7 @@ const CategorySlider = styled.div`
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -1,5 +1,5 @@
 import React from "react";
-import naver from "../../assets/icons/naver-icon.png";
+import naver from "../../assets/icons/socialLogin/naver-icon.png";
 // import { NAVER_LOGIN_URL } from "../../api/login";
 import styled from "styled-components";
 

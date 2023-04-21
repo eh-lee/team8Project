@@ -5,6 +5,7 @@ import { instance } from "../../api/axios";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
+import { Helmet } from "react-helmet";
 
 const SignUpPage = () => {
   const navi = useNavigate();
@@ -102,88 +103,95 @@ const SignUpPage = () => {
   };
 
   return (
-    <MobileLayout>
-      <Container onSubmit={submitButtonHandler}>
-        <div>
+    <>
+      <Helmet>
+        <title>훈수 — 회원가입</title>
+      </Helmet>
+      <MobileLayout>
+        <Container onSubmit={submitButtonHandler}>
           <div>
-            <div>이메일</div>
-            <AuthInput
-              type="email"
-              value={user.email}
-              name="email"
-              onChange={(e) => {
-                validEmail(e);
-                changeInputHandler(e);
-              }}
-              placeholder="이메일을 입력해 주세요."
-            />
-            <Validation match={emailMsg === "올바른 형식입니다."}>
-              {emailMsg}
-            </Validation>
-          </div>
+            <div>
+              <div>이메일</div>
+              <AuthInput
+                type="email"
+                value={user.email}
+                name="email"
+                onChange={(e) => {
+                  validEmail(e);
+                  changeInputHandler(e);
+                }}
+                placeholder="이메일을 입력해 주세요."
+              />
+              <Validation match={emailMsg === "올바른 형식입니다."}>
+                {emailMsg}
+              </Validation>
+            </div>
 
-          <div>
-            <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-              비밀번호
+            <div>
+              <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+                비밀번호
+              </div>
+              <AuthInput
+                type="password"
+                value={user.password}
+                name="password"
+                onChange={(e) => {
+                  validPassword(e);
+                  changeInputHandler(e);
+                }}
+                placeholder="비밀번호를 입력해 주세요."
+              />
+              <Validation match={passwordMsg === "올바른 형식입니다."}>
+                {passwordMsg}
+              </Validation>
             </div>
-            <AuthInput
-              type="password"
-              value={user.password}
-              name="password"
-              onChange={(e) => {
-                validPassword(e);
-                changeInputHandler(e);
-              }}
-              placeholder="비밀번호를 입력해 주세요."
-            />
-            <Validation match={passwordMsg === "올바른 형식입니다."}>
-              {passwordMsg}
-            </Validation>
-          </div>
-          <div>
-            <div style={{ marginTop: "10px", marginBottom: "5px" }}>
-              비밀번호 확인
+            <div>
+              <div style={{ marginTop: "10px", marginBottom: "5px" }}>
+                비밀번호 확인
+              </div>
+              <AuthInput
+                type="password"
+                value={user.passwordConfirm}
+                name="passwordConfirm"
+                onChange={(e) => {
+                  onChangeConfirmPw(e);
+                  changeInputHandler(e);
+                }}
+                placeholder="비밀번호를 다시 입력해 주세요."
+              />
+              <Validation match={confirmPwMsg === "비밀번호가 일치합니다."}>
+                {confirmPwMsg}
+              </Validation>
             </div>
-            <AuthInput
-              type="password"
-              value={user.passwordConfirm}
-              name="passwordConfirm"
-              onChange={(e) => {
-                onChangeConfirmPw(e);
-                changeInputHandler(e);
-              }}
-              placeholder="비밀번호를 다시 입력해 주세요."
-            />
-            <Validation match={confirmPwMsg === "비밀번호가 일치합니다."}>
-              {confirmPwMsg}
-            </Validation>
+            <div>
+              <div style={{ marginTop: "10px", marginBottom: "5px" }}>
+                닉네임
+              </div>
+              <AuthInput
+                type="text"
+                value={user.nickname}
+                name="nickname"
+                onChange={(e) => {
+                  changeInputHandler(e);
+                  validNickname(e);
+                }}
+                placeholder="닉네임을 입력해 주세요."
+              />
+              <Validation match={nicknameMsg === "올바른 형식입니다."}>
+                {nicknameMsg}
+              </Validation>
+            </div>
           </div>
-          <div>
-            <div style={{ marginTop: "10px", marginBottom: "5px" }}>닉네임</div>
-            <AuthInput
-              type="text"
-              value={user.nickname}
-              name="nickname"
-              onChange={(e) => {
-                changeInputHandler(e);
-                validNickname(e);
-              }}
-              placeholder="닉네임을 입력해 주세요."
-            />
-            <Validation match={nicknameMsg === "올바른 형식입니다."}>
-              {nicknameMsg}
-            </Validation>
+          <div style={{ marginTop: "1.5rem" }}>
+            <AuthButton text={"회원가입 완료"} />
+            <LoginContainer>
+              <LoginP>이미 계정이 있나요?</LoginP>
+              <StyledLink to="/login">로그인</StyledLink>
+            </LoginContainer>
           </div>
-        </div>
-        <div style={{ marginTop: "1.5rem" }}>
-          <AuthButton text={"회원가입 완료"} />
-          <LoginContainer>
-            <LoginP>이미 계정이 있나요?</LoginP>
-            <StyledLink to="/login">로그인</StyledLink>
-          </LoginContainer>
-        </div>
-      </Container>
-    </MobileLayout>
+        </Container>
+      </MobileLayout>
+    </>
   );
 };
 
