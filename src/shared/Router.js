@@ -12,6 +12,7 @@ import SeriousBoard from '../pages/board/SeriousBoard'
 import Battle from '../pages/Battle'
 import Write from '../pages/write/Write'
 import DetailPost from '../pages/detailPost/DetailPost'
+import EditPost from '../components/post/EditPost'
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/humourboard" element={<HumourBoard />} />
         <Route path="/seriousboard" element={<SeriousBoard />} />
         <Route path="/board/:postIdx" element={<DetailPost />} />
+        <Route path="/board/:postIdx/edit" element={<EditPost />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/:sthId/profileedit" element={<ProfileEditPage />} />
         <Route path="/kakaoLogin" element={<KakaoLogin />} />

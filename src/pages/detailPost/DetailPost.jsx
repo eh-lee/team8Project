@@ -21,28 +21,27 @@ const DetailPost = () => {
 
   const menuModalOpenHandler = () => {
     setIsMenuModalOpen(true);
-    // console.log("모달 연다");
   };
-  // console.log("모달 열렸나?", isMenuModalOpen);
 
   const menuModalCloseHandler = () => {
     setIsMenuModalOpen(false);
-    // console.log("모달 닫혔다");
   };
 
-  // 상세 게시글을 담을 state
-  const [detailPost, setDetailPost] = useState([]);
+  // 상세 게시글 카테고리 관리
+  const [detailPostCat, setDetailPostCat] = useState([]);
 
-  // 명세 수정 반영 부분
+  // 상세 게시글 카테고리 get 
   useEffect(() => {
     const getDetailPost = async () => {
       const { data } = await instance.get(
         `/postCards/post/category/${postIdx}`
       );
-      setDetailPost(data);
+      setDetailPostCat(data);
+      console.log('진짜 데이터를 좀 보자' ,data)
     };
     getDetailPost();
   }, []);
+
 
   // 상세 투표
   const [detailPoll, setDetailPoll] = useState({});
@@ -56,12 +55,6 @@ const DetailPost = () => {
     };
     getDetailPoll();
   }, [postIdx]);
-
-  // console.log("Detail에서 PostIdx=========>", postIdx);
-
-  // console.log("명세 반영 잘 됐니?=========>", detailPoll);
-  // console.log("처음에 proInputValue?=========>", detailPoll.proInputValue);
-  // console.log("처음에 conInputValue?***********>", detailPoll.conInputValue);
 
   return (
     <>
@@ -79,7 +72,7 @@ const DetailPost = () => {
               <MdArrowBackIosNew size="1rem" />
             </DetailPost_BackBtn>
             <DetailPost_Category>
-              {detailPost.maincategory}◦{detailPost.category}
+              {detailPostCat.maincategory}◦{detailPostCat.category}
             </DetailPost_Category>
             <DetailPost_MenuBtn onClick={menuModalOpenHandler}>
               <FiMoreVertical />
@@ -89,15 +82,18 @@ const DetailPost = () => {
         {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
         {/* 메뉴모달 */}
         <ModalPortal>
-          <ModalCont>
-            {isMenuModalOpen && (
-              <DetailMenuModal
-                open={isMenuModalOpen}
-                close={menuModalCloseHandler}
-                postIdx={postIdx}
-              />
-            )}
-          </ModalCont>
+            <ModalCont>
+                {
+                    isMenuModalOpen && (
+                        <DetailMenuModal
+                            open={isMenuModalOpen}
+                            close={menuModalCloseHandler}
+                            postIdx={postIdx}
+                            detailPostCat={detailPostCat}
+                        />
+                    )
+                }
+            </ModalCont>
         </ModalPortal>
         {/* 상세페이지 내용 */}
         <DetailPostContents />
@@ -174,13 +170,13 @@ const DetailPost_BackBtn = styled.div`
 `;
 
 const DetailPost_Category = styled.div`
-  /* border: 1px solid blue; */
-  letter-spacing: 0.0125em;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-  color: rgb(70, 70, 70);
+/* border: 1px solid blue; */
+letter-spacing: 0.0125em;
+height: 24px;
+display: flex;
+align-items: center;
+font-size: 18px;
+color: rgb(70, 70, 70);
 `;
 
 const DetailPost_MenuBtn = styled.div`

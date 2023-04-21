@@ -1,236 +1,265 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
-import Like from "../like/Like";
-import DetailPostCommentReply from "./DetailPostCommentReply";
-import { instanceWithAuth } from "../../api/axios";
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import styled, { css } from 'styled-components';
+import Like from '../like/Like';
+import DetailPostCommentReply from './DetailPostCommentReply';
+import { instanceWithAuth } from '../../api/axios';
 import { BsTrash } from "react-icons/bs";
-import { cookies } from "../../api/cookies";
-import { FiEdit } from "react-icons/fi";
-import { useFormattingDate } from "../hook/useFormattingDate";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsComment } from "../../app/modules/detailSlice";
+import { cookies } from '../../api/cookies';
+// import {AiOutlineEdit} from 'react-icons/ai'
+import { useFormattingDate } from '../hook/useFormattingDate';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsComment } from '../../app/modules/detailSlice'
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
 
-const DetailPostComment = ({ comment }) => {
-  // postIdx: UUID,
-  // commentIdx: UUID,
-  // nickname: STRING,
-  // createdAt: DATE,
-  // comment: STRING,
-  // isLike: BOOLEAN,
-  // likesCount: NUMBER,
-  // proInputValue: BOOLEAN(아직),
-  // conInputValue: BOOLEAN(아직),
+const DetailPostComment = ({comment}) => {
+    // API명세
+    // postIdx: UUID,
+    // commentIdx: UUID,
+    // nickname: STRING,
+    // createdAt: DATE,
+    // comment: STRING,
+    // isLike: BOOLEAN,
+    // likesCount: NUMBER,
+    // proInputValue: BOOLEAN(아직),
+    // conInputValue: BOOLEAN(아직),
 
-  // ======================= 댓글 =======================
-  // 댓글 작성한 시간
-  const [createdDate, formattingDate] = useFormattingDate(comment.createdAt);
+    // =============================================== 댓글 ===============================================
+    // 댓글 작성한 시간
+    const [createdDate, formattingDate] = useFormattingDate(comment.createdAt);
 
-  useEffect(() => {
-    formattingDate();
-  }, []);
+    useEffect(()=> {
+        formattingDate();
+    },[]);
 
-  // 댓글 삭제 요청
-  const deleteCommentHandler = async () => {
-    try {
-      // const response = await instanceWithAuth.delete(`comment/${comment.postIdx}/${comment.commentIdx}`);
-      await instanceWithAuth.delete(
-        `comment/${comment.postIdx}/${comment.commentIdx}`
-      );
-    } catch (error) {
-      // console.error("댓글삭제", error.response.data.errorMessage);
-      console.error(error);
-    }
-  };
+    // 댓글 삭제 관리
+    const [isDelete, setIsDelete] = useState(false)
 
-  // 댓글 좋아요 관리 state
-  const [commentLikesCount, setCommentLikesCount] = useState(
-    comment.likesCount
-  );
-  const [isLike, setIsLike] = useState(null);
-
-  // 댓글 좋아요 버튼
-  const clickCommentLike = () => {
-    instanceWithAuth.put(
-      `/commentLike/${comment.postIdx}/${comment.commentIdx}`
-    );
-    setIsLike((prev) => !prev);
-    setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
-  };
-
-  // ======================= 답훈수 =======================
-
-  // isComment 불러오기
-  const { isComment } = useSelector((state) => state.detail);
-  const dispatch = useDispatch();
-
-  // 답훈수 관리 state
-  const [replyList, setReplyList] = useState([]);
-
-  // 답훈수 더 보기 관리 state
-  const [replyisActive, setReplyIsActive] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-
-  // const replyInputRef = useRef(null);
-
-  // new답훈수 관리 state
-  const [newReply, setNewReply] = useState();
-  const [newReplyTime, setNewReplyTime] = useState("");
-  const [curNickname, setCurNickname] = useState("");
-  const [curCommentIdx, setCurCommentIdx] = useState("초기값");
-  // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
-
-  // 답훈수 get요청
-  useEffect(() => {
-    const getReplyList = async () => {
-      const { data } = await instanceWithAuth.get(
-        `/reply/${comment.postIdx}/${comment.commentIdx}`
-      );
-      setReplyList(data.replys);
+    // 댓글 삭제 요청
+    const deleteCommentHandler = async () => {
+        try {
+            await instanceWithAuth.delete(`comment/${comment.postIdx}/${comment.commentIdx}`);
+            setIsDelete(true);
+        } catch(error) {
+            console.error("댓글삭제", error.response.data.errorMessage);
+            console.error(error)
+        };
     };
-    const nickname = cookies.get("nickname");
-    getReplyList();
-    setCurNickname(nickname);
-  }, []);
 
-  // 답훈수 달기 버튼 핸들러
-  const replyCreateHandler = () => {
-    setCurCommentIdx(comment.commentIdx);
-    dispatch(setIsComment(true));
-    // replyInputRef.current.focus();
-  };
+    // 댓글 좋아요 관리 state
+    const [commentLikesCount ,setCommentLikesCount] = useState(comment.likesCount);
+    const [isLike, setIsLike] = useState(null);
 
-  // 답훈수 더 보기 핸들러
-  const ReplyisActiveHandler = () => {
-    setReplyIsActive(!replyisActive);
-    setIsHidden(!isHidden);
-  };
+    // 댓글 좋아요 버튼
+    const clickCommentLike = () => {
+        instanceWithAuth.put(`/commentLike/${comment.postIdx}/${comment.commentIdx}`);
+        setIsLike((prev) => !prev)
+        setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+    };
 
-  // 새로운 답훈수 핸들러
-  const newReplyHandler = (e) => {
-    setNewReply(e.target.value);
-  };
 
-  // 답훈수 작성 핸들러
-  const newReplysubmitHandler = (e) => {
-    e.preventDefault();
+    // =============================================== 답훈수 ===============================================
 
-    //답훈수 작성시간
-    const currentTime = new Date()
-      .toLocaleString("ko-KR", { hour12: false })
-      .replace(/\. /g, ". 0");
-    setNewReplyTime(currentTime);
+    // isComment 불러오기
+    const { isComment } = useSelector ((state) => state.detail);
+    const dispatch = useDispatch();
 
-    instanceWithAuth
-      .post(`/reply/${comment.postIdx}/${curCommentIdx}`, { comment: newReply })
-      .then((response) => {
-        dispatch(setIsComment(!isComment));
-        console.log("댓글작성", response.data);
-      })
-      .catch((error) => {
-        console.error("댓글작성", error);
-      });
-  };
+    // 답훈수 관리 state
+    const [replyList, setReplyList] = useState([]);
 
-  return (
-    <>
-      {/* ======================= 댓글 ======================= */}
-      {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
-      <Comment_InfoWrap>
-        <Comment_Info_ProfileCont>
-          <Comment_Info_UserLvImg src={level1} />
-          {comment.proInputValue ? (
-            <Comment_Info_UserSide>찬성</Comment_Info_UserSide>
-          ) : comment.conInputValue ? (
-            <Comment_Info_UserSide>반대</Comment_Info_UserSide>
-          ) : null}
-        </Comment_Info_ProfileCont>
-        <Comment_Info_UserInfoWrap>
-          <Comment_Info_UserInfoCont>
-            <Comment_Info_Nickname> {comment.nickname} </Comment_Info_Nickname>
-            <Comment_Info_UserLevel> 레벨 </Comment_Info_UserLevel>
-          </Comment_Info_UserInfoCont>
-          <Comment_Info_UserInfo_CreatedAt>
-            {createdDate}
-            <CommentDelete onClick={deleteCommentHandler}>
-              <BsTrash />
-            </CommentDelete>
-            <CommentEdit>
-              <FiEdit />
-            </CommentEdit>
-          </Comment_Info_UserInfo_CreatedAt>
-        </Comment_Info_UserInfoWrap>
-      </Comment_InfoWrap>
+    // 답훈수 더 보기 관리 state
+    const [replyisActive, setReplyIsActive] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
 
-      {/* 댓글, 댓글 좋아요 */}
-      <CommentWrap>
-        <Comment> {comment.comment} </Comment>
-        <CommentLikeCont>
-          <CommentLikeIcon pointerOn="on" onClick={clickCommentLike}>
-            <Like isLike={isLike} />
-          </CommentLikeIcon>
-          <CommentLikeCount>{commentLikesCount}</CommentLikeCount>
-        </CommentLikeCont>
-      </CommentWrap>
-      {/* ======================= 댓글 ======================= */}
+    // const replyInputRef = useRef(null);
 
-      {/* ======================= 답훈수 ======================= */}
-      <DetailPostCommentReplyWrap>
-        <DetailPostCommentReplyCreate onClick={replyCreateHandler}>
-          답훈수 달기
-        </DetailPostCommentReplyCreate>
+    // new답훈수 관리 state
+    const [curNickname, setCurNickname] = useState('');
+    const [newReply, setNewReply] = useState();
+    const [curCommentIdx, setCurCommentIdx] = useState('초기값');
+    // const [newReplyTime, setNewReplyTime] = useState('');
+    // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
 
-        {/* 답훈수 더 보기 버튼 */}
-        {replyList.length > 0 && !isHidden && (
-          <DetailPostCommentReplyMore
-            onClick={ReplyisActiveHandler}
-            isHidden={isHidden}
-            isActive={replyisActive}
-          >
-            ----- 답훈수 더 보기
-          </DetailPostCommentReplyMore>
-        )}
+    // 답훈수 get요청
+    useEffect(() => {
+        const getReplyList = async () => {
+            const { data } = await instanceWithAuth.get(`/reply/${comment.postIdx}/${comment.commentIdx}`);
+            setReplyList([...data.replys].reverse());
+        };
+        getReplyList();
+        const nickname = cookies.get("nickname")
+        setCurNickname(nickname);
+    }, [comment]);
 
-        {/* 답훈수 리스트 */}
-        {replyisActive && (
-          <DetailPostCommentReplyList>
-            {replyList?.map((reply) => (
-              <DetailPostCommentReply key={reply.replyIdx} reply={reply} />
-            ))}
-          </DetailPostCommentReplyList>
-        )}
-      </DetailPostCommentReplyWrap>
-      {/* ========================== 답훈수 ========================== */}
+    // 답훈수 달기 버튼 핸들러
+    const replyCreateHandler = () => {
+        setCurCommentIdx(comment.commentIdx);
+        dispatch(setIsComment(true));
+        // replyInputRef.current.focus();
+    };
 
-      {/* ========================== 답글 입력 푸터 ========================== */}
-      {curCommentIdx !== "초기값" && isComment ? (
-        <DetailPostComments_Footer>
-          <DetailPostComments_FooterInputCont
-            onSubmit={(e) => newReplysubmitHandler(e)}
-          >
-            <DetailPostComments_Input
-              required
-              type="text"
-              placeholder="답훈수를 남겨주세요."
-              value={newReply}
-              onChange={(e) => newReplyHandler(e)}
-              autoFocus
-              // maxLength=
-            />
-            <DetailPostComments_InputBtn
-              type="submit"
-              onClick={(e) => newReplysubmitHandler(e)}
-            >
-              등록
-            </DetailPostComments_InputBtn>
-          </DetailPostComments_FooterInputCont>
-        </DetailPostComments_Footer>
-      ) : null}
-    </>
-  );
+    // 답훈수 더 보기 핸들러
+    const ReplyisActiveHandler = () => {
+        setReplyIsActive(!replyisActive);
+        setIsHidden(!isHidden);
+    };
+
+    // 새로운 답훈수 핸들러
+    const newReplyHandler = (e) => {
+            setNewReply(e.target.value);
+    };
+
+    // 답훈수 등록 버튼 핸들러
+    const newReplysubmitHandler = (e) => {
+        e.preventDefault();
+
+        //답훈수 작성시간
+        const curTime = new Date()
+        
+        // 새로운 답훈수 객체 생성
+        const newReplyData = {
+            comment: newReply,
+            // 임의로 달아줄 random한 key값 생성
+            createdAt: curTime,
+            nickname: curNickname,
+            postIdx: comment.postIdx,
+            commentIdx: comment.postIdx,
+            replyIdx: Math.random().toString(36).substring(2, 15),
+        };
+
+        instanceWithAuth.post(`/reply/${comment.postIdx}/${curCommentIdx}`, { comment: newReply })
+            .then(response => {
+                dispatch(setIsComment(!isComment))
+                setReplyList((prev)=> [...prev, newReplyData]);
+                setNewReply('');
+            })
+            .catch(error => {
+                console.error("답훈수작성", error);
+            });
+    };
+
+    return !isDelete && (
+        <>
+            {/* ======================= 댓글 ======================= */}
+            {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
+            <Comment_InfoWrap>
+                <Comment_Info_ProfileCont>
+                    <Comment_Info_UserLvImg src={level1} /> 
+                    {
+                        comment.proInputValue ?
+                            <Comment_Info_UserSide>
+                                찬성
+                            </Comment_Info_UserSide> 
+                            :
+                            comment.conInputValue ?
+                                <Comment_Info_UserSide>
+                                    반대
+                                </Comment_Info_UserSide> 
+                                :
+                                null
+                    }
+                </Comment_Info_ProfileCont>
+                <Comment_Info_UserInfoWrap>
+                    <Comment_Info_UserInfoCont>
+                        <Comment_Info_Nickname> {comment.nickname} </Comment_Info_Nickname>
+                        <Comment_Info_UserLevel> 레벨 </Comment_Info_UserLevel>
+                    </Comment_Info_UserInfoCont>
+                    <Comment_Info_UserInfo_CreatedAt>
+                        {createdDate}
+                        <CommentDelete onClick={deleteCommentHandler}>
+                            <BsTrash />
+                        </CommentDelete>
+                        {/* <CommentEdit >
+                            <AiOutlineEdit />
+                        </CommentEdit> */}
+                    </Comment_Info_UserInfo_CreatedAt>
+                </Comment_Info_UserInfoWrap>
+            </Comment_InfoWrap>
+
+            {/* 댓글, 댓글 좋아요 */}
+            <CommentWrap>
+                <Comment> {comment.comment} </Comment>
+                <CommentLikeCont>
+                    <CommentLikeIcon 
+                    pointerOn="on"
+                    onClick={clickCommentLike}
+                    >
+                        <Like 
+                            isLike={isLike} 
+                        />
+                    </CommentLikeIcon>
+                    <CommentLikeCount>
+                        {commentLikesCount}
+                    </CommentLikeCount>
+                </CommentLikeCont>
+            </CommentWrap>
+            {/* ======================= 댓글 ======================= */}
+
+            {/* ======================= 답훈수 ======================= */}
+            <DetailPostCommentReplyWrap>
+                <DetailPostCommentReplyCreate onClick={replyCreateHandler} >
+                    답훈수 달기
+                </DetailPostCommentReplyCreate>
+
+                {/* 답훈수 더 보기 버튼 */}
+                {
+                    (replyList.length > 0) &&
+                    !isHidden && (
+                        <DetailPostCommentReplyMore
+                            onClick={ReplyisActiveHandler}
+                            isHidden={isHidden}
+                            isActive={replyisActive}
+                        >
+                            ----- 답훈수 더 보기
+                        </DetailPostCommentReplyMore >
+                    )
+                }
+
+                {/* 답훈수 리스트 */}
+                {
+                    replyisActive &&
+                    <DetailPostCommentReplyList >
+                        {
+                            replyList?.map((reply) => (
+                                <DetailPostCommentReply
+                                    key={reply.replyIdx}
+                                    reply={reply}
+                                />
+                            ))
+                        }
+                    </DetailPostCommentReplyList>
+                }
+            </DetailPostCommentReplyWrap>
+            {/* ========================== 답훈수 ========================== */}
+
+            {/* ========================== 답글 입력 푸터 ========================== */}
+            { ( curCommentIdx !== '초기값' && isComment) ?
+                < DetailPostComments_Footer >
+                <DetailPostComments_FooterInputCont onSubmit={newReplysubmitHandler}>
+                    <DetailPostComments_Input
+                        required
+                        type='text'
+                        placeholder='답훈수를 남겨주세요.(100자 이내)'
+                        value={newReply}
+                        onChange={newReplyHandler}
+                        autoFocus
+                        maxLength='100'
+                        />
+                            <DetailPostComments_InputBtn
+                                type='submit'
+                            >
+                                등록
+                            </DetailPostComments_InputBtn>
+                </DetailPostComments_FooterInputCont>
+                    </DetailPostComments_Footer >
+                : null
+            }
+        </>
+    );
 };
 
 export default DetailPostComment;
+// =========================================* Styled Components *==========================================
+
 
 // ========================= 댓글 정보 =========================
 const Comment_InfoWrap = styled.ul`
@@ -315,13 +344,6 @@ const Comment_Info_UserInfo_CreatedAt = styled.ul`
 
 const CommentDelete = styled.li`
   /* border: 1px solid violet; */
-  display: flex;
-  font-size: 10px;
-  cursor: pointer;
-  margin-left: 4px;
-`;
-
-const CommentEdit = styled.li`
   display: flex;
   font-size: 10px;
   cursor: pointer;

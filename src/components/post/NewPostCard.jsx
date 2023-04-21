@@ -116,15 +116,15 @@ const PostCardJr_TitleBox = styled.ul`
 `;
 
 const PostCardJr_MainCategory = styled.li`
-  font-size: 0.6rem;
+  font-size: 10px;
   color: gray;
 `;
 
 const PostCardJr_Title = styled.li`
-  font-size: 1.3rem;
   white-space: nowrap;
   /* overflow: hidden; */
   text-overflow: ellipsis;
+  font-size: 18px;
 `;
 
 const PostCardJr_ContentBox = styled.div`
@@ -149,5 +149,5 @@ const PostCardJr_ContentBox = styled.div`
 const PostCardJr_Content = styled.div`
   display: flex;
   color: gray;
-  font-size: 0.8rem;
+  font-size: 14px;
 `;
