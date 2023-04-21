@@ -24,6 +24,7 @@ const MyPage = () => {
   const logout = () => {
     // dispatch(isLoginActions.logout());
 
+    // 왜 안 되나 체크 4/21 17:44
     cookies.remove("access_token");
     cookies.remove("refresh_token");
     cookies.remove("nickname");
