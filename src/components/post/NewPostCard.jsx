@@ -5,6 +5,47 @@ import { useNavigate } from "react-router-dom";
 const NewPostCard = ({ postIdx, mainCategory, category, title, content }) => {
   const navigate = useNavigate();
 
+  //* =========== Cat. Label ===============
+  const categories = [
+    "패션/뷰티",
+    "맛집/요리/음식",
+    "경제/재테크",
+    "썸/연애",
+    "취미/운동",
+    "스포츠",
+    "여행",
+    "결혼",
+    "게임",
+    "반려동물",
+    "가족",
+    "취업/자격증",
+    "일상",
+    "기타",
+  ];
+
+  const icons = [
+    "👗",
+    "🍱",
+    "💰",
+    "💘",
+    "🎨",
+    "⚽️",
+    "✈️",
+    "👩‍❤️‍👨",
+    "🎮",
+    "🐶",
+    "👨‍👩‍👧‍👦",
+    "💼",
+    "💬",
+    "🎸",
+  ];
+
+  const categoryIconsMap = categories.reduce((acc, cur, idx) => {
+    acc[cur] = icons[idx];
+    return acc;
+  }, {});
+
+  //* =========== Cat. Label ===============
   return (
     <PostCardJrWrap
       onClick={() => {
@@ -13,9 +54,14 @@ const NewPostCard = ({ postIdx, mainCategory, category, title, content }) => {
     >
       <PostCardJr_TitleBox>
         <PostCardJr_MainCategory>
-          {mainCategory}🌝{category}
+          {/* //* =========== Cat. Label =============== */}
+          <PostCardCatBtn>
+            {mainCategory}&nbsp;
+            {categoryIconsMap[category]}
+          </PostCardCatBtn>
+          {/* //* =========== Cat. Label =============== */}
         </PostCardJr_MainCategory>
-        <PostCardJr_Title>{title}</PostCardJr_Title>
+        <PostCardJr_Title>{title?.slice(0, 8)}</PostCardJr_Title>
       </PostCardJr_TitleBox>
       <PostCardJr_ContentBox>
         <PostCardJr_Content>{content}</PostCardJr_Content>
@@ -25,7 +71,16 @@ const NewPostCard = ({ postIdx, mainCategory, category, title, content }) => {
 };
 
 export default NewPostCard;
-
+//* =========== Cat. Label ===============
+const PostCardCatBtn = styled.button`
+  color: white;
+  background: #3a3a59;
+  border-radius: 100px;
+  padding: 0 4px 0px 6px;
+  border: none;
+  font-size: 0.5rem;
+`;
+//* =========== Cat. Label ===============
 const PostCardJrWrap = styled.div`
   /* border: 1px solid black; */
   border-radius: 10px;
@@ -67,6 +122,9 @@ const PostCardJr_MainCategory = styled.li`
 
 const PostCardJr_Title = styled.li`
   font-size: 1.3rem;
+  white-space: nowrap;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
 `;
 
 const PostCardJr_ContentBox = styled.div`

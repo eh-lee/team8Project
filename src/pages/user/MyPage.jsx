@@ -8,6 +8,7 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";
+import AuthButton from "../../components/elem/AuthButton";
 
 const MyPage = () => {
   const navi = useNavigate();
@@ -16,7 +17,7 @@ const MyPage = () => {
   // const isLogin = useSelector((state) => state.auth.isLogin);
   const isLogin = cookies.get("access_token") ? true : false;
 
-  console.log("isLogin??", isLogin);
+  // console.log("isLogin??", isLogin);
   // *=========== 04/11 11:56 bug 발견 ============*
   // 렌더링 문제 있음. reloading해 줘야 함.
   // *=========== 04/11 11:56 bug 발견 ============*
@@ -25,6 +26,7 @@ const MyPage = () => {
     // dispatch(isLoginActions.logout());
 
     // 왜 안 되나 체크 4/21 17:44
+    // [Refactor] 인터셉터로 처리하게
     cookies.remove("access_token");
     cookies.remove("refresh_token");
     cookies.remove("nickname");
@@ -42,13 +44,12 @@ const MyPage = () => {
       <MobileLayout>
         <Header />
         <PageWithHeaderAndFooterWrapper>
-          <div>My page</div>
           <div>
             <>
               {isLogin ? (
-                <p type="button" style={{ cursor: "pointer" }} onClick={logout}>
-                  로그아웃
-                </p>
+                <MyPageWrap>
+                  <AuthButton text={"로그아웃"} onClick={logout} />
+                </MyPageWrap>
               ) : (
                 <p
                   type="button"
@@ -69,6 +70,12 @@ const MyPage = () => {
 
 export default MyPage;
 
+const MyPageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 0 auto;
+`;
 const PageWithHeaderAndFooterWrapper = styled.div`
   margin: 3.5rem 0 15rem 0;
 `;

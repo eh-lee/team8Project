@@ -19,6 +19,48 @@ const HotPostCard = ({
 
   console.log("likesCount=========================##", likesCount);
 
+  //* =========== Cat. Label ===============
+  const categories = [
+    "패션/뷰티",
+    "맛집/요리/음식",
+    "경제/재테크",
+    "썸/연애",
+    "취미/운동",
+    "스포츠",
+    "여행",
+    "결혼",
+    "게임",
+    "반려동물",
+    "가족",
+    "취업/자격증",
+    "일상",
+    "기타",
+  ];
+
+  const icons = [
+    "👗",
+    "🍱",
+    "💰",
+    "💘",
+    "🎨",
+    "⚽️",
+    "✈️",
+    "👩‍❤️‍👨",
+    "🎮",
+    "🐶",
+    "👨‍👩‍👧‍👦",
+    "💼",
+    "💬",
+    "🎸",
+  ];
+
+  const categoryIconsMap = categories.reduce((acc, cur, idx) => {
+    acc[cur] = icons[idx];
+    return acc;
+  }, {});
+
+  //* =========== Cat. Label ===============
+
   return (
     <PostCardWrap
       mainCategory={mainCategory}
@@ -30,7 +72,12 @@ const HotPostCard = ({
     >
       <PostCard_TitleBox>
         <PostCard_MainCategory>
-          {mainCategory}🌝{category}
+          {/* =========== Cat. Label =============== */}
+          <PostCardCatBtn>
+            {mainCategory}&nbsp;
+            {categoryIconsMap[category]}
+          </PostCardCatBtn>
+          {/* =========== Cat. Label =============== */}
         </PostCard_MainCategory>
         <PostCard_Title>{title}</PostCard_Title>
 
@@ -84,6 +131,15 @@ const HotPostCard = ({
 };
 
 export default HotPostCard;
+
+const PostCardCatBtn = styled.button`
+  color: white;
+  background: #3a3a59;
+  border-radius: 100px;
+  padding: 0 4px 0px 6px;
+  border: none;
+  font-size: 0.5rem;
+`;
 
 const PostCardWrap = styled.div`
   /* border: 1px solid black; */
