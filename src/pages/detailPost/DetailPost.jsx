@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { instance, instanceWithAuth } from "../../api/axios";
 import MobileLayout from "../../layout/MobileLayout";
-// import Footer from "../../components/footer/Footer";
 import { FiMoreVertical } from "react-icons/fi";
 import { MdArrowBackIosNew } from "react-icons/md";
 import DetailPostContents from "../../components/detail/DetailPostContents";
@@ -88,7 +87,20 @@ const DetailPost = () => {
           </DetailPost_HeaderCont>
         </DetailPost_Header>
         {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
-
+        {/* 메뉴모달 */}
+        <ModalPortal>
+            <ModalCont>
+                {
+                    isMenuModalOpen && (
+                        <DetailMenuModal
+                            open={isMenuModalOpen}
+                            close={menuModalCloseHandler}
+                            postIdx={postIdx}
+                        />
+                    )
+                }
+            </ModalCont>
+        </ModalPortal>
         {/* 상세페이지 내용 */}
         <DetailPostContents />
 
@@ -109,18 +121,6 @@ const DetailPost = () => {
 
         {/* 댓글, 답글 */}
         <DetailPostCommentsList postIdx={postIdx} />
-
-        {/* 메뉴모달 */}
-        <ModalPortal>
-          <ModalCont>
-            {isMenuModalOpen && (
-              <DetailMenuModal
-                open={isMenuModalOpen}
-                close={menuModalCloseHandler}
-              />
-            )}
-          </ModalCont>
-        </ModalPortal>
       </MobileLayout>
     </>
   );

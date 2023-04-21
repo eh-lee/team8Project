@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components';
 import { BsTrash } from "react-icons/bs";
 import { instanceWithAuth } from '../../api/axios';
+import { useFormattingDate } from '../hook/useFormattingDate';
 
 const DetailPostCommentReply = ({reply}) => {
     // postIdx
@@ -12,23 +13,25 @@ const DetailPostCommentReply = ({reply}) => {
     // comment,
 
     // 답훈수 작성한 시간
-    // 참고: '\u00A0'는 공백을 표현하는 유니코드 문자
-    const ReplycreatedAt = `${reply.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${reply.createdAt?.split('T')[1].slice(0, 5)}`
+    const [createdDate, formattingDate] = useFormattingDate(reply.createdAt)
+
+    useEffect(()=> {
+        formattingDate();
+    },[]);
 
     // 답글 삭제 요청
-    const deleteReplytHandler = () => {
-        instanceWithAuth.delete(`reply/${reply.postIdx}/${reply.commentIdx}/${reply.replyIdx}`)
-            .then(response => {
-                console.log("답글삭제", response.data);
-            })
-            .catch(error => {
-                console.error("답글삭제", error.response.data.errorMessage);
-            });
+    const deleteReplytHandler = async () => {
+        try {
+            // const response = await instanceWithAuth.delete(`reply/${reply.postIdx}/${reply.commentIdx}/${reply.replyIdx}`);
+            await instanceWithAuth.delete(`reply/${reply.postIdx}/${reply.commentIdx}/${reply.replyIdx}`);
+        } catch(error) {
+            console.error(error)
+        };
     };
 
     return (
         <>
-            {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
+            {/* 유저정보(프로필사진, 닉네임, 레벨, 작성시간 */}
             <CommentReply_InfoWrap>
                 <CommentReply_Info_ProfileCont>
                     <CommentReply_Info_UserLvImg>  </CommentReply_Info_UserLvImg>
@@ -39,7 +42,7 @@ const DetailPostCommentReply = ({reply}) => {
                         <CommentReply_Info_UserLevel> 레벨 </CommentReply_Info_UserLevel>
                     </CommentReply_Info_UserInfoCont>
                     <CommentReply_Info_UserInfo_CreatedAt> 
-                        {ReplycreatedAt} 
+                        {createdDate} 
                         <ReplyDelete onClick={deleteReplytHandler}>
                             <BsTrash />
                         </ReplyDelete>

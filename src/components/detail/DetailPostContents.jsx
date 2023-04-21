@@ -5,6 +5,7 @@ import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
+import { useFormattingDate } from "../hook/useFormattingDate";
 
 const DetailPostContents = () => {
     const {postIdx} = useParams();
@@ -13,23 +14,34 @@ const DetailPostContents = () => {
     const [detailPost, setDetailPost] = useState([]);
     
     // 게시글 작성한 시간
-    // 참고: '\u00A0'는 공백을 표현하는 유니코드 문자
-    const createdAt = `${detailPost.createdAt?.split('T')[0].replace(/-/g, ".")}\u00A0\u00A0${detailPost.createdAt?.split('T')[1].slice(0, 5)}`
+    const [createdDate, formattingDate] = useFormattingDate(detailPost.createdAt);
     
     // 좋아요 관리 state
-    const [postLikesCount, setPostLikesCount] = useState(0);
+    const [postLikesCount, setPostLikesCount] = useState(null);
     const [isLike, setIsLike] = useState(null);
     
     // 상세 게시글 정보 불러오기
     useEffect(() => {
         const getDetailPost = async () => {
-            const {data} = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
-            // const {data} = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
+          try {
+            const {data} = await instanceWithAuth.get(`/postCards/post/${postIdx}`)
             setDetailPost(data.post);
+            formattingDate();
             setPostLikesCount(data.post.likesCount);
             setIsLike(data.post.IsLike);
+          } catch(error) {
+            console.error('상세게시글get error', error)
+          }
         };
         getDetailPost();
+        // instanceWithAuth.get(`/postCards/post/${postIdx}`)
+        // .then((response)=>{
+        //   console.log('게시글조회중', response.data.post)
+        //   setDetailPost(response.data.post);
+        //   formattingDate();
+        //   setPostLikesCount(response.data.post.likesCount);
+        //   setIsLike(response.data.post.IsLike);}
+        // );
     }, []);
     
     // 좋아요 버튼
@@ -53,7 +65,7 @@ const DetailPostContents = () => {
                         <DetailPost_UserInfo_Nickname>{detailPost.nickname}</DetailPost_UserInfo_Nickname>
                         <DetailPost_UserInfo_UserLevel>{detailPost.userLevel}레벨</DetailPost_UserInfo_UserLevel>
                     </DetailPost_UserInfoCont>
-                    <DetailPost_UserInfo_CreatedAt>{createdAt}</DetailPost_UserInfo_CreatedAt>
+                    <DetailPost_UserInfo_CreatedAt>{createdDate}</DetailPost_UserInfo_CreatedAt>
                 </DetailPost_InfoCont>
             </DetailPost_InfoWrap>
             {/* 게시글 내용 */}

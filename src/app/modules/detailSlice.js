@@ -17,6 +17,6 @@ export const detailSlice = createSlice({
     },
 });
 
-export const { setIsComment, returnIsComment } = detailSlice.actions;
+export const { setIsComment } = detailSlice.actions;
 
 export default detailSlice.reducer;
