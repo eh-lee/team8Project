@@ -131,7 +131,7 @@ const HotPostCard = ({
 };
 
 export default HotPostCard;
-
+//* =========== Cat. Label ===============
 const PostCardCatBtn = styled.button`
   color: white;
   background: #3a3a59;
@@ -140,7 +140,7 @@ const PostCardCatBtn = styled.button`
   border: none;
   font-size: 0.5rem;
 `;
-
+//* =========== Cat. Label ===============
 const PostCardWrap = styled.div`
   /* border: 1px solid black; */
   border-radius: 0.75rem;

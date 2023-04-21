@@ -137,7 +137,7 @@ const TotalBoard = () => {
             </BoardHeaderSub>
           </BoardHeader>
           <PostCardCont ref={postCardContRef}>
-            {data?.map((item) => (
+            {data?.map((item, idx) => (
               <BoardPostCard
                 key={item.postIdx}
                 postIdx={item.postIdx}
@@ -149,6 +149,7 @@ const TotalBoard = () => {
                 commentCount={item.commentCount}
                 mainCategory={item.maincategory}
                 category={item.category}
+                // isFirst={idx === 0}
               />
             ))}
           </PostCardCont>

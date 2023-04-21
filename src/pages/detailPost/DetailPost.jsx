@@ -79,7 +79,7 @@ const DetailPost = () => {
               <MdArrowBackIosNew size="1rem" />
             </DetailPost_BackBtn>
             <DetailPost_Category>
-              {detailPost.maincategory}🌝{detailPost.category}
+              {detailPost.maincategory}◦{detailPost.category}
             </DetailPost_Category>
             <DetailPost_MenuBtn onClick={menuModalOpenHandler}>
               <FiMoreVertical />
@@ -175,10 +175,12 @@ const DetailPost_BackBtn = styled.div`
 
 const DetailPost_Category = styled.div`
   /* border: 1px solid blue; */
+  letter-spacing: 0.0125em;
   height: 24px;
   display: flex;
   align-items: center;
   font-size: 18px;
+  color: rgb(70, 70, 70);
 `;
 
 const DetailPost_MenuBtn = styled.div`

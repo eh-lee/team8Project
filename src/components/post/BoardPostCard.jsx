@@ -21,7 +21,8 @@ const BoardPostCard = ({
   postIdx,
   likesCount,
   nickname,
-  // isFirst, 자식의 자식이 돼 벌임
+  // isFirst,
+  // 자식의 자식이 돼 벌임
 }) => {
   const navigate = useNavigate();
 
@@ -198,12 +199,13 @@ const PostCardTitleIcon = styled.div`
 `;
 
 const PostCardWrap = styled.div`
+  /* border: 1px solid red; */
   background-color: white;
   padding: 8% 0 5% 7%;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  /* ${({ isFirst }) => isFirst && `border-top-radius: 1rem;`}; */
+  ${({ isFirst }) => isFirst && `border-top-radius: 1rem;`};
 
   &:hover {
     cursor: pointer;
@@ -231,7 +233,7 @@ const PostCardTitle = styled.li`
 `;
 
 const PostCardContentBox = styled.div`
-  max-height: 4vh;
+  max-height: 3vh;
   /* max-height: 1%; */
   /* 최대 2줄 */
   width: 90%;
