@@ -30,18 +30,17 @@ const DetailPost = () => {
   // 상세 게시글 카테고리 관리
   const [detailPostCat, setDetailPostCat] = useState([]);
 
-  // 상세 게시글 카테고리 get 
+  // 상세 게시글 카테고리 get
   useEffect(() => {
     const getDetailPost = async () => {
       const { data } = await instance.get(
         `/postCards/post/category/${postIdx}`
       );
       setDetailPostCat(data);
-      console.log('진짜 데이터를 좀 보자' ,data)
+      console.log("진짜 데이터를 좀 보자", data);
     };
     getDetailPost();
   }, []);
-
 
   // 상세 투표
   const [detailPoll, setDetailPoll] = useState({});
@@ -82,18 +81,16 @@ const DetailPost = () => {
         {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
         {/* 메뉴모달 */}
         <ModalPortal>
-            <ModalCont>
-                {
-                    isMenuModalOpen && (
-                        <DetailMenuModal
-                            open={isMenuModalOpen}
-                            close={menuModalCloseHandler}
-                            postIdx={postIdx}
-                            detailPostCat={detailPostCat}
-                        />
-                    )
-                }
-            </ModalCont>
+          <ModalCont>
+            {isMenuModalOpen && (
+              <DetailMenuModal
+                open={isMenuModalOpen}
+                close={menuModalCloseHandler}
+                postIdx={postIdx}
+                detailPostCat={detailPostCat}
+              />
+            )}
+          </ModalCont>
         </ModalPortal>
         {/* 상세페이지 내용 */}
         <DetailPostContents />
@@ -108,7 +105,6 @@ const DetailPost = () => {
               detailPollTitle={detailPoll.pollTitle}
               detailProCount={detailPoll.proCount}
               detailConCount={detailPoll.conCount}
-              // 서버에서 카운트 반대로 주는 것 같음
             />
           ) : null}
           {/* {pollType === select ? <> </> : null} */}
@@ -170,13 +166,13 @@ const DetailPost_BackBtn = styled.div`
 `;
 
 const DetailPost_Category = styled.div`
-/* border: 1px solid blue; */
-letter-spacing: 0.0125em;
-height: 24px;
-display: flex;
-align-items: center;
-font-size: 18px;
-color: rgb(70, 70, 70);
+  /* border: 1px solid blue; */
+  letter-spacing: 0.0125em;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: rgb(70, 70, 70);
 `;
 
 const DetailPost_MenuBtn = styled.div`

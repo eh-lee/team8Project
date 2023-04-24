@@ -29,6 +29,7 @@ const MyPage = () => {
     // [Refactor] 인터셉터로 처리하게
     cookies.remove("access_token");
     cookies.remove("refresh_token");
+
     cookies.remove("nickname");
     console.log(isLogin);
     alert("로그아웃 되었습니다.");

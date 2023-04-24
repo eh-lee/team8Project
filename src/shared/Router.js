@@ -13,6 +13,8 @@ import Battle from '../pages/Battle'
 import Write from '../pages/write/Write'
 import DetailPost from '../pages/detailPost/DetailPost'
 import EditPost from '../components/post/EditPost'
+import A from '../pages/test/A'
+import B from '../pages/test/B'
 
 const Router = () => {
   return (
@@ -31,6 +33,8 @@ const Router = () => {
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
         <Route path="/battle" element={<Battle />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/a" element={<A />} />
+        <Route path="/b" element={<B />} />
       </Routes>
     </BrowserRouter>
   )
