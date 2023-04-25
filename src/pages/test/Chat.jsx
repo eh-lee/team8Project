@@ -19,6 +19,9 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const [test, setTest] = useState({});
+  const [currParty, setCurrParty] = useState({});
+
   useEffect(() => {
     // 여기선 name과 room을 url에서 가져온다.
     // 이유는 setRoom과 setName이 적용되기 전에 socket.emit('join')이 실행되기 때문이다.
@@ -35,6 +38,7 @@ const Chat = ({ location }) => {
     setName(name);
 
     socket.emit("join", { name, room }, (error) => {
+      console.log("rooom===========>", room);
       if (error) {
         alert(error);
       }
@@ -49,7 +53,19 @@ const Chat = ({ location }) => {
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
+
+    // ================ socket server와 통신하기 ==================
+    // 이걸로 현재 인원 체크해서 카드에 표시하기 like, currParty.numUsers/maxParty
+    // * socket에 있는 Key name { numUsers, room } 으로 인자 받기
+    socket.on("currParty", ({ numUsers, room }) => {
+      setCurrParty({ numUsers, room });
+    });
+    // ================ socket server와 통신하기 ==================
   }, []);
+
+  console.log("crr===========>", currParty);
+  // console.log("test=========>", test);
+  // console.log("test=========>", message);
 
   const sendMessage = (event) => {
     event.preventDefault();
