@@ -14,14 +14,16 @@ import DetailPost from '../pages/detailPost/DetailPost'
 import EditPost from '../components/post/EditPost'
 import A from '../pages/test/A'
 import B from '../pages/test/B'
-import Battle from "../pages/battle/Battle"
-import Chat from "../pages/battle/Chat"
+import Chat from '../pages/test/Chat'
+import Join from '../pages/test/Join'
+// import Battle from "../pages/battle/Battle"
+// import Chat from "../pages/battle/Chat"
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/totalboard" element={<TotalBoard />} />
@@ -36,8 +38,10 @@ const Router = () => {
         {/* test */}
         <Route path="/a" element={<A />} />
         <Route path="/b" element={<B />} />
-        <Route path="/battle/chat" element={<Chat />} />
-        <Route path="/battle" element={<Battle />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/" element={<Join />} />
+        {/* <Route path="/battle/chat" element={<Chat />} /> */}
+        {/* <Route path="/battle" element={<Battle />} /> */}
         {/* <Route path="/chat" element={<socket1 />} /> */}
         {/* test */}
       </Routes>
