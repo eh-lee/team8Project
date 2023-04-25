@@ -11,10 +11,10 @@ import { cookies } from "./cookies";
 // const access_token = decodeURI(document.cookie).replace("access_token=", "").replace(/; nickname=([^;]*)/, "").replace(/; refresh_token=[^;]*/, "");
 
 export const instance = axios.create({
-    // baseURL: REACT_APP_SERVER_URL
+    baseURL: process.env.REACT_APP_SERVER_URL
     // baseURL: "https://hunsu.site/api"
     // baseURL: "https://3.38.208.169/api"
-    baseURL: "https://kimohseong.com/api"
+    // baseURL: "https://kimohseong.com/api"
     // baseURL: "https://kimohseong.com"
 
 
@@ -24,10 +24,10 @@ export const instance = axios.create({
 
 
 export const instanceWithAuth = axios.create({
-    // baseURL: REACT_APP_SERVER_URL
+    baseURL: process.env.REACT_APP_SERVER_URL
     // baseURL: "https://hunsu.site/api"
     // baseURL: "https://3.38.208.169/api"
-    baseURL: "https://kimohseong.com/api"
+    // baseURL: "https://kimohseong.com/api"
     // baseURL: "https://kimohseong.com"
 
     //=========================================

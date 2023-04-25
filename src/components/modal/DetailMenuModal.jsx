@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
-import styled, { css } from 'styled-components';
-import {AiOutlineEdit} from 'react-icons/ai'
-import {BsTrash} from 'react-icons/bs'
-import { useNavigate } from 'react-router-dom';
-import { instanceWithAuth } from '../../api/axios';
+import React, { useEffect, useRef } from "react";
+import styled, { css } from "styled-components";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsTrash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { instanceWithAuth } from "../../api/axios";
 
-const DetailMenuModal = ({open, close, postIdx, detailPostCat }) => {
+const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
   const nav = useNavigate();
 
   // =========== 모달 창 바깥을 클릭하면 닫히는 기능 ===========
@@ -21,29 +21,36 @@ const DetailMenuModal = ({open, close, postIdx, detailPostCat }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [open, close]);
+  }, [modalRef]);
+
+  //title: string,
+  // maxParty: number,
+  // nickname: string,
+  // roomName: string,
+  // chatIdx: UUID
 
   // 수정하기 버튼 클릭
   const editButtonHandler = () => {
     close();
     // 수정페이지 만들어서 이동
-    nav('/board/:postIdx/edit', { state: {postIdx, detailPostCat} });
-  }
+    nav("/board/:postIdx/edit", { state: { postIdx, detailPostCat } });
+  };
 
   // 삭제하기 버튼 클릭
   const deleteButtonHandler = () => {
     close();
-    instanceWithAuth.delete(`/postCards/post/createPost/${postIdx}`)
-    .then(response => {
-      alert(response.data.msg);
-      nav('/totalboard');
-    })
-    .catch(error => {
-      console.error('게시글 삭제', error);
-    })
+    instanceWithAuth
+      .delete(`/postCards/post/createPost/${postIdx}`)
+      .then((response) => {
+        alert(response.data.msg);
+        nav("/totalboard");
+      })
+      .catch((error) => {
+        console.error("게시글 삭제", error);
+      });
   };
 
-  return open? (
+  return open ? (
     <DetailMenuWrap>
       <MenuButton onClick={editButtonHandler} ref={modalRef}>
         <ButtonText>수정하기</ButtonText>
@@ -54,8 +61,7 @@ const DetailMenuModal = ({open, close, postIdx, detailPostCat }) => {
         <BsTrash />
       </MenuButton>
     </DetailMenuWrap>
-  ) 
-  : null
+  ) : null;
 };
 
 export default DetailMenuModal;
@@ -81,11 +87,13 @@ const MenuButton = styled.ul`
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  border-bottom: 1px solid #CCCCCC;
-  ${({delete: isDelete}) => isDelete && css`
-    color: #EB5147;
-    border-bottom: none;
-  `}
+  border-bottom: 1px solid #cccccc;
+  ${({ delete: isDelete }) =>
+    isDelete &&
+    css`
+      color: #eb5147;
+      border-bottom: none;
+    `}
 `;
 
 const ButtonText = styled.li``;

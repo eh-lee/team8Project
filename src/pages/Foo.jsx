@@ -4,7 +4,7 @@ import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import MobileLayout from "../layout/MobileLayout";
 import { Helmet } from "react-helmet";
-import YetGuard from "../components/hook/guard/YetGuard.jsx";
+import YetGuard from "../components/hook/guard/YetGuard.jsx.jsx";
 
 const Battle = () => {
   YetGuard();
