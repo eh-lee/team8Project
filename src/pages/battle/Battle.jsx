@@ -32,7 +32,7 @@ const Battle = () => {
       try {
         // const res = await instance.get(`/chat/hunsuChat?splitNumber=4&splitPageNumber=${page}`)
         const res = await instance.get(
-          "/chat/hunsuChat?splitNumber=4&splitPageNumber=1"
+          "/chat/hunsuChat?splitNumber=10&splitPageNumber=1"
         );
         // maxParty
         // nicknmae
@@ -133,6 +133,8 @@ const Battle = () => {
 export default Battle;
 
 const ChatCardCont = styled.div`
+  margin-top: 48px;
+  /* === 헤더 높이 === */
   height: 45.28rem;
   /* height: 70vh; */
   overflow-y: scroll;

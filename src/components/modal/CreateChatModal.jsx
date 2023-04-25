@@ -38,10 +38,13 @@ const CreateChatModal = ({ open, close }) => {
       await instanceWithAuth.post("/chat/hunsuChat", {
         roomName: chatRoom.roomName,
         maxParty: parseInt(chatRoom.maxParty),
-        title: "title",
+        // title: "title",
       });
 
-      navi(`/battle/chat?name=${nickname}&roomName=${chatRoom.roomName}`);
+      navi(`/battle/chat?name=${nickname}&roomName=${chatRoom.roomName}`, {
+        state: { maxParty: chatRoom.maxParty, roomName: chatRoom.roomName },
+      });
+
       setChatRoom({
         roomName: "",
         maxParty: 0,

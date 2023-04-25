@@ -23,10 +23,13 @@ const App = () => {
   const nickname = cookies.get("nickname");
 
   const location = useLocation();
-  const { roomName, maxParty } = location.state;
+  const { roomName, maxParty } = location?.state;
+
+  console.log("이번에야말로 들어오겠지 roomName?=====>", roomName);
 
   useEffect(() => {
-    socketRef.current = socketIOClient("localhost:4000");
+    // socketRef.current = socketIOClient(process.env.REACT_APP_SOCKET_URL);
+    socketRef.current = socketIOClient("52.78.166.176:3000");
 
     socketRef.current.on("receive message", (message) => {
       console.log("msg===========>", message);
@@ -38,20 +41,6 @@ const App = () => {
       socketRef.current.disconnect();
     };
   }, [messageList]);
-
-  //onChange
-
-  /// 아래 두 submit 하나로 통합 필요
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   console.log("message==========>", value);
-  //   console.log("nickname==========>", nickname);
-  //   // socketRef.current.emit("send message", { name: name, message: value });
-  //   socketRef.current.emit("send message", {
-  //     name: nickname,
-  //     message: value,
-  //   });
-  // };
 
   // 채팅 작성 핸들러
   const newChatsubmitHandler = async (e) => {

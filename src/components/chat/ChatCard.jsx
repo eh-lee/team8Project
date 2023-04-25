@@ -8,7 +8,7 @@ const ChatCard = ({ roomName, chatIdx, nickname, maxParty }) => {
   return (
     <ChatCardWrap
       onClick={() => {
-        navigate(`/battle/chat?nickName=${nickname}&roomName=${roomName}`, {
+        navigate(`/battle/chat?name=${nickname}&roomName=${roomName}`, {
           state: { roomName, maxParty },
         });
       }}
@@ -31,7 +31,7 @@ const PostCardRow = styled.div`
 `;
 
 const ChatCardWrap = styled.div`
-  /* border: 1px solid red; */
+  // border: 1px solid red;
   background-color: white;
   padding: 8% 0 5% 7%;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
