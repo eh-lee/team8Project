@@ -12,18 +12,15 @@ import SeriousBoard from '../pages/board/SeriousBoard'
 import Write from '../pages/write/Write'
 import DetailPost from '../pages/detailPost/DetailPost'
 import EditPost from '../components/post/EditPost'
-import A from '../pages/test/A'
-import B from '../pages/test/B'
 import Chat from '../pages/test/Chat'
 import Join from '../pages/test/Join'
-// import Battle from "../pages/battle/Battle"
-// import Chat from "../pages/battle/Chat"
+import Battle from '../pages/battle/Battle'
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/totalboard" element={<TotalBoard />} />
@@ -36,13 +33,13 @@ const Router = () => {
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
         <Route path="/write" element={<Write />} />
         {/* test */}
-        <Route path="/a" element={<A />} />
-        <Route path="/b" element={<B />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/" element={<Join />} />
-        {/* <Route path="/battle/chat" element={<Chat />} /> */}
-        {/* <Route path="/battle" element={<Battle />} /> */}
-        {/* <Route path="/chat" element={<socket1 />} /> */}
+        <Route path="/battle/chat" element={<Chat />} />
+        {/* <Route path="/battle" element={<Join />} /> */}
+        <Route path="/battle" element={<Battle />} />
+        {/* [V] 1. Join을 CreateChatModal로 모달화하고, 
+        [ ] 2. battle 페이지 jsx 다시 가져오고 모달 연결
+        <Route path="/battle" element={<Battle />} />
+         */}
         {/* test */}
       </Routes>
     </BrowserRouter>

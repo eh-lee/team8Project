@@ -5,17 +5,19 @@ import styled from "styled-components";
 const ChatCard = ({ roomName, chatIdx, nickname, maxParty }) => {
   const navigate = useNavigate();
 
+  // const
+
   return (
     <ChatCardWrap
       onClick={() => {
-        navigate(`/battle/chat?name=${nickname}&roomName=${roomName}`, {
-          state: { roomName, maxParty },
-        });
+        navigate(`/battle/chat?name=${nickname}&room=${roomName}`);
       }}
     >
       <PostCardTitleBox>
         <PostCardRow>
           <PostCardTitle>{roomName}</PostCardTitle>
+          {/* <PostCardTitle>{currParty}</PostCardTitle> */}
+          <PostCardTitle>{maxParty}</PostCardTitle>
         </PostCardRow>
       </PostCardTitleBox>
     </ChatCardWrap>
