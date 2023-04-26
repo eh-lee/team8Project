@@ -3,6 +3,7 @@ import React from "react";
 import "./Message.css";
 
 import ReactEmoji from "react-emoji";
+import styled from "styled-components";
 
 function Message({ message: { user, text }, name }) {
   let isSentByCurrentUser = false;
@@ -14,12 +15,12 @@ function Message({ message: { user, text }, name }) {
   }
 
   return isSentByCurrentUser ? (
-    <div className="messageContainer justifyEnd">
+    <StMessageCont>
       <p className="sentText pr-10">{trimmedName}</p>
       <div className="messageBox backgroundBlue">
         <p className="messageText colorWhite">{ReactEmoji.emojify(text)}</p>
       </div>
-    </div>
+    </StMessageCont>
   ) : (
     <div className="messageContainer justifyStart">
       <div className="messageBox backgroundLight">
@@ -31,3 +32,10 @@ function Message({ message: { user, text }, name }) {
 }
 
 export default Message;
+
+const StMessageCont = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin-top: 3px;
+`;
