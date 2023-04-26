@@ -1,9 +1,0 @@
-.messages {
-  padding: 100px 0;
-  overflow: auto;
-  /* flex: auto; */
-  display: flex;
-  min-height: 400px;
-  width: 100%;
-  border: 1px solid brown;
-}
