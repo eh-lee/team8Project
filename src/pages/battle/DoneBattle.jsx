@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import MobileLayout from "../../layout/MobileLayout";
 import styled from "styled-components";
 import FooterNav from "../../components/footer/FooterNav";
-import { MdArrowBackIosNew } from "react-icons/md";
 import ModalPortal from "../../components/modal/ModalPortal";
 import CreateChatModal from "../../components/modal/CreateChatModal";
 import { useEffect } from "react";
 import { instance } from "../../api/axios";
 import ChatCard from "../../components/chat/ChatCard";
+import { Helmet } from "react-helmet";
+import battleCreate from "../../assets/battle/battleCreate.png"
 
 const Battle = () => {
   const nav = useNavigate();
@@ -56,19 +57,32 @@ const Battle = () => {
 
   return (
     <>
+      <Helmet>
+        <title>훈수 — 훈수배틀</title>
+      </Helmet>
       <MobileLayout>
         {/* 배틀 페이지 헤더 */}
-        <BattleHeader>
-          <BattleHeaderCont>
-            <BattleBackBtn
-              onClick={() => {
-                nav(-1);
-              }}
-            >
-              <MdArrowBackIosNew size="1rem" />
-            </BattleBackBtn>
-          </BattleHeaderCont>
-        </BattleHeader>
+        <StBattleHeaderWrap>
+          <StBattleHeaderSub>
+            <StBattleTitle>훈수 배틀</StBattleTitle>
+            <StBattleCategoryCont>
+              <StBattleCategory               
+              onClick={() => nav("/battle")}
+              >
+                실시간 배틀
+              </StBattleCategory>
+              <StBattleCategory 
+              isActive 
+              onClick={() => nav("/donebattle")}
+              >
+                지난 배틀
+              </StBattleCategory>
+            </StBattleCategoryCont>
+            <StBattleBackground>
+              {/* <div> 대충 배경자리 </div> */}
+            </StBattleBackground>
+          </StBattleHeaderSub>
+        </StBattleHeaderWrap>
         {/* 배틀 페이지 헤더 */}
 
         {/* 채팅 리스트 */}
@@ -77,6 +91,7 @@ const Battle = () => {
           {chattingList?.map((item, idx) => (
             <ChatCard
               key={idx}
+              idx={idx}
               chatIdx={item.chatIdx}
               roomName={item.roomName}
               nickname={item.nickname}
@@ -85,7 +100,6 @@ const Battle = () => {
             />
           ))}
         </ChatCardCont>
-
         {/* 채팅 리스트 */}
 
         {/* ====== 채팅방 개설 버튼 ====== */}
@@ -96,13 +110,13 @@ const Battle = () => {
             }
             to={`/battle/chat?nickName=${nickname}&roomName=${roomName}`}
           >
-            <button
+
+            <StBattleCreateBtn 
               onClick={createChatModalOpenHandler}
-              // title={title}
               type="submit"
             >
-              채팅방 개설
-            </button>
+              <StBattleCreateImg src={battleCreate}/>
+            </StBattleCreateBtn>
           </Link>
         </BtnCont>
         {/* ====== 채팅방 개설 버튼 ====== */}
@@ -133,7 +147,8 @@ const Battle = () => {
 export default Battle;
 
 const ChatCardCont = styled.div`
-  margin-top: 48px;
+  /* margin-top: 48px; */
+  margin-top: 146px;
   /* === 헤더 높이 === */
   height: 45.28rem;
   /* height: 70vh; */
@@ -152,6 +167,7 @@ const ModalCont = styled.div`
 `;
 
 const BtnCont = styled.div`
+  /* border: 1px solid tomato; */
   bottom: 100px;
   position: fixed;
   max-width: 400px;
@@ -159,6 +175,18 @@ const BtnCont = styled.div`
   justify-content: flex-end;
   width: 100%;
 `;
+
+const StBattleCreateImg = styled.img`
+  height: 56px;
+  width: 56px;
+`
+
+const StBattleCreateBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+`
 
 const StyledFooter = styled.div`
   position: fixed;
@@ -174,41 +202,68 @@ const StyledFooter = styled.div`
   /* transition: opacity 0.3s ease-in-out; */
 `;
 
-const BattleHeader = styled.header`
+// ================= header ====================
+
+const StBattleHeaderWrap = styled.header`
   background-color: white;
   position: fixed;
-  /* top: 0; */
-
+  top: 0;
+  padding-top: 0.75rem;
   width: 100%;
-  min-width: 200px;
+  /* width: 100vw; */
   max-width: 400px;
-  height: 48px;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  font-size: 18px;
+  color: rgb(70, 70, 70);
 `;
 
-const BattleHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
+const StBattleHeaderSub = styled.div`
+  /* border: 1px solid red; */
   display: flex;
-
-  height: 48px;
-
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 7.5%;
+  flex-direction: column;
+  font-weight: bold;
+  justify-content: space-evenly;
 `;
 
-const BattleBackBtn = styled.div`
-  /* border: 1px solid green; */
-  color: rgb(180, 180, 180);
-  height: 24px;
-  width: 24px;
+const StBattleTitle = styled.div`
+  padding-bottom: 2rem;
   display: flex;
-  align-items: center;
   justify-content: center;
+`;
+
+const StBattleCategoryCont = styled.div`
+  /* border: 1px solid green; */
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`;
+
+const StBattleCategory = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 0.75rem;
+  text-decoration: none;
+
+  color: ${(props) =>
+    props.isActive ? "rgb(70, 70, 70)" : "rgb(180, 180, 180)"};
+  border-bottom: ${(props) =>
+    props.isActive
+      ? "0.2rem solid rgb(70, 70, 70)"
+      : "0.1rem solid rgb(180, 180, 180)"};
 
   &:hover {
     cursor: pointer;
-    color: rgb(70, 70, 70);
   }
+
+  &:active {
+    color: rgb(70, 70, 70);
+    border-bottom: 0.2rem solid rgb(70, 70, 70);
+  }
+`;
+
+const StBattleBackground = styled.div`
+  padding: 5% 0;
+  width: 400px;
+  height: 12px;
+  background-color: rgb(220, 220, 220, 0.35);  
 `;

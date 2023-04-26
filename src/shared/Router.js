@@ -14,7 +14,8 @@ import DetailPost from '../pages/detailPost/DetailPost'
 import EditPost from '../components/post/EditPost'
 import Chat from '../pages/test/Chat'
 import Join from '../pages/test/Join'
-import Battle from '../pages/battle/Battle'
+import Battle from '../pages/battle/RealTimeBattle'
+import DoneBattle from '../pages/battle/DoneBattle'
 
 const Router = () => {
   return (
@@ -36,6 +37,7 @@ const Router = () => {
         <Route path="/battle/chat" element={<Chat />} />
         {/* <Route path="/battle" element={<Join />} /> */}
         <Route path="/battle" element={<Battle />} />
+        <Route path="/donebattle" element={<DoneBattle />} />
         {/* [V] 1. Join을 CreateChatModal로 모달화하고, 
         [ ] 2. battle 페이지 jsx 다시 가져오고 모달 연결
         <Route path="/battle" element={<Battle />} />

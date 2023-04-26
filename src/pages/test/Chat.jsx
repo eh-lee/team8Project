@@ -18,6 +18,7 @@ let socket;
 
 // const Chat = ({ location }) => {
 // location 없어두 되나..?
+
 const Chat = () => {
   const nav = useNavigate();
   const [name, setName] = useState("");
@@ -38,15 +39,15 @@ const Chat = () => {
     nav("/battle");
   };
 
+  // 룸 입장
   useEffect(() => {
-    // 전의 대화내용 가져오기
-    // instanceWithAuth(`/chat/hunsuChat`)
 
     // 여기선 name과 room을 url에서 가져온다.
     // 이유는 setRoom과 setName이 적용되기 전에 socket.emit('join')이 실행되기 때문이다.
     // url에서 가져오는 방법이 아닌 다른 방법으로 name과 room을 가져오려면
     // 미리 정해진 방법으로 name과 room을 가져오는 것이 아닌
     // socket.emit('join')이 실행되기 전에 setRoom과 setName이 실행되도록 해야 한다.
+
     const { name, room, maxParty } = queryString.parse(window.location.search);
     console.log(name, room);
 
@@ -63,6 +64,7 @@ const Chat = () => {
     });
   }, [ENDPOINT, window.location.search]);
 
+  // 서버에서 messages받아오는 코드
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
