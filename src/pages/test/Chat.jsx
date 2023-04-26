@@ -55,8 +55,9 @@ const Chat = () => {
     setRoom(room);
     setName(name);
 
-    socket.emit("join", { name, room, maxParty }, (error) => {
-      console.log("rooom===========>", room);
+    const isAdmin = "";
+
+    socket.emit("join", { name, room, maxParty, isAdmin }, (error) => {
       if (error) {
         alert(error);
       }
@@ -68,9 +69,23 @@ const Chat = () => {
       setMessages((messages) => [...messages, message]);
     });
 
-    socket.on("roomData", ({ users }) => {
-      setUsers(users);
+    // ====================== 추가하려는 기능 ======================
+    // socket.io로 처리..
+    // 지난 기록 채팅들 받기. 아래 Messages 태그 안에서 맵 돌아가게
+    socket.on("total_messages", (messages) => {
+      setMessages(messages);
     });
+
+    // GET 요청으로 처리..
+
+    // ====================== 추가하려는 기능 ======================
+
+    // console.log(message);
+
+    // socket.on("roomData", ({ room, users, messages }) => {
+    //   setUsers(users);
+    //   setPrevMessages(messages);
+    // });
 
     // ================ socket server와 통신하기 ==================
     // 이걸로 현재 인원 체크해서 카드에 표시하기 like, currParty.numUsers/maxParty
@@ -80,6 +95,7 @@ const Chat = () => {
     });
     // ================ socket server와 통신하기 ==================
   }, []);
+  // console.log("바깥msgs============>", messages);
 
   // {name: test1, message: hi} >> arr[0].name
   // const msgList = [
@@ -89,16 +105,14 @@ const Chat = () => {
   // 자기가 친 채팅 내역이 있는 사람만 자기 채팅 우측에, 없으면 다 왼쪽
   // name === {nickname} ? <> el.<>
 
-  console.log("mess===========>", messages);
-  console.log("crr===========>", currParty);
-  // console.log("test=========>", test);
-  // console.log("test=========>", message);
+  console.log("sadasd===========>", prevMessages);
+  console.log("msgs============>", messages);
 
   const sendMessage = (event) => {
     event.preventDefault();
 
     if (message) {
-      // console.log(message)
+      socket.emit("new_message", { data: message });
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
@@ -125,6 +139,13 @@ const Chat = () => {
               {/*  */}
             </div>
           </div>
+          {/* 
+          <Messages messages={messages} name={name} />
+          <Input
+            message={message}
+            setMessage={setMessage}
+            sendMessage={sendMessage}
+          /> */}
 
           <Messages messages={messages} name={name} />
           <Input
@@ -133,7 +154,7 @@ const Chat = () => {
             sendMessage={sendMessage}
           />
         </div>
-        <TextContainer users={users} />
+        {/* <TextContainer users={users} /> */}
       </div>
     </FooLayout>
   );

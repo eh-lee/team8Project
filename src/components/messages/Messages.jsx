@@ -12,7 +12,7 @@ function Messages({ messages, name }) {
 
   return (
     <BasicScrollToBottom className="messages">
-      {messages.map((message, i) => {
+      {messages?.map((message, i) => {
         return (
           <div key={i}>
             <Message message={message} name={name} />
