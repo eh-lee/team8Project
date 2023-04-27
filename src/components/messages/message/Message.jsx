@@ -37,6 +37,7 @@ const StMessageContEnd = styled.div`
   width: 400px;
   margin: 16px 10px 0 0;
   // border: 1px solid tomato;
+  font-size: 14px;
 `;
 
 const StMessageContStart = styled.div`
@@ -45,13 +46,13 @@ const StMessageContStart = styled.div`
   justify-content: flex-start;
   margin: 16px 10px 0 10px;
   // border: 1px solid green;
+  font-size: 14px;
 `;
 
 const StMsgTextWhite = styled.p`
   width: 100%;
   letter-spacing: 0;
   float: left;
-  font-size: 1.1em;
   word-wrap: break-word;
   color: white;
 `;
@@ -60,7 +61,6 @@ const StMsgTextDark = styled.p`
   width: 100%;
   letter-spacing: 0;
   float: left;
-  font-size: 1.1em;
   word-wrap: break-word;
   color: #353535;
 `;
@@ -85,7 +85,6 @@ const StMsgBoxBlue = styled.div`
 const StNameRight = styled.p`
   display: flex;
   align-items: center;
-  font-family: Helvetica;
   color: #828282;
   letter-spacing: 0.3px;
   padding-right: 10px;
@@ -94,7 +93,6 @@ const StNameRight = styled.p`
 const StNameLeft = styled.p`
   display: flex;
   align-items: center;
-  font-family: Helvetica;
   color: #828282;
   letter-spacing: 0.3px;
   padding-left: 10px;

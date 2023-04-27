@@ -123,7 +123,10 @@ const Write = () => {
         <PageWithFooterWrapper>
           <WriteHeader>
             <WriteHeaderCont>
+              {/* 1 */}
               <WriteCanc onClick={handleCanc}>취소</WriteCanc>
+              {/* 1 */}
+              {/* 2 */}
               <WriteCategory>
                 <MainCat>{maincategory}</MainCat>
                 <SubCat>{category}</SubCat>
@@ -131,7 +134,10 @@ const Write = () => {
                   <IoIosArrowDown onClick={categoryModalOpenHandler} />
                 </IconCont>
               </WriteCategory>
+              {/* 2 */}
+              {/* 3 */}
               <WritePost onClick={submitHandler}>등록</WritePost>
+              {/* 3 */}
             </WriteHeaderCont>
           </WriteHeader>
           <WriteForm

@@ -28,7 +28,7 @@ function Messages({ messages, name }) {
 export default Messages;
 
 const MessagesWrap = styled.div`
-  margin-top: 12.2%;
+  margin-top: 18%;
   overflow: auto;
   display: flex;
   height: 85%;

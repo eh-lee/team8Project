@@ -24,7 +24,6 @@ const Input = ({ setMessage, sendMessage, message }) => (
 export default Input;
 
 const StInputCont = styled.div`
-  /* border: 1px solid green; */
   background-color: white;
   width: 400px;
   min-height: 30px;
@@ -37,7 +36,7 @@ const StInputCont = styled.div`
   align-items: center;
   position: fixed;
   bottom: 0;
-  /* z-index: 1; */
+  z-index: 1;
 `;
 
 const StForm = styled.form`
@@ -51,7 +50,6 @@ const StForm = styled.form`
 
 const StMsginput = styled.input`
   background-color: #f2f2f7;
-  border: none;
   border-radius: 20px;
   width: 260px;
   font-size: 14px;

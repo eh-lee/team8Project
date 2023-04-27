@@ -2,16 +2,12 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import { MdArrowBackIosNew } from "react-icons/md";
-
+import { MdOutlineClose } from "react-icons/md";
 // import "./Chat.css";
 // import InfoBar from "../../components/infoBar/InfoBar";
 import Messages from "../../components/messages/Messages";
 import Input from "../../components/input/Input";
-import TextContainer from "../../components/textContainer/TextContainer";
 import styled from "styled-components";
-
-import onlineIcon from "../../assets/icons/test/onlineIcon.png";
-import closeIcon from "../../assets/icons/test/closeIcon.png";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 
@@ -29,6 +25,7 @@ const Chat = () => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [isAdmin, setIsAdmin] = useState("");
 
   // 그 전의 대화 내용
   const [prevMessages, setPrevMessages] = useState([]);
@@ -44,7 +41,7 @@ const Chat = () => {
 
   const closeBtnHandler = async () => {
     // [추가] 1
-    // [  ] isAdmin ? <onClick = {chatSaveHandler} /> : null
+    // [V] isAdmin ? <onClick = {chatSaveHandler} /> : null
     console.log("room============>", room);
     socket.disconnect();
     try {
@@ -53,12 +50,13 @@ const Chat = () => {
       console.error(error);
     }
 
-    nav(-1);
+    nav("/battle");
   };
 
   const chatSaveHandler = async () => {
     // [추가] 2
-    // [  ] isAdmin ? <onClick = {chatSaveHandler} /> : null
+    // [ V ] isAdmin ? <onClick = {chatSaveHandler} /> : null
+    // [  ]통신 확인 필요
     try {
       console.log("messages보낸다~~");
       await instanceWithAuth.post("/chat/chatsave", messages);
@@ -68,7 +66,27 @@ const Chat = () => {
   };
 
   // [추가] 3
-  // [  ] !isAdmin ?  <onClick = {nav('-1')} /> : null
+  // [ V ] !isAdmin ?  <onClick = {nav('-1')} /> : null
+
+  // [추가] 4
+  // [  ] isAdmin GET (명세 추가 필요)
+  // <저녁 회의>
+  // [  ] to 건선 님 ====> 채팅 기능 DELETE 제외 전부 key value 등 말씀 드리기
+  // [  ] to 디자이너님 =====> 채팅 저장, 삭제 등 관련해서!
+  // [  ] to 모두 ====> 채팅기능 : 계급장 떼고 붙자!!!!! + 배틀 게시판 이미지 참고 (user정보 필요없음)
+
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      try {
+        const response = await instanceWithAuth.get("/sth/sth");
+        console.log("fetchAdmin의 response===========>", response);
+        // setIsAdmin(response.sth);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAdmin();
+  }, []);
 
   //================================================================
 
@@ -151,26 +169,56 @@ const Chat = () => {
 
   return (
     <FooLayout>
-      <ChatHeader>
+      <StChatHeader>
+        <StChatHeaderCont>
+          {/* 1 */}
+          <StChatClose>
+            {/* { isAdmin ? <MdOutlineClose onClick={closeBtnHandler}/> : <MdArrowBackIosNew onClick={()=>{nav(-1)}}/> } */}
+            <MdOutlineClose onClick={closeBtnHandler} />
+          </StChatClose>
+          {/* 1 */}
+          {/* 2 */}
+          <StChatInfo>
+            <StChatInfoSub>
+              {room} &nbsp; {currParty.numUsers}/{currParty.maxParty}
+            </StChatInfoSub>
+          </StChatInfo>
+          {/* 2 */}
+          {/* 3 */}
+          <StChatSave>
+            {/* { isAdmin ? <SthSaveIcon onClick={chatSaveHandler}/> : <StFooDiv> } */}
+            <MdOutlineClose onClick={chatSaveHandler} />
+          </StChatSave>
+          {/* 3 */}
+        </StChatHeaderCont>
+      </StChatHeader>
+
+      {/* =================================================================================== */}
+      {/* <ChatHeader>
         <ChatHeaderCont>
           <StBackBtn
             onClick={() => {
-              nav(-1);
+              nav("/battle");
             }}
-          >
+            >
             <MdArrowBackIosNew />
+            { isAdmin ? <MdOutlineClose onClick={closeBtnHandler}/> : <MdArrowBackIosNew onClick={()=>{nav(-1)}}/>}
+            <MdOutlineClose onClick={closeBtnHandler} />
           </StBackBtn>
           <WriteCategory>
             <MainCat>
               {room} &nbsp; {currParty.numUsers}/{currParty.maxParty}
             </MainCat>
+            { isAdmin ? <SthSaveIcon onClick={chatSaveHandler}/> : <FooDivForSpace> }
             <button onClick={closeBtnHandler}>채팅방 나가기</button>
-            <button onClick={chatSaveHandler}>채팅 기록하기</button>
-            {/* room 글자 수 제한 걸기 */}
+            <button onClick={chatSaveHandler }>채팅 기록하기</button>
+            room 글자 수 제한 걸기
           </WriteCategory>
+          <MdOutlineClose onClick={chatSaveHandler} />
           <StFooDiv />
-        </ChatHeaderCont>
-      </ChatHeader>
+          </ChatHeaderCont>
+          </ChatHeader> */}
+      {/* =================================================================================== */}
 
       <Messages messages={messages} name={name} />
       <Input
@@ -183,6 +231,57 @@ const Chat = () => {
 };
 
 export default Chat;
+
+const StChatSave = styled.div`
+  margin-right: 7.5%;
+`;
+// from write
+
+const StChatHeader = styled.div`
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 400px;
+  color: rgb(70, 70, 70);
+`;
+
+const StChatHeaderCont = styled.div`
+  /* border: 1px solid tomato; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  // *============ HEADER 높이 ===============*
+  padding-bottom: 2vh;
+  height: 5vh;
+  // *============ HEADER 높이 ===============*
+`;
+
+const StChatInfo = styled.div`
+  gap: 0.25rem;
+  display: flex;
+  font-size: 0.95rem;
+  font-weight: bold;
+`;
+
+const StChatClose = styled.div`
+  margin-left: 7.5%;
+  color: rgb(180, 180, 180);
+  font-size: 0.9rem;
+  &:hover {
+    cursor: pointer;
+    color: rgb(70, 70, 70);
+  }
+`;
+
+const StChatInfoSub = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+// from write
 
 // const StChatCont = styled.div`
 //   border: 1px solid blue;
@@ -274,6 +373,7 @@ const FooLayout = styled.div`
 // `;
 
 const ChatHeader = styled.div`
+  // border: 1px solid green;
   background-color: white;
   position: fixed;
   z-index: 1;
@@ -284,29 +384,30 @@ const ChatHeader = styled.div`
 `;
 
 const ChatHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
+  border: 1px solid tomato;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.1rem solid rgb(180, 180, 180);
   // *============ HEADER 높이 ===============*
-  padding: 0 7.5%;
+  // padding: 0 7.5%;
   height: 48px;
   // *============ HEADER 높이 ===============*
 `;
 
-const MainCat = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-`;
+// const MainCat(chat) = styled.div`
+//   font-size: 18px;
+//   font-weight: bold;
+// `;
 
-const WriteCategory = styled.div`
-  gap: 0.25rem;
-  display: flex;
-  font-size: 0.95rem;
-  font-weight: bold;
-`;
+// const WriteCategory(chat) = styled.div`
+//   gap: 0.25rem;
+//   display: flex;
+//   font-size: 0.95rem;
+//   font-weight: bold;
+// `;
 
 const StBackBtn = styled.div`
   color: rgb(180, 180, 180);
