@@ -28,10 +28,10 @@ const LogInPage = () => {
       //   path: "/",
       // });
       cookies.set("nickname", response.data.nickname, { path: "/" });
-      cookies.set("refresh_token", response.headers.refreshtoken, {
-        path: "/",
-      });
-      console.log("일반 로그인 rfrsh------>", response.headers.refreshtoken);
+      // cookies.set("refresh_token", response.headers.refreshtoken, {
+      //   path: "/",
+      // });
+      // console.log("일반 로그인 rfrsh------>", response.headers.refreshtoken);
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.msg;

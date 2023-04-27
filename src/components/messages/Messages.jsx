@@ -28,13 +28,16 @@ function Messages({ messages, name }) {
 export default Messages;
 
 const MessagesWrap = styled.div`
-  padding: 10% 0;
+  margin-top: 12.2%;
   overflow: auto;
-  /* flex: auto; */
   display: flex;
-  height: 400px;
+  height: 85%;
   width: 100%;
-  border: 1px solid brown;
+  overflow: none;
+  // border: 1px solid brown;
+  /* padding-top: 30px; */
+  /* padding: 30px 0; */
+  background-color: #f2f2f7;
 `;
 
 const StMessageCont = styled.div`

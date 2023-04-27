@@ -164,7 +164,7 @@ const DetailPostComments_Input = styled.textarea`
 const DetailPostComments_InputBtn = styled.button`
   border: none;
   background-color: transparent;
-  color: #dddde4;
+  color: #bdbdc9;
   width: 32px;
   height: 24px;
 

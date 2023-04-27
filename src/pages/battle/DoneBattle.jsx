@@ -9,13 +9,10 @@ import { useEffect } from "react";
 import { instance } from "../../api/axios";
 import ChatCard from "../../components/chat/ChatCard";
 import { Helmet } from "react-helmet";
-import battleCreate from "../../assets/battle/battleCreate.png"
+import battleCreate from "../../assets/battle/battleCreate.png";
 
 const Battle = () => {
   const nav = useNavigate();
-
-  const [nickname, setNickname] = useState("");
-  const [roomName, setRoomName] = useState("");
 
   const [chattingList, setChattingList] = useState([]);
 
@@ -66,15 +63,10 @@ const Battle = () => {
           <StBattleHeaderSub>
             <StBattleTitle>훈수 배틀</StBattleTitle>
             <StBattleCategoryCont>
-              <StBattleCategory               
-              onClick={() => nav("/battle")}
-              >
+              <StBattleCategory onClick={() => nav("/battle")}>
                 실시간 배틀
               </StBattleCategory>
-              <StBattleCategory 
-              isActive 
-              onClick={() => nav("/donebattle")}
-              >
+              <StBattleCategory isActive onClick={() => nav("/donebattle")}>
                 지난 배틀
               </StBattleCategory>
             </StBattleCategoryCont>
@@ -92,11 +84,9 @@ const Battle = () => {
             <ChatCard
               key={idx}
               idx={idx}
-              chatIdx={item.chatIdx}
+              // chatIdx={item.chatIdx}
               roomName={item.roomName}
-              nickname={item.nickname}
               maxParty={item.maxParty}
-              // isFirst={idx === 0}
             />
           ))}
         </ChatCardCont>
@@ -104,20 +94,9 @@ const Battle = () => {
 
         {/* ====== 채팅방 개설 버튼 ====== */}
         <BtnCont>
-          <Link
-            onClick={(e) =>
-              !nickname || !roomName ? e.preventDefault() : null
-            }
-            to={`/battle/chat?nickName=${nickname}&roomName=${roomName}`}
-          >
-
-            <StBattleCreateBtn 
-              onClick={createChatModalOpenHandler}
-              type="submit"
-            >
-              <StBattleCreateImg src={battleCreate}/>
-            </StBattleCreateBtn>
-          </Link>
+          <StBattleCreateBtn onClick={createChatModalOpenHandler} type="submit">
+            <StBattleCreateImg src={battleCreate} />
+          </StBattleCreateBtn>
         </BtnCont>
         {/* ====== 채팅방 개설 버튼 ====== */}
 
@@ -179,14 +158,14 @@ const BtnCont = styled.div`
 const StBattleCreateImg = styled.img`
   height: 56px;
   width: 56px;
-`
+`;
 
 const StBattleCreateBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
   outline: none;
-`
+`;
 
 const StyledFooter = styled.div`
   position: fixed;
@@ -265,5 +244,5 @@ const StBattleBackground = styled.div`
   padding: 5% 0;
   width: 400px;
   height: 12px;
-  background-color: rgb(220, 220, 220, 0.35);  
+  background-color: rgb(220, 220, 220, 0.35);
 `;

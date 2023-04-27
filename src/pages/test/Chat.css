@@ -1,9 +1,9 @@
-.outerContainer {
+/* .outerContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #1a1a1d;
+  background-color: #f2f2f7;
 }
 
 .container {
@@ -13,7 +13,6 @@
   background: #ffffff;
   border-radius: 8px;
   height: 60%;
-  /* width: 35%; */
   width: 400px;
 }
 
@@ -32,4 +31,4 @@
   .container {
     width: 60%;
   }
-}
+} */

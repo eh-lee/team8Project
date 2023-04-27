@@ -34,19 +34,17 @@ export default Message;
 const StMessageContEnd = styled.div`
   display: flex;
   justify-content: flex-end;
-  // padding: 0 5%;
-  margin-top: 3px;
-  border: 1px solid green;
-  width: 100%;
+  width: 400px;
+  margin: 16px 10px 0 0;
+  // border: 1px solid tomato;
 `;
 
 const StMessageContStart = styled.div`
-  width: 100%;
+  width: 400px;
   display: flex;
   justify-content: flex-start;
-  // padding: 0 5%;
-  margin-top: 3px;
-  border: 1px solid green;
+  margin: 16px 10px 0 10px;
+  // border: 1px solid green;
 `;
 
 const StMsgTextWhite = styled.p`
@@ -68,21 +66,20 @@ const StMsgTextDark = styled.p`
 `;
 
 const StMsgBoxLight = styled.div`
-  background: #f3f3f3;
-  border-radius: 20px;
-  padding: 5px 20px;
-  color: white;
+  background: white;
+  border-radius: 0 10px 10px 10px;
+  padding: 8px 12px;
   display: inline-block;
   max-width: 80%;
 `;
 
 const StMsgBoxBlue = styled.div`
-  border-radius: 20px;
-  padding: 5px 20px;
-  color: white;
+  border-radius: 10px 0 10px 10px;
+  padding: 8px 12px;
   display: inline-block;
-  max-width: 80%;
-  background: #2979ff;
+  max-width: 60%;
+  background: #ef3f61;
+  margin-right: 10px;
 `;
 
 const StNameRight = styled.p`

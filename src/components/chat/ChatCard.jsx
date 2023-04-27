@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import battle1 from "../../assets/battle/battle1.png"
-import battle2 from "../../assets/battle/battle2.png"
-import battleParty from "../../assets/battle/battleCurrParty.png"
+import { cookies } from "../../api/cookies";
+import battle1 from "../../assets/battle/battle1.png";
+import battle2 from "../../assets/battle/battle2.png";
+import battleParty from "../../assets/battle/battleCurrParty.png";
 
-const ChatCard = ({ idx, roomName, chatIdx, nickname, maxParty }) => {
+const ChatCard = ({ idx, roomName, chatIdx, maxParty }) => {
   const navigate = useNavigate();
+  const nickname = cookies.get("nickname");
 
   return (
     <StChatCardWrap
@@ -16,7 +18,7 @@ const ChatCard = ({ idx, roomName, chatIdx, nickname, maxParty }) => {
     >
       <StChatCardInfoCont>
         <StChatCardInfoTitleBox>
-          <StChatCardTitleImg src={idx %2 === 0 ? battle2 : battle1} />
+          <StChatCardTitleImg src={idx % 2 === 0 ? battle2 : battle1} />
           <StChatCardTitle>{roomName}</StChatCardTitle>
         </StChatCardInfoTitleBox>
         {/* {currParty}\ */}

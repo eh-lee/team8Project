@@ -11,7 +11,6 @@ const KakaoLogin = () => {
   const navi = useNavigate();
   const { REACT_APP_SERVER_URL } = process.env;
 
-  //토큰 받는 부분
   useEffect(() => {
     if (code) {
       const kakao = async () => {
@@ -24,11 +23,11 @@ const KakaoLogin = () => {
             },
           }
         );
-        // if ( await response.headers.authorization) {
         if (await response) {
           console.log("리프레시 토큰을 찾아서…===========>", response);
           cookies.set("access_token", response.headers.authorization);
           cookies.set("refresh_token", response.headers.refreshtoken);
+          // 이거 refsh 없애기로 했나?
           cookies.set("nickname", response.data.nickname);
         }
         return navi("/");
