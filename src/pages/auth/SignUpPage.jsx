@@ -55,11 +55,11 @@ const SignUpPage = () => {
   const [nicknameMsg, setNicknameMsg] = useState("");
   const validNickname = (e) => {
     const nickname = e.target.value;
-    const isValidNickname = /^[가-힣a-zA-Z0-9]{2,15}$/.test(nickname);
+    const isValidNickname = /^[가-힣a-zA-Z0-9]{2,6}$/.test(nickname);
     if (isValidNickname) {
       setNicknameMsg("올바른 형식입니다.");
     } else {
-      setNicknameMsg("닉네임은 2~15글자, 한글, 알파벳, 숫자만 입력 가능합니다");
+      setNicknameMsg("닉네임은 2~6글자, 한글, 알파벳, 숫자만 입력 가능합니다");
     }
   };
 

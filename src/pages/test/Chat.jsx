@@ -10,6 +10,11 @@ import Input from "../../components/input/Input";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
+import closeBtn from "../../assets/icons/common/closeBtn.png";
+import ModalPortal from "../../components/modal/ModalPortal";
+import ChatEndModal from "../../components/modal/ChatEndModal";
+import MobileLayout from "../../layout/MobileLayout";
+import { cookies } from "../../api/cookies";
 
 const ENDPOINT = "http://localhost:4000";
 let socket;
@@ -19,13 +24,15 @@ let socket;
 
 const Chat = () => {
   const nav = useNavigate();
+  const curNickname = cookies.get("nickname");
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [isAdmin, setIsAdmin] = useState("");
+
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // 그 전의 대화 내용
   const [prevMessages, setPrevMessages] = useState([]);
@@ -39,32 +46,6 @@ const Chat = () => {
   // [ V ]chatRoom? css
   // 채팅 그.. wrap 밖에.. 그.. 하나 더.. 그.. 넣기.. 배경.. 그거..
 
-  const closeBtnHandler = async () => {
-    // [추가] 1
-    // [V] isAdmin ? <onClick = {chatSaveHandler} /> : null
-    console.log("room============>", room);
-    socket.disconnect();
-    try {
-      await instanceWithAuth.delete(`/chat/hunsuChat/${room}`);
-    } catch (error) {
-      console.error(error);
-    }
-
-    nav("/battle");
-  };
-
-  const chatSaveHandler = async () => {
-    // [추가] 2
-    // [ V ] isAdmin ? <onClick = {chatSaveHandler} /> : null
-    // [  ]통신 확인 필요
-    try {
-      console.log("messages보낸다~~");
-      await instanceWithAuth.post("/chat/chatsave", messages);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   // [추가] 3
   // [ V ] !isAdmin ?  <onClick = {nav('-1')} /> : null
 
@@ -72,21 +53,31 @@ const Chat = () => {
   // [  ] isAdmin GET (명세 추가 필요)
   // <저녁 회의>
   // [  ] to 건선 님 ====> 채팅 기능 DELETE 제외 전부 key value 등 말씀 드리기
-  // [  ] to 디자이너님 =====> 채팅 저장, 삭제 등 관련해서!
-  // [  ] to 모두 ====> 채팅기능 : 계급장 떼고 붙자!!!!! + 배틀 게시판 이미지 참고 (user정보 필요없음)
+  // [ V ] to 디자이너님 =====> 채팅 저장, 삭제 등 관련해서!
+  // [ V ] to 모두 ====> 채팅기능 : 계급장 떼고 붙자!!!!! + 배틀 게시판 이미지 참고 (user정보 필요없음)
+  // [ V ] 지난 배틀 관련 (===실시간 배틀 but, 이미지는 grayscale로?)
+  // [ V ] 닉네임이랑 말풍선 배치 관련
 
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const response = await instanceWithAuth.get("/sth/sth");
-        console.log("fetchAdmin의 response===========>", response);
-        // setIsAdmin(response.sth);
+        const response = await instanceWithAuth.get(
+          `/chat/hunsuChat/admin/${room}`
+        );
+        console.log("fetchAdmin의 response nickname=========>", response.data);
+        // if(curNickname === response.sth) {
+        //   setIsAdmin(true);
+        // } else {
+        // setIsAdmin(false);
+        // }
       } catch (error) {
         console.error(error);
       }
     };
     fetchAdmin();
   }, []);
+
+  console.log("isAdmin===============>", isAdmin);
 
   //================================================================
 
@@ -153,9 +144,6 @@ const Chat = () => {
     // ================ socket server와 통신하기 ==================
   }, []);
 
-  // 자기가 친 채팅 내역이 있는 사람만 자기 채팅 우측에, 없으면 다 왼쪽
-  // name === {nickname} ? <> el.<>
-
   console.log("mess===========>", messages);
   console.log("crr===========>", currParty);
 
@@ -167,70 +155,80 @@ const Chat = () => {
     }
   };
 
+  const [isChatEndModalOpen, setIsChatEndModalOpen] = useState(false);
+
+  const ChatEndModalOpenHandler = () => {
+    setIsChatEndModalOpen(true);
+  };
+  const ChatEndModalCloseHandler = () => {
+    console.log("모달이 닫힌거임!");
+    setIsChatEndModalOpen(false);
+  };
+
+  console.log("open?==========>", isChatEndModalOpen);
+
   return (
-    <FooLayout>
-      <StChatHeader>
-        <StChatHeaderCont>
-          {/* 1 */}
-          <StChatClose>
-            {/* { isAdmin ? <MdOutlineClose onClick={closeBtnHandler}/> : <MdArrowBackIosNew onClick={()=>{nav(-1)}}/> } */}
-            <MdOutlineClose onClick={closeBtnHandler} />
-          </StChatClose>
-          {/* 1 */}
-          {/* 2 */}
-          <StChatInfo>
-            <StChatInfoSub>
-              {room} &nbsp; {currParty.numUsers}/{currParty.maxParty}
-            </StChatInfoSub>
-          </StChatInfo>
-          {/* 2 */}
-          {/* 3 */}
-          <StChatSave>
-            {/* { isAdmin ? <SthSaveIcon onClick={chatSaveHandler}/> : <StFooDiv> } */}
-            <MdOutlineClose onClick={chatSaveHandler} />
-          </StChatSave>
-          {/* 3 */}
-        </StChatHeaderCont>
-      </StChatHeader>
+    <>
+      <MobileLayout>
+        {/* =========== 모달 =========== */}
+        <ModalPortal>
+          <ModalCont>
+            {isChatEndModalOpen && (
+              <ChatEndModal
+                open={isChatEndModalOpen}
+                close={ChatEndModalCloseHandler}
+                isAdmin={isAdmin}
+                room={room}
+                messages={messages}
+              />
+            )}
+          </ModalCont>
+        </ModalPortal>
+        {/* =========== 모달 =========== */}
+        {/* <FooLayout> */}
+        <StChatHeader>
+          <StChatHeaderCont>
+            {/* 1 */}
+            <StChatClose onClick={ChatEndModalOpenHandler}>
+              {/* { isAdmin ? <MdOutlineClose onClick={closeBtnHandler}/> : <MdArrowBackIosNew onClick={()=>{nav(-1)}}/> } */}
+              <StChatCloseImg src={closeBtn} />
 
-      {/* =================================================================================== */}
-      {/* <ChatHeader>
-        <ChatHeaderCont>
-          <StBackBtn
-            onClick={() => {
-              nav("/battle");
-            }}
-            >
-            <MdArrowBackIosNew />
-            { isAdmin ? <MdOutlineClose onClick={closeBtnHandler}/> : <MdArrowBackIosNew onClick={()=>{nav(-1)}}/>}
-            <MdOutlineClose onClick={closeBtnHandler} />
-          </StBackBtn>
-          <WriteCategory>
-            <MainCat>
-              {room} &nbsp; {currParty.numUsers}/{currParty.maxParty}
-            </MainCat>
-            { isAdmin ? <SthSaveIcon onClick={chatSaveHandler}/> : <FooDivForSpace> }
-            <button onClick={closeBtnHandler}>채팅방 나가기</button>
-            <button onClick={chatSaveHandler }>채팅 기록하기</button>
-            room 글자 수 제한 걸기
-          </WriteCategory>
-          <MdOutlineClose onClick={chatSaveHandler} />
-          <StFooDiv />
-          </ChatHeaderCont>
-          </ChatHeader> */}
-      {/* =================================================================================== */}
-
-      <Messages messages={messages} name={name} />
-      <Input
-        message={message}
-        setMessage={setMessage}
-        sendMessage={sendMessage}
-      />
-    </FooLayout>
+              {/*  */}
+            </StChatClose>
+            {/* 1 */}
+            {/* 2 */}
+            <StChatInfo>
+              <StChatInfoSub>
+                {room} &nbsp; {currParty.numUsers}/{currParty.maxParty}
+              </StChatInfoSub>
+            </StChatInfo>
+            {/* 2 */}
+            {/* 3 */}
+            <StChatSave>
+              <StFooDiv />
+              {/* <MdOutlineClose onClick={chatSaveHandler} /> */}
+            </StChatSave>
+            {/* 3 */}
+          </StChatHeaderCont>
+        </StChatHeader>
+        <Messages messages={messages} name={name} />
+        <Input
+          message={message}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
+        />
+        {/* </FooLayout> */}
+      </MobileLayout>
+    </>
   );
 };
 
 export default Chat;
+
+const ModalCont = styled.div`
+  margin: 0 auto;
+  width: 400px;
+`;
 
 const StChatSave = styled.div`
   margin-right: 7.5%;
@@ -267,6 +265,7 @@ const StChatInfo = styled.div`
 `;
 
 const StChatClose = styled.div`
+  border: 1px solid brown;
   margin-left: 7.5%;
   color: rgb(180, 180, 180);
   font-size: 0.9rem;
@@ -274,6 +273,11 @@ const StChatClose = styled.div`
     cursor: pointer;
     color: rgb(70, 70, 70);
   }
+`;
+
+const StChatCloseImg = styled.img`
+  height: 12px;
+  width: 12px;
 `;
 
 const StChatInfoSub = styled.div`
@@ -299,9 +303,7 @@ const StChatInfoSub = styled.div`
 // `;
 
 const FooLayout = styled.div`
-  /* border: 2px solid red; */
-  /* position: fixed; */
-  /* top: 0; */
+  position: relative;
   margin: 0 auto;
   width: 400px;
   height: 100vh;

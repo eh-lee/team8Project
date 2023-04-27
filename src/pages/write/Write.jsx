@@ -110,6 +110,7 @@ const Write = () => {
   const categoryModalOpenHandler = () => {
     setIsCategoryModalOpen(true);
   };
+
   const categoryModalCloseHandler = () => {
     setIsCategoryModalOpen(false);
   };

@@ -70,14 +70,14 @@ const StMsgBoxLight = styled.div`
   border-radius: 0 10px 10px 10px;
   padding: 8px 12px;
   display: inline-block;
-  max-width: 80%;
+  max-width: 65%;
 `;
 
 const StMsgBoxBlue = styled.div`
   border-radius: 10px 0 10px 10px;
   padding: 8px 12px;
   display: inline-block;
-  max-width: 60%;
+  max-width: 65%;
   background: #ef3f61;
   margin-right: 10px;
 `;

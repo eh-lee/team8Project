@@ -18,16 +18,12 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
       }
     };
 
+    document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [modalRef]);
-
-  //title: string,
-  // maxParty: number,
-  // nickname: string,
-  // roomName: string,
-  // chatIdx: UUID
+  }, [modalRef, open, close]);
 
   // 수정하기 버튼 클릭
   const editButtonHandler = () => {
@@ -51,12 +47,12 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
   };
 
   return open ? (
-    <DetailMenuWrap>
-      <MenuButton onClick={editButtonHandler} ref={modalRef}>
+    <DetailMenuWrap ref={modalRef}>
+      <MenuButton onClick={editButtonHandler}>
         <ButtonText>수정하기</ButtonText>
         <AiOutlineEdit />
       </MenuButton>
-      <MenuButton onClick={deleteButtonHandler} ref={modalRef} delete>
+      <MenuButton onClick={deleteButtonHandler} delete>
         <ButtonText>삭제하기</ButtonText>
         <BsTrash />
       </MenuButton>
