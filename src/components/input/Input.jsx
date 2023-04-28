@@ -36,7 +36,6 @@ const StInputCont = styled.div`
   align-items: center;
   position: fixed;
   bottom: 0;
-  /* z-index: 1; */
 `;
 
 const StForm = styled.form`

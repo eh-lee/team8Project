@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+// import ChatIcon from "../../../assets/battle/battleChatIcon.png";
+import hunsuFace from "../../../assets/battle/battleChatIcon.png";
 
 function Message({ message: { user, text }, name }) {
-  // function Message({ message: {text} , name }) {
   let isSentByCurrentUser = false;
 
   const trimmedName = name.trim().toLowerCase();
@@ -14,17 +15,19 @@ function Message({ message: { user, text }, name }) {
   return isSentByCurrentUser ? (
     <StMessageContEnd>
       <StNameRight>{trimmedName}</StNameRight>
-      <StMsgBoxBlue>
-        {/* <StMsgTextWhite>{ReactEmoji.emojify(text)}</StMsgTextWhite> */}
+      <StMsgBoxMargenta>
         <StMsgTextWhite>{text}</StMsgTextWhite>
-      </StMsgBoxBlue>
+      </StMsgBoxMargenta>
     </StMessageContEnd>
   ) : (
     <StMessageContStart>
+      <StChatInfoProfileCont>
+        <StChatInfoUserLvImg src={hunsuFace} />
+        <StNameLeft>{user === "hunsuBot" ? "훈수봇" : user}</StNameLeft>
+      </StChatInfoProfileCont>
       <StMsgBoxLight>
         <StMsgTextDark>{text}</StMsgTextDark>
       </StMsgBoxLight>
-      <StNameLeft>{user}</StNameLeft>
     </StMessageContStart>
   );
 }
@@ -35,18 +38,36 @@ const StMessageContEnd = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 400px;
-  margin: 16px 10px 0 0;
-  // border: 1px solid tomato;
+  margin-top: 16px;
   font-size: 14px;
+  // border: 1px solid tomato;
+`;
+
+const StChatInfoProfileCont = styled.div`
+  // border: 1px solid violet;
+  display: flex;
+  flex-direction: flex-start;
+  align-items: center;
+  position: relative;
+  max-width: 280px;
+  height: 32px;
+`;
+
+const StChatInfoUserLvImg = styled.img`
+  /* border: 1px solid gray; */
+  // border-radius: 50%;
+  width: 32px;
+  height: 32px;
 `;
 
 const StMessageContStart = styled.div`
   width: 400px;
   display: flex;
   justify-content: flex-start;
-  margin: 16px 10px 0 10px;
-  // border: 1px solid green;
+  margin: 16px 10px 0 25px;
   font-size: 14px;
+  flex-direction: column;
+  // border: 1px solid green;
 `;
 
 const StMsgTextWhite = styled.p`
@@ -71,15 +92,16 @@ const StMsgBoxLight = styled.div`
   padding: 8px 12px;
   display: inline-block;
   max-width: 65%;
+  margin-left: 40px;
 `;
 
-const StMsgBoxBlue = styled.div`
+const StMsgBoxMargenta = styled.div`
   border-radius: 10px 0 10px 10px;
   padding: 8px 12px;
   display: inline-block;
   max-width: 65%;
   background: #ef3f61;
-  margin-right: 10px;
+  margin-right: 25px;
 `;
 
 const StNameRight = styled.p`

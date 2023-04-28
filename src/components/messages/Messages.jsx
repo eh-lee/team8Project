@@ -32,9 +32,9 @@ const MessagesWrap = styled.div`
   overflow: auto;
   display: flex;
   height: 85%;
-  width: 100%;
+  width: 400px;
   overflow: none;
-  // border: 1px solid brown;
+  /* border: 1px solid brown; */
   /* padding-top: 30px; */
   /* padding: 30px 0; */
   background-color: #f2f2f7;

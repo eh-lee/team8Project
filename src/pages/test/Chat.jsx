@@ -131,6 +131,8 @@ const Chat = () => {
       setMessages((messages) => [...messages, message]);
     });
 
+    //메세지스 = 서버에서 받아오는 메세지들을 합한 배열
+    //메세지의 0번(훈수봇)은 서버에서 오고, 1번부터(send_message)가 클라->서버->클라
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
