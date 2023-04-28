@@ -7,6 +7,7 @@ import BoardPostCard from "../../components/post/BoardPostCard";
 // import HorizontalScroll from "../../components/hook/scroll/HorizontalScroll";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const TotalBoard = () => {
   const [category, setCategory] = useState("전체");
@@ -48,8 +49,11 @@ const TotalBoard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await instance.get(
-          `/postCards?maincategory=전체&category=${category}&splitNumber=7&splitPageNumber=${page}`
+        // const response = await instance.get(
+        // `/postCards?maincategory=전체&category=${category}&splitNumber=7&splitPageNumber=${page}`
+        // );
+        const response = await axios.get(
+          ` http://43.201.45.82:3000/api/postCards?maincategory=전체&category=${category}&splitNumber=7&splitPageNumber=${page}`
         );
         if (prevCategory === category) {
           setData((prev) => [...prev, ...response.data.postCards]);

@@ -6,7 +6,6 @@ import styled from "styled-components";
 function KakaoLoginBtn() {
   const KaKaoLoginHandler = () => {
     window.location.href = KAKAO_LOGIN_URL;
-    console.log("btnPage--------->", KAKAO_LOGIN_URL);
   };
 
   return (
