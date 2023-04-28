@@ -12,7 +12,7 @@ import HotPostCardSlider from "../components/post/HotPostCardSlider";
 import NewPostCardSlider from "../components/post/NewPostCardSlider";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Chatting from "./chatting/Chatting";
+import LiveBattleCard from "../components/chat/LiveBattleCard";
 
 const Home = () => {
   const isLogin = cookies.get("access_token") ? true : false;
@@ -51,7 +51,7 @@ const Home = () => {
                 more="더 보기"
                 on="on"
               />
-              <Chatting />
+              <LiveBattleCard />
             </NewChattingCont>
 
             {/* 실시간 게시글 */}
