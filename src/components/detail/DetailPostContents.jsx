@@ -110,7 +110,7 @@ export default DetailPostContents
 // 상세 게시글 정보
 const DetailPost_InfoWrap = styled.ul`
   /* border: 1px solid green; */
-  margin: 4rem 7.5% 0 7.5%;
+  margin: 9.5vh 7.5% 0 7.5%;
   display: flex;
   flex-direction: row;
 `;

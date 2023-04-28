@@ -65,7 +65,7 @@ export default DetailMenuModal;
 const DetailMenuWrap = styled.ul`
   position: absolute;
   background-color: white;
-  top: 7vh;
+  top: 9vh;
   left: 50vw;
   width: 164px;
   height: 80px;
