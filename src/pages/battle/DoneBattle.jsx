@@ -1,49 +1,43 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MobileLayout from "../../layout/MobileLayout";
 import styled from "styled-components";
 import FooterNav from "../../components/footer/FooterNav";
-import ModalPortal from "../../components/modal/ModalPortal";
-import CreateChatModal from "../../components/modal/CreateChatModal";
 import { useEffect } from "react";
 import { instance } from "../../api/axios";
 import ChatCard from "../../components/chat/ChatCard";
 import { Helmet } from "react-helmet";
-import battleCreate from "../../assets/battle/battleCreate.png";
 
 const Battle = () => {
   const nav = useNavigate();
 
   const [chattingList, setChattingList] = useState([]);
-
-  const [isCreateChatModalOpen, setIsCreateChatModalOpen] = useState(false);
-
-  const createChatModalOpenHandler = () => {
-    setIsCreateChatModalOpen(true);
-  };
-  const createChatModalCloseHandler = () => {
-    setIsCreateChatModalOpen(false);
-  };
+  
+  const isRealTime = false;
 
   useEffect(() => {
-    const chatInfoGet = async () => {
+    const doneChatGet = async () => {
       try {
-        // const res = await instance.get(`/chat/hunsuChat?splitNumber=4&splitPageNumber=${page}`)
         const res = await instance.get(
-          "/chat/hunsuChat?splitNumber=10&splitPageNumber=1"
+          "/chat/doneChat"
         );
-        // maxParty
-        // nicknmae
-        // roomName
-        // chatIdx
-        console.log("data===========>", res.data.result);
-        setChattingList(res.data.result);
+        
+        console.log("data===========>", res.data);
+        // setChattingList(res.data.sth)
+        // setChatSaveIdx(res.data.sth.sth);
       } catch (error) {
         console.error("채팅get실패", error);
       }
     };
-    chatInfoGet();
+    doneChatGet();
   }, []);
+
+
+
+  // 1. 전체 채팅 목록 (roomName, chatSaveIndx) => doneBattle
+  // /api/chat/doneChat
+
+
 
   // maxParty: number,
   // nickname: string,
@@ -71,53 +65,29 @@ const Battle = () => {
               </StBattleCategory>
             </StBattleCategoryCont>
             <StBattleBackground>
-              {/* <div> 대충 배경자리 </div> */}
             </StBattleBackground>
           </StBattleHeaderSub>
         </StBattleHeaderWrap>
         {/* 배틀 페이지 헤더 */}
 
         {/* 채팅 리스트 */}
-        {/* <ChatCardCont ref={postCardContRef}> */}
         <ChatCardCont>
           {chattingList?.map((item, idx) => (
             <ChatCard
               key={idx}
               idx={idx}
-              // chatIdx={item.chatIdx}
+              chatSaveIdx={item.chatSaveIdx}
               roomName={item.roomName}
-              maxParty={item.maxParty}
             />
           ))}
         </ChatCardCont>
         {/* 채팅 리스트 */}
-
-        {/* ====== 채팅방 개설 버튼 ====== */}
-        <BtnCont>
-          <StBattleCreateBtn onClick={createChatModalOpenHandler} type="submit">
-            <StBattleCreateImg src={battleCreate} />
-          </StBattleCreateBtn>
-        </BtnCont>
-        {/* ====== 채팅방 개설 버튼 ====== */}
 
         {/* ====== 푸터 ======= */}
         <StyledFooter>
           <FooterNav />
         </StyledFooter>
         {/* ====== 푸터 ======= */}
-
-        {/* ====== 채팅 생성 모달 ====== */}
-        <ModalPortal>
-          <ModalCont>
-            {isCreateChatModalOpen && (
-              <CreateChatModal
-                open={isCreateChatModalOpen}
-                close={createChatModalCloseHandler}
-              />
-            )}
-          </ModalCont>
-        </ModalPortal>
-        {/* ====== 채팅 생성 모달 ====== */}
       </MobileLayout>
     </>
   );
@@ -138,33 +108,6 @@ const ChatCardCont = styled.div`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
-`;
-
-const ModalCont = styled.div`
-  margin: 0 auto;
-  width: 400px;
-`;
-
-const BtnCont = styled.div`
-  /* border: 1px solid tomato; */
-  bottom: 100px;
-  position: fixed;
-  max-width: 400px;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-`;
-
-const StBattleCreateImg = styled.img`
-  height: 56px;
-  width: 56px;
-`;
-
-const StBattleCreateBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
 `;
 
 const StyledFooter = styled.div`

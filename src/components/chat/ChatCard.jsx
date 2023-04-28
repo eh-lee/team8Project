@@ -6,7 +6,7 @@ import battle1 from "../../assets/battle/battle1.png";
 import battle2 from "../../assets/battle/battle2.png";
 import battleParty from "../../assets/battle/battleCurrParty.png";
 
-const ChatCard = ({ idx, roomName, chatIdx, maxParty }) => {
+const ChatCard = ({ idx, roomName, maxParty, isRealTime }) => {
   const navigate = useNavigate();
   const nickname = cookies.get("nickname");
 
