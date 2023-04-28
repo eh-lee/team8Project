@@ -31,7 +31,7 @@ const Router = () => {
         <Route path="/board/:postIdx/edit" element={<EditPost />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/:sthId/profileedit" element={<ProfileEditPage />} />
-        <Route path="/kakaoLogin" element={<KakaoLogin />} />
+        <Route path="/auth/kakao/redirect" element={<KakaoLogin />} />
         <Route path="/write" element={<Write />} />
         {/* test */}
         <Route path="/battle/chat" element={<Chat />} />

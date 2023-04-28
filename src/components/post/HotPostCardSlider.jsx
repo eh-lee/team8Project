@@ -3,13 +3,18 @@ import styled, { css } from "styled-components";
 import HotPostCard from "./HotPostCard";
 import { instance } from "../../api/axios";
 import { BsChevronLeft } from "react-icons/bs";
+import axios from "axios";
 
 const PostCardSlider = () => {
   // hotPostCard 불러오기
   useEffect(() => {
     const getHotPost = async () => {
-      const response = await instance.get("/postCards/hotPostCard");
-      setPostCards(response.data.postCards);
+      // const response = await instance.get("/postCards/hotPostCard");
+      const response = await axios.get(
+        "http://43.201.45.82:3000/api/postCards/hotPostCard"
+      );
+      console.log("dfsdfsfsd", response.data[0]);
+      // setPostCards(response.data.postCards);
     };
     getHotPost();
   }, []);

@@ -6,6 +6,7 @@ import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const SignUpPage = () => {
   const navi = useNavigate();
@@ -92,7 +93,8 @@ const SignUpPage = () => {
       return;
     }
     try {
-      await instance.post("/user/signup", user);
+      // await instance.post("/user/signup", user);
+      await axios.post("http://43.201.45.82:3000/api/user/signup", user);
       // await axios.post("http://52.78.166.176:3000/api/user/signup", user);
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");

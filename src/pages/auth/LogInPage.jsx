@@ -11,6 +11,7 @@ import TrueGuard from "../../components/hook/guard/TrueGuard";
 import NaverLoginBtn from "../../components/login/NaverLoginBtn";
 import GoogleLoginBtn from "../../components/login/GoogleLoginBtn";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const LogInPage = () => {
   TrueGuard();
@@ -20,7 +21,12 @@ const LogInPage = () => {
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await instance.post("/user/login", user);
+      // const response = await instance.post("/auth/login", user);
+      const response = await axios.post(
+        "http://43.201.45.82:3000/api/auth/login",
+        user
+      );
+      console.log("일반 로그인 헤더======>", response.headers);
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
       });

@@ -3,14 +3,19 @@ import styled, { css } from "styled-components";
 import { instance } from "../../api/axios";
 import { BsChevronLeft } from "react-icons/bs";
 import NewPostCard from "./NewPostCard";
+import axios from "axios";
 
 const NewPostCardSlider = () => {
   // newPostCard 불러오기
   useEffect(() => {
     const getPost = async () => {
-      const response = await instance.get(
-        `/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
+      // const response = await instance.get(
+      //   `/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
+      // );
+      const response = await axios.get(
+        ` http://43.201.45.82:3000/api/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
       );
+
       setNewPostCards(response.data.postCards);
     };
     getPost();
@@ -23,7 +28,7 @@ const NewPostCardSlider = () => {
   const [animate, setAnimate] = useState({
     on: false,
     // value: "310px",
-    value: "180px"
+    value: "180px",
   });
 
   const genPostCardsArray = (target) => {
@@ -117,9 +122,9 @@ const NewPostCards = styled.div`
   }};
 
   & :hover {
-  // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
-  transform: scale(1.05);
-  };
+    // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
+    transform: scale(1.05);
+  }
 `;
 
 // 버튼
