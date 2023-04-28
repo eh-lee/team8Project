@@ -9,6 +9,8 @@ let socket;
 
 // const ChatEndModal = ({ open, close, isAdmin, room, messages }) => {
 const ChatEndModal = ({ open, close, room, messages }) => {
+  // nickname: 방을 만든 사람의 nickname
+
   const nav = useNavigate();
 
   const modalRef = useRef();

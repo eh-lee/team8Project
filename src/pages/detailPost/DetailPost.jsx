@@ -133,7 +133,11 @@ const DetailPost_Header = styled.header`
   min-width: 200px;
   max-width: 400px;
   height: 48px;
+  /* height: 5vh; */
+  /* HEADER 높이 맞추기 */
   z-index: 1;
+  
+  border: 1px solid orange;
 
   border-bottom: 0.1rem solid rgb(180, 180, 180);
 `;

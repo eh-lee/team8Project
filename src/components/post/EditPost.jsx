@@ -289,6 +289,7 @@ const WritePost = styled.div`
 `;
 
 const WriteHeader = styled.div`
+  /* border: 1px solid blue; */
   background-color: white;
   position: fixed;
   top: 0;
