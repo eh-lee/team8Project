@@ -14,11 +14,8 @@ function HeaderNav() {
       <HeaderUl>
         <Header_Logo onClick={() => navi("/")} src={logo} />
         <Header_Box>
-          <Header_Box_Item>
-            <BiSearch
-              size="1.75em"
-              onClick={() => alert("구현 중인 기능입니다.")}
-            />
+          <Header_Box_Item onClick={() => navi("/search")}>
+            <BiSearch size="1.75em" />
           </Header_Box_Item>
           <Header_Box_Item>
             <BiBell
