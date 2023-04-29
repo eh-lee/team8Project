@@ -1,11 +1,11 @@
 import React from 'react'
-import { AiOutlineHeart } from 'react-icons/ai'
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
+import like from "../../assets/icons/common/like.png"
 
 const Like = ({ isLike }) => {
   return (
     <LikeIcon isLike={isLike} >
-        <AiOutlineHeart />
+        <StLikeImg src={like} />
     </LikeIcon>
   )
 }
@@ -21,4 +21,9 @@ const LikeIcon = styled.div`
       `
     }
   }}
+`;
+
+const StLikeImg = styled.img`
+  width: 24px;
+  height: 24px;
 `

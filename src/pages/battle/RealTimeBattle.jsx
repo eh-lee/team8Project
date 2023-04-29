@@ -84,9 +84,8 @@ const Battle = () => {
           {chattingList?.map((item, idx) => (
             <ChatCard
               key={idx}
-              idx={idx}
-              // chatIdx={item.chatIdx}
               roomName={item.roomName}
+              idx={idx}
               maxParty={item.maxParty}
               // isFirst={idx === 0}
             />

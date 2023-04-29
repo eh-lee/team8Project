@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { instance } from "../../api/axios";
-import { BsChevronLeft } from "react-icons/bs";
+import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png"
 import NewPostCard from "./NewPostCard";
 import axios from "axios";
 
@@ -27,8 +27,7 @@ const NewPostCardSlider = () => {
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
-    // value: "310px",
-    value: "180px",
+    value: "174px",
   });
 
   const genPostCardsArray = (target) => {
@@ -47,11 +46,9 @@ const NewPostCardSlider = () => {
   };
 
   const clickLeftHandler = () => {
-    // setAnimate(() => ({ on: true, value: "310px" }));
-    setAnimate(() => ({ on: true, value: "180px" }));
+    setAnimate(() => ({ on: true, value: "174px" }));
     setTimeout(() => {
-      // setAnimate(() => ({ on: false, value: "310px" }));
-      setAnimate(() => ({ on: false, value: "180px" }));
+      setAnimate(() => ({ on: false, value: "174px" }));
       setIndex((pre) => {
         if (pre === -4) return (pre = 0);
         else return pre - 1;
@@ -60,11 +57,9 @@ const NewPostCardSlider = () => {
   };
 
   const clickRightHandler = () => {
-    // setAnimate(() => ({ on: true, value: "-310px" }));
-    setAnimate(() => ({ on: true, value: "-180px" }));
+    setAnimate(() => ({ on: true, value: "-174px" }));
     setTimeout(() => {
-      // setAnimate(() => ({ on: false, value: "-310px" }));
-      setAnimate(() => ({ on: false, value: "-180px" }));
+      setAnimate(() => ({ on: false, value: "-174px" }));
       setIndex((pre) => {
         if (pre === 4) return (pre = 0);
         else return pre + 1;
@@ -110,7 +105,7 @@ const SliderContainer = styled.div`
 const NewPostCards = styled.div`
   display: flex;
 
-  gap: 30px;
+  gap: 8px;
 
   ${({ animate }) => {
     if (animate.on) {
@@ -121,36 +116,39 @@ const NewPostCards = styled.div`
     }
   }};
 
-  & :hover {
+  /* & :hover {
     // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
     transform: scale(1.05);
-  }
+  } */
 `;
 
 // 버튼
 const Button = ({ dir, onClick }) => {
   return (
     <Stbutton dir={dir} onClick={onClick}>
-      <BsChevronLeft />
+      <ButtonImg src={sliderBtnLeft} />
     </Stbutton>
   );
 };
 
 const Stbutton = styled.button`
   background-color: transparent;
-  /* width: 40px;
-  height: 40px; */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
+  border-radius: 50%;
   position: absolute;
   z-index: 1;
   cursor: pointer;
-  font-size: 1.5rem;
-  color: lightgray;
+  background: rgba(46, 46, 71, 0.4);
 
   ${({ dir }) => {
     if (dir === "left") {
       return css`
-        left: 90px;
+        left: 25px;
         top: 50%;
         transform: translateY(-50%);
       `;
@@ -158,10 +156,18 @@ const Stbutton = styled.button`
 
     if (dir === "right") {
       return css`
-        right: 90px;
+        right: 25px;
         top: 50%;
         transform: translateY(-50%) scaleX(-1);
       `;
     }
   }}
+`;
+
+const ButtonImg = styled.img`
+  width: 5px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

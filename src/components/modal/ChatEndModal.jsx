@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import io from "socket.io-client";
+import { cookies } from "../../api/cookies";
 
 const ENDPOINT = "http://localhost:4000";
 let socket;
@@ -10,10 +11,12 @@ let socket;
 // const ChatEndModal = ({ open, close, isAdmin, room, messages }) => {
 const ChatEndModal = ({ open, close, room, messages }) => {
   // nickname: 방을 만든 사람의 nickname
+  const nickname = cookies.get("nickname");
 
   const nav = useNavigate();
 
   const modalRef = useRef();
+
 
   //   console.log("모달로 내려온 isAdmin", isAdmin)
   console.log("모달로 내려온 messages", messages);
@@ -42,7 +45,11 @@ const ChatEndModal = ({ open, close, room, messages }) => {
     // [  ]통신 확인 필요
     try {
       console.log("messages보낸다~~");
-      await instanceWithAuth.post("/chat/chatsave", messages);
+      await instanceWithAuth.post("/chat/chatsave", {
+        nickname: nickname,
+        room: room,
+        saveDataChat: messages,
+      });
     } catch (error) {
       console.error(error);
     }

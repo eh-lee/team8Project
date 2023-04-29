@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
-import { MdArrowBackIosNew } from "react-icons/md";
-import { MdOutlineClose } from "react-icons/md";
-// import "./Chat.css";
-// import InfoBar from "../../components/infoBar/InfoBar";
 import Messages from "../../components/messages/Messages";
 import Input from "../../components/input/Input";
 import styled from "styled-components";

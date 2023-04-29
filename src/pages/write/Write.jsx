@@ -13,18 +13,12 @@ import { BsTrash } from "react-icons/bs";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
 import { Helmet } from "react-helmet";
-// import { instance } from "../../api/axios";
 
 const Write = () => {
   FalseGuard();
   const dispatch = useDispatch();
   const { pollType, pollTitle, tag } = useSelector((state) => state.write);
   const navi = useNavigate();
-
-  // const access_token = decodeURI(document.cookie)
-  //   .replace("access_token=", "")
-  //   .replace(/; nickname=([^;]*)/, "")
-  //   .replace(/; refresh_token=[^;]*/, "");
 
   const WriteCallback = (x, y) => {
     setMaincategory(x);
@@ -39,13 +33,8 @@ const Write = () => {
   const [desc, setDesc] = useState("");
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
-  // 임시 04/29
-  const [imgUrl, setImgUrl] = useState("");
-  // 임시 04/29
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    // *=============== 글자 수 검사 ===============*
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
@@ -66,7 +55,6 @@ const Write = () => {
     }
 
     try {
-      // console.log("auth===========>", instanceWithAuth);
       await instanceWithAuth.post("/postCards/post/createPost", {
         title,
         desc,
@@ -75,25 +63,8 @@ const Write = () => {
         pollType,
         pollTitle,
         tag,
-        imgUrl,
+        imgUrl: "",
       });
-      // await instance.post(
-      //   "/postCards/post/createPost",
-      //   {
-      //     title,
-      //     desc,
-      //     maincategory,
-      //     category,
-      //     pollType,
-      //     pollTitle,
-      //     tag,
-      //   },
-      //   {
-      //     headers: {
-      //       Authorization: `${access_token}`,
-      //     },
-      //   }
-      // );
 
       dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
@@ -128,10 +99,7 @@ const Write = () => {
         <PageWithFooterWrapper>
           <WriteHeader>
             <WriteHeaderCont>
-              {/* 1 */}
               <WriteCanc onClick={handleCanc}>취소</WriteCanc>
-              {/* 1 */}
-              {/* 2 */}
               <WriteCategory>
                 <MainCat>{maincategory}</MainCat>
                 <SubCat>{category}</SubCat>
@@ -139,10 +107,7 @@ const Write = () => {
                   <IoIosArrowDown onClick={categoryModalOpenHandler} />
                 </IconCont>
               </WriteCategory>
-              {/* 2 */}
-              {/* 3 */}
               <WritePost onClick={submitHandler}>등록</WritePost>
-              {/* 3 */}
             </WriteHeaderCont>
           </WriteHeader>
           <WriteForm
@@ -168,11 +133,7 @@ const Write = () => {
               placeholder="훈수 받고 싶은 내용을 입력하세요."
             ></WriteContent>
           </WriteForm>
-
-          {/* ========= 찬반형 투표 미리보기 ========= */}
           {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
-          {/* ========= 찬반형 투표 미리보기 ========= */}
-
           {pollType === "select" ? (
             <>
               <div>선택형 투표 미리보기입니다.</div>
@@ -181,13 +142,9 @@ const Write = () => {
               <div>
                 <BsTrash onClick={proConDelHandler} />
               </div>
-              {/* tag map 돌려야 하나? */}
             </>
           ) : null}
-
-          {/* ======= pollModal은 요 안에 ======== */}
           <WriteFooter />
-          {/* ======= pollModal은 요 안에 ======== */}
         </PageWithFooterWrapper>
         <ModalPortal>
           <ModalCont>
@@ -196,7 +153,6 @@ const Write = () => {
                 open={isCategoryModalOpen}
                 close={categoryModalCloseHandler}
                 parentFunction={WriteCallback}
-                // CategoryModal(child) to write.jsx(parent)
               />
             )}
           </ModalCont>
