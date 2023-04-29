@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import HotPostCard from "./HotPostCard";
-import { instance } from "../../api/axios";
-import { BsChevronLeft } from "react-icons/bs";
+import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png"
+
 import axios from "axios";
 
 const PostCardSlider = () => {
@@ -13,8 +13,7 @@ const PostCardSlider = () => {
       const response = await axios.get(
         "http://43.201.45.82:3000/api/postCards/hotPostCard"
       );
-      console.log("dfsdfsfsd", response.data[0]);
-      // setPostCards(response.data.postCards);
+      setPostCards(response.data.postCards);
     };
     getHotPost();
   }, []);
@@ -28,7 +27,7 @@ const PostCardSlider = () => {
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
-    value: "310px",
+    value: "348px",
   });
 
   const genPostCardsArray = (target) => {
@@ -48,9 +47,9 @@ const PostCardSlider = () => {
   };
 
   const clickLeftHandler = () => {
-    setAnimate(() => ({ on: true, value: "310px" }));
+    setAnimate(() => ({ on: true, value: "348px" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "310px" }));
+      setAnimate(() => ({ on: false, value: "348px" }));
       setIndex((pre) => {
         if (pre === -4) return (pre = 0);
         else return pre - 1;
@@ -59,9 +58,9 @@ const PostCardSlider = () => {
   };
 
   const clickRightHandler = () => {
-    setAnimate(() => ({ on: true, value: "-310px" }));
+    setAnimate(() => ({ on: true, value: "-348px" }));
     setTimeout(() => {
-      setAnimate(() => ({ on: false, value: "-310px" }));
+      setAnimate(() => ({ on: false, value: "-348px" }));
       setIndex((pre) => {
         if (pre === 4) return (pre = 0);
         else return pre + 1;
@@ -108,11 +107,9 @@ const SliderContainer = styled.div`
 `;
 
 const PostCards = styled.div`
-  /* height: 160px; */
-  /* height: 10rem; */
   display: flex;
 
-  gap: 30px;
+  gap: 8px;
 
   ${({ animate }) => {
     if (animate.on) {
@@ -126,8 +123,8 @@ const PostCards = styled.div`
   }};
 
   /* & :hover {
-  // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
-  transform: scale(1.05);
+    transform: scale(1.05);
+    // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
   }; */
 `;
 
@@ -135,26 +132,29 @@ const PostCards = styled.div`
 const Button = ({ dir, onClick }) => {
   return (
     <Stbutton dir={dir} onClick={onClick}>
-      <BsChevronLeft />
+      <ButtonImg src={sliderBtnLeft} />
     </Stbutton>
   );
 };
 
 const Stbutton = styled.button`
   background-color: transparent;
-  /* width: 40px;
-  height: 40px; */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
+  border-radius: 50%;
   position: absolute;
   z-index: 1;
   cursor: pointer;
-  font-size: 1.5rem;
-  color: lightgray;
+  background: rgba(46, 46, 71, 0.4);
 
   ${({ dir }) => {
     if (dir === "left") {
       return css`
-        left: 1.5rem;
+        left: 25px;
         top: 50%;
         transform: translateY(-50%);
       `;
@@ -162,10 +162,18 @@ const Stbutton = styled.button`
 
     if (dir === "right") {
       return css`
-        right: 1.5rem;
+        right: 25px;
         top: 50%;
         transform: translateY(-50%) scaleX(-1);
       `;
     }
   }}
+`;
+
+const ButtonImg = styled.img`
+  width: 5px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

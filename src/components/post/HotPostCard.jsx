@@ -4,6 +4,10 @@ import styled, { css } from "styled-components";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
+import imgIcon from "../../assets/icons/common/imgIcon.png"
+import like from "../../assets/icons/common/like.png"
+import view from "../../assets/icons/common/view.png"
+import comment from "../../assets/icons/common/comment.png"
 
 const HotPostCard = ({
   mainCategory,
@@ -69,19 +73,24 @@ const HotPostCard = ({
       }}
       // className="no-hover"
     >
-      <PostCard_TitleBox>
-        <PostCard_MainCategory>
-          {/* =========== Cat. Label =============== */}
-          <PostCardCatBtn>
-            {mainCategory}&nbsp;
-            {categoryIconsMap[category]}
-          </PostCardCatBtn>
-          {/* =========== Cat. Label =============== */}
-        </PostCard_MainCategory>
-        <PostCard_Title>{title}</PostCard_Title>
+      <StPostCardCont>
+        <PostCard_TitleBox>
+          <PostCard_MainCategory>
+            {/* =========== Cat. Label =============== */}
+            <PostCardCatBtn>
+              {mainCategory}&nbsp;
+              {categoryIconsMap[category]}
+            </PostCardCatBtn>
+            {/* =========== Cat. Label =============== */}
+          </PostCard_MainCategory>
+          <PostCard_Title>
+            {title}
+            <StPostCardIsImgIn src={imgIcon} />
+          </PostCard_Title>
 
-        {/* 투표 유무 이미지 표시 */}
-        {/* <PostCardRow>
+
+          {/* 투표 유무 이미지 표시 */}
+          {/* <PostCardRow>
           <PostCardTitle>{title}</PostCardTitle>
           <PostCardTitleIcon></PostCardTitleIcon>
           {pollType !== "" ? (
@@ -92,63 +101,56 @@ const HotPostCard = ({
             </>
           ) : null}
         </PostCardRow> */}
-        {/* 투표 유무 이미지 표시 */}
-      </PostCard_TitleBox>
+          {/* 투표 유무 이미지 표시 */}
+        </PostCard_TitleBox>
 
-      <PostCard_ContentBox>
-        <PostCard_Content>{content}</PostCard_Content>
-      </PostCard_ContentBox>
-      <PostCard_InfoBox>
-        {/* 좋아요수 */}
-        <PostCard_Info_Content>
-          <PostCard_Info_Content_Icon>
-            <AiOutlineHeart />
-          </PostCard_Info_Content_Icon>
-          <PostCard_Info_Content_Count>
-            {likesCount}
-          </PostCard_Info_Content_Count>
-        </PostCard_Info_Content>
-        {/* 조회수 */}
-        <PostCard_Info_Content>
-          <PostCard_Info_Content_Icon>
-            <AiOutlineEye />
-          </PostCard_Info_Content_Icon>
-          <PostCard_Info_Content_Count>{viewCount}</PostCard_Info_Content_Count>
-        </PostCard_Info_Content>
-        {/* 댓글 버튼, 개수 */}
-        <PostCard_Info_Content>
-          <PostCard_Info_Content_Icon>
-            <IoChatbubbleOutline />
-          </PostCard_Info_Content_Icon>
-          <PostCard_Info_Content_Count>
-            {commentCount}
-          </PostCard_Info_Content_Count>
-        </PostCard_Info_Content>
-      </PostCard_InfoBox>
+        <PostCard_ContentBox>
+          <PostCard_Content>{content}</PostCard_Content>
+        </PostCard_ContentBox>
+        <PostCard_InfoBox>
+          {/* 좋아요수 */}
+          <PostCard_Info_Content>
+            <PostCard_Info_Content_Icon>
+              <StPostCardInfoContentImg src={like} />
+            </PostCard_Info_Content_Icon>
+            <PostCard_Info_Content_Count>
+              {likesCount}
+            </PostCard_Info_Content_Count>
+          </PostCard_Info_Content>
+          {/* 조회수 */}
+          <PostCard_Info_Content>
+            <PostCard_Info_Content_Icon>
+              <StPostCardInfoContentImg src={view} />
+            </PostCard_Info_Content_Icon>
+            <PostCard_Info_Content_Count>{viewCount}</PostCard_Info_Content_Count>
+          </PostCard_Info_Content>
+          {/* 댓글 버튼, 개수 */}
+          <PostCard_Info_Content>
+            <PostCard_Info_Content_Icon>
+              <StPostCardInfoContentImg src={comment} />
+            </PostCard_Info_Content_Icon>
+            <PostCard_Info_Content_Count>
+              {commentCount}
+            </PostCard_Info_Content_Count>
+          </PostCard_Info_Content>
+        </PostCard_InfoBox>
+      </StPostCardCont>
     </PostCardWrap>
   );
 };
 
 export default HotPostCard;
-//* =========== Cat. Label ===============
-const PostCardCatBtn = styled.button`
-  color: white;
-  background: #3a3a59;
-  border-radius: 100px;
-  padding: 0 4px 0px 6px;
-  border: none;
-  font-size: 0.5rem;
-`;
-//* =========== Cat. Label ===============
+
 const PostCardWrap = styled.div`
   /* border: 1px solid black; */
   border-radius: 0.75rem;
   background-color: #ffffff;
 
-  width: 280px;
-  height: 100px;
+  width: 340px;
+  /* height: 130px; */
+  height: 148px;
 
-  padding: 1rem 0 0.55rem 0;
+  /* padding: 12px 0; */
 
   display: flex;
   flex-direction: column;
@@ -157,6 +159,14 @@ const PostCardWrap = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
+const StPostCardCont = styled.div`
+  /* border: 1px solid tomato; */
+  height: 148px;
+  display: flex;
+  flex-direction: column;
+  /* height: 148px; */
+`
+
 const PostCard_TitleBox = styled.ul`
   /* border: 1px solid orange; */
 
@@ -164,46 +174,68 @@ const PostCard_TitleBox = styled.ul`
   flex-direction: column;
   justify-content: space-between;
 
-  /* width: 15.5rem; */
-  width: 248px;
-  height: 2.5rem;
+  width: 308px;
+  height: 46px;
 
-  gap: 0.5rem;
+  gap: 4px;
 
-  margin-left: 1rem;
+  margin: 12px 16px 0 16px;
 
-  margin-bottom: 0.3rem;
+  margin-bottom: 4px;
 `;
 
 const PostCard_MainCategory = styled.li`
   /* border: 1px solid black; */
-  font-size: 10px;
-  color: gray;
+  height: 18px;
 `;
+
+//* =========== Cat. Label ===============
+const PostCardCatBtn = styled.button`
+  height: 18px;
+  color: white;
+  background: #3a3a59;
+  border-radius: 100px;
+  padding: 0 4px 0px 6px;
+  border: none;
+  font-size: 10px;
+`;
+//* =========== Cat. Label ===============
 
 const PostCard_Title = styled.li`
   /* border: 1px solid black; */
   font-size: 18px;
+  width: 308px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
+
+const StPostCardIsImgIn = styled.img`
+  width: 16px;
+  height: 16px;
+`
 
 const PostCard_ContentBox = styled.div`
   /* border: 1px solid blue; */
-  max-height: 30vh;
-  /* height을 안 정해서 스크롤이 안 먹힌 것 */
-  width: 15.5rem;
+  width: 308px;
+  height: 49px;
+  display: flex;
+  margin-bottom: 4px;
+  margin-left: 16px;
+  border-bottom: 1px solid #e1e2e4;
+
   overflow-y: scroll;
+  max-height: 30vh;
   word-wrap: break-word;
   /* 줄바꿈 기능 */
-  display: flex;
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
-
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
     display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+
 `;
 
 const PostCard_Content = styled.div`
@@ -215,42 +247,41 @@ const PostCard_Content = styled.div`
 
 const PostCard_InfoBox = styled.ul`
   /* border: 1px solid green; */
-  border-top: 1px solid #e1e2e4;
 
-  width: 15.5rem;
-  height: 1.5rem;
+  width: 308px;
+  height: 16px;
 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 1.9rem;
-  margin-left: 1rem;
+
   font-size: 10px;
+  margin: 0 16px 12px 16px;
 `;
 
 const PostCard_Info_Content = styled.li`
-  /* border: 1px solid tomato; */
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 4px;
   color: gray;
 `;
 
 const PostCard_Info_Content_Icon = styled.div`
-  /* border: 1px solid tomato; */
-  font-size: 1rem;
-
-  ${({ pointerOn }) => {
-    if (pointerOn === "on") {
-      return css`
-        cursor: pointer;
-      `;
-    }
-  }}
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
+const StPostCardInfoContentImg = styled.img`
+  width: 16px;
+  height: 16px;
+`
+
 const PostCard_Info_Content_Count = styled.div`
-  /* border: 1px solid tomato; */
+  width: 24px;
 `;

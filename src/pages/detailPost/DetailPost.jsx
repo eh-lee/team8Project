@@ -137,7 +137,7 @@ const DetailPost_Header = styled.header`
   /* HEADER 높이 맞추기 */
   z-index: 1;
   
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
 
   border-bottom: 0.1rem solid rgb(180, 180, 180);
 `;

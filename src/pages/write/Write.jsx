@@ -72,6 +72,7 @@ const Write = () => {
         pollType,
         pollTitle,
         tag,
+        imgUrl: "",
       });
       // await instance.post(
       //   "/postCards/post/createPost",

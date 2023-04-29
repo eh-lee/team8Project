@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { BiCommentDetail } from "react-icons/bi";
-import { AiOutlineEye } from "react-icons/ai";
+import comment from "../../assets/icons/common/comment.png"
+import view from "../../assets/icons/common/view.png"
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
@@ -29,8 +29,9 @@ const DetailPostContents = () => {
 
         const formattingTime = data.post.createdAt.replace(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/, '$1.$2.$3 $4:$5')
         setCreatedDate(formattingTime);
-        setPostLikesCount(data.post.likesCount);
-        setIsLike(data.post.IsLike);
+        setPostLikesCount(+(data.post.likesCount));
+        setIsLike(!Boolean(data.post.IsLike));
+        console.log("게시글 어케 들어오니?", data.post);
       } catch (error) {
         console.error('상세게시글get error', error)
       }
@@ -40,7 +41,6 @@ const DetailPostContents = () => {
 
   // 게시글 좋아요 버튼
   const clickPostLike = () => {
-    // console.log("좋아요 눌렀다고!!!")
     instanceWithAuth.put(`/postlike/post/${postIdx}`)
     setIsLike((prev) => !prev)
     setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
@@ -84,19 +84,19 @@ const DetailPostContents = () => {
           {/* 조회수 */}
           <DetailPost_Content>
             <DetailPost_Content_Icon>
-              <AiOutlineEye />
+              <StDetailPostContentImg src={view} />
             </DetailPost_Content_Icon>
             <DetailPost_Content_Count>
               {detailPost.postViewCount}
             </DetailPost_Content_Count>
           </DetailPost_Content>
-          {/* 댓글 버튼, 개수 */}
+          {/* 댓글 개수 */}
           <DetailPost_Content>
             <DetailPost_Content_Icon>
-              <BiCommentDetail />
+              <StDetailPostContentImg src={comment} />
             </DetailPost_Content_Icon>
             <DetailPost_Content_Count>
-              {detailPost.commentCount}
+              {+(detailPost.commentCount)}
             </DetailPost_Content_Count>
           </DetailPost_Content>
         </DetailPost_Content_Info>
@@ -184,6 +184,7 @@ const DetailPost_Content_Desc = styled.li`
 const DetailPost_Content_Info = styled.ul`
   /* border: 1px solid green; */
   display: flex;
+  height: 24px;
   flex-direction: row;
   gap: 12px;
   justify-content: flex-end;
@@ -201,8 +202,8 @@ const DetailPost_Content_Icon = styled.div`
   /* border: 1px solid tomato; */
   display: flex;
   justify-content: center;
-  height: 18px;
-  width: 18px;
+  height: 24px;
+  width: 24px;
   font-size: 20px;
 
   ${({ pointerOn }) => {
@@ -214,13 +215,17 @@ const DetailPost_Content_Icon = styled.div`
   }}
 `;
 
+const StDetailPostContentImg = styled.img`
+  height: 24px;
+  width: 24px;
+`
+
 const DetailPost_Content_Count = styled.div`
   /* border: 1px solid tomato; */
   margin-left: 4px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 18px;
   height: 18px;
   font-size: 14px;
 `;
