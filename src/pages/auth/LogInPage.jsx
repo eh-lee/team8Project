@@ -12,6 +12,7 @@ import NaverLoginBtn from "../../components/login/NaverLoginBtn";
 import GoogleLoginBtn from "../../components/login/GoogleLoginBtn";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import logo from "../../assets/icons/logo/loginlogo.png";
 
 const LogInPage = () => {
   TrueGuard();
@@ -58,7 +59,9 @@ const LogInPage = () => {
         <title>훈수 — 로그인</title>
       </Helmet>
       <MobileLayout>
-        <FooLogo>훈수</FooLogo>
+        <StLogoWrap>
+          <StLoginLogo />
+        </StLogoWrap>
         <Container onSubmit={submitButtonHandler}>
           <InputColumn>
             <AuthInput
@@ -105,15 +108,18 @@ const Row = styled.div`
   flex-direction: row;
   gap: 1.5vw;
 `;
-const FooLogo = styled.div`
+const StLogoWrap = styled.div`
   margin: 20vh 0 7.5vh 0;
-  align-items: center;
-  width: 100%;
-  font-size: 2.5rem;
-  font-weight: bold;
   display: flex;
   flex-direction: center;
   justify-content: center;
+`;
+
+const StLoginLogo = styled.div`
+  background-size: cover;
+  background-image: url(${logo});
+  width: 80px;
+  height: 57px;
 `;
 
 const GreetingWrapper = styled.div`

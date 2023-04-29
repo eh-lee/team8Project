@@ -5,7 +5,7 @@ import { cookies } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../api/axios";
 import styled from "styled-components";
-import loading from "../../assets/etc/loading.gif";
+import logo from "../../assets/icons/logo/kakaologinloadinglogo.png";
 
 const KakaoLogin = () => {
   const navi = useNavigate();
@@ -80,21 +80,27 @@ const KakaoLogin = () => {
 
   return (
     <MobileLayout>
-      {/* 로딩 화면 테스트 */}
-      <LoadingGif />
-      {/* 로딩 화면 테스트 */}
+      <StBg>
+        <StLogo />
+      </StBg>
     </MobileLayout>
   );
 };
 
 export default KakaoLogin;
 
-const LoadingGif = styled.div`
+const StBg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #2e2e47;
+`;
+
+const StLogo = styled.div`
   background-size: cover;
-  background-image: url(${loading});
-  width: ${loading.width}px;
-  height: ${loading.height}px;
+  background-image: url(${logo});
+  width: 92px;
+  height: 66px;
 `;
