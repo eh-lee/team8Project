@@ -4,7 +4,7 @@ import LogInPage from '../pages/auth/LogInPage'
 import SignUpPage from '../pages/auth/SignUpPage'
 import ProfileEditPage from '../pages/user/ProfileEditPage'
 import MyPage from '../pages/user/MyPage'
-import Home from '../pages/Home'
+import Home from '../pages/home/Home'
 import KakaoLogin from '../pages/auth/KakaoLogin'
 import TotalBoard from '../pages/board/TotalBoard'
 import HumourBoard from '../pages/board/HumourBoard'
@@ -13,17 +13,17 @@ import Write from '../pages/write/Write'
 import DetailPost from '../pages/detailPost/DetailPost'
 import EditPost from '../components/post/EditPost'
 import Chat from "../pages/test/Chat"
-
-import Join from '../pages/test/Join'
 import Battle from '../pages/battle/RealTimeBattle'
 import DoneBattle from '../pages/battle/DoneBattle'
-import Search from '../pages/Search'
+import Search from '../pages/search/Search'
+import OnBoarding from '../pages/onboarding/OnBoarding'
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/onboarding" element={<OnBoarding />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/totalboard" element={<TotalBoard />} />

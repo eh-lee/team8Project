@@ -39,6 +39,9 @@ const Write = () => {
   const [desc, setDesc] = useState("");
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
+  // 임시 04/29
+  const [imgUrl, setImgUrl] = useState("");
+  // 임시 04/29
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -72,6 +75,7 @@ const Write = () => {
         pollType,
         pollTitle,
         tag,
+        imgUrl,
       });
       // await instance.post(
       //   "/postCards/post/createPost",

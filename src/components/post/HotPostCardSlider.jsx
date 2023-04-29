@@ -13,8 +13,7 @@ const PostCardSlider = () => {
       const response = await axios.get(
         "http://43.201.45.82:3000/api/postCards/hotPostCard"
       );
-      console.log("dfsdfsfsd", response.data[0]);
-      // setPostCards(response.data.postCards);
+      setPostCards(response.data.postCards);
     };
     getHotPost();
   }, []);

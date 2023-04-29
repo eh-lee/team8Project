@@ -38,6 +38,7 @@ const LogInPage = () => {
       //   path: "/",
       // });
       // console.log("일반 로그인 rfrsh------>", response.headers.refreshtoken);
+      cookies.set("isNewbie", "F", { path: "/" });
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.msg;

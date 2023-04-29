@@ -111,6 +111,7 @@ const Chat = () => {
 
     const { name, room, maxParty } = queryString.parse(window.location.search);
     console.log(name, room);
+    console.log("rooooooom====================>", room);
 
     socket = io(ENDPOINT);
 

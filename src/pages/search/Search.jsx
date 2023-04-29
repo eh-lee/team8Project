@@ -1,11 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import MobileLayout from "../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout";
 import { BiSearch } from "react-icons/bi";
-import vector from "../assets/icons/common/vector.png";
-import cancel from "../assets/icons/common/expand.png";
-import search from "../assets/icons/common/search.png";
+import vector from "../../assets/icons/common/vector.png";
+import cancel from "../../assets/icons/common/expand.png";
+import search from "../../assets/icons/common/search.png";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {

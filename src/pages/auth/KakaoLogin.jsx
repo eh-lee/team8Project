@@ -65,6 +65,7 @@ const KakaoLogin = () => {
             });
             cookies.set("nickname", response.data.nickname, { path: "/" });
             cookies.set("email", response.data.email, { path: "/" });
+            cookies.set("isNewbie", "F", { path: "/" });
           }
           return navi("/");
         } catch (err) {

@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/header/Header";
-import TrueGreeting from "../components/greeting/trueGreeting/TrueGreeting";
-import TrueGreetingLv from "../components/greeting/trueGreeting/TrueGreetingLv";
-import Footer from "../components/footer/Footer";
-import MobileLayout from "../layout/MobileLayout";
-import FalseGreeting from "../components/greeting/falseGreeting/FalseGreeting";
-import FalseGreetingLv from "../components/greeting/falseGreeting/FalseGreetingLv";
-import { cookies } from "../api/cookies";
-import HotPostCardSlider from "../components/post/HotPostCardSlider";
-import NewPostCardSlider from "../components/post/NewPostCardSlider";
+import Header from "../../components/header/Header";
+import TrueGreeting from "../../components/greeting/trueGreeting/TrueGreeting";
+import TrueGreetingLv from "../../components/greeting/trueGreeting/TrueGreetingLv";
+import Footer from "../../components/footer/Footer";
+import MobileLayout from "../../layout/MobileLayout";
+import FalseGreeting from "../../components/greeting/falseGreeting/FalseGreeting";
+import FalseGreetingLv from "../../components/greeting/falseGreeting/FalseGreetingLv";
+import { cookies } from "../../api/cookies";
+import HotPostCardSlider from "../../components/post/HotPostCardSlider";
+import NewPostCardSlider from "../../components/post/NewPostCardSlider";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Chatting from "./chatting/Chatting";
+import Chatting from "../chatting/Chatting";
 
 const Home = () => {
   const isLogin = cookies.get("access_token") ? true : false;
