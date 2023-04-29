@@ -6,36 +6,32 @@ import { instance } from "../../api/axios";
 import { cookies } from "../../api/cookies";
 
 const LiveBattleCard = () => {
-
     const nav = useNavigate();
 
-    const [liveBattle, setLiveBattle] = useState({});
-    // const [roomName, seRoomName] = useState({});
+    const [roomName, setRoomName] = useState('');
 
     const nickname = cookies.get('nickname');
 
     useEffect(() => {
         const getLiveBattle = async () => {
             try {
-                const res = await instance.get('chat/hunsuChat/live');
-                // console.log(res);
-                // setLiveBattle(res.data);
+                const {data} = await instance.get('chat/hunsuChat/live');
+                setRoomName(data.roomName);
             } catch (error) {
                 console.error("LiveBattle Get", error);
             }
         };
         getLiveBattle();
-    });
+    }, []);
 
     const battleInHandler = () => {
-        // nav(`/battle/chat?name=${nickname}&room=${roomName}`);
+        nav(`/battle/chat?name=${nickname}&room=${roomName}`);
     }
 
     return (
         <StLiveBattleCardWrap>
             <StLiveBattleCardTitle>
-                {/* <StLiveBattleCardTitleText>Q. {roomName}</StLiveBattleCardTitleText> */}
-                <StLiveBattleCardTitleText>Q. 짱구는 착한 아이인가 나쁜 아이인가?</StLiveBattleCardTitleText>
+                <StLiveBattleCardTitleText>Q. {roomName.slice(0,20)}</StLiveBattleCardTitleText>            
             </StLiveBattleCardTitle>
             <StLiveBattleCardBtnCont>
                 <StLiveBattleCardBtn onClick={battleInHandler}>참여하기</StLiveBattleCardBtn>
@@ -67,6 +63,8 @@ const StLiveBattleCardTitle = styled.div`
 `;
 
 const StLiveBattleCardTitleText = styled.div`
+    /* border: 1px solid orange; */
+    max-width: 340px;
     font-weight: 600;
     font-size: 18px;
     color: #2D2D2D;
