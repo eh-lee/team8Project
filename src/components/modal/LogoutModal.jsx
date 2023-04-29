@@ -22,42 +22,32 @@ const LogoutModal = ({ open, close }) => {
     };
   }, [modalRef, open, close]);
 
-
   const logout = () => {
     // 왜 안 되나 체크 4/21 17:44
     // [Refactor] 인터셉터로 처리하게
-    cookies.remove("access_token");
-    cookies.remove("refresh_token");
-    cookies.remove("nickname");
-    cookies.remove("email");
+    cookies.remove("access_token", { path: "/" });
+    cookies.remove("nickname", { path: "/" });
+    cookies.remove("email", { path: "/" });
 
     alert("로그아웃 되었습니다.");
     navi("/");
   };
 
   return open ? (
-    (
-        <StFooBG>
-          <StChatEndWrap ref={modalRef}>
-            <StChatEndList column medium>
-              <ButtonText Large>경고</ButtonText>
-              <StChatEndInfo>
-                로그아웃 하시겠습니까?
-              </StChatEndInfo>
-            </StChatEndList>
-            <StChatEndList
-              onClick={logout}
-              isLogout
-              cursor
-            >
-              <ButtonText>로그아웃</ButtonText>
-            </StChatEndList>
-            <StChatEndList onClick={close} topMargin cursor>
-              <ButtonText>취소</ButtonText>
-            </StChatEndList>
-          </StChatEndWrap>
-        </StFooBG>
-      )
+    <StFooBG>
+      <StChatEndWrap ref={modalRef}>
+        <StChatEndList column medium>
+          <ButtonText Large>경고</ButtonText>
+          <StChatEndInfo>로그아웃 하시겠습니까?</StChatEndInfo>
+        </StChatEndList>
+        <StChatEndList onClick={logout} isLogout cursor>
+          <ButtonText>로그아웃</ButtonText>
+        </StChatEndList>
+        <StChatEndList onClick={close} topMargin cursor>
+          <ButtonText>취소</ButtonText>
+        </StChatEndList>
+      </StChatEndWrap>
+    </StFooBG>
   ) : null;
 };
 

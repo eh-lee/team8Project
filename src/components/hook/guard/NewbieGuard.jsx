@@ -6,8 +6,8 @@ const NewbieGuard = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    const isNewbie = cookies.get("isNewbie");
-    if (!isNewbie) {
+    const isFirst = cookies.get("isFirst");
+    if (!isFirst) {
       nav("/onboarding");
     }
   }, []);

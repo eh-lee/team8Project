@@ -9,11 +9,13 @@ import vector from "../../assets/icons/common/vector.png";
 import onboarding1 from "../../assets/onboarding/onboarding1.png";
 import onboarding2 from "../../assets/onboarding/onboarding2.png";
 import onboarding3 from "../../assets/onboarding/onboarding3.png";
-import OldbieGuard from "../../components/hook/guard/OldbieGuard copy";
+import OldbieGuard from "../../components/hook/guard/OldbieGuard";
+import { cookies } from "../../api/cookies";
 
 const OnBoarding = () => {
   const navi = useNavigate();
   OldbieGuard();
+  cookies.set("isFirst", "F", { path: "/" });
 
   const [page, setPage] = useState(1);
 
@@ -47,12 +49,10 @@ const OnBoarding = () => {
             src={cancel}
           />
         </StFooRightDiv>
-        {/* 32 */}
         {page === 1 ? (
           <>
             <StOnbImgWrap>
               <StOnbImgCont></StOnbImgCont>
-              {/* 32 */}
               <StOnbDescCont>
                 <StOnbDesc>
                   <StMainP>누군가에게</StMainP>
@@ -73,7 +73,6 @@ const OnBoarding = () => {
           <>
             <StOnbImgWrap>
               <StOnbImgCont onboarding2></StOnbImgCont>
-              {/* 32 */}
               <StOnbDescCont>
                 <StOnbDesc>
                   <StMainP>나에게 이래라 저래라</StMainP>
@@ -96,7 +95,6 @@ const OnBoarding = () => {
               <StOnbRow>
                 <StOnbImgCont onboarding3></StOnbImgCont>
               </StOnbRow>
-              {/* 32 */}
               <StOnbDescCont>
                 <StOnbDesc>
                   <StMainP>훈수에 훈수를 두고 싶을 때</StMainP>
@@ -112,7 +110,6 @@ const OnBoarding = () => {
             <StPageCurrDot dot3 />
           </>
         ) : null}
-        {/* 112 */}
         <StAuthButton onClick={() => navi("/login")}>
           로그인하고 훈수 시작하기
         </StAuthButton>
@@ -197,7 +194,6 @@ const Stbutton = styled.button`
   border: none;
   border-radius: 50%;
   position: absolute;
-  /* z-index: 1; */
   cursor: pointer;
   background: rgba(242, 242, 247, 0.6);
   ${({ dir }) => {

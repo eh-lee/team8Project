@@ -4,6 +4,8 @@ import MobileLayout from "../../layout/MobileLayout";
 import { cookies } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../api/axios";
+import styled from "styled-components";
+import loading from "../../assets/etc/loading.gif";
 
 const KakaoLogin = () => {
   const navi = useNavigate();
@@ -78,9 +80,21 @@ const KakaoLogin = () => {
 
   return (
     <MobileLayout>
-      <div>KakaoLogin</div>
+      {/* 로딩 화면 테스트 */}
+      <LoadingGif />
+      {/* 로딩 화면 테스트 */}
     </MobileLayout>
   );
 };
 
 export default KakaoLogin;
+
+const LoadingGif = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-image: url(${loading});
+  width: ${loading.width}px;
+  height: ${loading.height}px;
+`;
