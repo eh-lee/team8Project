@@ -13,10 +13,11 @@ import NewPostCardSlider from "../../components/post/NewPostCardSlider";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Chatting from "../chatting/Chatting";
+import NewbieGuard from "../../components/hook/guard/NewbieGuard";
 
 const Home = () => {
   const isLogin = cookies.get("access_token") ? true : false;
-  console.log("======* .env *=====", process.env);
+  NewbieGuard();
 
   return (
     <>

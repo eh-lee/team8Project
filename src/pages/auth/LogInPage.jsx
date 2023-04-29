@@ -26,18 +26,11 @@ const LogInPage = () => {
         "http://43.201.45.82:3000/api/auth/login",
         user
       );
-      console.log("일반 로그인 헤더======>", response.headers);
+      cookies.set("email", user.email, { path: "/" });
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
       });
-      // cookies.set("refresh_token", response.headers., {
-      //   path: "/",
-      // });
       cookies.set("nickname", response.data.nickname, { path: "/" });
-      // cookies.set("refresh_token", response.headers.refreshtoken, {
-      //   path: "/",
-      // });
-      // console.log("일반 로그인 rfrsh------>", response.headers.refreshtoken);
       cookies.set("isNewbie", "F", { path: "/" });
       navi("/");
     } catch (e) {

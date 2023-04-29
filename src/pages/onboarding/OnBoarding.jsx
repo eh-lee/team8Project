@@ -9,9 +9,11 @@ import vector from "../../assets/icons/common/vector.png";
 import onboarding1 from "../../assets/onboarding/onboarding1.png";
 import onboarding2 from "../../assets/onboarding/onboarding2.png";
 import onboarding3 from "../../assets/onboarding/onboarding3.png";
+import OldbieGuard from "../../components/hook/guard/OldbieGuard copy";
 
 const OnBoarding = () => {
   const navi = useNavigate();
+  OldbieGuard();
 
   const [page, setPage] = useState(1);
 
