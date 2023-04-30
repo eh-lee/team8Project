@@ -34,6 +34,7 @@ const Footer = () => {
 // footer 높이 5.55~56?rem
 const StyledFooter = styled.div`
   position: fixed;
+  z-index: 1;
   bottom: 0;
   max-width: 400px;
   /* StMobileLayout의 width와 동일하게 처리 */

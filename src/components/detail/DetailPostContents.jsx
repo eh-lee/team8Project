@@ -31,7 +31,6 @@ const DetailPostContents = () => {
         setCreatedDate(formattingTime);
         setPostLikesCount(+(data.post.likesCount));
         setIsLike(!Boolean(data.post.IsLike));
-        console.log("게시글 어케 들어오니?", data.post);
       } catch (error) {
         console.error('상세게시글get error', error)
       }

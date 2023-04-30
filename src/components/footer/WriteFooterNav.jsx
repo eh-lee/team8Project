@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FaVoteYea } from "react-icons/fa";
-import { AiOutlineCamera } from "react-icons/ai";
+import { ReactComponent as Camera } from "../../assets/icons/common/camera.svg"
 import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
 
 function WriteFooterNav() {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
+
+  const [imgs, setImgs] = useState([]);
+  const [preImgs, setPreImgs] = useState([]);
+
+  // const imgInputRef = useRef(null);
+
+  // const handleClick = () => {
+  //   imgInputRef.current.click();
+  // };
+
+  const imgOnchangeHandler = (event) => {
+    console.log("이미지 업로드 어떻게 되지요?=======>", event.target.files)
+    // console.log("filesArr type======>", typeof event.target.files);
+    const fileList = event.target.files;
+    setImgs(fileList);
+    localStorage.setItem('isWritingImg', true);
+  };
+  console.log("여러장 저장되나?", imgs);
 
   const pollModalOpenHandler = () => {
     setIsPollModalOpen(true);
@@ -23,9 +41,17 @@ function WriteFooterNav() {
             <FaVoteYea />
             투표 생성
           </StyledPoll>
-          <StyledImageBtn>
-            <AiOutlineCamera />
-          </StyledImageBtn>
+          <StyledImageCont>
+            <StImageInput
+              type="file"
+              accept="image/*"
+              multiple
+              // ref={imgInputRef}
+              onChange={imgOnchangeHandler}
+            />
+            {/* <StImageIcon onClick={handleClick} /> */}
+            <StImageIcon />
+          </StyledImageCont>
         </StyledNav>
       </StyledColumn>
 
@@ -88,8 +114,9 @@ const StyledPoll = styled.button`
   }
 `;
 
-const StyledImageBtn = styled.button`
-  width: 30px;
+const StyledImageCont = styled.label`
+  width: 24px;
+  height: 24px;
   display: flex;
   padding: 0;
   justify-content: flex-end;
@@ -97,12 +124,20 @@ const StyledImageBtn = styled.button`
   font-size: 20px;
   border: none;
   background-color: transparent;
-  color: #d8d8de;
-
-  &:hover {
-    cursor: pointer;
-    color: #3a3a59;
-  }
 `;
+
+const StImageIcon = styled(Camera)`
+  width: 100%;
+  height: 100%;
+&:hover {
+  cursor: pointer;
+  path:nth-child(1), path:nth-child(2) {
+    stroke: #3a3a59;
+  }};
+`;
+
+const StImageInput = styled.input`
+  display: none;
+`
 
 export default WriteFooterNav;

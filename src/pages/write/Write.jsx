@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
@@ -33,8 +33,19 @@ const Write = () => {
   const [desc, setDesc] = useState("");
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
+
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('desc', desc);
+    formData.append('maincategory', maincategory);
+    formData.append('category', category);
+    formData.append('pollType', pollType);
+    formData.append('tag', tag);
+    formData.append('imgUrl', []);
+
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
@@ -54,17 +65,19 @@ const Write = () => {
       return;
     }
 
+    // {
+    //   title,
+    //   desc,
+    //   maincategory,
+    //   category,
+    //   pollType,
+    //   pollTitle,
+    //   tag,
+    //   imgUrl: "",
+    // }
+
     try {
-      await instanceWithAuth.post("/postCards/post/createPost", {
-        title,
-        desc,
-        maincategory,
-        category,
-        pollType,
-        pollTitle,
-        tag,
-        imgUrl: "",
-      });
+      await instanceWithAuth.post("/postCards/post/createPost", formData);
 
       dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
@@ -89,6 +102,21 @@ const Write = () => {
   const categoryModalCloseHandler = () => {
     setIsCategoryModalOpen(false);
   };
+
+  // ================= CallBack TEST =================
+  const [isWritingImg, setIsWritingImg] = useState(false);
+
+  const handleIsWritingImg = (callBackData) => {
+    setIsWritingImg(callBackData);
+  };
+
+  useEffect(()=> {
+    if(isWritingImg) {
+      console.log('지금 이미지 작성중이라구~!', isWritingImg);
+    } else {
+      console.log('지금 이미지 작성 안함.', isWritingImg);
+    }
+  },[isWritingImg])
 
   return (
     <>
@@ -144,7 +172,7 @@ const Write = () => {
               </div>
             </>
           ) : null}
-          <WriteFooter />
+          <WriteFooter handleIsWritingImg={handleIsWritingImg} />
         </PageWithFooterWrapper>
         <ModalPortal>
           <ModalCont>

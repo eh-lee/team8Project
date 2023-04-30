@@ -59,7 +59,7 @@ const LogInPage = () => {
         <title>훈수 — 로그인</title>
       </Helmet>
       <MobileLayout>
-        <StLogoWrap>
+        <StLogoWrap onClick={()=> {navi('/')}}>
           <StLoginLogo />
         </StLogoWrap>
         <Container onSubmit={submitButtonHandler}>
@@ -113,6 +113,9 @@ const StLogoWrap = styled.div`
   display: flex;
   flex-direction: center;
   justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StLoginLogo = styled.div`
