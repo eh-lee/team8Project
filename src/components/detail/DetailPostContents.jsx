@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import comment from "../../assets/icons/common/comment.png"
-import view from "../../assets/icons/common/view.png"
+import comment from "../../assets/icons/common/comment.png";
+import view from "../../assets/icons/common/view.png";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
+import DetailImgs from "./DetailImgs";
 
 const DetailPostContents = () => {
   const { postIdx } = useParams();
@@ -24,16 +25,21 @@ const DetailPostContents = () => {
   useEffect(() => {
     const getDetailPost = async () => {
       try {
-        const { data } = await instanceWithAuth.get(`/postCards/post/${postIdx}`)
+        const { data } = await instanceWithAuth.get(
+          `/postCards/post/${postIdx}`
+        );
         setDetailPost(data.post);
 
-        const formattingTime = data.post.createdAt.replace(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/, '$1.$2.$3 $4:$5')
+        const formattingTime = data.post.createdAt.replace(
+          /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/,
+          "$1.$2.$3 $4:$5"
+        );
         setCreatedDate(formattingTime);
-        setPostLikesCount(+(data.post.likesCount));
+        setPostLikesCount(+data.post.likesCount);
         setIsLike(!Boolean(data.post.IsLike));
         console.log("게시글 어케 들어오니?", data.post);
       } catch (error) {
-        console.error('상세게시글get error', error)
+        console.error("상세게시글get error", error);
       }
     };
     getDetailPost();
@@ -41,8 +47,8 @@ const DetailPostContents = () => {
 
   // 게시글 좋아요 버튼
   const clickPostLike = () => {
-    instanceWithAuth.put(`/postlike/post/${postIdx}`)
-    setIsLike((prev) => !prev)
+    instanceWithAuth.put(`/postlike/post/${postIdx}`);
+    setIsLike((prev) => !prev);
     setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
   };
 
@@ -54,8 +60,12 @@ const DetailPostContents = () => {
         <DetailPost_UserInfo_LvImg src={level1} />
         <DetailPost_InfoCont>
           <DetailPost_UserInfoCont>
-            <DetailPost_UserInfo_Nickname>{detailPost.nickname}</DetailPost_UserInfo_Nickname>
-            <DetailPost_UserInfo_UserLevel>{detailPost.userLevel}레벨</DetailPost_UserInfo_UserLevel>
+            <DetailPost_UserInfo_Nickname>
+              {detailPost.nickname}
+            </DetailPost_UserInfo_Nickname>
+            <DetailPost_UserInfo_UserLevel>
+              {detailPost.userLevel}레벨
+            </DetailPost_UserInfo_UserLevel>
           </DetailPost_UserInfoCont>
           <DetailPost_UserInfo_CreatedAt>
             {createdDate}
@@ -67,6 +77,11 @@ const DetailPostContents = () => {
         <DetailPost_Content_Title>{detailPost.title}</DetailPost_Content_Title>
         <DetailPost_Content_Desc>{detailPost.desc}</DetailPost_Content_Desc>
         {/* 게시글 정보 */}
+
+        <StDetailPostImgWrap>
+          <DetailImgs postIdx={postIdx} />
+        </StDetailPostImgWrap>
+
         <DetailPost_Content_Info>
           {/* 좋아요 버튼, 개수 */}
           <DetailPost_Content>
@@ -75,7 +90,6 @@ const DetailPostContents = () => {
               pointerOn="on"
             >
               <Like isLike={isLike} />
-
             </DetailPost_Content_Icon>
             <DetailPost_Content_Count>
               {postLikesCount}
@@ -96,16 +110,24 @@ const DetailPostContents = () => {
               <StDetailPostContentImg src={comment} />
             </DetailPost_Content_Icon>
             <DetailPost_Content_Count>
-              {+(detailPost.commentCount)}
+              {+detailPost.commentCount}
             </DetailPost_Content_Count>
           </DetailPost_Content>
         </DetailPost_Content_Info>
       </DetailPost_ContentWrap>
     </>
-  )
-}
+  );
+};
 
-export default DetailPostContents
+export default DetailPostContents;
+
+const StDetailPostImgWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  border: 2px solid tan;
+  margin-bottom: 16px;
+`;
 
 // 상세 게시글 정보
 const DetailPost_InfoWrap = styled.ul`
@@ -218,7 +240,7 @@ const DetailPost_Content_Icon = styled.div`
 const StDetailPostContentImg = styled.img`
   height: 24px;
   width: 24px;
-`
+`;
 
 const DetailPost_Content_Count = styled.div`
   /* border: 1px solid tomato; */
