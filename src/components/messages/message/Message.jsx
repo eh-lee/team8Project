@@ -61,13 +61,13 @@ const StChatInfoUserLvImg = styled.img`
 `;
 
 const StMessageContStart = styled.div`
-  width: 400px;
   display: flex;
   justify-content: flex-start;
+  width: 400px;
   margin: 16px 10px 0 25px;
   font-size: 14px;
   flex-direction: column;
-  // border: 1px solid green;
+  /* border: 1px solid green; */
 `;
 
 const StMsgTextWhite = styled.p`

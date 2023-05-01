@@ -81,8 +81,6 @@ const StyledFooter = styled.div`
   background-color: rgba(255, 255, 255);
 `;
 
-
-
 const ModalCont = styled.div`
   width: 400px;
   margin: 0 auto;

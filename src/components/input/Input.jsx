@@ -7,7 +7,7 @@ const Input = ({ setMessage, sendMessage, message }) => (
   <StInputCont>
     <StForm>
       <StMsginput
-        className="input"
+        // className="input"
         type="text"
         placeholder="메시지를 입력하세요."
         value={message}

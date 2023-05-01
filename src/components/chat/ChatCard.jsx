@@ -13,7 +13,7 @@ const ChatCard = ({ idx, roomName, maxParty, isRealTime }) => {
   return (
     <StChatCardWrap
       onClick={() => {
-        navigate(`/battle/chat?name=${nickname}&room=${roomName}`);
+        navigate(`/battle/chat?name=${nickname}&room=${roomName}&maxParty=${maxParty}`);
       }}
     >
       <StChatCardInfoCont>

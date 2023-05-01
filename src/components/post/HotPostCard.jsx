@@ -1,11 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiOutlineEye } from "react-icons/ai";
-import { IoChatbubbleOutline } from "react-icons/io5";
 import imgIcon from "../../assets/icons/common/imgIcon.png"
-import like from "../../assets/icons/common/like.png"
+import like from "../../assets/icons/common/like.svg"
 import view from "../../assets/icons/common/view.png"
 import comment from "../../assets/icons/common/comment.png"
 
