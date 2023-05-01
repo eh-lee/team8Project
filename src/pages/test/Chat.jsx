@@ -73,14 +73,8 @@ const Chat = () => {
 
   // 서버에서 messages받아오는 코드
   useEffect(() => {
-    // socket.on("message", (message) => {
-    //   console.log("message");
-    // });
-
-    socket.on("message", ({ user, text }) => {
-      // console.log("userseuser---------------->", user);
-      //  console.log("tettxtetxt---------------->", text);
-      setMessages((messages) => [...messages, { user, text }]);
+    socket.on("message", (message) => {
+      setMessages((messages) => [...messages, message]);
     });
 
     // socket.on("roomData", ({ room, users, messages }) => {
@@ -101,9 +95,7 @@ const Chat = () => {
     event.preventDefault();
 
     if (message) {
-      // socket.emit("sendMessage", { message }, () => setMessage(""));
-      socket.emit("message", { room, msg: message });
-      setMessage("");
+      socket.emit("sendMessage", { message }, () => setMessage(""));
     }
   };
 
