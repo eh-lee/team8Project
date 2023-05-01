@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
-import io from "socket.io-client";
+// import io from "socket.io-client";
+import { io } from "socket.io-client";
 import Messages from "../../components/messages/Messages";
 import Input from "../../components/input/Input";
 import styled from "styled-components";
@@ -12,12 +13,11 @@ import ChatEndModal from "../../components/modal/ChatEndModal";
 import MobileLayout from "../../layout/MobileLayout";
 import { cookies } from "../../api/cookies";
 
-// const ENDPOINT = "http://localhost:4000";
-const ENDPOINT = "http://43.201.45.82:3000";
 let socket;
-
-// const Chat = ({ location }) => {
-// location 없어두 되나..?
+// let newSocket;
+// const ENDPOINT = "http://3.35.19.8:3000";
+const ENDPOINT = "http://13.209.50.102:3000";
+// const ENDPOINT = "http://localhost:4000";
 
 const Chat = () => {
   const nav = useNavigate();
@@ -29,73 +29,139 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  //isAdmin for test
   const [isAdmin, setIsAdmin] = useState(false);
+  //isAdmin for test
 
   const [prevMessages, setPrevMessages] = useState([]);
   const [currParty, setCurrParty] = useState({});
 
-  // for test
+  /// ======================== GunSun CODE ========================
+  // let [socket, setSocket] = useState(null);
+
   // useEffect(() => {
-  //   const fetchAdmin = async () => {
-  //     try {
-  //       const response = await instanceWithAuth.get(
-  //         `/chat/hunsuChat/admin/${room}`
-  //       );
-  //       console.log("fetchAdmin의 response nickname=========>", response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
+  //   socket = io(ENDPOINT);
+  //   // 소켓 생성
+  //   // newSocket = io(ENDPOINT);
+
+  //   // console.log("WHy Cant read?", newSocket);
+  //   // console.log("WHy Cant read?", newSocket.io);
+  //   // console.log("WHy Cant read?", newSocket);
+  //   // setSocket(newSocket);
+
+  //   if (socket) {
+  //     socket.on("testConnect", (msg) => {
+  //       // newSocket.on("testConnect", (msg) => {
+  //       console.log(msg);
+  //     });
+
+  //     socket.on("message", ({ user, text }) => {
+  //       // newSocket.on("message", ({ user, text }) => {
+  //       console.log(user.text);
+  //     });
+
+  //     socket.on("sessionId", ({ sessionId, text }) => {
+  //       // newSocket.on("sessionId", ({ sessionId, text }) => {
+  //       console.log(sessionId, text);
+  //     });
+  //   }
+  //   return () => {
+  //     socket.disconnect();
+  //     // newSocket.disconnect();
   //   };
-  //   fetchAdmin();
   // }, []);
-  // for test
 
-  console.log("isAdmin===============>", isAdmin);
+  // console.log("WHy Cant read?", socket);
 
-  // 룸 입장
+  /// ======================== GunSun CODE ========================
+
+  /// ======================== ORIGIN CODE ========================
   useEffect(() => {
     const { name, room, maxParty } = queryString.parse(window.location.search);
     console.log(name, room);
     console.log("rooooooom====================>", room);
-
+    // 여기
     socket = io(ENDPOINT);
 
     setRoom(room);
     setName(name);
 
-    socket.emit("join", { name, room, maxParty }, (error) => {
-      console.log("rooom===========>", room);
-      if (error) {
-        alert(error);
-      }
+    // socket.on("testConnect", (msg) => {
+    //   console.log("msg==============>", msg);
+    // });
+
+    socket.on("message", ({ user, text }) => {
+      console.log("user.text========>", user.text);
     });
+
+    socket.emit("join", { name, room, maxParty }, () => {
+      console.log("조인 emit함===========>", room);
+      // if (error) {
+      // alert(error);
+      // }
+      //server => callback()
+    });
+
+    socket.on("sessionId", ({ sessionId, text }) => {
+      // cosnt sessionData = {session}
+
+      console.log(sessionId, text);
+      // text 안 찍힘 서버 코드 확인필요
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [ENDPOINT, window.location.search]);
+  // ======================== ORIGIN CODE ========================
+
+  /// ======================== GPT CODE ========================
+  // useEffect(() => {
+  //   const { name, room, maxParty } = queryString.parse(window.location.search);
+  //   console.log(name, room);
+  //   console.log("rooooooom====================>", room);
+
+  //   socket = io(ENDPOINT);
+
+  //   setRoom(room);
+  //   setName(name);
+
+  //   socket.on("connect", () => {
+  //     console.log("Socket connected.");
+  //     socket.emit("join", { name, room, maxParty }, (error) => {
+  //       console.log("조인 emit함===========>", room);
+  //       if (error) {
+  //         alert(error);
+  //       }
+  //     });
+  //   });
+
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, [ENDPOINT, window.location.search]);
+  /// ======================== GPT CODE ========================
 
   // 서버에서 messages받아오는 코드
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
-
-    // socket.on("roomData", ({ room, users, messages }) => {
-    //   setUsers(users);
-    // });
-
-    // ================ socket server와 통신하기 ==================
     socket.on("currParty", ({ numUsers, maxParty, room }) => {
       setCurrParty({ numUsers, maxParty, room });
     });
-    // ================ socket server와 통신하기 ==================
   }, []);
 
-  console.log("mess===========>", messages);
-  console.log("crr===========>", currParty);
+  useEffect(() => {}, [currParty.numUsers]);
 
   const sendMessage = (event) => {
     event.preventDefault();
 
     if (message) {
-      socket.emit("sendMessage", { message }, () => setMessage(""));
+      // socket.emit("sendMessage", { message });
+      socket.emit("message", { room, msg: message });
+
+      setMessage("");
     }
   };
 
@@ -105,7 +171,6 @@ const Chat = () => {
     setIsChatEndModalOpen(true);
   };
   const ChatEndModalCloseHandler = () => {
-    console.log("모달이 닫힌거임!");
     setIsChatEndModalOpen(false);
   };
 
