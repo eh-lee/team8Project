@@ -109,6 +109,37 @@ const Chat = () => {
       // text 안 찍힘 서버 코드 확인필요
     });
 
+    // server-side-session-condition
+    // handleConnection(socket: Socket, ...args: any[]) {
+    //   const sessionId = socket.handshake.query.t;
+    //   if (typeof sessionId === 'string' && this.sessions[sessionId]) {
+    //   // 기존 세션 ID로 새 소켓을 교체
+    //   this.sessions[sessionId].disconnect();
+    //   this.sessions[sessionId] = socket;
+    //   console.log(
+    //   `Session ${sessionId} reconnected. with new socket ${socket.id}`,
+    //   );
+
+    //   // 존재하는 세션 만료 시간을 취소
+    //   clearTimeout(this.sessionExpirations.get(sessionId));
+    //   } else {
+    //   // 새로운 세션 생성
+    //   this.sessions[socket.id] = socket;
+    //   console.log(`New session ${socket.id}이 생성되었습니다.`);
+    //   }
+    //   // 세션 만료 시간 스케줄링 (1시간 후)
+    //   const expirationTimeout = setTimeout(() => {
+    //   this.sessions[socket.id].disconnect();
+    //   delete this.sessions[socket.id];
+    //   this.sessionExpirations.delete(socket.id);
+    //   console.log(`Session ${socket.id} expired`);
+    //   }, 60 * 60 * 1000); // 1시간 (60분 * 60초 * 1000밀리초)
+
+    //   this.sessionExpirations.set(socket.id, expirationTimeout);
+    //   }
+
+    // server-side-session-condition
+
     return () => {
       socket.disconnect();
     };
