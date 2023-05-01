@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import HotPostCard from "./HotPostCard";
-import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png"
+import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png";
 
 import axios from "axios";
+import { instance } from "../../api/axios";
 
 const PostCardSlider = () => {
-  // hotPostCard 불러오기
   useEffect(() => {
     const getHotPost = async () => {
-      // const response = await instance.get("/postCards/hotPostCard");
-      const response = await axios.get(
-        "http://43.201.45.82:3000/api/postCards/hotPostCard"
-      );
+      const response = await instance.get("/postCards/hotPostCard");
       setPostCards(response.data.postCards);
     };
     getHotPost();

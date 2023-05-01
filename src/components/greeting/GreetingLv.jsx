@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import level2 from "../../../assets/icons/userLevel/level icon=하수, size=18.png";
+import level2 from "../../assets/icons/userLevel/level icon=하수, size=18.png";
 
 const FalseGreetingLv = () => {
-  const currExp = 170;
-  const goalExp = 200;
+  const currExp = 0;
+  const goalExp = 100;
   const exp = (currExp / goalExp) * 100;
+
   return (
     <GreetingLvCont>
       <RowMain>
@@ -24,7 +25,7 @@ const FalseGreetingLv = () => {
 
         <Row>
           <GreetingLvPoint1>{currExp}</GreetingLvPoint1>
-          <GreetingLvPoint2>/{goalExp}</GreetingLvPoint2>
+          <GreetingLvPoint2>/ {goalExp}</GreetingLvPoint2>
         </Row>
       </RowMain>
     </GreetingLvCont>
@@ -32,16 +33,17 @@ const FalseGreetingLv = () => {
 };
 
 const RowMain = styled.div`
-  /* border: 1px solid green; */
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
 const LvExperienceBar = styled.div`
-  width: 90%;
-  height: 0.5rem;
-  background-color: rgb(230, 230, 230);
+  /* width: ${(props) => props.goalExp}%; */
+
+  width: 229px;
+  height: 8px;
+  background: #f4f4f5;
   border-radius: 2rem;
   position: relative;
   display: flex;
@@ -60,57 +62,58 @@ const ColoredExperienceBar = styled.div`
 `;
 
 const Row = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   align-items: baseline;
+  height: 34px;
 `;
 
 const GreetingLvContSub = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   justify-content: row;
   align-items: center;
+  height: 18px;
+  margin-bottom: 4px;
 `;
 
 //https://sangjuntech.tistory.com/11
 
 const GreetingLvCont = styled.div`
   display: flex;
-  justify-content: space-between;
-  // postCard와 라인 맞추기 위해 margin값 수정
-  margin: 1rem 2rem 0 2rem;
-  /* HeaderNav padding 좌우 값과 동일 */
+  height: 42px;
+  margin: 0 25px 16px 25px;
   max-width: 400px;
   /* StMobileLayout과 동일 */
 `;
 
 const GreetingLvPoint1 = styled.div`
+  height: 34px;
   display: flex;
-  align-items: center;
-  font-size: 1.9rem;
-  font-weight: bold;
-  color: #2d2d2d;
+  align-items: flex-end;
+  font-weight: 700;
+  font-size: 28px;
+  color: #ffffff;
 `;
 const GreetingLvPoint2 = styled.div`
   display: flex;
   align-items: center;
-  color: rgb(160, 160, 160);
-  font-size: 1.5rem;
+  color: #c4c4c4;
+  font-weight: 400;
+  font-size: 24px;
 `;
 
 const GreetingLevelImgCont = styled.div`
   display: flex;
   align-items: center; /* 이미지 세로 중앙 정렬 */
   justify-content: center; /* 이미지 가로 중앙 정렬 */
-  width: 1.3rem;
-  aspect-ratio: 1;
+  width: 18px;
+  height: 18px;
   border-radius: 50%; /* 원 모양으로 만들기 */
-  overflow: hidden;
-  margin-right: 0.25rem;
+  margin-right: 4px;
 `;
 
 const GreetingLevelImg = styled.img`
-  height: 100%;
+  height: 18px;
+  width: 18px;
   border: none;
 `;
 
@@ -124,8 +127,8 @@ const GreetingText1 = styled.div`
 `;
 
 const GreetingLvText1 = styled.div`
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 14px;
   color: #ef3f61;
 `;
 
@@ -139,8 +142,9 @@ const GreetingLvText1 = styled.div`
 // `;
 
 const GreetingLvText2 = styled.div`
-  font-size: 0.9rem;
-  color: rgb(160, 160, 160);
+  font-weight: 600;
+  font-size: 14px;
+  color: #f4f4f5;
   letter-spacing: 0rem;
 `;
 

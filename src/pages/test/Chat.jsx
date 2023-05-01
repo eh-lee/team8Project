@@ -12,7 +12,8 @@ import ChatEndModal from "../../components/modal/ChatEndModal";
 import MobileLayout from "../../layout/MobileLayout";
 import { cookies } from "../../api/cookies";
 
-const ENDPOINT = "http://localhost:4000";
+// const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://43.201.45.82:3000";
 let socket;
 
 // const Chat = ({ location }) => {
@@ -30,81 +31,29 @@ const Chat = () => {
 
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // 그 전의 대화 내용
   const [prevMessages, setPrevMessages] = useState([]);
-
-  // const [test, setTest] = useState({});
   const [currParty, setCurrParty] = useState({});
 
-  //[추가] -1
-  //  [ V ] //axios.delete? 이거 명세 필요 이거 처리랑
-  //[추가] 0
-  // [ V ]chatRoom? css
-  // 채팅 그.. wrap 밖에.. 그.. 하나 더.. 그.. 넣기.. 배경.. 그거..
-
-  // [추가] 3
-  // [ V ] !isAdmin ?  <onClick = {nav('-1')} /> : null
-
-  // [추가] 4
-  // [  ] isAdmin GET (명세 추가 필요)
-  // <저녁 회의>
-  // [  ] to 건선 님 ====> 채팅 기능 DELETE 제외 전부 key value 등 말씀 드리기
-  // [ V ] to 디자이너님 =====> 채팅 저장, 삭제 등 관련해서!
-  // [ V ] to 모두 ====> 채팅기능 : 계급장 떼고 붙자!!!!! + 배틀 게시판 이미지 참고 (user정보 필요없음)
-  // [ V ] 지난 배틀 관련 (===실시간 배틀 but, 이미지는 grayscale로?)
-  // [ V ] 닉네임이랑 말풍선 배치 관련
-
-  useEffect(() => {
-    const fetchAdmin = async () => {
-      try {
-        const response = await instanceWithAuth.get(
-          `/chat/hunsuChat/admin/${room}`
-        );
-        console.log("fetchAdmin의 response nickname=========>", response.data);
-        // if(curNickname === response.sth) {
-        //   setIsAdmin(true);
-        // } else {
-        // setIsAdmin(false);
-        // }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchAdmin();
-  }, []);
+  // for test
+  // useEffect(() => {
+  //   const fetchAdmin = async () => {
+  //     try {
+  //       const response = await instanceWithAuth.get(
+  //         `/chat/hunsuChat/admin/${room}`
+  //       );
+  //       console.log("fetchAdmin의 response nickname=========>", response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchAdmin();
+  // }, []);
+  // for test
 
   console.log("isAdmin===============>", isAdmin);
 
-  //================================================================
-
-  //1.
-  ////3. 모달에서 방 만들 때, errorMSG 가공해서 알럿에!
-
-  ////////////////////////////////
-  //04/27 12:24
-  //delete관련..!
-  //3. isAdmin 명세 요청........핳;; (일단 비밀)
-  //closeBtn은 방을 만든 사람만 보이는데, 그걸 판별하는 건, isAdmin키.
-  // <방 생성자>
-  //isAdmin키의 값은, 방을 최초에 만든 사람이 POST 할 때의 토큰 값에 저장된 닉네임, 즉, 방을 만든 사람의 닉네임
-  // <방 접속자>
-  //방에 접속하는 유저들의 경로는 배틀페이지->챗카드인데, 배틀페이지에서 GET을 할 때, isAdmin을 받고,
-  //ChatCard에 들어갔을 때, 앞서 받은 isAdmin의 값과 자신의 nickname이 일치하지 않으면(할 수가 없겠쥬?)
-  //closeBtn === null
-  ////////////////////////////////
-
-  //1.isAdmin 키를 방을 만들 때 저장해 주고(state로든 브라우저 저장소에든)
-  //로그아웃 했을 때는?.. isAdmin 안 지우기? (정 안 되면.. 다른 컴퓨터면 문제됨)어쨋뜬 서버에서 해 줘야 하는데 하기 시름// 로컬스토리지로 채팅방으로 넘겨주고
-  //2.closeBtn자체를 isAdmin ? <closeBtn /> : null
-
   // 룸 입장
   useEffect(() => {
-    // 여기선 name과 room을 url에서 가져온다.
-    // 이유는 setRoom과 setName이 적용되기 전에 socket.emit('join')이 실행되기 때문이다.
-    // url에서 가져오는 방법이 아닌 다른 방법으로 name과 room을 가져오려면
-    // 미리 정해진 방법으로 name과 room을 가져오는 것이 아닌
-    // socket.emit('join')이 실행되기 전에 setRoom과 setName이 실행되도록 해야 한다.
-
     const { name, room, maxParty } = queryString.parse(window.location.search);
     console.log(name, room);
     console.log("rooooooom====================>", room);
@@ -128,15 +77,11 @@ const Chat = () => {
       setMessages((messages) => [...messages, message]);
     });
 
-    //메세지스 = 서버에서 받아오는 메세지들을 합한 배열
-    //메세지의 0번(훈수봇)은 서버에서 오고, 1번부터(send_message)가 클라->서버->클라
-    socket.on("roomData", ({ users }) => {
-      setUsers(users);
-    });
+    // socket.on("roomData", ({ room, users, messages }) => {
+    //   setUsers(users);
+    // });
 
     // ================ socket server와 통신하기 ==================
-    // 이걸로 현재 인원 체크해서 카드에 표시하기 like, currParty.numUsers/maxParty
-    // * socket에 있는 Key name { numUsers, room } 으로 인자 받기
     socket.on("currParty", ({ numUsers, maxParty, room }) => {
       setCurrParty({ numUsers, maxParty, room });
     });
@@ -150,7 +95,7 @@ const Chat = () => {
     event.preventDefault();
 
     if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
+      socket.emit("sendMessage", { message }, () => setMessage(""));
     }
   };
 

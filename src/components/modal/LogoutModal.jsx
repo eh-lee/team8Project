@@ -23,11 +23,11 @@ const LogoutModal = ({ open, close }) => {
   }, [modalRef, open, close]);
 
   const logout = () => {
-    // 왜 안 되나 체크 4/21 17:44
-    // [Refactor] 인터셉터로 처리하게
-    cookies.remove("access_token", { path: "/" });
-    cookies.remove("nickname", { path: "/" });
-    cookies.remove("email", { path: "/" });
+    const userLogout = ["access_token", "nickname", "email"];
+
+    userLogout.forEach((name) => {
+      cookies.remove(name, { path: "/" });
+    });
 
     alert("로그아웃 되었습니다.");
     navi("/");

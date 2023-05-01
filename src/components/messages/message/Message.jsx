@@ -15,6 +15,7 @@ function Message({ message: { user, text }, name }) {
   return isSentByCurrentUser ? (
     <StMessageContEnd>
       <StNameRight>{trimmedName}</StNameRight>
+
       <StMsgBoxMargenta>
         <StMsgTextWhite>{text}</StMsgTextWhite>
       </StMsgBoxMargenta>
@@ -25,6 +26,7 @@ function Message({ message: { user, text }, name }) {
         <StChatInfoUserLvImg src={hunsuFace} />
         <StNameLeft>{user === "hunsuBot" ? "훈수봇" : user}</StNameLeft>
       </StChatInfoProfileCont>
+
       <StMsgBoxLight>
         <StMsgTextDark>{text}</StMsgTextDark>
       </StMsgBoxLight>
@@ -87,6 +89,7 @@ const StMsgTextDark = styled.p`
 `;
 
 const StMsgBoxLight = styled.div`
+  border: 1px solid green;
   background: white;
   border-radius: 0 10px 10px 10px;
   padding: 8px 12px;

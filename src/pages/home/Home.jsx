@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import MobileLayout from "../../layout/MobileLayout";
-import FalseGreeting from "../../components/greeting/falseGreeting/FalseGreeting";
-import FalseGreetingLv from "../../components/greeting/falseGreeting/FalseGreetingLv";
+import Greeting from "../../components/greeting/Greeting";
+import GreetingLv from "../../components/greeting/GreetingLv";
 import { cookies } from "../../api/cookies";
 import HotPostCardSlider from "../../components/post/HotPostCardSlider";
 import NewPostCardSlider from "../../components/post/NewPostCardSlider";
@@ -28,14 +28,14 @@ const Home = () => {
           {isLogin ? (
             <>
               <StGreetingWrap>
-                <FalseGreeting />
-                <FalseGreetingLv />
+                <Greeting />
+                <GreetingLv />
               </StGreetingWrap>
             </>
           ) : (
             <StGreetingWrap>
-              <FalseGreeting />
-              <FalseGreetingLv />
+              <Greeting />
+              <GreetingLv />
             </StGreetingWrap>
           )}
           <PostCardSliders>

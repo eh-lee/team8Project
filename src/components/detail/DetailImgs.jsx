@@ -52,5 +52,5 @@ const StImgBox = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 7.27273px;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 `;

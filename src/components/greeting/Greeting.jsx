@@ -1,31 +1,47 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import level1 from "../../../assets/icons/userLevel/level icon=초보, size=72.png";
-import { cookies } from "../../../api/cookies";
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
+import { cookies } from "../../api/cookies";
 
 const FalseGreeting = () => {
   const navi = useNavigate();
-  const nickname = cookies.get('nickname');
+  const nickname = cookies.get("nickname");
   const isLogin = cookies.get("access_token") ? true : false;
 
   return (
     <GreetingCont>
       <GreetingText1>
-        <Row>
-          <GreetingNickname onClick={() => navi("/login")}>
-            {isLogin? nickname : "로그인"}
-          </GreetingNickname>
-          <Greeting1>{isLogin? "의" : "후"}</Greeting1>
-        </Row>
-        <Greeting1>{isLogin? "훈수 능력치는?" : "이용 가능합니다."}</Greeting1>
+        {isLogin ? (
+          <>
+            <Row>
+              <GreetingNickname onClick={() => navi("/mypage")}>
+                {nickname}
+              </GreetingNickname>
+              <Greeting1>님의</Greeting1>
+            </Row>
+            <Greeting1>훈수 능력치는?</Greeting1>
+          </>
+        ) : (
+          <>
+            <Row>
+              <GreetingNickname onClick={() => navi("/login")}>
+                로그인
+              </GreetingNickname>
+              <Greeting1>후</Greeting1>
+            </Row>
+            <Greeting1>이용 가능합니다.</Greeting1>
+          </>
+        )}
       </GreetingText1>
 
       <Column>
         <GreetingLevelImgCont>
           <GreetingLevelImg src={level1} />
         </GreetingLevelImgCont>
-        <GreetingLevelName>{isLogin? "훈수 초보" : "훈수 초보"}</GreetingLevelName>
+        <GreetingLevelName>
+          {isLogin ? "훈수 초보" : "훈수 초보"}
+        </GreetingLevelName>
       </Column>
     </GreetingCont>
   );
@@ -75,7 +91,6 @@ const GreetingLevelImg = styled.img`
   height: 72px;
   width: 72px;
   border: none;
-  cursor: pointer;
 `;
 // 스크롤시 이미지 올라오는 문제 확인 => backGround-image로 줄 수 있는지 확인해보기
 

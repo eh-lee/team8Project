@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { instance } from "../../api/axios";
-import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png"
+import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png";
 import NewPostCard from "./NewPostCard";
 import axios from "axios";
 
@@ -9,13 +9,9 @@ const NewPostCardSlider = () => {
   // newPostCard 불러오기
   useEffect(() => {
     const getPost = async () => {
-      // const response = await instance.get(
-      //   `/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
-      // );
-      const response = await axios.get(
-        ` http://43.201.45.82:3000/api/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
+      const response = await instance.get(
+        `/postCards?maincategory=전체&category=전체&splitNumber=5&splitPageNumber=1`
       );
-
       setNewPostCards(response.data.postCards);
     };
     getPost();

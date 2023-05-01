@@ -124,7 +124,6 @@ const StDetailPostImgWrap = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-  border: 2px solid tan;
   margin-bottom: 16px;
 `;
 

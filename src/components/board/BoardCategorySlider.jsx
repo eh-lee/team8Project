@@ -58,7 +58,7 @@ const BoardCategorySlider = ({ parentFunction }) => {
   //   넘치는 거 지우기
 
   return (
-    <div>
+    <>
       <StCatLeftButton onClick={moveLeftHandler}>❮</StCatLeftButton>
       <StCatSliderWrap>
         <CategorySlider
@@ -77,7 +77,7 @@ const BoardCategorySlider = ({ parentFunction }) => {
         </CategorySlider>
       </StCatSliderWrap>
       <StCatRightButton onClick={moveRightHandler}>❯</StCatRightButton>
-    </div>
+    </>
   );
 };
 
@@ -124,6 +124,7 @@ const CategorySlider = styled.div`
   width: 1600px;
   background-color: rgb(220, 220, 220, 0.35);
   transform: translateX(${(props) => props.currentPosition}px);
+  transition: transform 0.5s ease-in-out;
 
   & > button {
     display: inline-block;
