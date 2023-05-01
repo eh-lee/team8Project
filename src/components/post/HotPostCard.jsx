@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
-import { IoChatbubbleOutline } from "react-icons/io5";
-import imgIcon from "../../assets/icons/common/imgIcon.png"
-import like from "../../assets/icons/common/like.png"
-import view from "../../assets/icons/common/view.png"
-import comment from "../../assets/icons/common/comment.png"
+// import { IoChatbubbleOutline } from "react-icons/io5";
+import imgIcon from "../../assets/icons/common/imgIcon.png";
+import like from "../../assets/icons/common/like.png";
+import view from "../../assets/icons/common/view.png";
+import comment from "../../assets/icons/common/comment.png";
 
 const HotPostCard = ({
   mainCategory,
@@ -20,7 +20,7 @@ const HotPostCard = ({
   postIdx,
 }) => {
   const navigate = useNavigate();
-  
+
   console.log("likesCount=========================##", likesCount);
 
   //* =========== Cat. Label ===============
@@ -88,7 +88,6 @@ const HotPostCard = ({
             <StPostCardIsImgIn src={imgIcon} />
           </PostCard_Title>
 
-
           {/* 투표 유무 이미지 표시 */}
           {/* <PostCardRow>
           <PostCardTitle>{title}</PostCardTitle>
@@ -122,7 +121,9 @@ const HotPostCard = ({
             <PostCard_Info_Content_Icon>
               <StPostCardInfoContentImg src={view} />
             </PostCard_Info_Content_Icon>
-            <PostCard_Info_Content_Count>{viewCount}</PostCard_Info_Content_Count>
+            <PostCard_Info_Content_Count>
+              {viewCount}
+            </PostCard_Info_Content_Count>
           </PostCard_Info_Content>
           {/* 댓글 버튼, 개수 */}
           <PostCard_Info_Content>
@@ -165,7 +166,7 @@ const StPostCardCont = styled.div`
   display: flex;
   flex-direction: column;
   /* height: 148px; */
-`
+`;
 
 const PostCard_TitleBox = styled.ul`
   /* border: 1px solid orange; */
@@ -214,7 +215,7 @@ const PostCard_Title = styled.li`
 const StPostCardIsImgIn = styled.img`
   width: 16px;
   height: 16px;
-`
+`;
 
 const PostCard_ContentBox = styled.div`
   /* border: 1px solid blue; */
@@ -235,7 +236,6 @@ const PostCard_ContentBox = styled.div`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
-
 `;
 
 const PostCard_Content = styled.div`
@@ -280,7 +280,7 @@ const PostCard_Info_Content_Icon = styled.div`
 const StPostCardInfoContentImg = styled.img`
   width: 16px;
   height: 16px;
-`
+`;
 
 const PostCard_Info_Content_Count = styled.div`
   width: 24px;

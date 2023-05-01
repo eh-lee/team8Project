@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import MobileLayout from "../../layout/MobileLayout";
 import styled from "styled-components";
 import FooterNav from "../../components/footer/FooterNav";
-import { MdArrowBackIosNew } from "react-icons/md";
 import ModalPortal from "../../components/modal/ModalPortal";
 import CreateChatModal from "../../components/modal/CreateChatModal";
 import { useEffect } from "react";
