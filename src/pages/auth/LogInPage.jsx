@@ -10,7 +10,7 @@ import TrueGuard from "../../components/hook/guard/TrueGuard";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import logo from "../../assets/icons/logo/loginlogo.png";
-import SnsLoginBtn from "../../components/login/SnsLoginBtn";
+import SnsLoginBtn from "../../components/login/SnsLoginBtn";
 
 const LogInPage = () => {
   TrueGuard();
@@ -57,7 +57,11 @@ const LogInPage = () => {
         <title>훈수 — 로그인</title>
       </Helmet>
       <MobileLayout>
-        <StLogoWrap onClick={()=> {navi('/')}}>
+        <StLogoWrap
+          onClick={() => {
+            navi("/");
+          }}
+        >
           <StLoginLogo />
         </StLogoWrap>
         <Container onSubmit={submitButtonHandler}>
