@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import {ReactComponent as VoteIcon} from "../../assets/icons/common/vote.svg"
 import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
 import * as St from "./WriteFooter.style"
 
-const WriteFooter = ({handleIsWritingImg}) => {
+const WriteFooter = ({ handleIsWritingImg }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
   const [imgs, setImgs] = useState([]);
-  const [preImgs, setPreImgs] = useState([]);
-
+  // const [preImgs, setPreImgs] = useState([]);
   // const imgInputRef = useRef(null);
 
   // const handleClick = () => {
@@ -17,9 +15,9 @@ const WriteFooter = ({handleIsWritingImg}) => {
   // };
 
   const imgOnchangeHandler = (event) => {
-    console.log("이미지 업로드 어떻게 되지요?=======>", event.target.files)
+    console.log("이미지 업로드 어떻게 되지요?=======>", event.target.files);
     const fileList = event.target.files;
-    
+
     setImgs(fileList);
     handleIsWritingImg(true);
   };
@@ -38,7 +36,7 @@ const WriteFooter = ({handleIsWritingImg}) => {
       <St.Column>
         <St.Nav>
           <St.Poll onClick={() => pollModalOpenHandler()}>
-            <VoteIcon />
+            <St.VoteIcon />
             투표 생성
           </St.Poll>
           <St.ImageCont>

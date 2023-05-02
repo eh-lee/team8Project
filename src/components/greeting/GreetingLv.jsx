@@ -1,5 +1,5 @@
 import React from "react";
-import level2 from "../../assets/icons/userLevel/level icon=하수, size=18.png";
+import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
 import * as St from "./Greeting.style"
 
 const FalseGreetingLv = () => {

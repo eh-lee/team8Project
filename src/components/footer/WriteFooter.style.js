@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Camera } from "../../assets/icons/common/camera.svg"
+import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg"
 
 const Footer = styled.div`
   position: fixed;
@@ -11,6 +12,11 @@ const Footer = styled.div`
   font-size: 0.75rem;
   font-weight: bold;
   background-color: rgba(255, 255, 255);
+`;
+
+const ModalCont = styled.div`
+  width: 400px;
+  margin: 0 auto;
 `;
 
 const Column = styled.div`
@@ -25,9 +31,7 @@ const Column = styled.div`
 const Nav = styled.nav`
   width: 100vw;
   display: flex;
-  // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
   margin: 0 7.5%;
-  // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
@@ -85,10 +89,6 @@ const ImageIcon = styled(Camera)`
   }};
 `;
 
-const ModalCont = styled.div`
-  width: 400px;
-  margin: 0 auto;
-`;
 
 export {
     Footer,
@@ -98,5 +98,6 @@ export {
     ImageCont,
     ImageInput,
     ImageIcon,
+    VoteIcon,
     ModalCont,
 }
