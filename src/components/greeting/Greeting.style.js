@@ -1,5 +1,83 @@
 import styled from "styled-components";
 
+const Wrap = styled.div`
+  background-color: #3a3a59;
+  width: 100%;
+  height: 204px;
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 40px;
+  margin-top: 40px;
+  /* border: 2px solid red; */
+`;
+
+const GreetingCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+  // postCard와 라인 맞추기 위해 margin값 수정
+  margin: 46px 25px 8px 25px;
+  /* HeaderNav padding 좌우 값과 동일 */
+  max-width: 400px;
+  height: 92px;
+  /* StMobileLayout과 동일 */
+`;
+
+const GreetingText1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 38px;
+  justify-content: space-evenly;
+  height: 76px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  justify-content: row;
+`;
+
+const GreetingNickname = styled.div`
+  color: white;
+  padding-right: 4px;
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(220, 220, 220);
+  }
+`;
+
+const Greeting1 = styled.div`
+  color: white;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 92px;
+  gap: 2px;
+`;
+
+const GreetingLevelImgCont = styled.div`
+  display: flex;
+  border-radius: 50%;
+  height: 72px;
+  width: 72px;
+`;
+
+const GreetingLevelImg = styled.img`
+  height: 72px;
+  width: 72px;
+  border: none;
+`;
+
+const GreetingLevelName = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #ef3f61;
+  font-size: 14px;
+  font-weight: 600;
+`;
 
 const GreetingLvCont = styled.div`
   display: flex;
@@ -9,13 +87,13 @@ const GreetingLvCont = styled.div`
   /* StMobileLayout과 동일 */
 `;
 
-const RowMain = styled.div`
+const Between = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
-const GreetingText1 = styled.div`
+const GreetingText2 = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -32,7 +110,7 @@ const GreetingLvContSub = styled.div`
   margin-bottom: 4px;
 `;
 
-const GreetingLevelImgCont = styled.div`
+const GreetingLevelImgCont2 = styled.div`
   display: flex;
   align-items: center; /* 이미지 세로 중앙 정렬 */
   justify-content: center; /* 이미지 가로 중앙 정렬 */
@@ -42,7 +120,7 @@ const GreetingLevelImgCont = styled.div`
   margin-right: 4px;
 `;
 
-const GreetingLevelImg = styled.img`
+const GreetingLevelImg2 = styled.img`
   height: 18px;
   width: 18px;
   border: none;
@@ -87,7 +165,7 @@ const ColoredExperienceBar = styled.div`
   width: ${(props) => props.exp}%;
 `;
 
-const Row = styled.div`
+const Baseline = styled.div`
   display: flex;
   align-items: baseline;
   height: 34px;
@@ -110,19 +188,29 @@ const GreetingLvPoint2 = styled.div`
 `;
 
 export {
-    GreetingLvCont,
-    RowMain,
-    GreetingText1,
-    GreetingLvContSub,
-    GreetingLevelImgCont,
-    GreetingLevelImg,
-    GreetingLvText1,
-    GreetingLvText2,
-    LvExperienceBar,
-    ColoredExperienceBar,
-    Row,
-    GreetingLvPoint1,
-    GreetingLvPoint2,
+  Wrap,
+  Row,
+  Column,
+  Between,
+  Baseline,
 
+  GreetingLvCont,
+  GreetingLvContSub,
+  GreetingLvPoint1,
+  GreetingLvPoint2,
+  GreetingLvText1,
+  GreetingLvText2,
+  GreetingLevelImg,
+  GreetingLevelImg2,
+  GreetingLevelName,
+  GreetingLevelImgCont,
+  GreetingLevelImgCont2,
 
+  Greeting1,
+  GreetingCont,
+  GreetingText1,
+  GreetingText2,
+  GreetingNickname,
+  LvExperienceBar,
+  ColoredExperienceBar,
 }

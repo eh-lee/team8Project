@@ -1,6 +1,6 @@
 import React from "react";
 import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
-import * as St from "./Greeting.style"
+import * as St from "./GreetingLV.style";
 
 const FalseGreetingLv = () => {
   const currExp = 0;
@@ -9,7 +9,7 @@ const FalseGreetingLv = () => {
 
   return (
     <St.GreetingLvCont>
-      <St.RowMain>
+      <St.Between>
         <St.GreetingText1>
           <St.GreetingLvContSub>
             <St.GreetingLevelImgCont>
@@ -23,11 +23,11 @@ const FalseGreetingLv = () => {
           </St.LvExperienceBar>
         </St.GreetingText1>
 
-        <St.Row>
+        <St.Baseline>
           <St.GreetingLvPoint1>{currExp}</St.GreetingLvPoint1>
           <St.GreetingLvPoint2>/ {goalExp}</St.GreetingLvPoint2>
-        </St.Row>
-      </St.RowMain>
+        </St.Baseline>
+      </St.Between>
     </St.GreetingLvCont>
   );
 };
