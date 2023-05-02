@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { ReactComponent as Comment } from "../../assets/icons/common/comment.svg";
-import { ReactComponent as View } from "../../assets/icons/common/eye.svg";
+import { ReactComponent as StIconComment } from "../../assets/icons/common/comment.svg";
+import { ReactComponent as StIconView } from "../../assets/icons/common/eye.svg";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
@@ -34,7 +34,7 @@ const DetailPostContents = () => {
           /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/,
           "$1.$2.$3 $4:$5"
         );
-        console.log("data가 어케 들어오지", data)
+        console.log("data가 어케 들어오지", data);
         setCreatedDate(formattingTime);
         setPostLikesCount(+data.post.likesCount);
         setIsLike(data.post.IsLike);
@@ -44,7 +44,7 @@ const DetailPostContents = () => {
     };
     getDetailPost();
   }, []);
-  console.log("isLike어케 들어오니", isLike)
+  console.log("isLike어케 들어오니", isLike);
 
   // 게시글 좋아요 버튼
   const clickPostLike = () => {
@@ -52,7 +52,7 @@ const DetailPostContents = () => {
     setIsLike((prev) => !prev);
     setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
   };
-  console.log("isLikeCount변경은 잘 되겠지", postLikesCount)
+  console.log("isLikeCount변경은 잘 되겠지", postLikesCount);
 
   return (
     <>
@@ -124,16 +124,6 @@ const DetailPostContents = () => {
 };
 
 export default DetailPostContents;
-
-const StIconView = styled(View)`
-  width: 21px;
-  height: 15px;
-`;
-
-const StIconComment = styled(Comment)`
-  width: 18px;
-  height: 18px;
-`;
 
 const StDetailPostImgWrap = styled.div`
   display: flex;

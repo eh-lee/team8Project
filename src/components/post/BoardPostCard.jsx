@@ -142,37 +142,27 @@ const BoardPostCard = ({
 export default BoardPostCard;
 
 const StIconView = styled(View)`
-  width: 14px;
-  height: 10px;
   path:nth-child(1),
   path:nth-child(2) {
-    stroke: #8a8a8a;
     stroke-width: 2.25px;
   }
 `;
 
 const StIconLike = styled(Like)`
-  width: 12px;
-  height: 11px;
   path:nth-child(1) {
-    stroke: #8a8a8a;
     stroke-width: 2.25px;
   }
 `;
 
 const StIconComment = styled(Comment)`
-  width: 12px;
-  height: 12px;
   path:nth-child(1) {
-    stroke: #8a8a8a;
     stroke-width: 2.25px;
   }
 `;
 
 const StIconVote = styled(Vote)`
-  width: 18px;
-  height: 15px;
-  path:nth-child(1) {
+  path:nth-child(1),
+  path:nth-child(2) {
     stroke: #c4c4c4;
     stroke-width: 2px;
   }
