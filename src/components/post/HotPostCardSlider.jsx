@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import HotPostCard from "./HotPostCard";
 import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png";
-
-import axios from "axios";
 import { instance } from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
-const PostCardSlider = () => {
+const HotPostCardSlider = () => {
   useEffect(() => {
     const getHotPost = async () => {
       const response = await instance.get("/postCards/hotPostCard");
@@ -66,29 +65,90 @@ const PostCardSlider = () => {
   };
 
   return (
-    <SliderContainer>
-      <Button dir="left" onClick={clickLeftHandler} />
-      <Button dir="right" onClick={clickRightHandler} />
-      <PostCards animate={animate}>
-        {genPostCardsArray(index)?.map((el) => (
-          <HotPostCard
-            key={el?.postIdx}
-            postIdx={el?.postIdx}
-            mainCategory={el?.maincategory}
-            category={el?.category}
-            title={el?.title}
-            content={el?.desc}
-            likesCount={el?.likesCount}
-            viewCount={el?.postViewCount}
-            commentCount={el?.commentCount}
-          />
-        ))}
-      </PostCards>
-    </SliderContainer>
+    <XXXHotPostCardSliderCont>
+      <XXXPostCardSliderInfo colored="HOT" title=" 훈수" />
+      <SliderContainer>
+        <Button dir="left" onClick={clickLeftHandler} />
+        <Button dir="right" onClick={clickRightHandler} />
+        <PostCards animate={animate}>
+          {genPostCardsArray(index)?.map((el) => (
+            <HotPostCard
+              key={el?.postIdx}
+              postIdx={el?.postIdx}
+              mainCategory={el?.maincategory}
+              category={el?.category}
+              title={el?.title}
+              content={el?.desc}
+              likesCount={el?.likesCount}
+              viewCount={el?.postViewCount}
+              commentCount={el?.commentCount}
+            />
+          ))}
+        </PostCards>
+      </SliderContainer>
+    </XXXHotPostCardSliderCont>
   );
 };
 
-export default PostCardSlider;
+export default HotPostCardSlider;
+
+const XXXPostCardSliderInfo = ({ colored, title, more, on }) => {
+  const nav = useNavigate();
+  return (
+    <XXXPostCardSliderInfoXXX>
+      <XXXPostCardSliderTitle>
+        <span className="colored">{colored}</span>
+        {title}
+      </XXXPostCardSliderTitle>
+      <XXXPostCardSliderMore
+        onClick={() => {
+          if (on !== "on") {
+            nav("/totalboard");
+          } else {
+            nav("/battle");
+          }
+        }}
+      >
+        {more}
+      </XXXPostCardSliderMore>
+    </XXXPostCardSliderInfoXXX>
+  );
+};
+
+const XXXHotPostCardSliderCont = styled.li`
+  /* border: 1px solid blue; */
+  margin-top: 16px;
+`;
+
+const XXXPostCardSliderInfoXXX = styled.div`
+  /* border: 1px solid olivedrab; */
+  width: 350px;
+  height: 26px;
+  margin-left: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const XXXPostCardSliderTitle = styled.h1`
+  /* border: 1px solid red; */
+  font-weight: 600;
+  font-size: 20px;
+  color: #2d2d2d;
+
+  /* colored에 스타일주기 */
+  span.colored {
+    color: #ef3f61;
+  }
+`;
+
+const XXXPostCardSliderMore = styled.span`
+  /* border: 1px solid blue; */
+  color: #ef3f61;
+  font-size: 0.8rem;
+  cursor: pointer;
+`;
 
 const SliderContainer = styled.div`
   /* border: 1px solid green; */

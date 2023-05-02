@@ -2,39 +2,72 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../api/cookies";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
-import * as St from "./GreetingLv.style"
+import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
+import * as St from "./Greeting.style";
 
-const FalseGreeting = () => {
+const Greeting = () => {
   const navi = useNavigate();
   const nickname = cookies.get("nickname");
   const isLogin = cookies.get("access_token") ? true : false;
 
-  return (
-    <St.GreetingCont>
-      <St.GreetingText1>
-        {
-          <>
-            <St.Row>
-              <St.GreetingNickname onClick={() => navi(`/${isLogin? "mypage" : "login"}`)}>
-                {isLogin? nickname : "로그인"}
-              </St.GreetingNickname>
-              <St.Greeting1>{isLogin? "님의" : "후"}</St.Greeting1>
-            </St.Row>
-            <St.Greeting1>{isLogin? "훈수 능력치는?" : "이용 가능합니다."}</St.Greeting1>
-          </>
-        }
-      </St.GreetingText1>
+  const currExp = 0;
+  const goalExp = 100;
+  const exp = (currExp / goalExp) * 100;
 
-      <St.Column>
-        <St.GreetingLevelImgCont>
-          <St.GreetingLevelImg src={level1} />
-        </St.GreetingLevelImgCont>
-        <St.GreetingLevelName>
-          {isLogin ? "훈수 초보" : "훈수 초보"}
-        </St.GreetingLevelName>
-      </St.Column>
-    </St.GreetingCont>
+  return (
+    <St.Wrap>
+      <St.GreetingCont>
+        <St.GreetingText1>
+          {
+            <>
+              <St.Row>
+                <St.GreetingNickname
+                  onClick={() => navi(`/${isLogin ? "mypage" : "login"}`)}
+                >
+                  {isLogin ? nickname : "로그인"}
+                </St.GreetingNickname>
+                <St.Greeting1>{isLogin ? "님의" : "후"}</St.Greeting1>
+              </St.Row>
+              <St.Greeting1>
+                {isLogin ? "훈수 능력치는?" : "이용 가능합니다."}
+              </St.Greeting1>
+            </>
+          }
+        </St.GreetingText1>
+
+        <St.Column>
+          <St.GreetingLevelImgCont>
+            <St.GreetingLevelImg src={level1} />
+          </St.GreetingLevelImgCont>
+          <St.GreetingLevelName>
+            {isLogin ? "훈수 초보" : "훈수 초보"}
+          </St.GreetingLevelName>
+        </St.Column>
+      </St.GreetingCont>
+
+      <St.GreetingLvCont>
+        <St.Between>
+          <St.GreetingText2>
+            <St.GreetingLvContSub>
+              <St.GreetingLevelImgCont2>
+                <St.GreetingLevelImg2 src={level2} />
+              </St.GreetingLevelImgCont2>
+              <St.GreetingLvText1>훈수 하수</St.GreetingLvText1>
+              <St.GreetingLvText2>까지 앞으로</St.GreetingLvText2>
+            </St.GreetingLvContSub>
+            <St.LvExperienceBar>
+              <St.ColoredExperienceBar exp={exp} />
+            </St.LvExperienceBar>
+          </St.GreetingText2>
+
+          <St.Baseline>
+            <St.GreetingLvPoint1>{currExp}</St.GreetingLvPoint1>
+            <St.GreetingLvPoint2>/ {goalExp}</St.GreetingLvPoint2>
+          </St.Baseline>
+        </St.Between>
+      </St.GreetingLvCont>
+    </St.Wrap>
   );
 };
 
-export default FalseGreeting;
+export default Greeting;

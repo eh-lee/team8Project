@@ -4,6 +4,7 @@ import { instance } from "../../api/axios";
 import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png";
 import NewPostCard from "./NewPostCard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NewPostCardSlider = () => {
   // newPostCard 불러오기
@@ -64,26 +65,84 @@ const NewPostCardSlider = () => {
   };
 
   return (
-    <SliderContainer>
-      <Button dir="left" onClick={clickLeftHandler} />
-      <Button dir="right" onClick={clickRightHandler} />
-      <NewPostCards animate={animate}>
-        {genPostCardsArray(index)?.map((el) => (
-          <NewPostCard
-            key={el?.postIdx}
-            postIdx={el?.postIdx}
-            category={el?.category}
-            mainCategory={el?.maincategory}
-            title={el?.title}
-            content={el?.desc}
-          />
-        ))}
-      </NewPostCards>
-    </SliderContainer>
+    <XXXNewPostCardSliderCont>
+      <XXXPostCardSliderInfo title="실시간 훈수" more="더 보기" />
+      <SliderContainer>
+        <Button dir="left" onClick={clickLeftHandler} />
+        <Button dir="right" onClick={clickRightHandler} />
+        <NewPostCards animate={animate}>
+          {genPostCardsArray(index)?.map((el) => (
+            <NewPostCard
+              key={el?.postIdx}
+              postIdx={el?.postIdx}
+              category={el?.category}
+              mainCategory={el?.maincategory}
+              title={el?.title}
+              content={el?.desc}
+            />
+          ))}
+        </NewPostCards>
+      </SliderContainer>
+    </XXXNewPostCardSliderCont>
   );
 };
 
 export default NewPostCardSlider;
+
+const XXXNewPostCardSliderCont = styled.li``;
+
+const XXXPostCardSliderInfo = ({ colored, title, more, on }) => {
+  const nav = useNavigate();
+  return (
+    <XXXPostCardSliderInfoXXX>
+      <XXXPostCardSliderTitle>
+        <span className="colored">{colored}</span>
+        {title}
+      </XXXPostCardSliderTitle>
+      <XXXPostCardSliderMore
+        onClick={() => {
+          if (on !== "on") {
+            nav("/totalboard");
+          } else {
+            nav("/battle");
+          }
+        }}
+      >
+        {more}
+      </XXXPostCardSliderMore>
+    </XXXPostCardSliderInfoXXX>
+  );
+};
+
+const XXXPostCardSliderInfoXXX = styled.div`
+  /* border: 1px solid olivedrab; */
+  width: 350px;
+  height: 26px;
+  margin-left: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const XXXPostCardSliderTitle = styled.h1`
+  /* border: 1px solid red; */
+  font-weight: 600;
+  font-size: 20px;
+  color: #2d2d2d;
+
+  /* colored에 스타일주기 */
+  span.colored {
+    color: #ef3f61;
+  }
+`;
+
+const XXXPostCardSliderMore = styled.span`
+  /* border: 1px solid blue; */
+  color: #ef3f61;
+  font-size: 0.8rem;
+  cursor: pointer;
+`;
 
 const SliderContainer = styled.div`
   /* border: 1px solid green; */
