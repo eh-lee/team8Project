@@ -3,10 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { instance, instanceWithAuth } from "../../api/axios";
 import MobileLayout from "../../layout/MobileLayout";
-// import { FiMoreVertical } from "react-icons/fi";
 import { ReactComponent as VerticalDots } from "../../assets/icons/common/verticaldots.svg";
-// import { MdArrowBackIosNew } from "react-icons/md";
-import { ReactComponent as BackArrow } from "../../assets/icons/common/back.svg";
+import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
 import DetailPostContents from "../../components/detail/DetailPostContents";
 import DetailPostCommentsList from "../../components/detail/DetailPostCommentsList";
 import ModalPortal from "../../components/modal/ModalPortal";
@@ -70,7 +68,7 @@ const DetailPost = () => {
                 nav(-1);
               }}
             >
-              <StBackArrow />
+              <BackIcon />
             </DetailPost_BackBtn>
             <DetailPost_Category>
               {detailPostCat.maincategory}◦{detailPostCat.category}
@@ -121,25 +119,9 @@ const DetailPost = () => {
 
 export default DetailPost;
 
-const StBackArrow = styled(BackArrow)`
-  /* width: 16px; */
-  /* height: 16px; */
-  &:hover {
-    cursor: pointer;
-    /* path:nth-child(1) {
-      stroke: #3a3a59;
-    } */
-  }
-`;
-
 const StVerticalDots = styled(VerticalDots)`
-  /* width: 16px;
-  height: 16px; */
   &:hover {
     cursor: pointer;
-    /* path:nth-child(1) {
-      stroke: #3a3a59;
-    } */
   }
 `;
 
@@ -196,6 +178,7 @@ const DetailPost_Category = styled.div`
   height: 24px;
   display: flex;
   align-items: center;
+  font-weight: 600;
   font-size: 18px;
   color: rgb(70, 70, 70);
 `;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { BsCheckLg } from "react-icons/bs";
+import {ReactComponent as CheckIcon} from "../../assets/icons/common/check.svg"
 
 const CateogryModal = ({ parentFunction, open, close }) => {
   const modalRef = useRef();
@@ -92,7 +92,7 @@ const CateogryModal = ({ parentFunction, open, close }) => {
                 isClicked={isActive.sub}
               >
                 {item}
-                <BsCheckLg display={isActive.sub === idx ? "inline" : "none"} />
+                <CheckIcon display={isActive.sub === idx ? "inline" : "none"} />
               </SubCat>
             ))}
           </ModalSubCat>

@@ -2,10 +2,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { CgHome } from "react-icons/cg";
-import { TbHandFinger } from "react-icons/tb";
-import { RiSwordLine } from "react-icons/ri";
-import { HiOutlinePencil } from "react-icons/hi";
+import {ReactComponent as HomeIcon} from "../../assets/icons/common/home.svg"
+import {ReactComponent as BoardIcon} from "../../assets/icons/common/board.svg"
+import {ReactComponent as BattleIcon} from "../../assets/icons/common/battle.svg"
+import {ReactComponent as WriteIcon} from "../../assets/icons/common/write.svg"
+
 
 function FooterNav() {
   const navi = useNavigate();
@@ -16,24 +17,24 @@ function FooterNav() {
         <FooterUl>
           <Footer_Box onClick={() => navi("/")}>
             <Footer_Box_Column>
-              <CgHome size="1.75em" />홈
+              <StFooterNavIcon icon="Home" />홈
             </Footer_Box_Column>
           </Footer_Box>
           <Footer_Box onClick={() => navi("/totalboard")}>
             <Footer_Box_Column>
-              <TbHandFinger size="1.75em" />
+              <StFooterNavIcon icon="Board" />
               훈수게시판
             </Footer_Box_Column>
           </Footer_Box>
           <Footer_Box onClick={() => navi("/battle")}>
             <Footer_Box_Column>
-              <RiSwordLine size="1.75em" />
+              <StFooterNavIcon icon="Battle"/>
               훈수배틀
             </Footer_Box_Column>
           </Footer_Box>
           <Footer_Box onClick={() => navi("/write")}>
             <Footer_Box_Column>
-              <HiOutlinePencil size="1.75em" />
+              <StFooterNavIcon icon="Write" />
               글쓰기
             </Footer_Box_Column>
           </Footer_Box>
@@ -52,7 +53,7 @@ const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
   padding: 0 1rem;
-  color: rgb(70, 70, 70);
+  color: #BDBDC9;
 `;
 
 const FooterUl = styled.ul`
@@ -68,8 +69,11 @@ const Footer_Box = styled.div`
   text-align: center;
   justify-content: space-evenly;
   &:hover {
-    color: rgb(180, 180, 180);
+    color: #3A3A59;
     cursor: pointer;
+    path {
+          stroke: #3A3A59;
+        }
   }
 `;
 
@@ -78,6 +82,17 @@ const Footer_Box_Column = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
+`;
+
+
+const StFooterNavIcon = styled.svg.attrs(props => ({
+  children: props.icon === 'Home' ? <HomeIcon /> 
+    : props.icon === 'Board' ? <BoardIcon /> 
+    : props.icon === 'Battle' ? <BattleIcon />
+    : <WriteIcon />
+}))`
+  width: 24px;
+  height: 24px;
 `;
 
 export default FooterNav;

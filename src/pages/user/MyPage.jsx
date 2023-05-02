@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";
-import { MdArrowBackIosNew } from "react-icons/md";
+import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import level2 from "../../assets/icons/userLevel/level icon=하수, size=18.png";
 import myPageMenu from "../../assets/icons/common/myPageMenu.png";
@@ -76,7 +76,7 @@ const MyPage = () => {
                 navi(-1);
               }}
             >
-              <MdArrowBackIosNew size="1rem" />
+              <BackIcon />
             </DetailPost_BackBtn>
             <DetailPost_Category>마이페이지</DetailPost_Category>
             <DetailPost_MenuBtn></DetailPost_MenuBtn>
@@ -200,16 +200,17 @@ const DetailPost_HeaderCont = styled.div`
 
 const DetailPost_BackBtn = styled.div`
   /* border: 1px solid green; */
-  color: rgb(180, 180, 180);
   height: 24px;
   width: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  path {
+    stroke: white;
+  }
 
   &:hover {
     cursor: pointer;
-    color: rgb(70, 70, 70);
   }
 `;
 

@@ -5,7 +5,6 @@ import DetailPostCommentReply from "./DetailPostCommentReply";
 import { instanceWithAuth } from "../../api/axios";
 import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
 import { cookies } from "../../api/cookies";
-// import {AiOutlineEdit} from 'react-icons/ai'
 import { useFormattingDate } from "../hook/useFormattingDate";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsComment } from "../../app/modules/detailSlice";
@@ -184,7 +183,7 @@ const DetailPostComment = ({ comment }) => {
           <Comment> {comment.comment} </Comment>
           <CommentLikeCont>
             <CommentLikeIcon pointerOn="on" onClick={clickCommentLike}>
-              <Like isLike={isLike} />
+              <Like isLike={isLike} size={16} />
             </CommentLikeIcon>
             <CommentLikeCount>{commentLikesCount}</CommentLikeCount>
           </CommentLikeCont>
@@ -359,6 +358,7 @@ const CommentWrap = styled.div`
 `;
 
 const Comment = styled.div`
+  /* border: 1px solid blueviolet; */
   width: 224px;
   min-height: 14px;
   background-color: white;
@@ -373,6 +373,7 @@ const CommentLikeCont = styled.div`
   height: 16px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 5px;
   color: #8a8a8a;
 `;
@@ -396,7 +397,6 @@ const CommentLikeIcon = styled.div`
 
 const CommentLikeCount = styled.div`
   /* border: 1px solid violet; */
-  /* width: 26px; */
   width: 16px;
   height: 16px;
   display: flex;

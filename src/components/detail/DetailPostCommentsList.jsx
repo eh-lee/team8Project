@@ -48,6 +48,10 @@ const DetailPostCommentsList = ({ postIdx }) => {
       createdAt: curTime,
       nickname: curNickname,
       postIdx: postIdx,
+      likesCount: 0,
+      // isLike: false,
+      // proInputValue: BOOLEAN(아직),
+      // conInputValue: BOOLEAN(아직),
     };
 
     await instanceWithAuth

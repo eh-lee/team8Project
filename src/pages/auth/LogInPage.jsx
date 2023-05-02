@@ -24,7 +24,7 @@ const LogInPage = () => {
     try {
       // const response = await instance.post("/auth/login", user);
       const response = await axios.post(
-        "http://43.201.45.82:3000/api/auth/login",
+        `${process.env.REACT_APP_SERVER_URL}/auth/login`,
         user
       );
       cookies.set("email", user.email, { path: "/" });

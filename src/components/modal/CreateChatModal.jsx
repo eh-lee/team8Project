@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
 import { cookies } from "../../api/cookies";
-// import MobileLayout from "../../layout/MobileLayout";
-import { MdArrowBackIosNew } from "react-icons/md";
-import "../../pages/test/Join.css";
+import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
 
 const CreateChatModal = ({ open, close }) => {
   const [room, setRoom] = useState("");
@@ -93,7 +91,7 @@ const CreateChatModal = ({ open, close }) => {
         <ChatHeader>
           <ChatHeaderCont>
             <StBackBtn onClick={close}>
-              <MdArrowBackIosNew />
+              <BackIcon />
             </StBackBtn>
             <WriteCategory>
               <MainCat>훈수배틀방 만들기</MainCat>

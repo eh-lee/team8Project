@@ -6,7 +6,7 @@ import Message from "./message/Message";
 
 function Messages({ messages, name }) {
   useEffect(() => {
-    console.log(messages);
+    console.log('Messages컴포넌트에 프롭스로 내려온' ,messages);
   }, [messages]);
 
   return (
