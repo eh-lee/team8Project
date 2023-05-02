@@ -5,24 +5,23 @@ import { useNavigate } from "react-router-dom";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
 import MobileLayout from "../../layout/MobileLayout";
 import { cookies } from "../../api/cookies";
-
+import { instance } from "../../api/axios";
 
 // 프롭스: {chatSaveIdx, room} 요 놈들.. 내려주는  페이지 나중에 확인해서 잡기..
-const Chat = ( {chatSaveIdx, room} ) => {
+const Chat = ({ chatSaveIdx, room }) => {
   const nav = useNavigate();
   const curNickname = cookies.get("nickname");
 
-  const [room, setRoom] = useState("");
+  // const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const getDoneChat = async () => {
       try {
-        const response = await instance.get(`chat/chatSave/${chatSaveIdx}`)
-        
-        // const {messages} = 
+        const response = await instance.get(`chat/chatSave/${chatSaveIdx}`);
+
+        // const {messages} =
         // setMessages(messages.sth);
-        
       } catch (error) {
         console.error(error);
       }
@@ -30,37 +29,35 @@ const Chat = ( {chatSaveIdx, room} ) => {
     getDoneChat();
   }, []);
 
-  
-  
   // messageListGet--> /api/chat/chatSave/{chatSaveIdx}
-
 
   return (
     <>
       <MobileLayout>
         <StChatHeader>
           <StChatHeaderCont>
-            <StChatClose onClick={ChatEndModalOpenHandler}>
+            <StChatClose
+              onClick={() => {
+                nav(-1);
+              }}
+            >
               <StChatCloseImg src={closeBtn} />
             </StChatClose>
             <StChatInfo>
-              <StChatInfoSub>
-                {room}
-              </StChatInfoSub>
+              <StChatInfoSub>{room}</StChatInfoSub>
             </StChatInfo>
             <StChatSave>
               <StFooDiv />
             </StChatSave>
           </StChatHeaderCont>
         </StChatHeader>
-        <Messages messages={messages} name={name} />
+        <Messages messages={messages} />
       </MobileLayout>
     </>
   );
 };
 
 export default Chat;
-
 
 const StChatSave = styled.div`
   margin-right: 7.5%;
@@ -116,6 +113,5 @@ const StChatInfoSub = styled.div`
   font-size: 16px;
   font-weight: bold;
 `;
-
 
 const StFooDiv = styled.div``;

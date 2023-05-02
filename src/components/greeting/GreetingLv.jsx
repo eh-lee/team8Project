@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import level2 from "../../assets/icons/userLevel/level icon=하수, size=18.png";
+import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
 
 const FalseGreetingLv = () => {
   const currExp = 0;
