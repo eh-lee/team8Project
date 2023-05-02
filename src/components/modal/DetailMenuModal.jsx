@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsTrash } from "react-icons/bs";
+import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
+import { ReactComponent as Edit } from "../../assets/icons/common/edit.svg";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 
@@ -50,17 +50,30 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
     <DetailMenuWrap ref={modalRef}>
       <MenuButton onClick={editButtonHandler}>
         <ButtonText>수정하기</ButtonText>
-        <AiOutlineEdit />
+        <StIconEdit />
       </MenuButton>
       <MenuButton onClick={deleteButtonHandler} delete>
         <ButtonText>삭제하기</ButtonText>
-        <BsTrash />
+        <StIconTrash />
       </MenuButton>
     </DetailMenuWrap>
   ) : null;
 };
 
 export default DetailMenuModal;
+
+const StIconTrash = styled(Trash)`
+  width: 20px;
+  height: 20px;
+  path:nth-child(1) {
+    stroke: #eb5147;
+  }
+`;
+
+const StIconEdit = styled(Edit)`
+  width: 20px;
+  height: 20px;
+`;
 
 const DetailMenuWrap = styled.ul`
   position: absolute;

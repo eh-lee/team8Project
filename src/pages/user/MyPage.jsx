@@ -6,13 +6,15 @@ import { Helmet } from "react-helmet";
 import { MdArrowBackIosNew } from "react-icons/md";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import level2 from "../../assets/icons/userLevel/level icon=하수, size=18.png";
-import myPageMenu from "../../assets/icons/common/myPageMenu.png"
+import myPageMenu from "../../assets/icons/common/myPageMenu.png";
 import ModalPortal from "../../components/modal/ModalPortal";
 import LogoutModal from "../../components/modal/LogoutModal";
 import SignOutModal from "../../components/modal/SignOutModal";
+import { cookies } from "../../api/cookies";
 
 const MyPage = () => {
   const navi = useNavigate();
+  const nickname = cookies.get("nickname");
 
   const currExp = 75;
   const goalExp = 100;
@@ -41,7 +43,6 @@ const MyPage = () => {
         <title>훈수 — 마이페이지</title>
       </Helmet>
       <MobileLayout>
-
         {/* =========== 로그아웃 모달 =========== */}
         <ModalPortal>
           <ModalCont>
@@ -77,15 +78,11 @@ const MyPage = () => {
             >
               <MdArrowBackIosNew size="1rem" />
             </DetailPost_BackBtn>
-            <DetailPost_Category>
-              마이페이지
-            </DetailPost_Category>
-            <DetailPost_MenuBtn >
-            </DetailPost_MenuBtn>
+            <DetailPost_Category>마이페이지</DetailPost_Category>
+            <DetailPost_MenuBtn></DetailPost_MenuBtn>
           </DetailPost_HeaderCont>
         </DetailPost_Header>
         <StMyPageHeaderWrap>
-
           {/* ============== FalseGreeting ============== */}
           <GreetingCont>
             <Column>
@@ -93,7 +90,7 @@ const MyPage = () => {
                 <GreetingLevelImg src={level1} />
               </GreetingLevelImgCont>
               <StMyPageLevelUserInfoCont>
-                <StMyPageLevelNickname>철수</StMyPageLevelNickname>
+                <StMyPageLevelNickname>{nickname}</StMyPageLevelNickname>
                 <GreetingLevelName>훈수 초보</GreetingLevelName>
                 <StMyPageLevelEmail>hoonsoo123@naver.com</StMyPageLevelEmail>
               </StMyPageLevelUserInfoCont>
@@ -140,7 +137,6 @@ const MyPage = () => {
             <StMyPageMenuIcon src={myPageMenu} />
           </StMyPageMenu>
         </StMyPageMenuWrap>
-        
       </MobileLayout>
       {/* gif테스트 */}
       {/* <div>
@@ -160,7 +156,7 @@ const ModalCont = styled.div`
 
 const StMyPageHeaderWrap = styled.div`
   /* border: 1px solid green;; */
-  background-color: #3A3A59;
+  background-color: #3a3a59;
   height: 130px;
   border-bottom-right-radius: 40px;
   margin-top: 48px;
@@ -169,7 +165,7 @@ const StMyPageHeaderWrap = styled.div`
 
 // 마이페이지 헤더 ==================================================
 const DetailPost_Header = styled.header`
-  background-color: #3A3A59;
+  background-color: #3a3a59;
   position: fixed;
   /* top: 0; */
 
@@ -182,7 +178,7 @@ const DetailPost_Header = styled.header`
   /* height: 95px; */
   height: 48px;
   z-index: 1;
-  
+
   /* border: 1px solid orange; */
 
   border-bottom: 0.1rem solid rgba(90, 81, 81, 0.617);
@@ -243,7 +239,6 @@ const DetailPost_MenuBtn = styled.div`
   }
 `;
 
-
 // FalseGreeting ==================================================
 
 const Column = styled.div`
@@ -271,7 +266,7 @@ const GreetingLevelImgCont = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-`
+`;
 
 const GreetingLevelImg = styled.img`
   height: 72px;
@@ -287,15 +282,15 @@ const StMyPageLevelUserInfoCont = styled.ul`
   gap: 7px;
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 const StMyPageLevelNickname = styled.li`
   color: white;
   font-size: 24px;
-`
+`;
 
 const GreetingLevelName = styled.li`
-  color: #F26581;
+  color: #f26581;
   font-size: 14px;
   font-weight: bold;
 `;
@@ -303,7 +298,7 @@ const GreetingLevelName = styled.li`
 const StMyPageLevelEmail = styled.li`
   color: white;
   font-size: 10px;
-`
+`;
 // FalseGreetingLv ==================================================
 
 const GreetingLvCont = styled.div`
@@ -316,10 +311,10 @@ const GreetingLvCont = styled.div`
 `;
 
 const RowMain = styled.div`
-/* border: 1px solid green; */
-width: 100%;
-display: flex;
-justify-content: space-between;
+  /* border: 1px solid green; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const GreetingText1 = styled.div`
@@ -358,12 +353,12 @@ const GreetingLvText1 = styled.div`
   margin-left: 4px;
   font-size: 14px;
   font-weight: bold;
-  color: #EF3F61;
+  color: #ef3f61;
 `;
 
 const GreetingLvText2 = styled.div`
   font-size: 14px;
-  color: #F4F4F5;
+  color: #f4f4f5;
   letter-spacing: 0rem;
 `;
 
@@ -386,7 +381,7 @@ const ColoredExperienceBar = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: #EF3F61;
+  background-color: #ef3f61;
   border-radius: 2rem;
   width: ${(props) => props.exp}%;
 `;
@@ -409,13 +404,13 @@ const GreetingLvPoint1 = styled.div`
 const GreetingLvPoint2 = styled.div`
   display: flex;
   align-items: center;
-  color: #C4C4C4;
+  color: #c4c4c4;
   font-size: 24px;
 `;
 
 // 메뉴
 const StMyPageMenuWrap = styled.ul`
-  margin-top:15px;
+  margin-top: 15px;
   width: 400px;
   height: 168px;
   /* border: 1px solid blanchedalmond; */
@@ -429,19 +424,18 @@ const StMyPageMenu = styled.li`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #E1E2E4;
+  border-bottom: 1px solid #e1e2e4;
   cursor: pointer;
 `;
 
 const StMyPageMenuText = styled.div`
   /* border: 1px solid blueviolet; */
   margin-left: 24px;
-  ${({ isLogout }) => 
+  ${({ isLogout }) =>
     isLogout &&
     css`
-      color: #EF3F61;
-    `
-  };
+      color: #ef3f61;
+    `};
 `;
 
 const StMyPageMenuIcon = styled.img`

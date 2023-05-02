@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { pollCanc } from "../../app/modules/writeSlice";
-import { BsTrash } from "react-icons/bs";
 import { VscEdit } from "react-icons/vsc";
 import { TfiThumbUp } from "react-icons/tfi";
 import { TfiThumbDown } from "react-icons/tfi";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { instanceWithAuth } from "../../api/axios";
+import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
 
 const ProCon = ({
   pollTitle,
@@ -109,7 +109,7 @@ const ProCon = ({
               <VscEdit onClick={proConEditHandler} />
             </ProConDelete>
             <ProConEdit>
-              <BsTrash onClick={proConDelHandler} />
+              <StIconTrash onClick={proConDelHandler} />
             </ProConEdit>
           </ProConIcon>
         ) : null}
@@ -161,6 +161,17 @@ const ProCon = ({
     </ProConWrap>
   );
 };
+
+const StIconTrash = styled(Trash)`
+  width: 20px;
+  height: 20px;
+  &:hover {
+    cursor: pointer;
+    path:nth-child(1) {
+      stroke: #3a3a59;
+    }
+  }
+`;
 
 const ProConColumn = styled.div`
   display: flex;

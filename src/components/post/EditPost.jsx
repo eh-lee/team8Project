@@ -4,15 +4,15 @@ import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
-import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../../components/modal/CateogryModal";
 import WriteFooter from "../../components/footer/WriteFooter";
 import ModalPortal from "../../components/modal/ModalPortal";
 import { useDispatch, useSelector } from "react-redux";
-import { BsTrash } from "react-icons/bs";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
 import { Helmet } from "react-helmet";
+import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
+import { ReactComponent as ArrowDown } from "../../assets/icons/common/arrowdown.svg";
 
 const EditPost = () => {
   FalseGuard();
@@ -38,20 +38,20 @@ const EditPost = () => {
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
 
-    useEffect(() => {
-        const getForEditPost = async () => {
-            try {
-                const res = await instanceWithAuth.get(`/postCards/post/${postIdx}`)
-                setTitle(res.data.post.title);
-                setDesc(res.data.post.desc);
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        getForEditPost();
-        setMaincategory(location.state.detailPostCat.maincategory);
-        setCategory(location.state.detailPostCat.category);
-    }, [])
+  useEffect(() => {
+    const getForEditPost = async () => {
+      try {
+        const res = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
+        setTitle(res.data.post.title);
+        setDesc(res.data.post.desc);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getForEditPost();
+    setMaincategory(location.state.detailPostCat.maincategory);
+    setCategory(location.state.detailPostCat.category);
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -124,7 +124,7 @@ const EditPost = () => {
                 <MainCat>{maincategory}</MainCat>
                 <SubCat>{category}</SubCat>
                 <IconCont>
-                  <IoIosArrowDown onClick={categoryModalOpenHandler} />
+                  <StArrowDown onClick={categoryModalOpenHandler} />
                 </IconCont>
               </WriteCategory>
               <WritePost onClick={submitHandler}>수정</WritePost>
@@ -164,7 +164,7 @@ const EditPost = () => {
               <div>{pollTitle}</div>
               <div>{tag}</div>
               <div>
-                <BsTrash onClick={proConDelHandler} />
+                <StIconTrash onClick={proConDelHandler} />
               </div>
               {/* tag map 돌려야 하나? */}
             </>
@@ -192,6 +192,28 @@ const EditPost = () => {
 };
 
 export default EditPost;
+
+const StArrowDown = styled(ArrowDown)`
+  width: 16px;
+  height: 16px;
+  &:hover {
+    cursor: pointer;
+    /* path:nth-child(1) {
+      stroke: #3a3a59;
+    } */
+  }
+`;
+
+const StIconTrash = styled(Trash)`
+  width: 20px;
+  height: 20px;
+  &:hover {
+    cursor: pointer;
+    path:nth-child(1) {
+      stroke: #3a3a59;
+    }
+  }
+`;
 
 const ModalCont = styled.div`
   margin: 0 auto;

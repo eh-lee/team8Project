@@ -1,15 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AiOutlineEye } from "react-icons/ai";
-import { IoChatbubbleOutline } from "react-icons/io5";
-import { BiCommentDetail } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
 import { useEffect } from "react";
 import { instance } from "../../api/axios";
 import { useState } from "react";
-import { MdOutlineHowToVote } from "react-icons/md";
-import { setPollType } from "../../app/modules/writeSlice";
+import { ReactComponent as Vote } from "../../assets/icons/common/vote.svg";
+import { ReactComponent as View } from "../../assets/icons/common/eye.svg";
+import { ReactComponent as Like } from "../../assets/icons/common/like.svg";
+import { ReactComponent as Comment } from "../../assets/icons/common/comment.svg";
 
 const BoardPostCard = ({
   mainCategory,
@@ -35,7 +33,6 @@ const BoardPostCard = ({
     const fetchPoll = async () => {
       try {
         const res = await instance.get(`/postCards/post/contents/${postIdx}`);
-        // console.log("투표 등 정보========>", res.data.contents);
         setPollData(res.data.contents);
         setPollType(res.data.contents.pollType);
       } catch (error) {
@@ -108,7 +105,7 @@ const BoardPostCard = ({
           {pollType !== "" ? (
             <>
               <PostCardTitleIcon>
-                <MdOutlineHowToVote />
+                <StIconVote />
               </PostCardTitleIcon>
             </>
           ) : null}
@@ -121,21 +118,19 @@ const BoardPostCard = ({
       <PostCardInfoBox>
         <DetailPostContent>
           <DetailPostContentIcon>
-            <AiOutlineHeart />
+            <StIconLike />
           </DetailPostContentIcon>
           <DetailPostContentCount>{likesCount}</DetailPostContentCount>
         </DetailPostContent>
-
         <DetailPostContent>
           <DetailPostContentIcon>
-            <AiOutlineEye />
+            <StIconView />
           </DetailPostContentIcon>
           <DetailPostContentCount>{viewCount}</DetailPostContentCount>
         </DetailPostContent>
-
         <DetailPostContent>
           <DetailPostContentIcon>
-            <BiCommentDetail />
+            <StIconComment />
           </DetailPostContentIcon>
           <DetailPostContentCount>{commentCount}</DetailPostContentCount>
         </DetailPostContent>
@@ -145,6 +140,43 @@ const BoardPostCard = ({
 };
 
 export default BoardPostCard;
+
+const StIconView = styled(View)`
+  width: 14px;
+  height: 10px;
+  path:nth-child(1),
+  path:nth-child(2) {
+    stroke: #8a8a8a;
+    stroke-width: 2.25px;
+  }
+`;
+
+const StIconLike = styled(Like)`
+  width: 12px;
+  height: 11px;
+  path:nth-child(1) {
+    stroke: #8a8a8a;
+    stroke-width: 2.25px;
+  }
+`;
+
+const StIconComment = styled(Comment)`
+  width: 12px;
+  height: 12px;
+  path:nth-child(1) {
+    stroke: #8a8a8a;
+    stroke-width: 2.25px;
+  }
+`;
+
+const StIconVote = styled(Vote)`
+  width: 18px;
+  height: 15px;
+  path:nth-child(1) {
+    stroke: #c4c4c4;
+    stroke-width: 2px;
+  }
+`;
 
 const DetailPostContentCount = styled.div`
   /* border: 1px solid tomato; */
@@ -161,6 +193,7 @@ const DetailPostContentIcon = styled.div`
   /* border: 1px solid tomato; */
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 18px;
   width: 18px;
   font-size: 20px;

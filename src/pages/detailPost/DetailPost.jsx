@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { instance, instanceWithAuth } from "../../api/axios";
 import MobileLayout from "../../layout/MobileLayout";
-import { FiMoreVertical } from "react-icons/fi";
-import { MdArrowBackIosNew } from "react-icons/md";
+// import { FiMoreVertical } from "react-icons/fi";
+import { ReactComponent as VerticalDots } from "../../assets/icons/common/verticaldots.svg";
+// import { MdArrowBackIosNew } from "react-icons/md";
+import { ReactComponent as BackArrow } from "../../assets/icons/common/back.svg";
 import DetailPostContents from "../../components/detail/DetailPostContents";
 import DetailPostCommentsList from "../../components/detail/DetailPostCommentsList";
 import ModalPortal from "../../components/modal/ModalPortal";
@@ -68,13 +70,13 @@ const DetailPost = () => {
                 nav(-1);
               }}
             >
-              <MdArrowBackIosNew size="1rem" />
+              <StBackArrow />
             </DetailPost_BackBtn>
             <DetailPost_Category>
               {detailPostCat.maincategory}◦{detailPostCat.category}
             </DetailPost_Category>
             <DetailPost_MenuBtn onClick={menuModalOpenHandler}>
-              <FiMoreVertical />
+              <StVerticalDots />
             </DetailPost_MenuBtn>
           </DetailPost_HeaderCont>
         </DetailPost_Header>
@@ -118,6 +120,28 @@ const DetailPost = () => {
 };
 
 export default DetailPost;
+
+const StBackArrow = styled(BackArrow)`
+  /* width: 16px; */
+  /* height: 16px; */
+  &:hover {
+    cursor: pointer;
+    /* path:nth-child(1) {
+      stroke: #3a3a59;
+    } */
+  }
+`;
+
+const StVerticalDots = styled(VerticalDots)`
+  /* width: 16px;
+  height: 16px; */
+  &:hover {
+    cursor: pointer;
+    /* path:nth-child(1) {
+      stroke: #3a3a59;
+    } */
+  }
+`;
 
 const DetailPoll = styled.div`
   width: 100%;

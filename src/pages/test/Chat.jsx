@@ -12,8 +12,8 @@ import ChatEndModal from "../../components/modal/ChatEndModal";
 import MobileLayout from "../../layout/MobileLayout";
 import { cookies } from "../../api/cookies";
 
-// const ENDPOINT = "http://localhost:4000";
-const ENDPOINT = "http://43.201.45.82:3000";
+const ENDPOINT = "http://localhost:4000";
+// const ENDPOINT = "http://43.201.45.82:3000";
 let socket;
 
 // const Chat = ({ location }) => {
@@ -29,6 +29,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const [maxParty, setMaxParty] = useState(0);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const [prevMessages, setPrevMessages] = useState([]);
@@ -62,6 +63,7 @@ const Chat = () => {
 
     setRoom(room);
     setName(name);
+    setMaxParty(maxParty);
 
     socket.emit("join", { name, room, maxParty }, (error) => {
       console.log("rooom===========>", room);
@@ -95,7 +97,7 @@ const Chat = () => {
     event.preventDefault();
 
     if (message) {
-      socket.emit("sendMessage", { message }, () => setMessage(""));
+      socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
 
@@ -143,7 +145,7 @@ const Chat = () => {
             {/* 2 */}
             <StChatInfo>
               <StChatInfoSub>
-                {room} &nbsp; {currParty.numUsers}/{currParty.maxParty}
+                {room} &nbsp; {currParty.numUsers}/{maxParty}
               </StChatInfoSub>
             </StChatInfo>
             {/* 2 */}

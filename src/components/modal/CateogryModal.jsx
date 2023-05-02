@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { BsCheckLg } from "react-icons/bs";
-import { BiSelectMultiple } from "react-icons/bi";
 
 const CateogryModal = ({ parentFunction, open, close }) => {
   const modalRef = useRef();
@@ -68,10 +67,6 @@ const CateogryModal = ({ parentFunction, open, close }) => {
   return open ? (
     <>
       <FooBG onClick={close} />
-      {/* <선택완료어쩌구아이콘 onClick={close} /> */}
-      <Selected>
-        <BiSelectMultiple onClick={close} />
-      </Selected>
       <CategoryModalOverlay open={open} close={close} ref={modalRef}>
         <CategoryModalRow>
           <ModalMainCat>

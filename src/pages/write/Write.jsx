@@ -4,15 +4,15 @@ import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
-import { IoIosArrowDown } from "react-icons/io";
 import CateogryModal from "../../components/modal/CateogryModal";
 import WriteFooter from "../../components/footer/WriteFooter";
 import ModalPortal from "../../components/modal/ModalPortal";
 import { useDispatch, useSelector } from "react-redux";
-import { BsTrash } from "react-icons/bs";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
 import { Helmet } from "react-helmet";
+import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
+import { ReactComponent as ArrowDown } from "../../assets/icons/common/arrowdown.svg";
 
 const Write = () => {
   FalseGuard();
@@ -132,7 +132,7 @@ const Write = () => {
                 <MainCat>{maincategory}</MainCat>
                 <SubCat>{category}</SubCat>
                 <IconCont>
-                  <IoIosArrowDown onClick={categoryModalOpenHandler} />
+                  <StArrowDown onClick={categoryModalOpenHandler} />
                 </IconCont>
               </WriteCategory>
               <WritePost onClick={submitHandler}>등록</WritePost>
@@ -168,7 +168,7 @@ const Write = () => {
               <div>{pollTitle}</div>
               <div>{tag}</div>
               <div>
-                <BsTrash onClick={proConDelHandler} />
+                <StIconTrash onClick={proConDelHandler} />
               </div>
             </>
           ) : null}
@@ -191,6 +191,28 @@ const Write = () => {
 };
 
 export default Write;
+
+const StArrowDown = styled(ArrowDown)`
+  width: 16px;
+  height: 16px;
+  &:hover {
+    cursor: pointer;
+    /* path:nth-child(1) {
+      stroke: #3a3a59;
+    } */
+  }
+`;
+
+const StIconTrash = styled(Trash)`
+  width: 20px;
+  height: 20px;
+  &:hover {
+    cursor: pointer;
+    path:nth-child(1) {
+      stroke: #3a3a59;
+    }
+  }
+`;
 
 const ModalCont = styled.div`
   margin: 0 auto;

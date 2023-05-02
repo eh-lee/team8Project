@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import comment from "../../assets/icons/common/comment.png";
-import view from "../../assets/icons/common/view.png";
+import { ReactComponent as Comment } from "../../assets/icons/common/comment.svg";
+import { ReactComponent as View } from "../../assets/icons/common/eye.svg";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
@@ -97,7 +97,8 @@ const DetailPostContents = () => {
           {/* 조회수 */}
           <DetailPost_Content>
             <DetailPost_Content_Icon>
-              <StDetailPostContentImg src={view} />
+              {/* <StDetailPostContentImg src={view} /> */}
+              <StIconView />
             </DetailPost_Content_Icon>
             <DetailPost_Content_Count>
               {detailPost.postViewCount}
@@ -106,7 +107,8 @@ const DetailPostContents = () => {
           {/* 댓글 개수 */}
           <DetailPost_Content>
             <DetailPost_Content_Icon>
-              <StDetailPostContentImg src={comment} />
+              {/* <StDetailPostContentImg src={comment} /> */}
+              <StIconComment />
             </DetailPost_Content_Icon>
             <DetailPost_Content_Count>
               {+detailPost.commentCount}
@@ -119,6 +121,16 @@ const DetailPostContents = () => {
 };
 
 export default DetailPostContents;
+
+const StIconView = styled(View)`
+  width: 21px;
+  height: 15px;
+`;
+
+const StIconComment = styled(Comment)`
+  width: 18px;
+  height: 18px;
+`;
 
 const StDetailPostImgWrap = styled.div`
   display: flex;
@@ -222,6 +234,7 @@ const DetailPost_Content_Icon = styled.div`
   /* border: 1px solid tomato; */
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 24px;
   width: 24px;
   font-size: 20px;

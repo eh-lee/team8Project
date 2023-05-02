@@ -1,13 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiOutlineEye } from "react-icons/ai";
-// import { IoChatbubbleOutline } from "react-icons/io5";
-import imgIcon from "../../assets/icons/common/imgIcon.png";
-import like from "../../assets/icons/common/like.png";
-import view from "../../assets/icons/common/view.png";
-import comment from "../../assets/icons/common/comment.png";
+import styled from "styled-components";
+import { ReactComponent as View } from "../../assets/icons/common/eye.svg";
+import { ReactComponent as Img } from "../../assets/icons/common/img.svg";
+import { ReactComponent as Like } from "../../assets/icons/common/like.svg";
+import { ReactComponent as Comment } from "../../assets/icons/common/comment.svg";
 
 const HotPostCard = ({
   mainCategory,
@@ -85,22 +82,9 @@ const HotPostCard = ({
           </PostCard_MainCategory>
           <PostCard_Title>
             {title}
-            <StPostCardIsImgIn src={imgIcon} />
+            {/* <StPostCardIsImgIn src={imgIcon} /> */}
+            <StIconImg />
           </PostCard_Title>
-
-          {/* 투표 유무 이미지 표시 */}
-          {/* <PostCardRow>
-          <PostCardTitle>{title}</PostCardTitle>
-          <PostCardTitleIcon></PostCardTitleIcon>
-          {pollType !== "" ? (
-            <>
-              <PostCardTitleIcon>
-                <MdOutlineHowToVote />
-              </PostCardTitleIcon>
-            </>
-          ) : null}
-        </PostCardRow> */}
-          {/* 투표 유무 이미지 표시 */}
         </PostCard_TitleBox>
 
         <PostCard_ContentBox>
@@ -110,7 +94,8 @@ const HotPostCard = ({
           {/* 좋아요수 */}
           <PostCard_Info_Content>
             <PostCard_Info_Content_Icon>
-              <StPostCardInfoContentImg src={like} />
+              {/* <StPostCardInfoContentImg src={like} /> */}
+              <StIconLike />
             </PostCard_Info_Content_Icon>
             <PostCard_Info_Content_Count>
               {likesCount}
@@ -119,7 +104,8 @@ const HotPostCard = ({
           {/* 조회수 */}
           <PostCard_Info_Content>
             <PostCard_Info_Content_Icon>
-              <StPostCardInfoContentImg src={view} />
+              {/* <StPostCardInfoContentImg src={view} /> */}
+              <StIconView />
             </PostCard_Info_Content_Icon>
             <PostCard_Info_Content_Count>
               {viewCount}
@@ -128,7 +114,8 @@ const HotPostCard = ({
           {/* 댓글 버튼, 개수 */}
           <PostCard_Info_Content>
             <PostCard_Info_Content_Icon>
-              <StPostCardInfoContentImg src={comment} />
+              {/* <StPostCardInfoContentImg src={comment} /> */}
+              <StIconComment />
             </PostCard_Info_Content_Icon>
             <PostCard_Info_Content_Count>
               {commentCount}
@@ -141,6 +128,39 @@ const HotPostCard = ({
 };
 
 export default HotPostCard;
+
+const StIconView = styled(View)`
+  width: 14px;
+  height: 10px;
+  path:nth-child(1),
+  path:nth-child(2) {
+    stroke: #8a8a8a;
+  }
+`;
+
+const StIconLike = styled(Like)`
+  width: 12px;
+  height: 11px;
+  path:nth-child(1) {
+    stroke: #8a8a8a;
+  }
+`;
+
+const StIconComment = styled(Comment)`
+  width: 12px;
+  height: 12px;
+  path:nth-child(1) {
+    stroke: #8a8a8a;
+  }
+`;
+
+const StIconImg = styled(Img)`
+  width: 16px;
+  height: 16px;
+  path:nth-child(1) {
+    stroke: #c4c4c4;
+  }
+`;
 
 const PostCardWrap = styled.div`
   /* border: 1px solid black; */
