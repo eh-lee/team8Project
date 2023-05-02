@@ -4,7 +4,7 @@ import styled from "styled-components";
 import MobileLayout from "../../layout/MobileLayout";
 import vector from "../../assets/icons/common/vector.png";
 import cancel from "../../assets/icons/common/expand.png";
-import search from "../../assets/icons/common/search.png";
+import {ReactComponent as SearchIcon} from "../../assets/icons/common/search.svg"
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -32,7 +32,7 @@ const Search = () => {
           >
             <StTogether>
               <StFooLeftDiv>
-                <StSearchIcon src={search} />
+                <StSearchIcon />
               </StFooLeftDiv>
 
               <DetailPostCommentsInput
@@ -116,10 +116,7 @@ const StCancIcon = styled.img`
     color: rgb(70, 70, 70);
   }
 `;
-const StSearchIcon = styled.img`
-  /* width: 8px; */
-  /* height: 16px; */
-  /* margin-left: 7.5%; */
+const StSearchIcon = styled(SearchIcon)`
   color: rgb(180, 180, 180);
   font-size: 0.9rem;
   &:hover {

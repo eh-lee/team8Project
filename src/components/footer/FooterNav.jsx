@@ -1,98 +1,43 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import {ReactComponent as HomeIcon} from "../../assets/icons/common/home.svg"
-import {ReactComponent as BoardIcon} from "../../assets/icons/common/board.svg"
-import {ReactComponent as BattleIcon} from "../../assets/icons/common/battle.svg"
-import {ReactComponent as WriteIcon} from "../../assets/icons/common/write.svg"
+import * as St from "./FooterNav.style"
 
 
 function FooterNav() {
   const navi = useNavigate();
 
   return (
-    <StyledColumn>
-      <StyledNav>
-        <FooterUl>
-          <Footer_Box onClick={() => navi("/")}>
-            <Footer_Box_Column>
-              <StFooterNavIcon icon="Home" />홈
-            </Footer_Box_Column>
-          </Footer_Box>
-          <Footer_Box onClick={() => navi("/totalboard")}>
-            <Footer_Box_Column>
-              <StFooterNavIcon icon="Board" />
+    <St.Column>
+      <St.Nav>
+        <St.FooterUl>
+          <St.FooterBox onClick={() => navi("/")}>
+            <St.FooterBoxColumn>
+              <St.FooterNavIcon icon="Home" />홈
+            </St.FooterBoxColumn>
+          </St.FooterBox>
+          <St.FooterBox onClick={() => navi("/totalboard")}>
+            <St.FooterBoxColumn>
+              <St.FooterNavIcon icon="Board" />
               훈수게시판
-            </Footer_Box_Column>
-          </Footer_Box>
-          <Footer_Box onClick={() => navi("/battle")}>
-            <Footer_Box_Column>
-              <StFooterNavIcon icon="Battle"/>
+            </St.FooterBoxColumn>
+          </St.FooterBox>
+          <St.FooterBox onClick={() => navi("/battle")}>
+            <St.FooterBoxColumn>
+              <St.FooterNavIcon icon="Battle"/>
               훈수배틀
-            </Footer_Box_Column>
-          </Footer_Box>
-          <Footer_Box onClick={() => navi("/write")}>
-            <Footer_Box_Column>
-              <StFooterNavIcon icon="Write" />
+            </St.FooterBoxColumn>
+          </St.FooterBox>
+          <St.FooterBox onClick={() => navi("/write")}>
+            <St.FooterBoxColumn>
+              <St.FooterNavIcon icon="Write" />
               글쓰기
-            </Footer_Box_Column>
-          </Footer_Box>
-        </FooterUl>
-      </StyledNav>
-    </StyledColumn>
+            </St.FooterBoxColumn>
+          </St.FooterBox>
+        </St.FooterUl>
+      </St.Nav>
+    </St.Column>
   );
 }
-
-const StyledColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledNav = styled.nav`
-  display: flex;
-  flex-direction: row;
-  padding: 0 1rem;
-  color: #BDBDC9;
-`;
-
-const FooterUl = styled.ul`
-  display: flex;
-  width: 100%;
-  gap: 0.1rem;
-`;
-
-const Footer_Box = styled.div`
-  padding: 1.5rem 0;
-  display: flex;
-  width: 25%;
-  text-align: center;
-  justify-content: space-evenly;
-  &:hover {
-    color: #3A3A59;
-    cursor: pointer;
-    path {
-          stroke: #3A3A59;
-        }
-  }
-`;
-
-const Footer_Box_Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-`;
-
-
-const StFooterNavIcon = styled.svg.attrs(props => ({
-  children: props.icon === 'Home' ? <HomeIcon /> 
-    : props.icon === 'Board' ? <BoardIcon /> 
-    : props.icon === 'Battle' ? <BattleIcon />
-    : <WriteIcon />
-}))`
-  width: 24px;
-  height: 24px;
-`;
 
 export default FooterNav;
