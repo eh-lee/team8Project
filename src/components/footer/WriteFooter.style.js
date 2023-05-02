@@ -46,10 +46,10 @@ const Poll = styled.button`
   min-height: 32px;
   min-width: 113px;
   padding: 3px 5px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #C4C4C4;
   border-radius: 2rem;
   background-color: white;
-  color: #3a3a59;
+  color: #3A3A59;
   font-size: 14px;
 
   &:hover {
@@ -75,20 +75,29 @@ const ImageCont = styled.label`
   background-color: transparent;
 `;
 
-const ImageIcon = styled(Camera)`
-  width: 100%;
-  height: 100%;
-  &:hover {
-    cursor: pointer;
-    path:nth-child(1),
-    path:nth-child(2) {
-      stroke: #3a3a59;
-    }
-  }
-`;
-
 const ImageInput = styled.input`
   display: none;
 `;
 
-export { VoteIcon, Footer, Nav, Camera, Column, Poll, ImageCont, ImageIcon, ImageInput, ModalCont };
+const ImageIcon = styled(Camera)`
+  width: 100%;
+  height: 100%;
+&:hover {
+  cursor: pointer;
+  path:nth-child(1), path:nth-child(2) {
+    stroke: #3a3a59;
+  }};
+`;
+
+
+export {
+    Footer,
+    Column,
+    Nav,
+    Poll,
+    ImageCont,
+    ImageInput,
+    ImageIcon,
+    VoteIcon,
+    ModalCont,
+}

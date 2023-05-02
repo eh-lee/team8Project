@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
 import none from "../../assets/imgs/detail/noneImg.png";
+import * as St from "./DetailImgs.style"
 
 const DetailImgs = ({ postIdx }) => {
   const [detailImgs, setDetailImgs] = useState([]);
@@ -33,7 +33,7 @@ const DetailImgs = ({ postIdx }) => {
         <>
           {[...Array(4)].map((_, i) => (
             //   <StImgBox key={i} src={detailImgs[i] ? detailImgs[i] : none} />
-            <StImgBox
+            <St.ImgBox
               key={i}
               src={
                 detailImgs[i] ? `http://localhost:3000/${detailImgs[i]}` : none
@@ -47,10 +47,3 @@ const DetailImgs = ({ postIdx }) => {
 };
 
 export default DetailImgs;
-
-const StImgBox = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 7.27273px;
-  /* border: 1px solid green; */
-`;

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
-import { useState } from "react";
-import * as St from "./WriteFooter.style";
+import * as St from "./WriteFooter.style"
 
 const WriteFooter = ({ handleIsWritingImg }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
