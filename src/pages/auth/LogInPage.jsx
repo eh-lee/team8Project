@@ -3,16 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
-import KakaoLoginBtn from "../../components/login/KakaoLoginBtn";
 import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 import TrueGuard from "../../components/hook/guard/TrueGuard";
-import NaverLoginBtn from "../../components/login/NaverLoginBtn";
-import GoogleLoginBtn from "../../components/login/GoogleLoginBtn";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import logo from "../../assets/icons/logo/loginlogo.png";
+import SnsLoginBtn from "../../components/login/SnsLoginBtn";
 
 const LogInPage = () => {
   TrueGuard();
@@ -83,9 +81,9 @@ const LogInPage = () => {
           <Column>
             <AuthButton text={"로그인"} />
             <Row>
-              <NaverLoginBtn />
-              <KakaoLoginBtn />
-              <GoogleLoginBtn />
+              <SnsLoginBtn type="Naver" />
+              <SnsLoginBtn type="Kakao" />
+              <SnsLoginBtn type="Google" />
             </Row>
           </Column>
 
