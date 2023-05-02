@@ -10,7 +10,7 @@ import TrueGuard from "../../components/hook/guard/TrueGuard";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import logo from "../../assets/icons/logo/loginlogo.png";
-import SnsLoginBtn from "../../components/login/SnsLoginBtn";
+import SnsLoginBtn from "../../components/login/SnsLoginBtn";
 
 const LogInPage = () => {
   TrueGuard();
