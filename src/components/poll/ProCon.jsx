@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { pollCanc } from "../../app/modules/writeSlice";
 import { BsTrash } from "react-icons/bs";
-import { VscEdit } from "react-icons/vsc";
 import { TfiThumbUp } from "react-icons/tfi";
 import { TfiThumbDown } from "react-icons/tfi";
+import {ReactComponent as ThumbsUp} from "../../assets/icons/common/thumbs-up.svg"
 import styled from "styled-components";
 import { useEffect } from "react";
 import { instanceWithAuth } from "../../api/axios";
@@ -26,9 +26,6 @@ const ProCon = ({
     dispatch(pollCanc());
   };
 
-  const proConEditHandler = () => {
-    alert("구현 중인 기능입니다.");
-  };
 
   const [proCount, setProCount] = useState(detailProCount);
   const [conCount, setConCount] = useState(detailConCount);
@@ -106,24 +103,21 @@ const ProCon = ({
         {pollTitle ? (
           <ProConIcon>
             <ProConDelete>
-              <VscEdit onClick={proConEditHandler} />
-            </ProConDelete>
-            <ProConEdit>
               <BsTrash onClick={proConDelHandler} />
-            </ProConEdit>
+            </ProConDelete>
           </ProConIcon>
         ) : null}
       </ProConHeader>
       <ProConBody>
         {pollTitle ? (
           <ProConColumn>
-            <TfiThumbUp size={25} />
+            <ThumbsUp />
             <ProBox>찬성 투표</ProBox>
           </ProConColumn>
         ) : (
           // onClick 걸고 state 관리
           <DetailProColumn onClick={voteProHandler} isVoted={proInputValue}>
-            <TfiThumbUp size={25} />
+            <ThumbsUp />
             <ProBox>찬성 투표</ProBox>
           </DetailProColumn>
         )}
@@ -146,14 +140,14 @@ const ProCon = ({
 
         {pollTitle ? (
           <ProConColumn>
-            <TfiThumbDown size={25} />
+            <StThumbsDown />
             <ConBox>반대 투표</ConBox>
           </ProConColumn>
         ) : (
           // onClick 걸고 state 관리
 
           <DetailConColumn onClick={voteConHandler} isVoted={conInputValue}>
-            <TfiThumbDown size={25} />
+            <StThumbsDown />
             <ConBox>반대 투표</ConBox>
           </DetailConColumn>
         )}
@@ -167,7 +161,14 @@ const ProConColumn = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 14px;
 `;
+
+const StThumbsDown = styled(ThumbsUp)`
+  transform: scale(-1, -1);
+`
 
 const DetailProColumn = styled.div`
   display: flex;
@@ -256,16 +257,8 @@ const ProConBody = styled.div`
   gap: 5%;
 `;
 
-const ProConDelete = styled.div`
-  color: rgb(120, 120, 120);
 
-  &:hover {
-    /* cursor: pointer;
-    color: black; */
-    /* 미구현 기능 */
-  }
-`;
-const ProConEdit = styled.div`
+const ProConDelete = styled.div`
   color: rgb(120, 120, 120);
 
   &:hover {

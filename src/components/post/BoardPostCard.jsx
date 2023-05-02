@@ -8,7 +8,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useEffect } from "react";
 import { instance } from "../../api/axios";
 import { useState } from "react";
-import { MdOutlineHowToVote } from "react-icons/md";
+import {ReactComponent as VoteIcon} from "../../assets/icons/common/back.svg"
 import { setPollType } from "../../app/modules/writeSlice";
 
 const BoardPostCard = ({
@@ -108,7 +108,7 @@ const BoardPostCard = ({
           {pollType !== "" ? (
             <>
               <PostCardTitleIcon>
-                <MdOutlineHowToVote />
+                <VoteIcon />
               </PostCardTitleIcon>
             </>
           ) : null}

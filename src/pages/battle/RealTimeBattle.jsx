@@ -37,7 +37,7 @@ const Battle = () => {
         // nicknmae
         // roomName
         // chatIdx
-        console.log("data===========>", res.data.result);
+        console.log("채팅리스트data===========>", res.data.result);
         setChattingList(res.data.result);
       } catch (error) {
         console.error("채팅get실패", error);

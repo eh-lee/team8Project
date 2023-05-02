@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FaVoteYea } from "react-icons/fa";
+import {ReactComponent as VoteIcon} from "../../assets/icons/common/vote.svg"
 import { ReactComponent as Camera } from "../../assets/icons/common/camera.svg"
 import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
@@ -39,7 +39,7 @@ const WriteFooter = ({handleIsWritingImg}) => {
       <StyledColumn>
         <StyledNav>
           <StyledPoll onClick={() => pollModalOpenHandler()}>
-            <FaVoteYea />
+            <VoteIcon />
             투표 생성
           </StyledPoll>
           <StyledImageCont>
@@ -112,20 +112,23 @@ const StyledPoll = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 3.5vh;
-  min-width: 11vh;
+  min-height: 32px;
+  min-width: 113px;
   padding: 3px 5px;
-  border: 1px solid #3a3a59;
+  border: 1px solid #C4C4C4;
   border-radius: 2rem;
   background-color: white;
-  color: #3a3a59;
-  font-size: 0.825rem;
+  color: #3A3A59;
+  font-size: 14px;
 
   &:hover {
     color: white;
     background-color: #3a3a59;
     outline: none;
     cursor: pointer;
+    path {
+      stroke: white;
+    }
   }
 `;
 

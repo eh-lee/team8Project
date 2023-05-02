@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { MdOutlineClose } from "react-icons/md";
+import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
 import { useSelector, useDispatch } from "react-redux";
 import {
   setPollType,
@@ -106,7 +107,7 @@ const PollModal = ({ open, close }) => {
         <PollWriteHeader>
           <PollWriteHeaderCont>
             <PollWriteCanc onClick={cancHandler}>
-              <MdOutlineClose />
+              <BackIcon />
               {/* <IoIosArrowBack/> */}
             </PollWriteCanc>
             <PollWriteCategory>
@@ -327,7 +328,11 @@ const PollWriteMain = styled.form`
   overflow-y: scroll;
 `;
 
-const PollWirteTitle = styled.div``;
+const PollWirteTitle = styled.div`
+  height: 24px;
+  font-weight: 600;
+  font-size: 18px;
+`;
 
 const PollMarginRight = styled.div`
   width: 0.9rem;

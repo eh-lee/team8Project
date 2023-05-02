@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { instance, instanceWithAuth } from "../../api/axios";
 import MobileLayout from "../../layout/MobileLayout";
 import { FiMoreVertical } from "react-icons/fi";
-import { MdArrowBackIosNew } from "react-icons/md";
+import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
 import DetailPostContents from "../../components/detail/DetailPostContents";
 import DetailPostCommentsList from "../../components/detail/DetailPostCommentsList";
 import ModalPortal from "../../components/modal/ModalPortal";
@@ -68,7 +68,7 @@ const DetailPost = () => {
                 nav(-1);
               }}
             >
-              <MdArrowBackIosNew size="1rem" />
+              <BackIcon />
             </DetailPost_BackBtn>
             <DetailPost_Category>
               {detailPostCat.maincategory}◦{detailPostCat.category}
@@ -172,6 +172,7 @@ const DetailPost_Category = styled.div`
   height: 24px;
   display: flex;
   align-items: center;
+  font-weight: 600;
   font-size: 18px;
   color: rgb(70, 70, 70);
 `;
