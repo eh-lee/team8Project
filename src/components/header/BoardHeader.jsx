@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BoardCategorySlider from "../board/BoardCategorySlider";
 import * as St from "./BoardHeader.style";
 
-const BoardHeader = () => {
+const BoardHeader = ({ parentFunction }) => {
   const navi = useNavigate();
   const location = useLocation();
   const BoardCallback = (x, y, z) => {
