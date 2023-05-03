@@ -6,8 +6,6 @@ import { cookies } from "../../api/cookies";
 import * as St from "./DetailPostCommentsList.style"
 
 const DetailPostCommentsList = ({ postIdx }) => {
-  // isComment 불러오기
-  // const { isComment } = useSelector((state) => state.detail);
 
   // 댓글 관리
   const [commentList, setCommentList] = useState(null);
@@ -15,9 +13,8 @@ const DetailPostCommentsList = ({ postIdx }) => {
   // 새 댓글 관리
   const [newComment, setNewComment] = useState('');
 
-  // isGood 상태 관리
+  // isComment 상태 관리
   const [isComment, setIsComment] = useState(true);
-  console.log("isComment 상태변화 관찰 ========>", isComment);
 
   // 댓글 get요청
   useEffect(() => {

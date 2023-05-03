@@ -6,20 +6,21 @@ import * as St from "./WriteFooter.style"
 const WriteFooter = ({ handleIsWritingImg }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
+  // 이미지 관리
   const [imgs, setImgs] = useState([]);
-  // const [preImgs, setPreImgs] = useState([]);
-  // const imgInputRef = useRef(null);
-
-  // const handleClick = () => {
-  //   imgInputRef.current.click();
-  // };
+  const [preImgs, setPreImgs] = useState([]);
 
   const imgOnchangeHandler = (event) => {
     console.log("이미지 업로드 어떻게 되지요?=======>", event.target.files);
     const fileList = event.target.files;
+    setImgs(Array.from(fileList));
+    // 최대 4개
+    const filesLength = fileList.length > 4 ? 4 : fileList.length;
 
-    setImgs(fileList);
-    handleIsWritingImg(true);
+    //
+
+    // handleIsWritingImg(true);
+
   };
   console.log("여러장 저장되나?", imgs);
 
@@ -40,6 +41,7 @@ const WriteFooter = ({ handleIsWritingImg }) => {
             투표 생성
           </St.Poll>
           <St.ImageCont>
+            <St.InfoText>이미지는 4장까지 업로드 가능합니다.</St.InfoText>
             <St.ImageInput
               type="file"
               accept="image/*"
@@ -47,7 +49,6 @@ const WriteFooter = ({ handleIsWritingImg }) => {
               // ref={imgInputRef}
               onChange={imgOnchangeHandler}
             />
-            {/* <StImageIcon onClick={handleClick} /> */}
             <St.ImageIcon />
           </St.ImageCont>
         </St.Nav>

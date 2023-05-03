@@ -73,6 +73,27 @@ const ImageCont = styled.label`
   font-size: 20px;
   border: none;
   background-color: transparent;
+
+  &:hover {
+    & > span {
+      visibility: visible;
+      opacity: 0.8;
+    }
+  }
+`;
+
+const InfoText = styled.span`
+  padding: 10px;
+  border-radius: 30px 30px 0 30px;
+  background-color: #EF3F61;
+  color: white;
+  position: absolute;
+  bottom: 55px;
+  right: 40px;
+  font-size: 16px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
 `;
 
 const ImageInput = styled.input`
@@ -96,6 +117,9 @@ export {
     Nav,
     Poll,
     ImageCont,
+
+    InfoText,
+
     ImageInput,
     ImageIcon,
     VoteIcon,
