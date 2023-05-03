@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
 import { cookies } from "../../api/cookies";
 import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
+import * as St from "./CreateChatModal.style"
 
 const CreateChatModal = ({ open, close }) => {
   const [room, setRoom] = useState("");
@@ -87,33 +87,33 @@ const CreateChatModal = ({ open, close }) => {
 
   return open ? (
     <>
-      <FooLayout>
-        <ChatHeader>
-          <ChatHeaderCont>
-            <StBackBtn onClick={close}>
+      <St.FooLayout>
+        <St.ChatHeader>
+          <St.ChatHeaderCont>
+            <St.BackBtn onClick={close}>
               <BackIcon />
-            </StBackBtn>
-            <WriteCategory>
-              <MainCat>훈수배틀방 만들기</MainCat>
-            </WriteCategory>
-            <StFooDiv />
-          </ChatHeaderCont>
-        </ChatHeader>
-        <CreateChatWrap>
-          <StFooDiv>
-            <StChatTitle>배틀방 이름을 입력해 주세요.</StChatTitle>
-            <StCreateChatTitleInput
+            </St.BackBtn>
+            <St.WriteCategory>
+              <St.MainCat>훈수배틀방 만들기</St.MainCat>
+            </St.WriteCategory>
+            <div />
+          </St.ChatHeaderCont>
+        </St.ChatHeader>
+        <St.CreateChatWrap>
+          <div>
+            <St.ChatTitle>배틀방 이름을 입력해 주세요.</St.ChatTitle>
+            <St.CreateChatTitleInput
               required
               placeholder="방 제목을 입력해 주세요.(15자 이하)"
               className="joinInput mt-20"
               type="text"
               onChange={(event) => setRoom(event.target.value)}
               maxLength={15}
-            ></StCreateChatTitleInput>
-          </StFooDiv>
-          <StFooDiv>
-            <StChatParty>참여 인원을 설정해 주세요.</StChatParty>
-            <CreateChatMatParty
+            ></St.CreateChatTitleInput>
+          </div>
+          <div>
+            <St.ChatParty>참여 인원을 설정해 주세요.</St.ChatParty>
+            <St.CreateChatMatParty
               required
               value={chatRoom.maxParty}
               name="maxParty"
@@ -129,156 +129,18 @@ const CreateChatModal = ({ open, close }) => {
               <option value="8"> 8 </option>
               <option value="9"> 9 </option>
               <option value="10"> 10 </option>
-            </CreateChatMatParty>
-          </StFooDiv>
-          {/* <StFooMarginTop /> */}
-          <CreateChatBtn onClick={createChatHandler}>
+            </St.CreateChatMatParty>
+          </div>
+          <St.CreateChatBtn onClick={createChatHandler}>
             채팅방 만들기
-          </CreateChatBtn>
-        </CreateChatWrap>
-      </FooLayout>
+          </St.CreateChatBtn>
+        </St.CreateChatWrap>
+      </St.FooLayout>
     </>
   ) : null;
 };
 
 export default CreateChatModal;
-
-const MainCat = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-const WriteCategory = styled.div`
-  gap: 0.25rem;
-  display: flex;
-  font-size: 0.95rem;
-  font-weight: bold;
-`;
-
-const ChatHeader = styled.div`
-  background-color: white;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 400px;
-  color: rgb(70, 70, 70);
-`;
-
-const ChatHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-  // *============ HEADER 높이 ===============*
-  padding: 0 7.5%;
-  height: 48px;
-  // *============ HEADER 높이 ===============*
-`;
-
-const StFooDiv = styled.div``;
-
-const StChatTitle = styled.p`
-  font-weight: bold;
-  color: #2d2d2d;
-`;
-
-const StFooMarginTop = styled.div`
-  height: 55vh;
-`;
-
-const StChatParty = styled.p`
-  font-weight: bold;
-  color: #2d2d2d;
-`;
-const CreateChatWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin-top: 80px;
-  align-items: center;
-  /* justify-content: flex-start; */
-  border: 1px soild burlywood;
-  gap: 20px;
-`;
-
-const StCreateChatTitleInput = styled.input`
-  /* border: 1px solid tomato; */
-  border-radius: 0.5rem;
-  /* height: 4vh; */
-  width: 340px;
-  /* padding: 0.5vh 1.5vh; */
-  margin: 1vh 0;
-  border: 0.1rem solid rgb(220, 220, 220);
-  padding: 1vh;
-  height: 25px;
-  font-size: 1rem;
-
-  &:focus-within {
-    border-radius: 0.5rem;
-    box-shadow: rgba(100, 100, 100, 0.3) 0px 8px 16px -8px;
-    background-color: rgba(200, 200, 200, 0.2);
-    outline: none;
-  }
-
-  ::placeholder {
-    color: #dcdcdc;
-  }
-`;
-
-const StBackBtn = styled.div`
-  color: rgb(180, 180, 180);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    cursor: pointer;
-    color: rgb(70, 70, 70);
-  }
-`;
-
-const FooLayout = styled.div`
-  position: fixed;
-  top: 0;
-  width: 400px;
-  height: 100vh;
-  background-color: white;
-`;
-
-const CreateChatMatParty = styled.select`
-  border-radius: 0.5rem;
-  /* height: 4vh; */
-  width: 360px;
-  /* padding: 0.5vh 1.5vh; */
-  margin: 1vh 0;
-  border: 0.1rem solid rgb(220, 220, 220);
-  color: #dcdcdc;
-  /* border-radius: 0.5rem; */
-  padding: 1vh;
-  height: 40px;
-  font-size: 1rem;
-`;
-
-const CreateChatBtn = styled.button`
-  border: none ${(props) => props.borderColor};
-  background-color: #ef3f61 ${(props) => props.backgroundColor};
-  color: white ${(props) => props.borderColor};
-  border-radius: 0.5rem;
-
-  height: 40px;
-  width: 360px;
-  font-size: 1rem;
-
-  position: fixed;
-  bottom: 40px;
-  &:hover {
-    border: 0.1rem solid ${(props) => props.borderColor};
-    background-color: pink;
-    cursor: pointer;
-  }
-`;
 
 //==================================================================
 // 기존 코드

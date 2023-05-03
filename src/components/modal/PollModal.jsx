@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { MdOutlineClose } from "react-icons/md";
 import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
 import { useSelector, useDispatch } from "react-redux";
+import * as St from "./PollModal.style"
 import {
   setPollType,
   setPollTitle,
@@ -103,278 +102,89 @@ const PollModal = ({ open, close }) => {
 
   return open ? (
     <>
-      <PollWriteWrap>
-        <PollWriteHeader>
-          <PollWriteHeaderCont>
-            <PollWriteCanc onClick={cancHandler}>
+      <St.PollWriteWrap>
+        <St.PollWriteHeader>
+          <St.PollWriteHeaderCont>
+            <St.PollWriteCanc onClick={cancHandler}>
               <BackIcon />
               {/* <IoIosArrowBack/> */}
-            </PollWriteCanc>
-            <PollWriteCategory>
-              <PollWirteTitle>투표</PollWirteTitle>
-            </PollWriteCategory>
-            <PollMarginRight></PollMarginRight>
-          </PollWriteHeaderCont>
-        </PollWriteHeader>
+            </St.PollWriteCanc>
+            <St.PollWriteCategory>
+              <St.PollWirteTitle>투표</St.PollWirteTitle>
+            </St.PollWriteCategory>
+            <St.PollMarginRight></St.PollMarginRight>
+          </St.PollWriteHeaderCont>
+        </St.PollWriteHeader>
 
-        <PollWriteMain onSubmit={handleSubmit}>
-          <PollType>
-            <PollTypeText>투표 유형</PollTypeText>
-            <PollRow>
-              <PollProConType
+        <St.PollWriteMain onSubmit={handleSubmit}>
+          <St.PollType>
+            <St.PollTypeText>투표 유형</St.PollTypeText>
+            <St.PollRow>
+              <St.PollProConType
                 onClick={handleProConClick}
                 isClicked={isProConClicked}
               >
                 찬반형
-              </PollProConType>
-              <PollSelectType
+              </St.PollProConType>
+              <St.PollSelectType
                 onClick={handleSelectClick}
                 isClicked={isSelectClicked}
               >
                 선택형
-              </PollSelectType>
-            </PollRow>
-          </PollType>
+              </St.PollSelectType>
+            </St.PollRow>
+          </St.PollType>
 
           {isProConClicked && (
-            <PollTitle>
-              <PollTitleText>투표 제목</PollTitleText>
-              <PollInput
+            <St.PollTitle>
+              <St.PollTitleText>투표 제목</St.PollTitleText>
+              <St.PollInput
                 id={pollTitle}
                 placeholder="제목을 입력해 주세요 (20자 이내)"
                 onChange={(e) => changePollTitleHandler(e)}
-              ></PollInput>
-            </PollTitle>
+              ></St.PollInput>
+            </St.PollTitle>
           )}
 
           {isSelectClicked && (
             <>
-              <PollTitle>
-                <PollTitleText>투표 제목</PollTitleText>
-                <PollInput
+              <St.PollTitle>
+                <St.PollTitleText>투표 제목</St.PollTitleText>
+                <St.PollInput
                   id={pollTitle}
                   placeholder="제목을 입력해 주세요 (20자 이내)"
                   onChange={(e) => changePollTitleHandler(e)}
-                ></PollInput>
-              </PollTitle>
+                ></St.PollInput>
+              </St.PollTitle>
 
-              <PollSelect>
-                <PollSelectText>보기</PollSelectText>
-                <PollCandid
+              <St.PollSelect>
+                <St.PollSelectText>보기</St.PollSelectText>
+                <St.PollCandid
                   onChange={(e) => changePollTagHandler(e, 0)}
                   placeholder="보기를 입력해 주세요 (20자 이내)"
-                ></PollCandid>
-                <PollCandid
+                ></St.PollCandid>
+                <St.PollCandid
                   onChange={(e) => changePollTagHandler(e, 1)}
                   placeholder="보기를 입력해 주세요 (20자 이내)"
-                ></PollCandid>
-                <PollCandid
+                ></St.PollCandid>
+                <St.PollCandid
                   onChange={(e) => changePollTagHandler(e, 2)}
                   placeholder="보기를 입력해 주세요 (20자 이내)"
-                ></PollCandid>
-                <PollCandid
+                ></St.PollCandid>
+                <St.PollCandid
                   onChange={(e) => changePollTagHandler(e, 3)}
                   placeholder="보기를 입력해 주세요 (20자 이내)"
-                ></PollCandid>
-              </PollSelect>
+                ></St.PollCandid>
+              </St.PollSelect>
             </>
           )}
-          <Gap />
-          <PollButton>투표 만들기</PollButton>
-        </PollWriteMain>
+          <St.Gap />
+          <St.PollButton>투표 만들기</St.PollButton>
+        </St.PollWriteMain>
         {/* <PollButton type="submit">투표 만들기</PollButton> */}
-      </PollWriteWrap>
+      </St.PollWriteWrap>
     </>
   ) : null;
 };
 
 export default PollModal;
-
-// fixed라서 hard하게 줘야 안 꺠짐
-
-const Gap = styled.div`
-  &::before {
-    content: "";
-    display: block;
-    min-height: 200px; /* 원하는 높이 값으로 조정 */
-  }
-`;
-
-const PollButton = styled.button`
-  /* margin-top: 50%; */
-  position: fixed;
-  /* width: 47.8%; */
-  width: 360px;
-  bottom: 0;
-  padding: 16px 8px;
-  margin: 20px;
-  color: white;
-  background-color: #ef3f61;
-  border-radius: 10px;
-  outline: none;
-  border: none;
-  text-align: center;
-
-  &:hover {
-    background-color: pink;
-    cursor: pointer;
-  }
-`;
-
-const PollWriteWrap = styled.div`
-  position: fixed;
-  top: 0;
-  width: 400px;
-  height: 100vh;
-  background-color: white;
-  /* modal이니까 position: fixed */
-`;
-
-const PollRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 10px 20px;
-`;
-
-const PollProConType = styled.div`
-  background-color: white;
-  border: 1px solid black;
-  padding: 7.5px 0;
-  width: 180px;
-  text-align: center;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-
-  color: ${(props) => (props.isClicked ? "white" : "black")};
-  background-color: ${(props) => (props.isClicked ? "#3A3A59" : "white")};
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-const PollSelectType = styled.div`
-  background-color: white;
-  border: 1px solid black;
-  padding: 7.5px 0;
-  width: 180px;
-  text-align: center;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-
-  color: ${(props) => (props.isClicked ? "white" : "black")};
-  background-color: ${(props) => (props.isClicked ? "#3A3A59" : "white")};
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-const PollInput = styled.input`
-  border-radius: 0.5rem;
-  height: 40px;
-  width: 340px;
-  padding: 5px 10px;
-  margin: 10px 20px;
-  border: 0.1rem solid rgb(220, 220, 220);
-
-  &:focus-within {
-    border-radius: 0.5rem;
-    box-shadow: rgba(100, 100, 100, 0.3) 0px 8px 16px -8px;
-    background-color: rgba(200, 200, 200, 0.2);
-    outline: none;
-  }
-`;
-const PollCandid = styled.input`
-  border-radius: 0.5rem;
-  height: 40px;
-  width: 340px;
-  padding: 5px 10px;
-  margin: 10px 20px;
-  border: 0.1rem solid rgb(220, 220, 220);
-
-  &:focus-within {
-    border-radius: 0.5rem;
-    box-shadow: rgba(100, 100, 100, 0.3) 0px 8px 16px -8px;
-    background-color: rgba(200, 200, 200, 0.2);
-    outline: none;
-  }
-`;
-
-const PollTypeText = styled.div`
-  margin: 10px 20px;
-`;
-const PollTitleText = styled.div`
-  margin: 10px 20px;
-`;
-const PollSelectText = styled.div`
-  margin: 10px 20px;
-`;
-const PollType = styled.div`
-  /* border: 1px solid blue; */
-`;
-const PollTitle = styled.div``;
-const PollSelect = styled.div``;
-
-const PollWriteMain = styled.form`
-  display: flex;
-  flex-direction: column;
-
-  /* align-items: ; */
-  /* border: 1px solid green; */
-  /* width: 340px; */
-  /* width: 100%; */
-  /* margin: 25% 7.5%; */
-  padding: 90px 0;
-  min-height: 400px;
-  overflow-y: scroll;
-`;
-
-const PollWirteTitle = styled.div`
-  height: 24px;
-  font-weight: 600;
-  font-size: 18px;
-`;
-
-const PollMarginRight = styled.div`
-  width: 0.9rem;
-  margin-right: 10%;
-`;
-
-const PollWriteCategory = styled.div`
-  /* border: 1px solid gray; */
-  gap: 0.25rem;
-  display: flex;
-  font-size: 0.95rem;
-  font-weight: bold;
-`;
-
-const PollWriteCanc = styled.div`
-  /* border: 1px solid red; */
-  margin-left: 7.5%;
-
-  &:hover {
-    cursor: pointer;
-    color: rgb(175, 175, 175);
-  }
-`;
-
-const PollWriteHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-  // *============ HEADER 높이 ===============*
-  padding-bottom: 2vh;
-  height: 5vh;
-  // *============ HEADER 높이 ===============*
-`;
-
-const PollWriteHeader = styled.div`
-  background-color: white;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 400px;
-  color: rgb(70, 70, 70);
-`;

@@ -1,24 +1,17 @@
 import React from "react";
-import styled from "styled-components";
 import LiveBattleCard from "../chat/LiveBattleCard";
 import HotPostCardSlider from "./HotPostCardSlider";
 import NewPostCardSlider from "./NewPostCardSlider";
+import * as St from "./HomeContents.style"
 
 const HomeContents = () => {
   return (
-    <XXXPostCardSliders>
+    <St.XXXPostCardSliders>
       <HotPostCardSlider />
       <LiveBattleCard />
       <NewPostCardSlider />
-    </XXXPostCardSliders>
+    </St.XXXPostCardSliders>
   );
 };
 
 export default HomeContents;
-
-const XXXPostCardSliders = styled.ul`
-  /* border: 1px solid blue; */
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
