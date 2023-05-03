@@ -30,7 +30,7 @@ const OnBoardingContents = () => {
                 <St.Desc>
                   <St.DescP>
                     {page === 1 && "누군가에게"}
-                    {page === 2 && "나에게"}
+                    {page === 2 && "나에게 이래라 저래라"}
                     {page === 3 && "훈수에 훈수를 두고 싶을 때"}
                   </St.DescP>
                   <St.DescP>
