@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import MobileLayout from "../../layout/MobileLayout";
@@ -9,6 +9,17 @@ import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const nav = useNavigate();
+
+  const [input, setInput] = useState('');
+
+  const searchSubmitHandler = async (e) => {
+    e.preventDefault()
+    
+  };
+
+  const inputHandler = (e) => {
+    setInput(e.target.value)
+  };
 
   return (
     <>
@@ -28,7 +39,7 @@ const Search = () => {
         </WriteHeader>
         <DetailPostCommentsFooter>
           <DetailPostCommentsFooterInputCont
-          // onSubmit={(e) => newCommentsubmitHandler(e)}
+          onSubmit={(e) => searchSubmitHandler(e)}
           >
             <StTogether>
               <StFooLeftDiv>
@@ -39,8 +50,8 @@ const Search = () => {
                 required
                 // type="text"
                 placeholder="검색어를 입력하세요."
-                // value={newComment}
-                // onChange={(e) => newCommentHandler(e)}
+                value={input}
+                onChange={(e) => inputHandler(e)}
                 maxLength="20"
               />
 

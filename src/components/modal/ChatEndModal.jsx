@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import io from "socket.io-client";
 import { cookies } from "../../api/cookies";
+import * as St from "./ChatEndModal.style"
 
 const ENDPOINT = "http://localhost:4000";
 let socket;
@@ -16,7 +16,6 @@ const ChatEndModal = ({ open, close, room, messages }) => {
   const nav = useNavigate();
 
   const modalRef = useRef();
-
 
   //   console.log("모달로 내려온 isAdmin", isAdmin)
   console.log("모달로 내려온 messages", messages);
@@ -80,58 +79,58 @@ const ChatEndModal = ({ open, close, room, messages }) => {
   return open ? (
     <>
       {isAdmin ? (
-        <StFooBG>
-          <StChatEndWrap ref={modalRef}>
-            <StChatEndList column large>
+        <St.FooBG>
+          <St.ChatEndWrap ref={modalRef}>
+            <St.ChatEndList column large>
               {/* <StChatColumn> */}
-              <ButtonText Large>채팅방 나가기</ButtonText>
-              <StChatEndInfo>
+              <St.ButtonText Large>채팅방 나가기</St.ButtonText>
+              <St.ChatEndInfo>
                 배틀 종료 선택시, 채팅이 종료됩니다.
-                <StFooBr />
+                <St.FooBr />
                 저장을 원하시는 경우 저장 후 종료하십시오.
-              </StChatEndInfo>
+              </St.ChatEndInfo>
               {/* </StChatColumn> */}
-            </StChatEndList>
+            </St.ChatEndList>
 
-            <StChatEndRowList>
-              <StRowButtonText onClick={endChatHandler} left>
+            <St.ChatEndRowList>
+              <St.RowButtonText onClick={endChatHandler} left>
                 배틀 종료
-              </StRowButtonText>
-              <StRowButtonText onClick={chatSaveHandler}>
+              </St.RowButtonText>
+              <St.RowButtonText onClick={chatSaveHandler}>
                 저장 후 종료
-              </StRowButtonText>
-            </StChatEndRowList>
+              </St.RowButtonText>
+            </St.ChatEndRowList>
 
-            <StChatEndList onClick={close} topMargin cursor>
-              <ButtonText>취소</ButtonText>
-            </StChatEndList>
-          </StChatEndWrap>
-        </StFooBG>
+            <St.ChatEndList onClick={close} topMargin cursor>
+              <St.ButtonText>취소</St.ButtonText>
+            </St.ChatEndList>
+          </St.ChatEndWrap>
+        </St.FooBG>
       ) : (
-        <StFooBG>
-          <StChatEndWrap ref={modalRef}>
-            <StChatEndList column medium>
+        <St.FooBG>
+          <St.ChatEndWrap ref={modalRef}>
+            <St.ChatEndList column medium>
               {/* <StChatColumn> */}
-              <ButtonText Large>채팅방 나가기</ButtonText>
-              <StChatEndInfo>
+              <St.ButtonText Large>채팅방 나가기</St.ButtonText>
+              <St.ChatEndInfo>
                 배틀 종료 선택 시, 채팅방을 나갑니다.
-              </StChatEndInfo>
+              </St.ChatEndInfo>
               {/* </StChatColumn> */}
-            </StChatEndList>
-            <StChatEndList
+            </St.ChatEndList>
+            <St.ChatEndList
               onClick={() => {
                 nav("/battle");
               }}
               delete
               cursor
             >
-              <ButtonText>배틀 종료</ButtonText>
-            </StChatEndList>
-            <StChatEndList onClick={close} topMargin cursor>
-              <ButtonText>취소</ButtonText>
-            </StChatEndList>
-          </StChatEndWrap>
-        </StFooBG>
+              <St.ButtonText>배틀 종료</St.ButtonText>
+            </St.ChatEndList>
+            <St.ChatEndList onClick={close} topMargin cursor>
+              <St.ButtonText>취소</St.ButtonText>
+            </St.ChatEndList>
+          </St.ChatEndWrap>
+        </St.FooBG>
       )}
     </>
   ) : null;
@@ -139,126 +138,6 @@ const ChatEndModal = ({ open, close, room, messages }) => {
 
 export default ChatEndModal;
 
-const StFooBr = styled.br``;
-
-const StFooBG = styled.div`
-  position: fixed;
-  top: 0;
-  width: 400px;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
-`;
-
-const StChatEndWrap = styled.ul`
-  position: absolute;
-  background-color: transparent;
-  top: 35%;
-  left: 7.5%;
-  width: 340px;
-  //   height: 176px;
-`;
-
-const StChatEndList = styled.ul`
-  width: 340px;
-  height: 56px;
-  /* border: 1px solid darkorchid; */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid #cccccc;
-  background-color: white;
-  color: #2d2d2d;
-  border-radius: 10px 10px 0 0;
-  ${({ cursor }) =>
-    cursor &&
-    css`
-      cursor: pointer;
-    `};
-
-  ${({ delete: isDelete }) =>
-    isDelete &&
-    css`
-      color: #eb5147;
-      border-bottom: none;
-      border-radius: 0 0 10px 10px;
-    `};
-
-  ${({ topMargin }) =>
-    topMargin &&
-    css`
-      margin-top: 8px;
-      border-radius: 10px;
-    `};
-
-  ${({ column }) =>
-    column &&
-    css`
-      flex-direction: column;
-    `};
-
-  ${({ medium }) =>
-    medium &&
-    css`
-      height: 73px;
-    `};
-
-  ${({ large }) =>
-    large &&
-    css`
-      height: 91px;
-    `};
-`;
-
-const StChatEndRowList = styled.ul`
-  width: 340px;
-  height: 56px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
-  background-color: white;
-  color: #2d2d2d;
-  /* border-radius: 10px 10px 0 0; */
-  color: #eb5147;
-  border-bottom: none;
-
-  border-radius: 0 0 10px 10px;
-`;
-
-const StRowButtonText = styled.li`
-  width: 170px;
-  height: 56px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 600;
-  ${({ left: isLeft }) =>
-    isLeft &&
-    css`
-      border-right: 1px solid #cccccc;
-    `};
-`;
-
-const ButtonText = styled.li`
-  //   text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  ${({ Large: isLarge }) =>
-    isLarge &&
-    css`
-      font-size: 18px;
-    `};
-`;
-
-const StChatEndInfo = styled.p`
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-`;
 
 // // ====
 // <StFooBG onClick={close} ref={modalRef}>

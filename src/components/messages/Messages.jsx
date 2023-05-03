@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-
 import BasicScrollToBottom from "react-scroll-to-bottom";
-import styled from "styled-components";
-import Message from "./message/Message";
+import Message from "./Message";
+import * as St from "./Messages.style"
 
 function Messages({ messages, name }) {
   useEffect(() => {
@@ -10,37 +9,19 @@ function Messages({ messages, name }) {
   }, [messages]);
 
   return (
-    <MessagesWrap>
+    <St.MessagesWrap>
       {/* <BasicScrollToBottom className="messages"> */}
       <BasicScrollToBottom>
         {messages?.map((message, i) => {
           return (
-            <StMessageCont key={i}>
+            <St.MessageCont key={i}>
               <Message message={message} name={name} />
-            </StMessageCont>
+            </St.MessageCont>
           );
         })}
       </BasicScrollToBottom>
-    </MessagesWrap>
+    </St.MessagesWrap>
   );
 }
 
 export default Messages;
-
-const MessagesWrap = styled.div`
-  margin-top: 18%;
-  overflow: auto;
-  display: flex;
-  height: 85%;
-  width: 400px;
-  overflow: none;
-  /* border: 1px solid brown; */
-  /* padding-top: 30px; */
-  /* padding: 30px 0; */
-  background-color: #f2f2f7;
-`;
-
-const StMessageCont = styled.div`
-  width: 100%;
-  /* border: 1px solid purple; */
-`;

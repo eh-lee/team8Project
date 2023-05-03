@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
-import FalseGuard from "../../components/hook/guard/FalseGuard";
+import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import MobileLayout from "../../layout/MobileLayout";
+import FalseGuard from "../../components/hook/guard/FalseGuard";
+import ModalPortal from "../../components/modal/ModalPortal";
 import CateogryModal from "../../components/modal/CateogryModal";
 import WriteFooter from "../../components/footer/WriteFooter";
-import ModalPortal from "../../components/modal/ModalPortal";
-import { useDispatch, useSelector } from "react-redux";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
-import { Helmet } from "react-helmet";
-import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
-import { ReactComponent as ArrowDown } from "../../assets/icons/common/arrowdown.svg";
+import * as St from "./EditPost.style"
 
 const EditPost = () => {
   FalseGuard();
@@ -116,26 +114,26 @@ const EditPost = () => {
         <title>훈수 — 게시글 수정</title>
       </Helmet>
       <MobileLayout>
-        <PageWithFooterWrapper>
-          <WriteHeader>
-            <WriteHeaderCont>
-              <WriteCanc onClick={handleCanc}>취소</WriteCanc>
-              <WriteCategory>
-                <MainCat>{maincategory}</MainCat>
-                <SubCat>{category}</SubCat>
-                <IconCont>
-                  <StArrowDown onClick={categoryModalOpenHandler} />
-                </IconCont>
-              </WriteCategory>
-              <WritePost onClick={submitHandler}>수정</WritePost>
-            </WriteHeaderCont>
-          </WriteHeader>
-          <WriteForm
+        <St.PageWithFooterWrapper>
+          <St.WriteHeader>
+            <St.WriteHeaderCont>
+              <St.WriteCanc onClick={handleCanc}>취소</St.WriteCanc>
+              <St.WriteCategory>
+                <St.MainCat>{maincategory}</St.MainCat>
+                <St.SubCat>{category}</St.SubCat>
+                <St.IconCont>
+                  <St.ArrowDownIcon onClick={categoryModalOpenHandler} />
+                </St.IconCont>
+              </St.WriteCategory>
+              <St.WritePost onClick={submitHandler}>수정</St.WritePost>
+            </St.WriteHeaderCont>
+          </St.WriteHeader>
+          <St.WriteForm
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
-            <WriteTitle
+            <St.WriteTitle
               type="text"
               value={title}
               onChange={(e) => {
@@ -143,16 +141,16 @@ const EditPost = () => {
               }}
               autoFocus
               placeholder="제목"
-            ></WriteTitle>
-            <WriteContent
+            ></St.WriteTitle>
+            <St.WriteContent
               type="text"
               value={desc}
               onChange={(e) => {
                 setDesc(e.target.value);
               }}
               placeholder="훈수 받고 싶은 내용을 입력하세요."
-            ></WriteContent>
-          </WriteForm>
+            ></St.WriteContent>
+          </St.WriteForm>
 
           {/* ========= 찬반형 투표 미리보기 ========= */}
           {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
@@ -164,7 +162,7 @@ const EditPost = () => {
               <div>{pollTitle}</div>
               <div>{tag}</div>
               <div>
-                <StIconTrash onClick={proConDelHandler} />
+                <St.TrashIcon onClick={proConDelHandler} />
               </div>
               {/* tag map 돌려야 하나? */}
             </>
@@ -173,9 +171,9 @@ const EditPost = () => {
           {/* ======= pollModal은 요 안에 ======== */}
           <WriteFooter />
           {/* ======= pollModal은 요 안에 ======== */}
-        </PageWithFooterWrapper>
+        </St.PageWithFooterWrapper>
         <ModalPortal>
-          <ModalCont>
+          <St.ModalCont>
             {isCategoryModalOpen && (
               <CateogryModal
                 open={isCategoryModalOpen}
@@ -184,7 +182,7 @@ const EditPost = () => {
                 // CategoryModal(child) to write.jsx(parent)
               />
             )}
-          </ModalCont>
+          </St.ModalCont>
         </ModalPortal>
       </MobileLayout>
     </>
@@ -192,159 +190,3 @@ const EditPost = () => {
 };
 
 export default EditPost;
-
-const StArrowDown = styled(ArrowDown)`
-  width: 16px;
-  height: 16px;
-  &:hover {
-    cursor: pointer;
-    /* path:nth-child(1) {
-      stroke: #3a3a59;
-    } */
-  }
-`;
-
-const StIconTrash = styled(Trash)`
-  width: 20px;
-  height: 20px;
-  &:hover {
-    cursor: pointer;
-    path:nth-child(1) {
-      stroke: #3a3a59;
-    }
-  }
-`;
-
-const ModalCont = styled.div`
-  margin: 0 auto;
-  width: 400px;
-`;
-
-const WriteTitle = styled.input`
-  font-size: 1.3rem;
-  margin: 1rem 0;
-  padding: 0.5rem 1rem;
-  width: 80%;
-  border: none;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-
-  &:focus {
-    outline: none;
-    border-bottom: 0.1rem solid rgb(180, 180, 180);
-  }
-
-  ::placeholder {
-    color: rgb(180, 180, 180);
-  }
-`;
-
-const MainCat = styled.div``;
-
-const SubCat = styled.div`
-  color: rgb(180, 180, 180);
-`;
-
-const WriteContent = styled.textarea`
-  font-size: 0.85rem;
-  width: 80%;
-  padding: 0 1rem 1rem 1rem;
-  /* scroll issue */
-  border: none;
-  min-height: 40vh;
-  overflow-y: scroll;
-  /* 스크롤바 숨기기 */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  resize: none;
-  white-space: pre-wrap;
-  /* 줄바꿈과 공백 인식하여 출력 ~ 댓글에도*/
-  word-break: break-all;
-  /* 줄바꿈 */
-
-  &:focus {
-    outline: none;
-  }
-
-  ::placeholder {
-    color: rgb(180, 180, 180);
-    white-space: pre-wrap;
-  }
-`;
-
-const WriteForm = styled.form`
-  padding-top: 1rem;
-  display: flex;
-  width: 100%;
-  max-width: 400px;
-  /* height: 60vh; */
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  /* border: 1px solid green; */
-`;
-
-const PageWithFooterWrapper = styled.div`
-  margin-top: 3.5rem;
-`;
-
-const WriteCanc = styled.div`
-  margin-left: 7.5%;
-  color: rgb(180, 180, 180);
-  font-size: 0.9rem;
-  &:hover {
-    cursor: pointer;
-    color: rgb(70, 70, 70);
-  }
-`;
-
-const WritePost = styled.div`
-  margin-right: 7.5%;
-  color: rgb(180, 180, 180);
-  font-size: 0.9rem;
-  &:hover {
-    cursor: pointer;
-    color: rgb(70, 70, 70);
-  }
-`;
-
-const WriteHeader = styled.div`
-  /* border: 1px solid blue; */
-  background-color: white;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 400px;
-  color: rgb(70, 70, 70);
-`;
-
-const WriteHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-  // *============ HEADER 높이 ===============*
-  padding-bottom: 2vh;
-  height: 5vh;
-  // *============ HEADER 높이 ===============*
-`;
-
-const WriteCategory = styled.div`
-  gap: 0.25rem;
-  display: flex;
-  font-size: 0.95rem;
-  font-weight: bold;
-`;
-
-const IconCont = styled.div`
-  color: rgb(180, 180, 180);
-
-  &:hover {
-    cursor: pointer;
-    color: rgb(70, 70, 70);
-  }
-`;
