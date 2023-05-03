@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
-import * as St from "./DetailMenuModal.style"
+import * as St from "./DetailMenuModal.style";
 
 const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
   const nav = useNavigate();
@@ -37,7 +37,7 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
       .delete(`/postCards/post/createPost/${postIdx}`)
       .then((response) => {
         alert(response.data.msg);
-        nav("/totalboard");
+        nav("/board");
       })
       .catch((error) => {
         console.error("게시글 삭제", error);
