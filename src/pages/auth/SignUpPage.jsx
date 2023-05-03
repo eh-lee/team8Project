@@ -6,7 +6,7 @@ import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+// import axios from "axios";
 
 const SignUpPage = () => {
   const navi = useNavigate();
@@ -93,8 +93,8 @@ const SignUpPage = () => {
       return;
     }
     try {
-      // await instance.post("/user/signup", user);
-      await axios.post("http://43.201.45.82:3000/api/user/signup", user);
+      await instance.post("/user/signup", user);
+      // await axios.post("http://43.201.45.82:3000/api/user/signup", user);
       // await axios.post("http://52.78.166.176:3000/api/user/signup", user);
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");
@@ -130,9 +130,7 @@ const SignUpPage = () => {
             </div>
 
             <div>
-              <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-                비밀번호
-              </div>
+              <Margin>비밀번호</Margin>
               <AuthInput
                 type="password"
                 value={user.password}
@@ -148,9 +146,7 @@ const SignUpPage = () => {
               </Validation>
             </div>
             <div>
-              <div style={{ marginTop: "10px", marginBottom: "5px" }}>
-                비밀번호 확인
-              </div>
+              <Margin>비밀번호 확인</Margin>
               <AuthInput
                 type="password"
                 value={user.passwordConfirm}
@@ -166,9 +162,7 @@ const SignUpPage = () => {
               </Validation>
             </div>
             <div>
-              <div style={{ marginTop: "10px", marginBottom: "5px" }}>
-                닉네임
-              </div>
+              <Margin>닉네임</Margin>
               <AuthInput
                 type="text"
                 value={user.nickname}
@@ -197,6 +191,10 @@ const SignUpPage = () => {
   );
 };
 
+const Margin = styled.div`
+  margin-top: 10px;
+  margin-bottom: 5px;
+`;
 const LoginP = styled.p`
   padding-right: 5px;
 `;
