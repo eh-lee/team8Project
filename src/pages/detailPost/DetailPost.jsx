@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { instance, instanceWithAuth } from "../../api/axios";
 import MobileLayout from "../../layout/MobileLayout";
 import { ReactComponent as VerticalDots } from "../../assets/icons/common/verticaldots.svg";
-import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
+import { ReactComponent as BackIcon } from "../../assets/icons/common/back.svg";
 import DetailPostContents from "../../components/detail/DetailPostContents";
 import DetailPostCommentsList from "../../components/detail/DetailPostCommentsList";
 import ModalPortal from "../../components/modal/ModalPortal";
@@ -57,10 +57,10 @@ const DetailPost = () => {
 
   return (
     <>
-      {/* Mobile Layout setting */}
       <MobileLayout>
         {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
         {/* 상세 게시글 페이지 헤더 */}
+
         <DetailPost_Header>
           <DetailPost_HeaderCont>
             <DetailPost_BackBtn
@@ -80,6 +80,7 @@ const DetailPost = () => {
         </DetailPost_Header>
         {/* ================== Wirte페이지와 공용으로 사용되는 Header로 Refactoring 예정 ==================== */}
         {/* 메뉴모달 */}
+
         <ModalPortal>
           <ModalCont>
             {isMenuModalOpen && (

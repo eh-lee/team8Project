@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { cookies } from "../../api/cookies";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
-import * as St from "./Greeting.style";
+import * as St from "./HomeGreeting.style";
 
-const Greeting = () => {
+const HomeGreeting = () => {
   const navi = useNavigate();
   const nickname = cookies.get("nickname");
   const isLogin = cookies.get("access_token") ? true : false;
@@ -70,4 +70,4 @@ const Greeting = () => {
   );
 };
 
-export default Greeting;
+export default HomeGreeting;

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import Greeting from "../../components/greeting/Greeting";
+import HomeGreeting from "../../components/greeting/HomeGreeting";
 import NewbieGuard from "../../components/hook/guard/NewbieGuard";
 import HomeContents from "../../components/post/HomeContents";
 import MobileLayout from "../../layout/MobileLayout";
@@ -17,7 +17,7 @@ const Home = () => {
       </Helmet>
       <MobileLayout>
         <Header />
-        <Greeting />
+        <HomeGreeting />
         <HomeContents />
         <Footer />
       </MobileLayout>
