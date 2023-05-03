@@ -37,7 +37,7 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
       .delete(`/postCards/post/createPost/${postIdx}`)
       .then((response) => {
         alert(response.data.msg);
-        nav("/totalboard");
+        nav("/board");
       })
       .catch((error) => {
         console.error("게시글 삭제", error);

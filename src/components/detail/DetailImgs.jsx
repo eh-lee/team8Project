@@ -36,7 +36,8 @@ const DetailImgs = ({ postIdx }) => {
             <St.ImgBox
               key={i}
               src={
-                detailImgs[i] ? `http://localhost:3000/${detailImgs[i]}` : none
+                // https://nodes3newjean.s3.ap-northeast-2.amazonaws.com/1682685653374_327
+                detailImgs[i] ? `process.env.REACT_APP_IMG_URL/${detailImgs[i]}` : none
               }
             />
           ))}

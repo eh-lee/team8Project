@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "./WriteForm.style";
+import WriteFooter from "../footer/WriteFooter";
 
 const WriteForm = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,10 @@ const WriteForm = () => {
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
 
+  // 이미지 업로드
+  const [imgs, setImgs] = useState([]);
+  console.log("이미지 어떻게 올라오나?", imgs);
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -35,7 +40,7 @@ const WriteForm = () => {
     formData.append("pollType", pollType);
     formData.append("pollTitle", pollTitle);
     formData.append("tag", tag);
-    formData.append("imgUrl", []);
+    formData.append("imgUrl", imgs);
 
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
@@ -121,6 +126,7 @@ const WriteForm = () => {
           placeholder="훈수 받고 싶은 내용을 입력하세요."
         ></St.WriteContent>
       </St.WriteForm>
+      <WriteFooter setImgs={setImgs} />
 
       {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
       {/* {pollType === "select" ? (
