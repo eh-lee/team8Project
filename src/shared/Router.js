@@ -6,9 +6,6 @@ import ProfileEditPage from '../pages/user/ProfileEditPage'
 import MyPage from '../pages/user/MyPage'
 import Home from '../pages/home/Home'
 import KakaoLogin from '../pages/auth/KakaoLogin'
-import TotalBoard from '../pages/board/TotalBoard'
-import HumourBoard from '../pages/board/HumourBoard'
-import SeriousBoard from '../pages/board/SeriousBoard'
 import Write from '../pages/write/Write'
 import DetailPost from '../pages/detailPost/DetailPost'
 import EditPost from '../components/post/EditPost'
@@ -17,6 +14,7 @@ import Battle from '../pages/battle/RealTimeBattle'
 import DoneBattle from '../pages/battle/DoneBattle'
 import Search from '../pages/search/Search'
 import OnBoarding from '../pages/onboarding/OnBoarding'
+import Board from '../pages/board/Board'
 
 const Router = () => {
   return (
@@ -26,9 +24,7 @@ const Router = () => {
         <Route path="/onboarding" element={<OnBoarding />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
-        <Route path="/totalboard" element={<TotalBoard />} />
-        <Route path="/humourboard" element={<HumourBoard />} />
-        <Route path="/seriousboard" element={<SeriousBoard />} />
+        <Route path="/board" element={<Board />} />
         <Route path="/board/:postIdx" element={<DetailPost />} />
         <Route path="/board/:postIdx/edit" element={<EditPost />} />
         <Route path="/mypage" element={<MyPage />} />

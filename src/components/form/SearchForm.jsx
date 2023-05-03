@@ -11,17 +11,14 @@ const SearchForm = () => {
     setInput(e.target.value);
   };
 
-  console.log("Search input=============>", input);
-
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
+    console.log("search 작동했다!");
     try {
-      // const response = await instance.get(`/search/?q=${input}`);
-      const response = await axios.get(
-        `http://3.35.19.8:3000/api/search/?q=${input}`
-      );
+      const response = await instance.get(`/search/?q=${input}`);
       console.log("search==========>", response);
       console.log("search==========>", response.data);
+      setInput("");
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +49,7 @@ const SearchForm = () => {
           </St.RightBox>
         </St.Row>
 
-        <St.InputBtn type="submit" onSubmit={(e) => searchSubmitHandler(e)}>
+        <St.InputBtn type="submit" onClick={(e) => searchSubmitHandler(e)}>
           검색
         </St.InputBtn>
       </St.Form>

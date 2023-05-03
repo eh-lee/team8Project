@@ -16,7 +16,6 @@ const KakaoLogin = () => {
 
   const [accesstoken, setAccesstoken] = useState("");
   const code = new URL(window.location.href).searchParams.get("code");
-  console.log("로컬 클라 코드==========>", code);
 
   // 2. 받은 인가 코드를 카카오에 날려서 토큰 받아오기
   useEffect(() => {
@@ -45,12 +44,8 @@ const KakaoLogin = () => {
 
   useEffect(() => {
     if (accesstoken) {
-      console.log("atkn=======>", accesstoken);
       const postToken = async () => {
-        console.log("=============카카오 토큰 post 요청 날라감=============");
         try {
-          // const response = await axios.post(
-          // `http://43.201.45.82:3000/api/auth/kakaoLogin`,
           const response = await instance.post(
             `/auth/kakaoLogin`,
             { accessToken: accesstoken },

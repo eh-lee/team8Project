@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 import HotPostCard from "./HotPostCard";
-import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png";
 import { instance } from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import * as St from "./HotPostCardSlider.style";
 
 const HotPostCardSlider = () => {
   useEffect(() => {
@@ -14,12 +12,7 @@ const HotPostCardSlider = () => {
     getHotPost();
   }, []);
 
-  // hotPostCard 저장
   const [postCards, setPostCards] = useState([]);
-
-  console.log("*****postCards****", postCards);
-
-  // 인덱스, 애니메이션 상태 저장
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
@@ -65,12 +58,12 @@ const HotPostCardSlider = () => {
   };
 
   return (
-    <XXXHotPostCardSliderCont>
-      <XXXPostCardSliderInfo colored="HOT" title=" 훈수" />
-      <SliderContainer>
-        <Button dir="left" onClick={clickLeftHandler} />
-        <Button dir="right" onClick={clickRightHandler} />
-        <PostCards animate={animate}>
+    <St.Wrap>
+      <St.InfoCont colored="HOT" title=" 훈수" />
+      <St.Slider>
+        <St.Btn dir="left" onClick={clickLeftHandler} />
+        <St.Btn dir="right" onClick={clickRightHandler} />
+        <St.Cards animate={animate}>
           {genPostCardsArray(index)?.map((el) => (
             <HotPostCard
               key={el?.postIdx}
@@ -84,153 +77,10 @@ const HotPostCardSlider = () => {
               commentCount={el?.commentCount}
             />
           ))}
-        </PostCards>
-      </SliderContainer>
-    </XXXHotPostCardSliderCont>
+        </St.Cards>
+      </St.Slider>
+    </St.Wrap>
   );
 };
 
 export default HotPostCardSlider;
-
-const XXXPostCardSliderInfo = ({ colored, title, more, on }) => {
-  const nav = useNavigate();
-  return (
-    <XXXPostCardSliderInfoXXX>
-      <XXXPostCardSliderTitle>
-        <span className="colored">{colored}</span>
-        {title}
-      </XXXPostCardSliderTitle>
-      <XXXPostCardSliderMore
-        onClick={() => {
-          if (on !== "on") {
-            nav("/totalboard");
-          } else {
-            nav("/battle");
-          }
-        }}
-      >
-        {more}
-      </XXXPostCardSliderMore>
-    </XXXPostCardSliderInfoXXX>
-  );
-};
-
-const XXXHotPostCardSliderCont = styled.li`
-  /* border: 1px solid blue; */
-  margin-top: 16px;
-`;
-
-const XXXPostCardSliderInfoXXX = styled.div`
-  /* border: 1px solid olivedrab; */
-  width: 350px;
-  height: 26px;
-  margin-left: 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const XXXPostCardSliderTitle = styled.h1`
-  /* border: 1px solid red; */
-  font-weight: 600;
-  font-size: 20px;
-  color: #2d2d2d;
-
-  /* colored에 스타일주기 */
-  span.colored {
-    color: #ef3f61;
-  }
-`;
-
-const XXXPostCardSliderMore = styled.span`
-  /* border: 1px solid blue; */
-  color: #ef3f61;
-  font-size: 0.8rem;
-  cursor: pointer;
-`;
-
-const SliderContainer = styled.div`
-  /* border: 1px solid green; */
-  width: 400px;
-  height: 160px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
-  overflow-x: hidden;
-`;
-
-const PostCards = styled.div`
-  display: flex;
-
-  gap: 8px;
-
-  ${({ animate }) => {
-    if (animate.on) {
-      return css`
-        transform: translate(${({ animate }) => animate.value});
-        // 350 > 애니메이션이 시작되기 전 대기 350
-        // ease-in-out > 처음과 끝은 느리게 중간은 빠르게 변화
-        transition: transform 350ms ease-in-out;
-      `;
-    }
-  }};
-
-  /* & :hover {
-    transform: scale(1.05);
-    // 내부 컨텐츠들은 안 움직였으면 좋겠는데....
-  }; */
-`;
-
-// 버튼
-const Button = ({ dir, onClick }) => {
-  return (
-    <Stbutton dir={dir} onClick={onClick}>
-      <ButtonImg src={sliderBtnLeft} />
-    </Stbutton>
-  );
-};
-
-const Stbutton = styled.button`
-  background-color: transparent;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 50%;
-  position: absolute;
-  z-index: 1;
-  cursor: pointer;
-  background: rgba(46, 46, 71, 0.4);
-
-  ${({ dir }) => {
-    if (dir === "left") {
-      return css`
-        left: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-      `;
-    }
-
-    if (dir === "right") {
-      return css`
-        right: 25px;
-        top: 50%;
-        transform: translateY(-50%) scaleX(-1);
-      `;
-    }
-  }}
-`;
-
-const ButtonImg = styled.img`
-  width: 5px;
-  height: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
