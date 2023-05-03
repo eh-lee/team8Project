@@ -60,7 +60,7 @@ const WriteForm = () => {
       await instanceWithAuth.post("/postCards/post/createPost", formData);
       dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
-      navi("/totalboard");
+      navi("/board");
     } catch (e) {
       const errorMsg = e.response.data.msg;
       alert(`${errorMsg}`);

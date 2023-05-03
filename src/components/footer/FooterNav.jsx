@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as St from "./FooterNav.style"
-
+import * as St from "./FooterNav.style";
 
 function FooterNav() {
   const navi = useNavigate();
@@ -16,7 +15,7 @@ function FooterNav() {
               <St.FooterNavIcon icon="Home" />홈
             </St.FooterBoxColumn>
           </St.FooterBox>
-          <St.FooterBox onClick={() => navi("/totalboard")}>
+          <St.FooterBox onClick={() => navi("/board")}>
             <St.FooterBoxColumn>
               <St.FooterNavIcon icon="Board" />
               훈수게시판
@@ -24,7 +23,7 @@ function FooterNav() {
           </St.FooterBox>
           <St.FooterBox onClick={() => navi("/battle")}>
             <St.FooterBoxColumn>
-              <St.FooterNavIcon icon="Battle"/>
+              <St.FooterNavIcon icon="Battle" />
               훈수배틀
             </St.FooterBoxColumn>
           </St.FooterBox>
