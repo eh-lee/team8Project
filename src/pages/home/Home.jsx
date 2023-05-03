@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import HomeGreeting from "../../components/greeting/HomeGreeting";
 import NewbieGuard from "../../components/hook/guard/NewbieGuard";
+import HomeGreeting from "../../components/greeting/HomeGreeting";
 import HomeContents from "../../components/post/HomeContents";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { instance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-import * as St from "./BoardPostCard.style"
+import * as St from "./BoardPostCard.style";
+import Categories from "../elem/Categories";
+import Icons from "../elem/Icons";
 
 const BoardPostCard = ({
   mainCategory,
@@ -36,43 +38,8 @@ const BoardPostCard = ({
     fetchPoll();
   }, []);
 
-  // console.log("data=====>", pollData);
-
-  // 여기서 pollType이 ""이 아니면 투표 이미지 뜨게.
-
-  const categories = [
-    "패션/뷰티",
-    "맛집/요리/음식",
-    "경제/재테크",
-    "썸/연애",
-    "취미/운동",
-    "스포츠",
-    "여행",
-    "결혼",
-    "게임",
-    "반려동물",
-    "가족",
-    "취업/자격증",
-    "일상",
-    "기타",
-  ];
-
-  const icons = [
-    "👗",
-    "🍱",
-    "💰",
-    "💘",
-    "🎨",
-    "⚽️",
-    "✈️",
-    "👰🏼‍♀️",
-    "🎮",
-    "🐶",
-    "👨‍👩‍👧‍👦",
-    "💼",
-    "💬",
-    "🎸",
-  ];
+  const categories = Categories;
+  const icons = Icons;
 
   const categoryIconsMap = categories.reduce((acc, cur, idx) => {
     acc[cur] = icons[idx];
