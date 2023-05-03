@@ -8,36 +8,27 @@ import BoardMainCategory from "../../components/board/BoardMainCategory";
 import BoardCategorySlider from "../../components/board/BoardCategorySlider";
 import { Helmet } from "react-helmet";
 import { instance } from "../../api/axios";
-import { useLocation } from "react-router-dom";
 import * as St from "../../components/board/Board.style";
 
-const TotalBoard = () => {
+const Board = () => {
   const BoardCallback = (x, y, z) => {
     setPrevCategory(x);
     setCategory(y);
     setPage(z);
   };
 
-  // const MainCatCallback = (x) => {
-  //   set
-  // }
+  const MainCatCallback = (x) => {
+    setMaincategory(x);
+  };
 
   const [prevCategory, setPrevCategory] = useState("전체");
   const [category, setCategory] = useState("전체");
-  // const [maincategory, setMaincategory] = useState("전체");
+  const [maincategory, setMaincategory] = useState("전체");
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
-  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
-      const maincategory =
-        location.pathname === "/totalboard"
-          ? "전체"
-          : location.pathname === "/humourboard"
-          ? "유머"
-          : "진지";
-
       try {
         const response = await instance.get(
           `/postCards?maincategory=${maincategory}&category=${category}&splitNumber=7&splitPageNumber=${page}`
@@ -58,7 +49,7 @@ const TotalBoard = () => {
       }
     };
     fetchData();
-  }, [category, page]);
+  }, [prevCategory, maincategory, category, page]);
 
   const postCardContRef = useRef(null);
   InfiniteScroll({ postCardContRef, setPage });
@@ -72,8 +63,7 @@ const TotalBoard = () => {
         <St.Header>
           <St.Wrap>
             <St.Main>훈수게시판</St.Main>
-            {/* <BoardMainCategory parentFunction={MainCatCallback}/> */}
-            <BoardMainCategory />
+            <BoardMainCategory parentFunction={MainCatCallback} />
             <BoardCategorySlider parentFunction={BoardCallback} />
           </St.Wrap>
         </St.Header>
@@ -110,4 +100,4 @@ const PostCardList = styled.div`
   scrollbar-width: none;
 `;
 
-export default TotalBoard;
+export default Board;

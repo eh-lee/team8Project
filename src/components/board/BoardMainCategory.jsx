@@ -1,37 +1,70 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import * as St from "./BoardMainCategory.style";
 
-const BoardMainCategory = () => {
-  const navi = useNavigate();
-  const location = useLocation();
+const BoardMainCategory = ({ parentFunction }) => {
+  const [maincategory, setMaincategory] = useState("전체");
+
+  const changeMainCategory = (e) => {
+    setMaincategory(e);
+  };
+  parentFunction(maincategory);
+
+  const [activeTab, setActiveTab] = useState("전체");
 
   return (
-    // board 통합하기 pseudo
-    // onClick에 각각의 board를 인식할 수 있는 state를 넣어 주고, 해당 state가 클릭되었을 때
-    // isActive를 실행시키기.
-
     <St.Around>
       <St.MainCategory
-        isActive={location.pathname === "/totalboard"}
-        onClick={() => navi("/totalboard")}
+        isActive={activeTab === "전체"}
+        onClick={() => {
+          changeMainCategory("전체");
+          setActiveTab("전체");
+        }}
       >
         전체
       </St.MainCategory>
       <St.MainCategory
-        isActive={location.pathname === "/humourboard"}
-        onClick={() => navi("/humourboard")}
+        isActive={activeTab === "유머"}
+        onClick={() => {
+          changeMainCategory("유머");
+          setActiveTab("유머");
+        }}
       >
         유머
       </St.MainCategory>
       <St.MainCategory
-        isActive={location.pathname === "/seriousboard"}
-        onClick={() => navi("/seriousboard")}
+        isActive={activeTab === "진지"}
+        onClick={() => {
+          changeMainCategory("진지");
+          setActiveTab("진지");
+        }}
       >
         진지
       </St.MainCategory>
     </St.Around>
   );
 };
+
+//     <St.Around>
+//       <St.MainCategory
+//         isActive=
+//         onClick={() => changeMainCategory("전체")}
+//       >
+//         전체
+//       </St.MainCategory>
+//       <St.MainCategory
+//         isActive=
+//         onClick={() => changeMainCategory("유머")}
+//       >
+//         유머
+//       </St.MainCategory>
+//       <St.MainCategory
+//         isActive=
+//         onClick={() => changeMainCategory("진지")}
+//       >
+//         진지
+//       </St.MainCategory>
+//     </St.Around>
+//   );
+// };
 
 export default BoardMainCategory;
