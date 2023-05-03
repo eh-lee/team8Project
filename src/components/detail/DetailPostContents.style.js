@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 
 // ========= 상세 게시글 정보 =========
-const InfoWrap = styled.ul`
+const InfoWrap = styled.div`
   margin: 9.5vh 7.5% 0 7.5%;
   display: flex;
   flex-direction: row;
@@ -16,7 +16,7 @@ const UserInfoLvImg = styled.img`
   height: 32px;
 `;
 
-const InfoCont = styled.li`
+const InfoCont = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +65,7 @@ const ContentDesc = styled.li`
   font-size: 16px;
 `;
 
-const ImgWrap = styled.div`
+const ImgWrap = styled.li`
   display: flex;
   flex-direction: row;
   gap: 8px;

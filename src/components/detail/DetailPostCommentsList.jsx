@@ -7,15 +7,17 @@ import * as St from "./DetailPostCommentsList.style"
 
 const DetailPostCommentsList = ({ postIdx }) => {
   // isComment 불러오기
-  const { isComment } = useSelector((state) => state.detail);
+  // const { isComment } = useSelector((state) => state.detail);
 
-  // 훈수 리스트 관리 state
+  // 댓글 관리
   const [commentList, setCommentList] = useState(null);
 
-  // new훈수 관리 state
-  // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
-  const [curNickname, setCurNickname] = useState("");
-  const [newComment, setNewComment] = useState();
+  // 새 댓글 관리
+  const [newComment, setNewComment] = useState('');
+
+  // isGood 상태 관리
+  const [isComment, setIsComment] = useState(true);
+  console.log("isComment 상태변화 관찰 ========>", isComment);
 
   // 댓글 get요청
   useEffect(() => {
@@ -23,12 +25,10 @@ const DetailPostCommentsList = ({ postIdx }) => {
       const { data } = await instanceWithAuth.get(`/comment/${postIdx}`);
       setCommentList([...data.comments].reverse());
     };
-    const nickname = cookies.get("nickname");
     getCommentList();
-    setCurNickname(nickname);
   }, []);
 
-  // 새로운 댓글 핸들러
+  // 새 댓글 핸들러
   const newCommentHandler = (e) => {
     setNewComment(e.target.value);
   };
@@ -37,43 +37,24 @@ const DetailPostCommentsList = ({ postIdx }) => {
   const newCommentsubmitHandler = async (e) => {
     e.preventDefault();
 
-    // 댓글 작성시간
-    const curTime = new Date();
-
-    // 새로운 댓글 객체 생성
-    const newCommentData = {
-      comment: newComment,
-      // 임의로 달아줄 random한 key값 생성
-      commentIdx: Math.random().toString(36).substring(2, 15),
-      createdAt: curTime,
-      nickname: curNickname,
-      postIdx: postIdx,
-      likesCount: 0,
-      // isLike: false,
-      // proInputValue: BOOLEAN(아직),
-      // conInputValue: BOOLEAN(아직),
+    try{
+    const response = await instanceWithAuth.post(`/comment/${postIdx}`, { comment: newComment })  
+    setCommentList((prev) => [...prev, response?.data]);
+    } catch(error) {
+      console.error("댓글작성", error);
     };
-
-    await instanceWithAuth
-      .post(`/comment/${postIdx}`, { comment: newComment })
-      .then((response) => {
-        setCommentList((prev) => [...prev, newCommentData]);
-        setNewComment("");
-      })
-      .catch((error) => {
-        console.error("댓글작성", error);
-      });
+    setNewComment("");
   };
 
   return (
     <St.DetailPostCommentsWrap>
       {/* ========================== 댓글 리스트 ========================== */}
       {commentList?.map((comment) => (
-        <DetailPostComment key={comment.commentIdx} comment={comment} />
+        <DetailPostComment key={comment.commentIdx} comment={comment} setIsComment={setIsComment} isComment={isComment} />
       ))}
 
       {/* ========================== 댓글 입력 푸터 ========================== */}
-      {!isComment && (
+      {isComment && (
         <St.FooterWrap>
           <St.FooterInputCont
             onSubmit={(e) => newCommentsubmitHandler(e)}

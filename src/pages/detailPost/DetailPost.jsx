@@ -93,6 +93,7 @@ const DetailPost = () => {
             )}
           </ModalCont>
         </ModalPortal>
+        
         {/* 상세페이지 내용 */}
         <DetailPostContents />
 

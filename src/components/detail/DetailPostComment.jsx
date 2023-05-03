@@ -2,24 +2,11 @@ import React, { useEffect, useState } from "react";
 import Like from "../like/Like";
 import DetailPostCommentReply from "./DetailPostCommentReply";
 import { instanceWithAuth } from "../../api/axios";
-import { cookies } from "../../api/cookies";
 import { useFormattingDate } from "../hook/useFormattingDate";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsComment } from "../../app/modules/detailSlice";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
 import * as St  from "./DetailPostComment.style";
 
-const DetailPostComment = ({ comment }) => {
-  // API명세
-  // postIdx: UUID,
-  // commentIdx: UUID,
-  // nickname: STRING,
-  // createdAt: DATE,
-  // comment: STRING,
-  // isLike: BOOLEAN,
-  // likesCount: NUMBER,
-  // proInputValue: BOOLEAN(아직),
-  // conInputValue: BOOLEAN(아직),
+const DetailPostComment = ({ comment, isComment, setIsComment }) => {
 
   // =============================================== 댓글 ===============================================
   // 댓글 작성한 시간
@@ -49,7 +36,7 @@ const DetailPostComment = ({ comment }) => {
   const [commentLikesCount, setCommentLikesCount] = useState(
     comment.likesCount
   );
-  const [isLike, setIsLike] = useState(null);
+  const [isLike, setIsLike] = useState(comment.isLiked);
 
   // 댓글 좋아요 버튼
   const clickCommentLike = () => {
@@ -62,9 +49,6 @@ const DetailPostComment = ({ comment }) => {
 
   // =============================================== 답훈수 ===============================================
 
-  // isComment 불러오기
-  const { isComment } = useSelector((state) => state.detail);
-  const dispatch = useDispatch();
 
   // 답훈수 관리 state
   const [replyList, setReplyList] = useState([]);
@@ -73,14 +57,10 @@ const DetailPostComment = ({ comment }) => {
   const [replyisActive, setReplyIsActive] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
-  // const replyInputRef = useRef(null);
-
-  // new답훈수 관리 state
-  const [curNickname, setCurNickname] = useState("");
+  // 새 답훈수 관리 state
   const [newReply, setNewReply] = useState();
   const [curCommentIdx, setCurCommentIdx] = useState("초기값");
-  // const [newReplyTime, setNewReplyTime] = useState('');
-  // nickname=>지금은 쿠키에, 작성시간=>newTime으로 만들기, 레벨=>지금은 없어, newComment까지.
+
 
   // 답훈수 get요청
   useEffect(() => {
@@ -91,15 +71,13 @@ const DetailPostComment = ({ comment }) => {
       setReplyList([...data.replys].reverse());
     };
     getReplyList();
-    const nickname = cookies.get("nickname");
-    setCurNickname(nickname);
   }, [comment]);
+
 
   // 답훈수 달기 버튼 핸들러
   const replyCreateHandler = () => {
     setCurCommentIdx(comment.commentIdx);
-    dispatch(setIsComment(true));
-    // replyInputRef.current.focus();
+    setIsComment(false);
   };
 
   // 답훈수 더 보기 핸들러
@@ -114,33 +92,21 @@ const DetailPostComment = ({ comment }) => {
   };
 
   // 답훈수 등록 버튼 핸들러
-  const newReplysubmitHandler = (e) => {
+  const newReplysubmitHandler = async (e) => {
     e.preventDefault();
 
-    //답훈수 작성시간
-    const curTime = new Date();
+    try {
+      console.log()
+      const {data} = await instanceWithAuth.post(`/reply/${comment.postIdx}/${curCommentIdx}`, { comment: newReply });
 
-    // 새로운 답훈수 객체 생성
-    const newReplyData = {
-      comment: newReply,
-      // 임의로 달아줄 random한 key값 생성
-      createdAt: curTime,
-      nickname: curNickname,
-      postIdx: comment.postIdx,
-      commentIdx: comment.postIdx,
-      replyIdx: Math.random().toString(36).substring(2, 15),
-    };
-
-    instanceWithAuth
-      .post(`/reply/${comment.postIdx}/${curCommentIdx}`, { comment: newReply })
-      .then((response) => {
-        dispatch(setIsComment(!isComment));
-        setReplyList((prev) => [...prev, newReplyData]);
-        setNewReply("");
-      })
-      .catch((error) => {
+      // dispatch(setIsComment(!isComment));
+      console.log("답훈수 어데갔니", data)
+      setIsComment(!isComment);
+      setReplyList((prev) => [...prev, data]);
+      setNewReply("");
+    } catch(error) {
         console.error("답훈수작성", error);
-      });
+      };
   };
 
   return (
@@ -215,7 +181,7 @@ const DetailPostComment = ({ comment }) => {
         {/* ========================== 답훈수 ========================== */}
 
         {/* ========================== 답글 입력 푸터 ========================== */}
-        {curCommentIdx !== "초기값" && isComment ? (
+        {curCommentIdx !== "초기값" && !isComment ? (
           <St.Footer>
             <St.ReplyInputCont
               onSubmit={newReplysubmitHandler}

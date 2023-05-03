@@ -5,14 +5,7 @@ import level1 from "../../assets/icons/userLevel/level icon=초보, size=18.png"
 import * as St from "./DetailPostCommentReply.style"
 
 const DetailPostCommentReply = ({ reply }) => {
-  // API명세
-  // postIdx
-  // commentIdx,
-  // replyIdx,
-  // createdAt,
-  // nickname,
-  // comment,
-
+  
   // 답훈수 삭제 관리
   const [isDelete, setIsDelete] = useState(false);
 

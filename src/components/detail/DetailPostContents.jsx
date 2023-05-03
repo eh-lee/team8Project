@@ -35,17 +35,15 @@ const DetailPostContents = () => {
           /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/,
           "$1.$2.$3 $4:$5"
         );
-        console.log("data가 어케 들어오지", data);
+
         setCreatedDate(formattingTime);
         setPostLikesCount(+data.post.likesCount);
         setIsLike(data.post.IsLike);
       } catch (error) {
-        console.error("상세게시글get error", error);
       }
     };
     getDetailPost();
   }, []);
-  console.log("isLike어케 들어오니", isLike);
 
   // 게시글 좋아요 버튼
   const clickPostLike = () => {
@@ -53,7 +51,6 @@ const DetailPostContents = () => {
     setIsLike((prev) => !prev);
     setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
   };
-  console.log("isLikeCount변경은 잘 되겠지", postLikesCount);
 
   return (
     <>
@@ -80,7 +77,6 @@ const DetailPostContents = () => {
         <St.ContentTitle>{detailPost.title}</St.ContentTitle>
         <St.ContentDesc>{detailPost.desc}</St.ContentDesc>
         {/* 게시글 정보 */}
-
         <St.ImgWrap>
           <DetailImgs postIdx={postIdx} />
         </St.ImgWrap>
