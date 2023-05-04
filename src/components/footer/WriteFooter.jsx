@@ -35,8 +35,6 @@ const WriteFooter = ({ setImgs }) => {
     setImgs([]);
   }
 
-
-
   const pollModalOpenHandler = () => {
     setIsPollModalOpen(true);
   };
@@ -80,7 +78,6 @@ const WriteFooter = ({ setImgs }) => {
           </St.ImageCont>
         </St.Nav>
       </St.Column>
-
       <ModalPortal>
         <St.ModalCont>
           {isPollModalOpen && (

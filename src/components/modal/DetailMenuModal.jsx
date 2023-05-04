@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
-import * as St from "./DetailMenuModal.style"
+import * as St from "./DetailMenuModal.style";
 
 const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
   const nav = useNavigate();

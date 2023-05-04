@@ -1,18 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProCon from "../poll/ProCon";
 import ModalPortal from "../modal/ModalPortal";
 import CateogryModal from "../modal/CateogryModal";
 import { useState } from "react";
-import { pollCanc } from "../../app/modules/writeSlice";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
-import { useDispatch, useSelector } from "react-redux";
 import * as St from "./WriteForm.style";
 import WriteFooter from "../footer/WriteFooter";
 
 const WriteForm = () => {
-  const dispatch = useDispatch();
-  const { pollType, pollTitle, tag } = useSelector((state) => state.write);
+  const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
+  const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
+
+  // ...=_= 로컬스토리지는 앱 상태를 관리하기 위한 API가 아닙니다. 앱 상태를 캐시하고 탭 간의 정보 교환을 위한 API에요.
+  // 이 말은 무슨 뜻이냐, 로컬스토리지의 변경 이벤트는 같은 탭에서는 리스닝할 수 없다는 의미입니다.
+
+  // useEffect(() => {
+  //   setPollTitle(localStorage.getItem("pollTitle"));
+  //   setPollType(localStorage.getItem("pollType"));
+  //   pollTitle !== "" && localStorage.removeItem("pollTitle");
+  //   pollType !== "" && localStorage.removeItem("pollType");
+  // }, []);
+
+  //===============try3====================================
+  // const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
+  // const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
+
+  // useEffect(() => {
+  //   window.addEventListener("storage", handleStorageChange);
+
+  //   return () => {
+  //     window.removeEventListener("storage", handleStorageChange);
+  //   };
+  // }, [window.localStorage]);
+
+  // const handleStorageChange = (event) => {
+  //   if (event.key === "pollTitle") {
+  //     setPollTitle(event.newValue);
+  //   } else if (event.key === "pollType") {
+  //     setPollType(event.newValue);
+  //   }
+  // };
+
   const navi = useNavigate();
 
   const WriteCallback = (x, y) => {
@@ -24,6 +53,7 @@ const WriteForm = () => {
   const [desc, setDesc] = useState("");
   const [maincategory, setMaincategory] = useState("카테고리");
   const [category, setCategory] = useState("");
+  const [tag, setTag] = useState([]);
 
   // 이미지 업로드
   const [imgs, setImgs] = useState([]);
@@ -63,7 +93,7 @@ const WriteForm = () => {
 
     try {
       await instanceWithAuth.post("/postCards/post/createPost", formData);
-      dispatch(pollCanc());
+      // dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
       navi("/board");
     } catch (e) {
@@ -73,7 +103,8 @@ const WriteForm = () => {
   };
 
   const handleCanc = () => {
-    dispatch(pollCanc());
+    localStorage.removeItem("pollTitle");
+    localStorage.removeItem("pollType");
     navi(-1);
   };
 
@@ -124,6 +155,7 @@ const WriteForm = () => {
             setDesc(e.target.value);
           }}
           placeholder="훈수 받고 싶은 내용을 입력하세요."
+          // ref={FormRef}
         ></St.WriteContent>
       </St.WriteForm>
       <WriteFooter setImgs={setImgs} />
