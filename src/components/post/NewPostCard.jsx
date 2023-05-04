@@ -27,9 +27,9 @@ const NewPostCard = ({ postIdx, mainCategory, category, title, content }) => {
             {categoryIconsMap[category]}
           </St.CatLabel>
         </St.MainCat>
-        <St.Title>{title?.slice(0, 20)}</St.Title>
+        <St.Title>{title?.length > 20 ? title.substring(0, 20) + "..." : title}</St.Title>
       </St.TitleBox>
-      <St.Content>{content}</St.Content>
+      <St.Content>{content?.length > 25 ? content.substring(0, 25) + "..." : content}</St.Content>
     </St.Wrap>
   );
 };

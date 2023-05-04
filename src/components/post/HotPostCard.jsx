@@ -13,6 +13,7 @@ const HotPostCard = ({
   viewCount,
   commentCount,
   postIdx,
+  isImg,
 }) => {
   const navigate = useNavigate();
 
@@ -44,20 +45,18 @@ const HotPostCard = ({
             {/* =========== Cat. Label =============== */}
           </St.MainCategory>
           <St.Title>
-            {title}
-            {/* <St.PostCardIsImgIn src={imgIcon} /> */}
-            <St.IconImg />
+            {title?.length > 20 ? title.substring(0, 20) + "..." : title}
+            {isImg ? <St.IconImg/> : null}
           </St.Title>
         </St.TitleBox>
 
         <St.ContentBox>
-          <St.Content>{content}</St.Content>
+          <St.Content>{content?.length > 50 ? content.substring(0, 50) + "..." : content}</St.Content>
         </St.ContentBox>
         <St.InfoBox>
           {/* 좋아요수 */}
           <St.InfoContent>
             <St.InfoContentIcon>
-              {/* <St.PostCardInfoContentImg src={like} /> */}
               <St.IconLike />
             </St.InfoContentIcon>
             <St.InfoContentCount>{likesCount}</St.InfoContentCount>
@@ -65,7 +64,6 @@ const HotPostCard = ({
           {/* 조회수 */}
           <St.InfoContent>
             <St.InfoContentIcon>
-              {/* <StPostCardInfoContentImg src={view} /> */}
               <St.IconView />
             </St.InfoContentIcon>
             <St.InfoContentCount>{viewCount}</St.InfoContentCount>
@@ -73,7 +71,6 @@ const HotPostCard = ({
           {/* 댓글 버튼, 개수 */}
           <St.InfoContent>
             <St.InfoContentIcon>
-              {/* <StPostCardInfoContentImg src={comment} /> */}
               <St.IconComment />
             </St.InfoContentIcon>
             <St.InfoContentCount>{commentCount}</St.InfoContentCount>

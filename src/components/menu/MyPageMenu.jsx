@@ -52,7 +52,7 @@ const MyPageMenu = () => {
       </ModalPortal>
 
       <St.Wrap>
-        <St.Menu>
+        <St.Menu onClick={()=> alert('아직 구현중인 기능입니다.')}>
           <St.Sub>서비스 정보</St.Sub>
           <St.Icon src={myPageMenu} />
         </St.Menu>
@@ -75,11 +75,12 @@ const MyPageMenu = () => {
             </St.Menu>
           </>
         )}
-
-        <St.Menu onClick={SignOutModalOpenHandler}>
-          <St.Sub>회원 탈퇴</St.Sub>
-          <St.Icon src={myPageMenu} />
-        </St.Menu>
+        {nickname ?
+          (<St.Menu onClick={SignOutModalOpenHandler}>
+            <St.Sub>회원 탈퇴</St.Sub>
+            <St.Icon src={myPageMenu} />
+          </St.Menu>)
+          : null}
       </St.Wrap>
     </>
   );

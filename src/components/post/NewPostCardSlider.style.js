@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import sliderBtnLeft from "../../assets/icons/common/sliderBtnLeft.png";
 
-const Wrap = styled.li``;
-
 const Info = ({ colored, title, more, on }) => {
   const nav = useNavigate();
   return (
@@ -132,5 +130,7 @@ const ButtonImg = styled.img`
   justify-content: center;
   align-items: center;
 `;
+
+const Wrap = styled.li``;
 
 export { Wrap, Info, Cont, Btn, Cards }

@@ -92,8 +92,6 @@ const WriteForm = () => {
   };
 
   const handleCanc = () => {
-    localStorage.removeItem("pollTitle");
-    localStorage.removeItem("pollType");
     navi(-1);
   };
 

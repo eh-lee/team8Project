@@ -13,11 +13,9 @@ const SearchForm = () => {
 
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("search 작동했다!");
+
     try {
       const response = await instance.get(`/search/?q=${input}`);
-      console.log("search==========>", response);
-      console.log("search==========>", response.data);
       setInput("");
     } catch (error) {
       console.error(error);

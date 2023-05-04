@@ -61,11 +61,6 @@ const MenuBtn = styled.div`
   width: 24px;
   color: rgb(180, 180, 180);
   font-size: 16px;
-
-  &:hover {
-    cursor: pointer;
-    color: rgb(70, 70, 70);
-  }
 `;
 
 const ModalCont = styled.div`

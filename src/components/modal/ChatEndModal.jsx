@@ -17,10 +17,6 @@ const ChatEndModal = ({ open, close, room, messages }) => {
 
   const modalRef = useRef();
 
-  //   console.log("모달로 내려온 isAdmin", isAdmin)
-  console.log("모달로 내려온 messages", messages);
-  console.log("모달로 내려온 room", room);
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (open && !modalRef.current.contains(event.target)) {
@@ -43,7 +39,6 @@ const ChatEndModal = ({ open, close, room, messages }) => {
     // [ V ] isAdmin ? <onClick = {chatSaveHandler} /> : null
     // [  ]통신 확인 필요
     try {
-      console.log("messages보낸다~~");
       await instanceWithAuth.post("/chat/chatsave", {
         nickname: nickname,
         room: room,
@@ -58,7 +53,6 @@ const ChatEndModal = ({ open, close, room, messages }) => {
     socket = io(ENDPOINT);
     // [추가] 1
     // [V] isAdmin ? <onClick = {chatSaveHandler} /> : null
-    console.log("room============>", room);
     socket.disconnect();
     try {
       await instanceWithAuth.delete(`/chat/hunsuChat/${room}`);

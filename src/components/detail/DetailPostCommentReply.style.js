@@ -33,7 +33,6 @@ const UserInfoWrap = styled.ul`
 `;
 
 const UserInfoCont = styled.ul`
-  /* border: 1px solid orange; */
   display: flex;
   flex-direction: row;
   align-items: flex-end;

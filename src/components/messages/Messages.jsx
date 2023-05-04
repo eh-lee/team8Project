@@ -5,7 +5,6 @@ import * as St from "./Messages.style"
 
 function Messages({ messages, name }) {
   useEffect(() => {
-    console.log('Messages컴포넌트에 프롭스로 내려온' ,messages);
   }, [messages]);
 
   return (

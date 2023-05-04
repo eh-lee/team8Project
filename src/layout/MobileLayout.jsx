@@ -1,6 +1,4 @@
 import styled from "styled-components";
-// import Header from "components/header/Header";
-// import { colors } from "styles/theme";
 import { useEffect } from "react";
 
 const MobileLayout = ({ title, children }) => {
@@ -17,7 +15,6 @@ const MobileLayout = ({ title, children }) => {
 
   return (
     <StMobileLayout>
-      {/* <StMobileHeader><Header title={title} /></StMobileHeader> */}
       {children}
     </StMobileLayout>
   );
@@ -49,16 +46,3 @@ const StMobileLayout = styled.div`
     width: 400px;
   }
 `;
-
-// const StMobileHeader = styled.div`
-//   width: 100%;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   z-index: 100;
-//   @media screen and (min-width: 950px) {
-//     width: 500px;
-//     left: 50%;
-//     transform: translateX(-50%);
-//   }
-// `;

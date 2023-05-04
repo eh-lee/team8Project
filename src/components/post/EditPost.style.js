@@ -2,9 +2,6 @@ import styled from "styled-components";
 import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
 import { ReactComponent as ArrowDown } from "../../assets/icons/common/arrowdown.svg";
 
-const PageWithFooterWrapper = styled.div`
-  margin-top: 3.5rem;
-`;
 
 const WriteHeader = styled.div`
   background-color: white;
@@ -81,6 +78,7 @@ const WritePost = styled.div`
 `;
 
 const WriteForm = styled.form`
+  margin-top: 3.5rem;
   padding-top: 1rem;
   display: flex;
   width: 100%;
@@ -153,7 +151,6 @@ const ModalCont = styled.div`
 `;
 
 export {
-    PageWithFooterWrapper,
     WriteHeader,
     WriteHeaderCont,
     WriteCanc,

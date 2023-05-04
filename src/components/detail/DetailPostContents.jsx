@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
@@ -8,9 +8,15 @@ import DetailImgs from "../img/DetailImgs";
 import { ReactComponent as IconComment } from "../../assets/icons/common/comment.svg";
 import { ReactComponent as IconView } from "../../assets/icons/common/eye.svg";
 import * as St from "./DetailPostContents.style"
+import { cookies } from "../../api/cookies";
 
 const DetailPostContents = () => {
   const { postIdx } = useParams();
+
+  const nav = useNavigate();
+
+  // 로그인 확인
+  const isLogin = cookies.get('nickname') ? true : false;
 
   // 상세 게시글을 담을 state
   const [detailPost, setDetailPost] = useState([]);
@@ -46,10 +52,14 @@ const DetailPostContents = () => {
   }, []);
 
   // 게시글 좋아요 버튼
-  const clickPostLike = () => {
-    instanceWithAuth.put(`/postlike/post/${postIdx}`);
+  const clickPostLike = async () => {
+    if (isLogin){
+    await instanceWithAuth.put(`/postlike/post/${postIdx}`);
     setIsLike((prev) => !prev);
     setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+  } else {
+    alert('로그인 후 이용해주세요!');
+  }
   };
 
   return (

@@ -51,11 +51,6 @@ const PollModal = ({ open, close, parentFunction }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(
-      "투표 만들기를 클릭하면서 PollType을 전역에 저장",
-      isProConClicked
-    );
-
     if (!isSelectClicked && !isProConClicked) {
       return alert("투표 유형을 선택해 주세요.");
     }
@@ -77,9 +72,6 @@ const PollModal = ({ open, close, parentFunction }) => {
       setPollType("proCon");
     }
   };
-
-  console.log("Plltp==================>", pollType);
-  console.log("Plltitle==================>", pollTitle);
 
   parentFunction(pollType, pollTitle);
 

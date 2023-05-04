@@ -3,6 +3,8 @@ import { ReactComponent as Vote } from "../../assets/icons/common/vote.svg";
 import { ReactComponent as View } from "../../assets/icons/common/eye.svg";
 import { ReactComponent as Like } from "../../assets/icons/common/like.svg";
 import { ReactComponent as Comment } from "../../assets/icons/common/comment.svg";
+import { ReactComponent as Img } from "../../assets/icons/common/img.svg";
+
 
 
 const PostCardWrap = styled.div`
@@ -46,7 +48,8 @@ const PostCardTitle = styled.li`
 `;
 
 const PostCardTitleIcon = styled.div`
-  width: 5.5%;
+  width: 24px;
+  height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,6 +62,14 @@ const IconVote = styled(Vote)`
     stroke: #c4c4c4;
     stroke-width: 2px;
   }
+`;
+
+const IconImg = styled(Img)`
+  /* path:nth-child(1),
+  path:nth-child(2) {
+    stroke: #c4c4c4;
+    stroke-width: 2px;
+  } */
 `;
 
 const PostCardContentBox = styled.div`
@@ -146,6 +157,7 @@ export {
     PostCardTitle,
     PostCardTitleIcon,
     IconVote,
+    IconImg,
     PostCardContentBox,
     PostCardContent,
     PostCardInfoBox,

@@ -6,7 +6,6 @@ import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
 import MobileLayout from "../../layout/MobileLayout";
 import { Helmet } from "react-helmet";
-// import axios from "axios";
 
 const SignUpPage = () => {
   const navi = useNavigate();
@@ -23,6 +22,12 @@ const SignUpPage = () => {
     setUser((prev) => {
       return { ...prev, [name]: value };
     });
+  };
+  
+  const validLengthHandler = (e) => {
+    if (e.target.value.length > 6) {
+      e.target.value = e.target.value.slice(0, 6);
+    }
   };
 
   // ================ 비밀번호 유효성 검사 ===================
@@ -65,8 +70,6 @@ const SignUpPage = () => {
   };
 
   // ================= 비밀번호 일치 검사 ====================
-  // user.password가 checkPw에 맞춰서 따라가면 왜 if문이 반응을 안 하지?..
-  // -> useCallback ( , [user.password])도 안 됨
   const [confirmPwMsg, setConfirmPwMsg] = useState("");
   const onChangeConfirmPw = (e) => {
     e.preventDefault();
@@ -94,8 +97,6 @@ const SignUpPage = () => {
     }
     try {
       await instance.post("/user/signup", user);
-      // await axios.post("http://43.201.45.82:3000/api/user/signup", user);
-      // await axios.post("http://52.78.166.176:3000/api/user/signup", user);
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");
     } catch (e) {
@@ -167,6 +168,7 @@ const SignUpPage = () => {
                 type="text"
                 value={user.nickname}
                 name="nickname"
+                onInput={validLengthHandler}
                 onChange={(e) => {
                   changeInputHandler(e);
                   validNickname(e);

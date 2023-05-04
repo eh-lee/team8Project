@@ -4,7 +4,7 @@ import { useFormattingDate } from "../hook/useFormattingDate";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=18.png";
 import * as St from "./DetailPostCommentReply.style"
 
-const DetailPostCommentReply = ({ reply }) => {
+const DetailPostCommentReply = ({ reply, curNickname }) => {
   
   // 답훈수 삭제 관리
   const [isDelete, setIsDelete] = useState(false);
@@ -47,7 +47,7 @@ const DetailPostCommentReply = ({ reply }) => {
             <St.UserInfoCreatedAt>
               {createdDate}
               <St.ReplyDelete onClick={deleteReplytHandler}>
-                <St.IconTrash />
+                { reply.nickname === curNickname ? <St.IconTrash /> : null }
               </St.ReplyDelete>
             </St.UserInfoCreatedAt>
           </St.UserInfoWrap>

@@ -24,6 +24,7 @@ const BoardPostCard = ({
 
   const [pollData, setPollData] = useState({});
   const [pollType, setPollType] = useState("");
+  const [isImgs, setIsImgs] = useState(false);
 
   useEffect(() => {
     const fetchPoll = async () => {
@@ -37,6 +38,22 @@ const BoardPostCard = ({
     };
     fetchPoll();
   }, []);
+
+  useEffect(() => {
+    const fetchImgs = async () => {
+      try {
+        const res = await instance.get(`/postCards/post/imgs/${postIdx}`);
+        if(res) {
+          setIsImgs(true)
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchImgs();
+  }, []);
+  
+  
 
   const categories = Categories;
   const icons = Icons;
@@ -63,6 +80,13 @@ const BoardPostCard = ({
         <St.PostCardRow>
           <St.PostCardTitle>{title}</St.PostCardTitle>
           <St.PostCardTitleIcon></St.PostCardTitleIcon>
+          {isImgs === true ? (
+            <>
+              <St.PostCardTitleIcon>
+                <St.IconImg />
+              </St.PostCardTitleIcon>
+            </>
+          ) : null}
           {pollType !== "" ? (
             <>
               <St.PostCardTitleIcon>
@@ -71,6 +95,7 @@ const BoardPostCard = ({
             </>
           ) : null}
         </St.PostCardRow>
+        
       </St.PostCardTitleBox>
 
       <St.PostCardContentBox>

@@ -49,13 +49,10 @@ const Chat = () => {
   // }, []);
   // for test
 
-  console.log("isAdmin===============>", isAdmin);
 
   // 룸 입장
   useEffect(() => {
     const { name, room, maxParty } = queryString.parse(window.location.search);
-    console.log(name, room);
-    console.log("rooooooom====================>", room);
 
     socket = io(ENDPOINT);
 
@@ -64,7 +61,7 @@ const Chat = () => {
     setMaxParty(maxParty);
 
     socket.emit("join", { name, room, maxParty }, (error) => {
-      console.log("rooom===========>", room);
+
       if (error) {
         alert(error);
       }
@@ -98,7 +95,7 @@ const Chat = () => {
     setIsChatEndModalOpen(true);
   };
   const ChatEndModalCloseHandler = () => {
-    console.log("모달이 닫힌거임!");
+    // console.log("모달이 닫힌거임!");
     setIsChatEndModalOpen(false);
   };
 

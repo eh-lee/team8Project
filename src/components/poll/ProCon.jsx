@@ -1,48 +1,20 @@
-// //idea end
-// import React, { useState } from "react";
-// import { useEffect } from "react";
-
-// const B = () => {
-//   const [value, setValue] = useState(0);
-
-//   useEffect(() => {
-//     setValue(parseInt(localStorage.getItem("value_from_A")));
-//     value !== 0 && localStorage.removeItem("value_from_A");
-//   }, [value]);
-
-//   return <div>넘어온 값은 : {value}</div>;
-// };
-
-// export default B;
-
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import { useDispatch } from "react-redux";
-// import { pollCanc } from "../../app/modules/writeSlice";
+import { cookies } from "../../api/cookies";
 import { instanceWithAuth } from "../../api/axios";
-import { ReactComponent as ThumbsUp } from "../../assets/icons/common/thumbs-up.svg";
+import {ReactComponent as ThumbsUp} from "../../assets/icons/common/thumbs-up.svg"
 import * as St from "./ProCon.style";
 
 const ProCon = ({
-  // for test
-  // a,
-  // b,
-  // for test
   pollTitle,
-  // write.jsx 미리보기
   detailPollTitle,
-  // detail.jsx
   detailProCount,
   detailConCount,
   detailPostIdx,
   parentProInputValue,
   parentConInputValue,
 }) => {
-  // const dispatch = useDispatch();
 
-  // const [pollTitle, setPollTitle] = useState(parentPollTitle);
-
-  console.log("dfsdfsdfsd=========>", pollTitle);
   const [pollType, setPollType] = useState("proCon");
 
   const [pollClose, setPollClose] = useState(true);
@@ -51,6 +23,8 @@ const ProCon = ({
     setPollClose(false);
   };
 
+
+  const nickname = cookies.get("nickname");
   const [proCount, setProCount] = useState(detailProCount);
   const [conCount, setConCount] = useState(detailConCount);
 
@@ -63,47 +37,55 @@ const ProCon = ({
   const [proInputValue, setProInputValue] = useState(parentProInputValue);
   const [conInputValue, setConInputValue] = useState(parentConInputValue);
 
+
   const voteProHandler = () => {
-    if (conInputValue === true && proInputValue === false) {
-      return alert("찬성/반대는 동시에 선택될 수 없습니다.");
-    }
+    if (nickname) {
+      if (conInputValue === true && proInputValue === false) {
+        return alert("찬성/반대는 동시에 선택될 수 없습니다.");
+      }
 
-    if (conInputValue === false && proInputValue === false) {
-      setProInputValue(true);
-      setProCount(proCount + 1);
-    }
+      if (conInputValue === false && proInputValue === false) {
+        setProInputValue(true);
+        setProCount(proCount + 1);
+      }
 
-    if (conInputValue === false && proInputValue === true) {
-      setProInputValue(false);
-      setProCount(proCount - 1);
+      if (conInputValue === false && proInputValue === true) {
+        setProInputValue(false);
+        setProCount(proCount - 1);
+      }
+    } else {
+      alert("로그인 후 이용해 주세요");
     }
   };
 
   const voteConHandler = () => {
-    if (proInputValue === true && conInputValue === false) {
-      return alert("찬성/반대는 동시에 선택될 수 없습니다.");
-    }
+    if (nickname) {
+      if (proInputValue === true && conInputValue === false) {
+        return alert("찬성/반대는 동시에 선택될 수 없습니다.");
+      }
 
-    if (proInputValue === false && conInputValue === false) {
-      setConInputValue(true);
-      setConCount(conCount + 1);
-    }
+      if (proInputValue === false && conInputValue === false) {
+        setConInputValue(true);
+        setConCount(conCount + 1);
+      }
 
-    if (proInputValue === false && conInputValue === true) {
-      setConInputValue(false);
-      setConCount(conCount - 1);
+      if (proInputValue === false && conInputValue === true) {
+        setConInputValue(false);
+        setConCount(conCount - 1);
+      }
+    } else {
+      alert("로그인 후 이용해 주세요");
     }
   };
 
-  // 유즈 이펙트 안 쓰면 렌더링 문제는 상관없는데 put할 때 payload가 한 템포 늦게 된다
-  // 그래서 변화를 감지한 다음에 해야 함 왜냐면 이건 리퀘스트 바디에 내가 페이로드를 담아야 하니까
-  // 변화가 안 된 걸 담으면 안 되니까 유즈이펙트 써야 함
+
 
   useEffect(() => {
     const putVote = async () => {
       await instanceWithAuth.put(`/prefer/post/${detailPostIdx}`, {
         proInputValue,
-        conInputValue,
+     
+       conInputValue,
       });
     };
     putVote();

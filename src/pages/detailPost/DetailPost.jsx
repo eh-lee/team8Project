@@ -10,16 +10,26 @@ import { instance, instanceWithAuth } from "../../api/axios";
 const DetailPost = () => {
   const { postIdx } = useParams();
   const [detailPostCat, setDetailPostCat] = useState([]);
+  const [writerNickname, setWriterNickname] = useState([]); 
 
   useEffect(() => {
     const getDetailPost = async () => {
+      const { data } = await instanceWithAuth.get(
+        `/postCards/post/${postIdx}`
+      );
+      setWriterNickname(data.post.nickname);
+    };
+    getDetailPost();
+  }, [postIdx]);
+
+  useEffect(() => {
+    const getDetailPostCat = async () => {
       const { data } = await instance.get(
         `/postCards/post/category/${postIdx}`
       );
       setDetailPostCat(data);
-      console.log("진짜 데이터를 좀 보자", data);
     };
-    getDetailPost();
+    getDetailPostCat();
   }, [postIdx]);
 
   const [detailPoll, setDetailPoll] = useState({});
@@ -37,7 +47,7 @@ const DetailPost = () => {
   return (
     <>
       <MobileLayout>
-        <DetailHeader postIdx={postIdx} detailPostCat={detailPostCat} />
+        <DetailHeader postIdx={postIdx} detailPostCat={detailPostCat} writerNickname={writerNickname}/>
         <DetailPostContents />
         <DetailPoll postIdx={postIdx} detailPoll={detailPoll} />
         <DetailPostCommentsList postIdx={postIdx} />

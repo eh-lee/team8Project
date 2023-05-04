@@ -75,6 +75,7 @@ const HotPostCardSlider = () => {
               likesCount={el?.likesCount}
               viewCount={el?.postViewCount}
               commentCount={el?.commentCount}
+              isImg={el?.isImg}
             />
           ))}
         </St.Cards>

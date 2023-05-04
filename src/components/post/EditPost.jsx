@@ -1,41 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { instanceWithAuth } from "../../api/axios";
-import { useDispatch, useSelector } from "react-redux";
-import { Helmet } from "react-helmet";
-import MobileLayout from "../../layout/MobileLayout";
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import ProCon from "../poll/ProCon";
+import PollModal from "../modal/PollModal";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
-import ModalPortal from "../../components/modal/ModalPortal";
-import CateogryModal from "../../components/modal/CateogryModal";
-import WriteFooter from "../../components/footer/WriteFooter";
-import { pollCanc } from "../../app/modules/writeSlice";
-import ProCon from "../../components/poll/ProCon";
+import WriteFooter from "../footer/WriteFooter";
+import ModalPortal from "../modal/ModalPortal";
+import MobileLayout from "../../layout/MobileLayout";
+import CateogryModal from "../modal/CateogryModal";
+import { Helmet } from "react-helmet";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { instanceWithAuth } from "../../api/axios";
+import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
 import * as St from "./EditPost.style";
 
 const EditPost = () => {
   FalseGuard();
 
   const location = useLocation();
+
   const postIdx = location.state.postIdx;
-
-  const dispatch = useDispatch();
-  const { pollType, pollTitle, tag } = useSelector((state) => state.write);
-  const navi = useNavigate();
-
-  const WriteCallback = (x, y) => {
-    setMaincategory(x);
-    setCategory(y);
-  };
-
-  const proConDelHandler = () => {
-    dispatch(pollCanc());
-  };
-
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [maincategory, setMaincategory] = useState("카테고리");
-  const [category, setCategory] = useState("");
-
+  
   useEffect(() => {
     const getForEditPost = async () => {
       try {
@@ -49,19 +34,67 @@ const EditPost = () => {
     getForEditPost();
     setMaincategory(location.state.detailPostCat.maincategory);
     setCategory(location.state.detailPostCat.category);
-  }, []);
+  }, [postIdx]);
+
+
+  const [isPollModalOpen, setIsPollModalOpen] = useState(false);
+
+  const pollModalOpenHandler = () => {
+    setIsPollModalOpen(true);
+  };
+  const pollModalCloseHandler = () => {
+    setIsPollModalOpen(false);
+  };
+
+  const [pollTitle, setPollTitle] = useState("");
+  const [pollType, setPollType] = useState("");
+
+  const PollCallback = (pollType, pollTitle) => {
+    setPollType(pollType);
+    setPollTitle(pollTitle);
+  };
+
+  const navi = useNavigate();
+
+  const WriteCallback = (x, y) => {
+    setMaincategory(x);
+    setCategory(y);
+  };
+
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [maincategory, setMaincategory] = useState('');
+  const [category, setCategory] = useState('');
+  const [tag, setTag] = useState([]);
+
+  // 이미지 업로드
+  const [imgs, setImgs] = useState([]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // *=============== 글자 수 검사 ===============*
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("desc", desc);
+    formData.append("maincategory", maincategory);
+    formData.append("category", category);
+    formData.append("pollType", pollType);
+    formData.append("pollTitle", pollTitle);
+    formData.append("tag", tag);
+
+    for (let i = 0; i < imgs.length; i++) {
+      formData.append('files', imgs[i]);
+    };
+
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
-    }
+    };
+
     if (desc.length < 10 || desc.length > 2000) {
       alert("내용은 10자 이상, 2000자 이하여야 합니다!");
       return;
-    }
+    };
 
     if (maincategory === "카테고리") {
       alert("카테고리를 선택해 주세요.");
@@ -74,18 +107,7 @@ const EditPost = () => {
     }
 
     try {
-      await instanceWithAuth.put(`/postCards/post/createPost/${postIdx}`, {
-        title,
-        desc,
-        maincategory,
-        category,
-        pollType,
-        pollTitle,
-        tag,
-        imgUrl: "",
-      });
-
-      dispatch(pollCanc());
+      await instanceWithAuth.put(`/postCards/post/createPost/${postIdx}`, formData);
       alert("글 수정에 성공하였습니다.");
       navi("/board");
     } catch (e) {
@@ -95,7 +117,6 @@ const EditPost = () => {
   };
 
   const handleCanc = () => {
-    dispatch(pollCanc());
     navi(-1);
   };
 
@@ -104,6 +125,7 @@ const EditPost = () => {
   const categoryModalOpenHandler = () => {
     setIsCategoryModalOpen(true);
   };
+
   const categoryModalCloseHandler = () => {
     setIsCategoryModalOpen(false);
   };
@@ -111,82 +133,161 @@ const EditPost = () => {
   return (
     <>
       <Helmet>
-        <title>훈수 — 게시글 수정</title>
+        <title>훈수 — 수정하기</title>
       </Helmet>
       <MobileLayout>
-        <St.PageWithFooterWrapper>
-          <St.WriteHeader>
-            <St.WriteHeaderCont>
-              <St.WriteCanc onClick={handleCanc}>취소</St.WriteCanc>
-              <St.WriteCategory>
-                <St.MainCat>{maincategory}</St.MainCat>
-                <St.SubCat>{category}</St.SubCat>
-                <St.IconCont>
-                  <St.ArrowDownIcon onClick={categoryModalOpenHandler} />
-                </St.IconCont>
-              </St.WriteCategory>
-              <St.WritePost onClick={submitHandler}>수정</St.WritePost>
-            </St.WriteHeaderCont>
-          </St.WriteHeader>
-          <St.WriteForm
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <St.WriteTitle
-              type="text"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-              autoFocus
-              placeholder="제목"
-            ></St.WriteTitle>
-            <St.WriteContent
-              type="text"
-              value={desc}
-              onChange={(e) => {
-                setDesc(e.target.value);
-              }}
-              placeholder="훈수 받고 싶은 내용을 입력하세요."
-            ></St.WriteContent>
-          </St.WriteForm>
+        <>
+        {/* <WriteForm /> */}
+        <St.WriteHeader>
+        <St.WriteHeaderCont>
+          <St.WriteCanc onClick={handleCanc}>취소</St.WriteCanc>
+          <St.WriteCategory>
+            <St.MainCat>{maincategory}</St.MainCat>
+            <St.SubCat>{category}</St.SubCat>
+            <St.IconCont>
+              <St.ArrowDownIcon onClick={categoryModalOpenHandler} />
+            </St.IconCont>
+          </St.WriteCategory>
+          <St.WritePost onClick={submitHandler}>수정</St.WritePost>
+        </St.WriteHeaderCont>
+      </St.WriteHeader>
+      <St.WriteForm
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <St.WriteTitle
+          type="text"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          autoFocus
+          placeholder="제목"
+        ></St.WriteTitle>
+        <Poll onClick={() => pollModalOpenHandler()}>
+          <Vote />
+          <VoteText>투표 생성</VoteText>
+        </Poll>
+        <St.WriteContent
+          type="text"
+          value={desc}
+          onChange={(e) => {
+            setDesc(e.target.value);
+          }}
+          placeholder="훈수 받고 싶은 내용을 입력하세요."
+        ></St.WriteContent>
+      </St.WriteForm>
+      <WriteFooter setImgs={setImgs} />
 
-          {/* ========= 찬반형 투표 미리보기 ========= */}
-          {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
-          {/* ========= 찬반형 투표 미리보기 ========= */}
-
-          {pollType === "select" ? (
-            <>
+      {/* ======================= Poll preview ======================= */}
+      {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
+      {/* {pollType === "select" ? (
+        <>
               <div>선택형 투표 미리보기입니다.</div>
               <div>{pollTitle}</div>
               <div>{tag}</div>
               <div>
-                <St.TrashIcon onClick={proConDelHandler} />
+                <St.StIconTrash onClick={proConDelHandler} />
               </div>
-              {/* tag map 돌려야 하나? */}
             </>
-          ) : null}
+          ) : null} */}
 
-          {/* ======= pollModal은 요 안에 ======== */}
-          <WriteFooter />
-          {/* ======= pollModal은 요 안에 ======== */}
-        </St.PageWithFooterWrapper>
-        <ModalPortal>
-          <St.ModalCont>
-            {isCategoryModalOpen && (
-              <CateogryModal
-                open={isCategoryModalOpen}
-                close={categoryModalCloseHandler}
-                parentFunction={WriteCallback}
-                // CategoryModal(child) to write.jsx(parent)
-              />
-            )}
-          </St.ModalCont>
-        </ModalPortal>
+      {/* for test */}
+      {/* <Poll onClick={() => pollModalOpenHandler()}>
+        <VoteIcon />
+        투표 생성
+      </Poll> */}
+      {/* ======================= Poll preview ======================= */}
+
+      <ModalPortal>
+        <St.ModalCont>
+          {isPollModalOpen && (
+            <PollModal
+              open={isPollModalOpen}
+              close={pollModalCloseHandler}
+              parentFunction={PollCallback}
+            />
+          )}
+        </St.ModalCont>
+      </ModalPortal>
+      <ModalPortal>
+        <St.ModalCont>
+          {isCategoryModalOpen && (
+            <CateogryModal
+              open={isCategoryModalOpen}
+              close={categoryModalCloseHandler}
+              parentFunction={WriteCallback}
+            />
+          )}
+        </St.ModalCont>
+      </ModalPortal>
+    </>
       </MobileLayout>
     </>
   );
 };
 
 export default EditPost;
+
+
+const VoteText = styled.p`
+  position: absolute;
+  z-index: 1000;
+  color: #3a3a59;
+  font-size: 14px;
+  left: 45px;
+  top: 7px;
+`;
+const Poll = styled.button`
+  gap: 0.25rem;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  min-height: 32px;
+  min-width: 113px;
+  padding: 3px 5px;
+  border: 1px solid #c4c4c4;
+  border-radius: 2rem;
+  background-color: white;
+
+  &:hover {
+    color: white;
+    /* background-color: #3a3a59; */
+    outline: none;
+    cursor: pointer;
+    path {
+      /* stroke: white; */
+    }
+  }
+
+  position: absolute;
+  z-index: 1000;
+  /* PollModal에 더 큰 인덱스 주기 */
+  /* width: 100px; */
+  /* height: 100px; */
+  bottom: 12px;
+  /* 이걸로 버튼 전체 높이 조정 */
+  left: 30px;
+  /* left: 15px; */
+  /* top: -15px; */
+  /* background-color: red; */
+  /* border: 2px solid red; */
+`;
+// for test
+
+const Vote = styled(VoteIcon)`
+  /* width: 100%; */
+  /* height: 100%; */
+  left: 15px;
+  top: 3px;
+  position: absolute;
+  z-index: 1000;
+  &:hover {
+    cursor: pointer;
+    path:nth-child(1),
+    path:nth-child(2) {
+      stroke: #3a3a59;
+    }
+  }
+`;

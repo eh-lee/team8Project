@@ -17,7 +17,7 @@ const InfoCont = ({ colored, title, more, on }) => {
             <More
                 onClick={() => {
                     if (on !== "on") {
-                        nav("/totalboard");
+                        nav("/board");
                     } else {
                         nav("/battle");
                     }

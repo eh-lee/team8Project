@@ -22,7 +22,6 @@ const Battle = () => {
           "/chat/doneChat"
         );
         
-        console.log("data===========>", res.data);
         // setChattingList(res.data.sth)
         // setChatSaveIdx(res.data.sth.sth);
       } catch (error) {

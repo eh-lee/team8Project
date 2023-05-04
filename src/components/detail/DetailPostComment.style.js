@@ -204,7 +204,6 @@ const Footer = styled.footer`
 `;
 
 const ReplyInputCont = styled.form`
-  /* border: 1px solid green; */
   width: 100vw;
   display: flex;
   // *======== HeaderCanc || HeaderPost와 마진 맞춤 =======*

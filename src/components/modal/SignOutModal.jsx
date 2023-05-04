@@ -26,7 +26,6 @@ const SignOutModal = ({ open, close }) => {
   const signout = async () => {
     try {
         const res = await instanceWithAuth.delete("/user/delete", { "email" : email })
-        console.log(res);
         // alert(res.data.msg)
         navi("/");
         // navi("/onboarding");

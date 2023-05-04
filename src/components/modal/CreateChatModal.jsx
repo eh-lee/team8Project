@@ -22,7 +22,6 @@ const CreateChatModal = ({ open, close }) => {
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
-    console.log("어떻게 들어오니", e.target);
 
     setChatRoom((prev) => {
       return { ...prev, [name]: value };

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import DetailPostComment from "./DetailPostComment";
 import { instanceWithAuth } from "../../api/axios";
-import { cookies } from "../../api/cookies";
 import * as St from "./DetailPostCommentsList.style"
 
 const DetailPostCommentsList = ({ postIdx }) => {

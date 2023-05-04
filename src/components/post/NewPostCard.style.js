@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-  /* border: 1px solid black; */
   border-radius: 10px;
   background-color: white;
 
@@ -15,29 +14,21 @@ const Wrap = styled.div`
 `;
 
 const TitleBox = styled.ul`
-  /* border: 1px solid black; */
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   width: 134px;
   height: 70px;
-
   gap: 4px;
-
   margin: 12px 16px 4px 16px;
-
 `;
 
 const MainCat = styled.li`
-  /* border: 1px solid black; */
   height: 18px;
   font-size: 10px;
   color: gray;
 `;
 
-//* =========== Cat. Label ===============
 const CatLabel = styled.button`
   color: white;
   background: #3a3a59;
@@ -45,11 +36,9 @@ const CatLabel = styled.button`
   padding: 0 4px 0px 6px;
   border: none;
   font-size: 10px;
-`;
-//* =========== Cat. Label ===============
-
+  `;
+  
 const Title = styled.li`
-  /* border: 1px solid black; */
   font-size: 18px;
   color: #2D2D2D;
   height: 48px;
