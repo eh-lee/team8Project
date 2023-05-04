@@ -57,7 +57,7 @@ const Board = () => {
   return (
     <>
       <Helmet>
-        <title>훈수 — 전체게시판</title>
+        <title>훈수게시판</title>
       </Helmet>
       <MobileLayout>
         <St.Header>

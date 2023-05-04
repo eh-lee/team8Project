@@ -25,8 +25,8 @@ import * as St from "./ProCon.style";
 
 const ProCon = ({
   // for test
-  a,
-  b,
+  // a,
+  // b,
   // for test
   pollTitle,
   // write.jsx 미리보기
@@ -40,10 +40,15 @@ const ProCon = ({
 }) => {
   // const dispatch = useDispatch();
 
+  // const [pollTitle, setPollTitle] = useState(parentPollTitle);
+
+  console.log("dfsdfsdfsd=========>", pollTitle);
+  const [pollType, setPollType] = useState("proCon");
+
+  const [pollClose, setPollClose] = useState(true);
+
   const proConDelHandler = () => {
-    localStorage.removeItem("pollTitle");
-    localStorage.removeItem("pollType");
-    // dispatch(pollCanc());
+    setPollClose(false);
   };
 
   const [proCount, setProCount] = useState(detailProCount);
@@ -104,9 +109,9 @@ const ProCon = ({
     putVote();
   }, [detailPostIdx, proInputValue, conInputValue]);
 
-  return (
+  return pollClose ? (
     <>
-      <TestDiv>{a}</TestDiv>
+      {/* <TestDiv>{a}</TestDiv> */}
       <St.ProConWrap>
         <St.ProConHeader>
           {!pollTitle ? (
@@ -180,7 +185,7 @@ const ProCon = ({
         </St.ProConBody>
       </St.ProConWrap>
     </>
-  );
+  ) : null;
 };
 
 export default ProCon;

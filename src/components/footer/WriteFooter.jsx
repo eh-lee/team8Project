@@ -1,20 +1,8 @@
 import React, { useState } from "react";
-// import PollModal from "../modal/PollModal";
-import ModalPortal from "../modal/ModalPortal";
 import * as St from "./WriteFooter.style";
 import WriteImg from "../img/WriteImg";
 
-// const WriteFooter = ({ setImgs }) => {
-
-// for test
-const WriteFooter = ({ setImgs, parentFunction }) => {
-  const a = "a";
-  const b = "투표 제목입니다.";
-  parentFunction(a, b);
-  // for test
-
-  // const [isPollModalOpen, setIsPollModalOpen] = useState(false);
-
+const WriteFooter = ({ setImgs }) => {
   // 이미지 관리
   const [prevImgs, setPrevImgs] = useState([]);
 
@@ -42,13 +30,6 @@ const WriteFooter = ({ setImgs, parentFunction }) => {
     setPrevImgs([]);
     setImgs([]);
   };
-
-  // const pollModalOpenHandler = () => {
-  //   setIsPollModalOpen(true);
-  // };
-  // const pollModalCloseHandler = () => {
-  //   setIsPollModalOpen(false);
-  // };
 
   return (
     <>

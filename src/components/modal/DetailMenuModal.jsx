@@ -27,7 +27,7 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
   const editButtonHandler = () => {
     close();
     // 수정페이지 만들어서 이동
-    nav("/board/:postIdx/edit", { state: { postIdx, detailPostCat } });
+    nav(`/board/${postIdx}/edit`, { state: { postIdx, detailPostCat } });
   };
 
   // 삭제하기 버튼 클릭

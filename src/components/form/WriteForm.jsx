@@ -12,7 +12,7 @@ import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
 import styled from "styled-components";
 
 const WriteForm = () => {
-  // migration
+  // =================================== migration ===================================
 
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
@@ -23,45 +23,28 @@ const WriteForm = () => {
     setIsPollModalOpen(false);
   };
 
-  // migration
-
-  const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
-  // const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
-
   // for test
-  const pollType = "proCon";
+  // const [a, setA] = useState("");
+  // const [b, setB] = useState("");
+
+  const [pollTitle, setPollTitle] = useState("");
+  const [pollType, setPollType] = useState("");
+
+  const PollCallback = (pollType, pollTitle) => {
+    setPollType(pollType);
+    setPollTitle(pollTitle);
+  };
+
+  console.log("a를 잘 받았니 부모가======>", pollType);
+  console.log("b를 잘 받았니 부모가======>", pollTitle);
   // for test
+  // for test
+  // const pollType = "proCon";
+  // for test
+  // =================================== migration ===================================
 
-  // ...=_= 로컬스토리지는 앱 상태를 관리하기 위한 API가 아닙니다. 앱 상태를 캐시하고 탭 간의 정보 교환을 위한 API에요.
-  // 이 말은 무슨 뜻이냐, 로컬스토리지의 변경 이벤트는 같은 탭에서는 리스닝할 수 없다는 의미입니다.
-
-  // useEffect(() => {
-  //   setPollTitle(localStorage.getItem("pollTitle"));
-  //   setPollType(localStorage.getItem("pollType"));
-  //   pollTitle !== "" && localStorage.removeItem("pollTitle");
-  //   pollType !== "" && localStorage.removeItem("pollType");
-  // }, []);
-
-  //===============try3====================================
   // const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
   // const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
-
-  // useEffect(() => {
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // }, [window.localStorage]);
-  // // }, []);
-
-  // const handleStorageChange = (event) => {
-  //   if (event.key === "pollTitle") {
-  //     setPollTitle(event.newValue);
-  //   } else if (event.key === "pollType") {
-  //     setPollType(event.newValue);
-  //   }
-  // };
 
   const navi = useNavigate();
 
@@ -69,19 +52,6 @@ const WriteForm = () => {
     setMaincategory(x);
     setCategory(y);
   };
-
-  // for test
-  const [a, setA] = useState("");
-  const [b, setB] = useState("");
-
-  const PollCallback = (pollType, pollTitle) => {
-    setA(pollType);
-    setB(pollTitle);
-  };
-
-  console.log("a를 잘 받았니 부모가======>", a);
-  console.log("b를 잘 받았니 부모가======>", b);
-  // for test
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -182,12 +152,12 @@ const WriteForm = () => {
           placeholder="제목"
         ></St.WriteTitle>
 
-        {/* for test */}
+        {/* ============================== for test ============================== */}
         <Poll onClick={() => pollModalOpenHandler()}>
           <Vote />
           <VoteText>투표 생성</VoteText>
         </Poll>
-        {/* for test */}
+        {/* ============================== for test ============================== */}
 
         <St.WriteContent
           type="text"
@@ -199,12 +169,12 @@ const WriteForm = () => {
           // ref={FormRef}
         ></St.WriteContent>
       </St.WriteForm>
-      <WriteFooter setImgs={setImgs} parentFunction={PollCallback} />
+      <WriteFooter setImgs={setImgs} />
 
       {/* ======================= ProCon preview ======================= */}
 
-      {/* {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null} */}
-      {a ? <ProCon a={a} b={b} /> : null}
+      {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
+      {/* {a ? <ProCon a={a} b={b} /> : null} */}
 
       {/* ======================= ProCon preview ======================= */}
       {/* {pollType === "select" ? (
@@ -227,7 +197,11 @@ const WriteForm = () => {
       <ModalPortal>
         <St.ModalCont>
           {isPollModalOpen && (
-            <PollModal open={isPollModalOpen} close={pollModalCloseHandler} />
+            <PollModal
+              open={isPollModalOpen}
+              close={pollModalCloseHandler}
+              parentFunction={PollCallback}
+            />
           )}
         </St.ModalCont>
       </ModalPortal>

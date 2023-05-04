@@ -54,7 +54,7 @@ const XXXPostCardSliderInfo = ({ colored, title, more, on }) => {
       <XXXPostCardSliderMore
         onClick={() => {
           if (on !== "on") {
-            nav("/totalboard");
+            nav("/board");
           } else {
             nav("/battle");
           }
