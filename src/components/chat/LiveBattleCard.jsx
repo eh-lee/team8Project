@@ -23,7 +23,8 @@ const LiveBattleCard = () => {
   }, []);
 
   const battleInHandler = () => {
-    nav(`/battle/chat?name=${nickname}&room=${roomName}`);
+    alert('구현중인 기능입니다.')
+    // nav(`/battle/chat?name=${nickname}&room=${roomName}`);
   };
 
   return (

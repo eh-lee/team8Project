@@ -15,9 +15,10 @@ const Info = ({ colored, title, more, on }) => {
       <InfoMore
         onClick={() => {
           if (on !== "on") {
-            nav("/totalboard");
+            nav("/board");
           } else {
-            nav("/battle");
+            alert('구현중인 기능입니다.')
+            // nav("/battle");
           }
         }}
       >

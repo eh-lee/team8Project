@@ -37,31 +37,32 @@ const CreateChatModal = ({ open, close }) => {
 
   const createChatHandler = async (e) => {
     e.preventDefault();
+    alert('구현중인 기능입니다.')
 
-    if (!room) {
-      return alert("방 제목을 입력해 주세요.");
-    }
+    // if (!room) {
+    //   return alert("방 제목을 입력해 주세요.");
+    // }
 
-    if (!chatRoom.maxParty) {
-      return alert("인원수를 선택해 주새요.");
-    }
+    // if (!chatRoom.maxParty) {
+    //   return alert("인원수를 선택해 주새요.");
+    // }
 
-    try {
-      await instanceWithAuth.post("/chat/hunsuChat", {
-        roomName: room,
-        maxParty: parseInt(chatRoom.maxParty),
-        // title: "title",
-      });
+    // try {
+    //   await instanceWithAuth.post("/chat/hunsuChat", {
+    //     roomName: room,
+    //     maxParty: parseInt(chatRoom.maxParty),
+    //     // title: "title",
+    //   });
 
-      navi(
-        `/battle/chat?name=${nickname}&room=${room}&maxParty=${parseInt(
-          chatRoom.maxParty
-        )}`
-      );
-    } catch (e) {
-      const errorMsg = e.response.data.msg;
-      alert(`${errorMsg}`);
-    }
+    //   navi(
+    //     `/battle/chat?name=${nickname}&room=${room}&maxParty=${parseInt(
+    //       chatRoom.maxParty
+    //     )}`
+    //   );
+    // } catch (e) {
+    //   const errorMsg = e.response.data.msg;
+    //   alert(`${errorMsg}`);
+    // }
   };
 
   //   *========================================*
