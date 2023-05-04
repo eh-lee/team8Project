@@ -13,7 +13,7 @@ const ChatCard = ({ idx, roomName, maxParty, isRealTime }) => {
   return (
     <St.ChatCardWrap
       onClick={() => {
-        alert('구현중인 기능입니다.')
+        alert('현재 점검 중인 기능입니다.')
         // navigate(
         //   `/battle/chat?name=${nickname}&room=${roomName}&maxParty=${maxParty}`
         // );

@@ -5,7 +5,7 @@ const YetGuard = () => {
   const navi = useNavigate();
 
   useEffect(() => {
-    alert("구현 중인 기능입니다.");
+    alert("현재 점검 중인 기능입니다.");
     navi(-1);
   }, []);
 

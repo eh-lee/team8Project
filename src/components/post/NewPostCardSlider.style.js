@@ -17,7 +17,7 @@ const Info = ({ colored, title, more, on }) => {
           if (on !== "on") {
             nav("/board");
           } else {
-            alert('구현중인 기능입니다.')
+            alert('현재 점검 중인 기능입니다.')
             // nav("/battle");
           }
         }}

@@ -16,8 +16,6 @@ const ENDPOINT = "http://localhost:4000";
 // const ENDPOINT = "http://43.201.45.82:3000";
 let socket;
 
-// const Chat = ({ location }) => {
-// location 없어두 되나..?
 
 const Chat = () => {
   const nav = useNavigate();
@@ -71,7 +69,7 @@ const Chat = () => {
         alert(error);
       }
     });
-  }, [ENDPOINT, window.location.search]);
+  }, [window.location.search]);
 
   // 서버에서 messages받아오는 코드
   useEffect(() => {
@@ -79,19 +77,12 @@ const Chat = () => {
       setMessages((messages) => [...messages, message]);
     });
 
-    // socket.on("roomData", ({ room, users, messages }) => {
-    //   setUsers(users);
-    // });
-
     // ================ socket server와 통신하기 ==================
     socket.on("currParty", ({ numUsers, maxParty, room }) => {
       setCurrParty({ numUsers, maxParty, room });
     });
     // ================ socket server와 통신하기 ==================
   }, []);
-
-  console.log("mess===========>", messages);
-  console.log("crr===========>", currParty);
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -111,7 +102,6 @@ const Chat = () => {
     setIsChatEndModalOpen(false);
   };
 
-  console.log("open?==========>", isChatEndModalOpen);
 
   return (
     <>
@@ -229,144 +219,6 @@ const StChatCloseImg = styled.img`
 const StChatInfoSub = styled.div`
   font-size: 16px;
   font-weight: bold;
-`;
-
-// from write
-
-// const StChatCont = styled.div`
-//   border: 1px solid blue;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   background: #f2f2f7;
-//   height: 100vh;
-//   /* width: 35%; */
-//   width: 400px;
-// `;
-
-// const CurrNumUsers = styled.h3`
-//   color: red;
-// `;
-
-const FooLayout = styled.div`
-  position: relative;
-  margin: 0 auto;
-  width: 400px;
-  height: 100vh;
-  background-color: #f2f2f7;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
-  /* padding-bottom: 30px; */
-`;
-
-// const Messages = styled.div`
-//   padding: 5% 0;
-//   overflow: auto;
-//   /* flex: auto; */
-//   display: flex;
-//   height: 400px;
-//   width: 100%;
-//   border: 1px solid brown;
-// `;
-
-// const MessagesWrap = styled.div`
-//   padding: 5% 0;
-//   overflow: auto;
-//   /* flex: auto; */
-//   display: flex;
-//   height: 400px;
-//   width: 100%;
-//   border: 1px solid brown;
-// `;
-
-// const CurrNumUsers = styled.h3`
-//   color: red;
-// `;
-
-// const ChatHeader = styled.div`
-//   background-color: white;
-//   position: fixed;
-//   top: 0;
-//   width: 100%;
-//   max-width: 400px;
-//   color: rgb(70, 70, 70);
-// `;
-
-// const ChatHeaderCont = styled.div`
-//   border: 1px solid tomato;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: flex-end;
-//   border-bottom: 0.1rem solid rgb(180, 180, 180);
-//   // *============ HEADER 높이 ===============*
-//   padding-bottom: 2vh;
-//   height: 5vh;
-//   // *============ HEADER 높이 ===============*
-// `;
-
-// const MainCat = styled.div`
-//   /* display:flex; */
-//   /* flex-direction:row; */
-// `;
-
-// const SubCat = styled.div`
-//   color: rgb(180, 180, 180);
-// `;
-
-// const WriteCategory = styled.div`
-//   gap: 0.25rem;
-//   display: flex;
-//   font-size: 0.95rem;
-//   font-weight: bold;
-// `;
-
-const ChatHeader = styled.div`
-  // border: 1px solid green;
-  background-color: white;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  width: 100%;
-  max-width: 400px;
-  color: rgb(70, 70, 70);
-`;
-
-const ChatHeaderCont = styled.div`
-  border: 1px solid tomato;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-  // *============ HEADER 높이 ===============*
-  // padding: 0 7.5%;
-  height: 48px;
-  // *============ HEADER 높이 ===============*
-`;
-
-// const MainCat(chat) = styled.div`
-//   font-size: 18px;
-//   font-weight: bold;
-// `;
-
-// const WriteCategory(chat) = styled.div`
-//   gap: 0.25rem;
-//   display: flex;
-//   font-size: 0.95rem;
-//   font-weight: bold;
-// `;
-
-const StBackBtn = styled.div`
-  color: rgb(180, 180, 180);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    cursor: pointer;
-    color: rgb(70, 70, 70);
-  }
 `;
 
 const StFooDiv = styled.div``;

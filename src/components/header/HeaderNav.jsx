@@ -17,12 +17,12 @@ function HeaderNav() {
         <St.HeaderBox>
           <St.HeaderBoxItem>
             <SearchIcon
-              onClick={() => alert("구현 중인 기능입니다.")}
+              onClick={() => alert("현재 점검 중인 기능입니다.")}
             />
           </St.HeaderBoxItem>
           <St.HeaderBoxItem>
             <AlarmIcon
-              onClick={() => alert("구현 중인 기능입니다.")}
+              onClick={() => alert("현재 점검 중인 기능입니다.")}
             />
           </St.HeaderBoxItem>
           <St.HeaderBoxItem>

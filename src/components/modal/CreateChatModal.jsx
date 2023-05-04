@@ -37,7 +37,7 @@ const CreateChatModal = ({ open, close }) => {
 
   const createChatHandler = async (e) => {
     e.preventDefault();
-    alert('구현중인 기능입니다.')
+    alert('현재 점검 중인 기능입니다.')
 
     // if (!room) {
     //   return alert("방 제목을 입력해 주세요.");
