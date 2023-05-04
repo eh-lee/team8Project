@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
-import * as St from "./WriteFooter.style"
+import * as St from "./WriteFooter.style";
 
 const WriteFooter = ({ handleIsWritingImg }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
@@ -20,7 +20,6 @@ const WriteFooter = ({ handleIsWritingImg }) => {
     //
 
     // handleIsWritingImg(true);
-
   };
   console.log("여러장 저장되나?", imgs);
 
@@ -53,7 +52,6 @@ const WriteFooter = ({ handleIsWritingImg }) => {
           </St.ImageCont>
         </St.Nav>
       </St.Column>
-
       <ModalPortal>
         <St.ModalCont>
           {isPollModalOpen && (
