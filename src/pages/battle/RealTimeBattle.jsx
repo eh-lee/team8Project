@@ -10,10 +10,8 @@ import { instance } from "../../api/axios";
 import ChatCard from "../../components/chat/ChatCard";
 import { Helmet } from "react-helmet";
 import battleCreate from "../../assets/battle/battleCreate.png";
-import YetGuard from "../../components/hook/guard/YetGuard.jsx"
 
 const Battle = () => {
-  YetGuard();
   const nav = useNavigate();
 
   const [chattingList, setChattingList] = useState([]);

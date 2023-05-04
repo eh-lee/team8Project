@@ -21,8 +21,8 @@ function FooterNav() {
               훈수게시판
             </St.FooterBoxColumn>
           </St.FooterBox>
-          {/* <St.FooterBox onClick={() => navi("/battle")}> */}
-          <St.FooterBox onClick={() => alert('현재 점검 중인 기능입니다.')}>
+          <St.FooterBox onClick={() => navi("/battle")}>
+          {/* <St.FooterBox onClick={() => alert('현재 점검 중인 기능입니다.')}> */}
             <St.FooterBoxColumn>
               <St.FooterNavIcon icon="Battle" />
               훈수배틀
