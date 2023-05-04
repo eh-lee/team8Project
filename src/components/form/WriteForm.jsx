@@ -12,8 +12,6 @@ import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
 import styled from "styled-components";
 
 const WriteForm = () => {
-  // =================================== migration ===================================
-
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
   const pollModalOpenHandler = () => {
@@ -23,10 +21,6 @@ const WriteForm = () => {
     setIsPollModalOpen(false);
   };
 
-  // for test
-  // const [a, setA] = useState("");
-  // const [b, setB] = useState("");
-
   const [pollTitle, setPollTitle] = useState("");
   const [pollType, setPollType] = useState("");
 
@@ -34,17 +28,6 @@ const WriteForm = () => {
     setPollType(pollType);
     setPollTitle(pollTitle);
   };
-
-  console.log("a를 잘 받았니 부모가======>", pollType);
-  console.log("b를 잘 받았니 부모가======>", pollTitle);
-  // for test
-  // for test
-  // const pollType = "proCon";
-  // for test
-  // =================================== migration ===================================
-
-  // const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
-  // const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
 
   const navi = useNavigate();
 
@@ -151,14 +134,10 @@ const WriteForm = () => {
           autoFocus
           placeholder="제목"
         ></St.WriteTitle>
-
-        {/* ============================== for test ============================== */}
         <Poll onClick={() => pollModalOpenHandler()}>
           <Vote />
           <VoteText>투표 생성</VoteText>
         </Poll>
-        {/* ============================== for test ============================== */}
-
         <St.WriteContent
           type="text"
           value={desc}
@@ -166,19 +145,14 @@ const WriteForm = () => {
             setDesc(e.target.value);
           }}
           placeholder="훈수 받고 싶은 내용을 입력하세요."
-          // ref={FormRef}
         ></St.WriteContent>
       </St.WriteForm>
       <WriteFooter setImgs={setImgs} />
 
-      {/* ======================= ProCon preview ======================= */}
-
+      {/* ======================= Poll preview ======================= */}
       {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
-      {/* {a ? <ProCon a={a} b={b} /> : null} */}
-
-      {/* ======================= ProCon preview ======================= */}
       {/* {pollType === "select" ? (
-            <>
+        <>
               <div>선택형 투표 미리보기입니다.</div>
               <div>{pollTitle}</div>
               <div>{tag}</div>
@@ -193,6 +167,7 @@ const WriteForm = () => {
         <VoteIcon />
         투표 생성
       </Poll> */}
+      {/* ======================= Poll preview ======================= */}
 
       <ModalPortal>
         <St.ModalCont>
@@ -205,8 +180,6 @@ const WriteForm = () => {
           )}
         </St.ModalCont>
       </ModalPortal>
-      {/* for test */}
-
       <ModalPortal>
         <St.ModalCont>
           {isCategoryModalOpen && (
