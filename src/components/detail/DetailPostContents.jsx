@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
-import DetailImgs from "./DetailImgs";
+import DetailImgs from "../img/DetailImgs";
 import { ReactComponent as IconComment } from "../../assets/icons/common/comment.svg";
 import { ReactComponent as IconView } from "../../assets/icons/common/eye.svg";
 import * as St from "./DetailPostContents.style"

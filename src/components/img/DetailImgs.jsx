@@ -18,8 +18,6 @@ const DetailImgs = ({ postIdx }) => {
         console.log("detail imgs length========>", typeof data.imgs[0]);
         setDetailImgs(data.imgs);
 
-        // index 0~3
-        // detailImgs[0]
       } catch (error) {
         console.error("error", error);
       }

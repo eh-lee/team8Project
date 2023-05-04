@@ -2,6 +2,36 @@ import styled from "styled-components";
 import { ReactComponent as Camera } from "../../assets/icons/common/camera.svg"
 import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg"
 
+const PrevImgCont = styled.div`
+  /* border: 1px solid orange; */
+  display: flex;
+  flex-direction: column;
+  padding: 16px 44px;
+  /* border-top: 1px solid #BDBDC9; */
+  /* border-bottom: 1px solid #BDBDC9; */
+  border-top: 1px solid #F4F4F5;
+  border-bottom: 1px solid #F4F4F5;
+`;
+
+const CancleBtn = styled.span`
+    /* border: 1px solid orange; */
+    font-size: 14px;
+    color: #BDBDC9;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+    &:hover {
+      cursor: pointer;
+      color: #EF3F61;
+    }
+`;
+
+const PrevImgs = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+`;
+
 const Footer = styled.div`
   position: fixed;
   bottom: 0;
@@ -112,16 +142,19 @@ const ImageIcon = styled(Camera)`
 
 
 export {
-    Footer,
-    Column,
-    Nav,
-    Poll,
-    ImageCont,
+  PrevImgCont,
+  Footer,
+  Column,
+  Nav,
+  Poll,
+  ImageCont,
+  CancleBtn,
+  PrevImgs,
 
-    InfoText,
+  InfoText,
 
-    ImageInput,
-    ImageIcon,
-    VoteIcon,
-    ModalCont,
+  ImageInput,
+  ImageIcon,
+  VoteIcon,
+  ModalCont,
 }

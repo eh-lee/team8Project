@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
 import { ReactComponent as ArrowDown } from "../../assets/icons/common/arrowdown.svg";
 
+
+
 const IconArrowDown = styled(ArrowDown)`
   width: 16px;
   height: 16px;
@@ -146,4 +148,4 @@ const IconCont = styled.div`
   }
 `;
 
-export { IconArrowDown, IconCont, IconTrash, MainCat, ModalCont, PageWithFooterWrapper, SubCat, WriteCanc, WriteCategory, WriteContent, WriteForm, WriteHeader, WriteHeaderCont, WritePost, WriteTitle }
+export { IconArrowDown, IconCont, IconTrash, MainCat, ModalCont, PageWithFooterWrapper, SubCat, WriteCanc, WriteCategory, WriteContent, WriteForm, WriteHeader, WriteHeaderCont, WritePost, WriteTitle, }
