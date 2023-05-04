@@ -57,7 +57,6 @@ const WriteForm = () => {
 
   // 이미지 업로드
   const [imgs, setImgs] = useState([]);
-  console.log("이미지 어떻게 올라오나?", imgs);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -70,16 +69,20 @@ const WriteForm = () => {
     formData.append("pollType", pollType);
     formData.append("pollTitle", pollTitle);
     formData.append("tag", tag);
-    formData.append("imgUrl", imgs);
+
+    for (let i = 0; i < imgs.length; i++) {
+      formData.append('files', imgs[i]);
+    };
 
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
-    }
+    };
+
     if (desc.length < 10 || desc.length > 2000) {
       alert("내용은 10자 이상, 2000자 이하여야 합니다!");
       return;
-    }
+    };
 
     if (maincategory === "카테고리") {
       alert("카테고리를 선택해 주세요.");
@@ -93,7 +96,6 @@ const WriteForm = () => {
 
     try {
       await instanceWithAuth.post("/postCards/post/createPost", formData);
-      // dispatch(pollCanc());
       alert("글 작성에 성공하였습니다.");
       navi("/board");
     } catch (e) {

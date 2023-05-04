@@ -3,6 +3,7 @@ import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
 import * as St from "./WriteFooter.style"
 import WriteImg from "../img/WriteImg";
+import none from "../../assets/imgs/detail/noneImg.png";
 
 const WriteFooter = ({ setImgs }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
@@ -11,8 +12,9 @@ const WriteFooter = ({ setImgs }) => {
   const [prevImgs, setPrevImgs] = useState([]);
 
   const imgOnchangeHandler = (e) => {
-    console.log("이미지 업로드 어떻게 되지요?=======>", e.target.files);
     const files = Array.from(e.target.files).slice(0, 4); // 첨부 가능한 최대 파일 개수를 4개로 제한
+
+    // WriteForm으로 데이터 올림
     setImgs(files);
     
     // 프리뷰
@@ -49,9 +51,8 @@ const WriteFooter = ({ setImgs }) => {
       <St.PrevImgCont>
       <St.CancleBtn onClick={CancleHandler}>이미지 업로드 취소</St.CancleBtn>
         <St.PrevImgs>
-          {
-            prevImgs.map((prevImg, index) => (
-              <WriteImg key={index} prevImg={prevImg} />
+          {[...Array(4)].map((_, i) => (
+              <WriteImg key={i} prevImg={i < prevImgs.length? prevImgs[i] : none} />
             ))
           }
         </St.PrevImgs>
@@ -59,7 +60,6 @@ const WriteFooter = ({ setImgs }) => {
     }
 
     <St.Footer>
-      {/* <WriteFooterNav handleIsWritingImg={handleIsWritingImg} /> */}
       <St.Column>
         <St.Nav>
           <St.Poll onClick={() => pollModalOpenHandler()}>
