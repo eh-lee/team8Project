@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import {ReactComponent as CheckIcon} from "../../assets/icons/common/check.svg"
-import * as St from "./CateogryModal.style"
+import { ReactComponent as CheckIcon } from "../../assets/icons/common/check.svg";
+import * as St from "./CateogryModal.style";
 
 const CateogryModal = ({ parentFunction, open, close }) => {
   const modalRef = useRef();

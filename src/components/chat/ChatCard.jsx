@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { cookies } from "../../api/cookies";
 import battle1 from "../../assets/battle/battle1.png";
 import battle2 from "../../assets/battle/battle2.png";
-import {ReactComponent as MaxParty} from "../../assets/icons/common/maxParty.svg"
+import { ReactComponent as MaxParty } from "../../assets/icons/common/maxParty.svg";
 import * as St from "./ChatCard.style";
 
 const ChatCard = ({ idx, roomName, maxParty, isRealTime }) => {

@@ -16,6 +16,7 @@
 // export default B;
 
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 // import { useDispatch } from "react-redux";
 // import { pollCanc } from "../../app/modules/writeSlice";
 import { instanceWithAuth } from "../../api/axios";
@@ -23,6 +24,10 @@ import { ReactComponent as ThumbsUp } from "../../assets/icons/common/thumbs-up.
 import * as St from "./ProCon.style";
 
 const ProCon = ({
+  // for test
+  // a,
+  // b,
+  // for test
   pollTitle,
   // write.jsx 미리보기
   detailPollTitle,
@@ -35,10 +40,15 @@ const ProCon = ({
 }) => {
   // const dispatch = useDispatch();
 
+  // const [pollTitle, setPollTitle] = useState(parentPollTitle);
+
+  console.log("dfsdfsdfsd=========>", pollTitle);
+  const [pollType, setPollType] = useState("proCon");
+
+  const [pollClose, setPollClose] = useState(true);
+
   const proConDelHandler = () => {
-    localStorage.removeItem("pollTitle");
-    localStorage.removeItem("pollType");
-    // dispatch(pollCanc());
+    setPollClose(false);
   };
 
   const [proCount, setProCount] = useState(detailProCount);
@@ -99,77 +109,95 @@ const ProCon = ({
     putVote();
   }, [detailPostIdx, proInputValue, conInputValue]);
 
-  return (
-    <St.ProConWrap>
-      <St.ProConHeader>
-        {!pollTitle ? (
-          <>
-            <St.ProConTitle>{detailPollTitle}</St.ProConTitle>
-            <St.ProConTitle>{pollTitle}</St.ProConTitle>
-          </>
-        ) : (
-          <>
-            <St.ProConTitle>{pollTitle}</St.ProConTitle>
-            <St.ProConTitle>{detailPollTitle}</St.ProConTitle>
-          </>
-        )}
-        {pollTitle ? (
-          <St.ProConIcon>
-            <St.ProConDelete>
-              <St.IconTrash onClick={proConDelHandler} />
-            </St.ProConDelete>
-          </St.ProConIcon>
-        ) : null}
-      </St.ProConHeader>
-      <St.ProConBody>
-        {pollTitle ? (
-          <St.ProConColumn>
-            <ThumbsUp />
-            <St.ProBox>찬성 투표</St.ProBox>
-          </St.ProConColumn>
-        ) : (
-          // onClick 걸고 state 관리
-          <St.DetailProColumn onClick={voteProHandler} isVoted={proInputValue}>
-            <ThumbsUp />
-            <St.ProBox>찬성 투표</St.ProBox>
-          </St.DetailProColumn>
-        )}
+  return pollClose ? (
+    <>
+      {/* <TestDiv>{a}</TestDiv> */}
+      <St.ProConWrap>
+        <St.ProConHeader>
+          {!pollTitle ? (
+            <>
+              <St.ProConTitle>{detailPollTitle}</St.ProConTitle>
+              <St.ProConTitle>{pollTitle}</St.ProConTitle>
+            </>
+          ) : (
+            <>
+              <St.ProConTitle>{pollTitle}</St.ProConTitle>
+              <St.ProConTitle>{detailPollTitle}</St.ProConTitle>
+            </>
+          )}
+          {pollTitle ? (
+            <St.ProConIcon>
+              <St.ProConDelete>
+                <St.IconTrash onClick={proConDelHandler} />
+              </St.ProConDelete>
+            </St.ProConIcon>
+          ) : null}
+        </St.ProConHeader>
+        <St.ProConBody>
+          {pollTitle ? (
+            <St.ProConColumn>
+              <ThumbsUp />
+              <St.ProBox>찬성 투표</St.ProBox>
+            </St.ProConColumn>
+          ) : (
+            // onClick 걸고 state 관리
+            <St.DetailProColumn
+              onClick={voteProHandler}
+              isVoted={proInputValue}
+            >
+              <ThumbsUp />
+              <St.ProBox>찬성 투표</St.ProBox>
+            </St.DetailProColumn>
+          )}
 
-        {pollTitle ? (
-          <St.PollGraph>
-            <St.ProCount width={proCountWidth}>50%</St.ProCount>
-            <St.ConCount width={conCountWidth}>50%</St.ConCount>
-          </St.PollGraph>
-        ) : (
-          <St.PollGraph>
-            <St.ProCount width={proCountWidth}>
-              {proCount === 0 && conCount === 0 ? "50%" : `${proCountWidth}%`}
-            </St.ProCount>
-            <St.ConCount width={conCountWidth}>
-              {proCount === 0 && conCount === 0 ? "50%" : `${conCountWidth}%`}
-            </St.ConCount>
-          </St.PollGraph>
-        )}
+          {pollTitle ? (
+            <St.PollGraph>
+              <St.ProCount width={proCountWidth}>50%</St.ProCount>
+              <St.ConCount width={conCountWidth}>50%</St.ConCount>
+            </St.PollGraph>
+          ) : (
+            <St.PollGraph>
+              <St.ProCount width={proCountWidth}>
+                {proCount === 0 && conCount === 0 ? "50%" : `${proCountWidth}%`}
+              </St.ProCount>
+              <St.ConCount width={conCountWidth}>
+                {proCount === 0 && conCount === 0 ? "50%" : `${conCountWidth}%`}
+              </St.ConCount>
+            </St.PollGraph>
+          )}
 
-        {pollTitle ? (
-          <St.ProConColumn>
-            <St.ThumbsDown />
-            <St.ConBox>반대 투표</St.ConBox>
-          </St.ProConColumn>
-        ) : (
-          // onClick 걸고 state 관리
+          {pollTitle ? (
+            <St.ProConColumn>
+              <St.ThumbsDown />
+              <St.ConBox>반대 투표</St.ConBox>
+            </St.ProConColumn>
+          ) : (
+            // onClick 걸고 state 관리
 
-          <St.DetailConColumn onClick={voteConHandler} isVoted={conInputValue}>
-            <St.ThumbsDown />
-            <St.ConBox>반대 투표</St.ConBox>
-          </St.DetailConColumn>
-        )}
-      </St.ProConBody>
-    </St.ProConWrap>
-  );
+            <St.DetailConColumn
+              onClick={voteConHandler}
+              isVoted={conInputValue}
+            >
+              <St.ThumbsDown />
+              <St.ConBox>반대 투표</St.ConBox>
+            </St.DetailConColumn>
+          )}
+        </St.ProConBody>
+      </St.ProConWrap>
+    </>
+  ) : null;
 };
 
 export default ProCon;
+
+const TestDiv = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  font-size: 200px;
+  z-index: 999;
+  position: absolute;
+`;
 
 // // ver 1.0.0.
 

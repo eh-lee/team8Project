@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { instanceWithAuth } from "../../api/axios";
 import none from "../../assets/imgs/detail/noneImg.png";
-import * as St from "./DetailImgs.style"
+import * as St from "./DetailImgs.style";
 
 const DetailImgs = ({ postIdx }) => {
   const [detailImgs, setDetailImgs] = useState([]);
@@ -13,7 +13,6 @@ const DetailImgs = ({ postIdx }) => {
           `/postCards/post/imgs/${postIdx}`
         );
         setDetailImgs(data.imgs);
-
       } catch (error) {
         console.error("이미지 get error", error);
       }
@@ -23,8 +22,7 @@ const DetailImgs = ({ postIdx }) => {
 
   return (
     <>
-      {
-      detailImgs.length === 1 && detailImgs[0] === "" ? null : (
+      {detailImgs.length === 1 && detailImgs[0] === "" ? null : (
         <>
           {/* {[...Array(4)].map((_, i) => (
             <St.ImgBox
@@ -36,15 +34,13 @@ const DetailImgs = ({ postIdx }) => {
               }
             />
           ))} */}
-          {
-            detailImgs.map((img, i) => (
-              <St.ImgBox
-                key={i}
-                src={`${process.env.REACT_APP_IMG_URL}/${img}`}
-                alt={none}
-              />
-            ))
-          }
+          {detailImgs.map((img, i) => (
+            <St.ImgBox
+              key={i}
+              src={`${process.env.REACT_APP_IMG_URL}/${img}`}
+              alt={none}
+            />
+          ))}
         </>
       )}
     </>

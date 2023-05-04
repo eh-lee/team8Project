@@ -27,14 +27,16 @@ import React, { useState } from "react";
 import { ReactComponent as BackIcon } from "../../assets/icons/common/back.svg";
 import * as St from "./PollModal.style";
 
-const PollModal = ({ open, close }) => {
+//  이거를 라이트푸터랑 합쳐 근데 라이트폼에서 폴모달에 오픈 클로즈를 프롭스로 내리고 있어
+
+const PollModal = ({ open, close, parentFunction }) => {
   const [isProConClicked, setIsProConClicked] = useState(false);
   const [isSelectClicked, setIsSelectClicked] = useState(false);
+
   const [pollTitle, setPollTitle] = useState("");
+  const [pollType, setPollType] = useState("");
 
   const backHandler = () => {
-    localStorage.removeItem("pollTitle");
-    localStorage.removeItem("pollType");
     closeModal();
   };
 
@@ -45,7 +47,6 @@ const PollModal = ({ open, close }) => {
   const changePollTitleHandler = (e) => {
     setPollTitle(e.target.value);
   };
-  localStorage.setItem("pollTitle", pollTitle);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,9 +64,7 @@ const PollModal = ({ open, close }) => {
       if (pollTitle.length >= 20) {
         return alert("투표 제목은 20자 이내로 작성해 주세요.");
       }
-      localStorage.setItem("pollType", "proCon");
     }
-
     closeModal();
   };
 
@@ -75,8 +74,14 @@ const PollModal = ({ open, close }) => {
       setIsProConClicked(!isProConClicked);
     } else {
       setIsProConClicked(!isProConClicked);
+      setPollType("proCon");
     }
   };
+
+  console.log("Plltp==================>", pollType);
+  console.log("Plltitle==================>", pollTitle);
+
+  parentFunction(pollType, pollTitle);
 
   return open ? (
     <>

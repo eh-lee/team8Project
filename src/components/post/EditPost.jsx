@@ -10,7 +10,7 @@ import CateogryModal from "../../components/modal/CateogryModal";
 import WriteFooter from "../../components/footer/WriteFooter";
 import { pollCanc } from "../../app/modules/writeSlice";
 import ProCon from "../../components/poll/ProCon";
-import * as St from "./EditPost.style"
+import * as St from "./EditPost.style";
 
 const EditPost = () => {
   FalseGuard();
@@ -87,7 +87,7 @@ const EditPost = () => {
 
       dispatch(pollCanc());
       alert("글 수정에 성공하였습니다.");
-      navi("/totalboard");
+      navi("/board");
     } catch (e) {
       const errorMsg = e.response.data.msg;
       alert(`${errorMsg}`);

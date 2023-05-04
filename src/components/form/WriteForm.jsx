@@ -7,40 +7,27 @@ import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import * as St from "./WriteForm.style";
 import WriteFooter from "../footer/WriteFooter";
+import PollModal from "../modal/PollModal";
+import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
+import styled from "styled-components";
 
 const WriteForm = () => {
-  const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
-  const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
+  const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
-  // ...=_= 로컬스토리지는 앱 상태를 관리하기 위한 API가 아닙니다. 앱 상태를 캐시하고 탭 간의 정보 교환을 위한 API에요.
-  // 이 말은 무슨 뜻이냐, 로컬스토리지의 변경 이벤트는 같은 탭에서는 리스닝할 수 없다는 의미입니다.
+  const pollModalOpenHandler = () => {
+    setIsPollModalOpen(true);
+  };
+  const pollModalCloseHandler = () => {
+    setIsPollModalOpen(false);
+  };
 
-  // useEffect(() => {
-  //   setPollTitle(localStorage.getItem("pollTitle"));
-  //   setPollType(localStorage.getItem("pollType"));
-  //   pollTitle !== "" && localStorage.removeItem("pollTitle");
-  //   pollType !== "" && localStorage.removeItem("pollType");
-  // }, []);
+  const [pollTitle, setPollTitle] = useState("");
+  const [pollType, setPollType] = useState("");
 
-  //===============try3====================================
-  // const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
-  // const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
-
-  // useEffect(() => {
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // }, [window.localStorage]);
-
-  // const handleStorageChange = (event) => {
-  //   if (event.key === "pollTitle") {
-  //     setPollTitle(event.newValue);
-  //   } else if (event.key === "pollType") {
-  //     setPollType(event.newValue);
-  //   }
-  // };
+  const PollCallback = (pollType, pollTitle) => {
+    setPollType(pollType);
+    setPollTitle(pollTitle);
+  };
 
   const navi = useNavigate();
 
@@ -135,7 +122,6 @@ const WriteForm = () => {
           <St.WritePost onClick={submitHandler}>등록</St.WritePost>
         </St.WriteHeaderCont>
       </St.WriteHeader>
-
       <St.WriteForm
         onSubmit={(e) => {
           e.preventDefault();
@@ -150,6 +136,10 @@ const WriteForm = () => {
           autoFocus
           placeholder="제목"
         ></St.WriteTitle>
+        <Poll onClick={() => pollModalOpenHandler()}>
+          <Vote />
+          <VoteText>투표 생성</VoteText>
+        </Poll>
         <St.WriteContent
           type="text"
           value={desc}
@@ -157,14 +147,14 @@ const WriteForm = () => {
             setDesc(e.target.value);
           }}
           placeholder="훈수 받고 싶은 내용을 입력하세요."
-          // ref={FormRef}
         ></St.WriteContent>
       </St.WriteForm>
       <WriteFooter setImgs={setImgs} />
 
+      {/* ======================= Poll preview ======================= */}
       {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
       {/* {pollType === "select" ? (
-            <>
+        <>
               <div>선택형 투표 미리보기입니다.</div>
               <div>{pollTitle}</div>
               <div>{tag}</div>
@@ -174,6 +164,24 @@ const WriteForm = () => {
             </>
           ) : null} */}
 
+      {/* for test */}
+      {/* <Poll onClick={() => pollModalOpenHandler()}>
+        <VoteIcon />
+        투표 생성
+      </Poll> */}
+      {/* ======================= Poll preview ======================= */}
+
+      <ModalPortal>
+        <St.ModalCont>
+          {isPollModalOpen && (
+            <PollModal
+              open={isPollModalOpen}
+              close={pollModalCloseHandler}
+              parentFunction={PollCallback}
+            />
+          )}
+        </St.ModalCont>
+      </ModalPortal>
       <ModalPortal>
         <St.ModalCont>
           {isCategoryModalOpen && (
@@ -190,3 +198,66 @@ const WriteForm = () => {
 };
 
 export default WriteForm;
+
+// for test
+
+const VoteText = styled.p`
+  position: absolute;
+  z-index: 1000;
+  color: #3a3a59;
+  font-size: 14px;
+  left: 45px;
+  top: 7px;
+`;
+const Poll = styled.button`
+  gap: 0.25rem;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  min-height: 32px;
+  min-width: 113px;
+  padding: 3px 5px;
+  border: 1px solid #c4c4c4;
+  border-radius: 2rem;
+  background-color: white;
+
+  &:hover {
+    color: white;
+    /* background-color: #3a3a59; */
+    outline: none;
+    cursor: pointer;
+    path {
+      /* stroke: white; */
+    }
+  }
+
+  position: absolute;
+  z-index: 1000;
+  /* PollModal에 더 큰 인덱스 주기 */
+  /* width: 100px; */
+  /* height: 100px; */
+  bottom: 12px;
+  /* 이걸로 버튼 전체 높이 조정 */
+  left: 30px;
+  /* left: 15px; */
+  /* top: -15px; */
+  /* background-color: red; */
+  /* border: 2px solid red; */
+`;
+// for test
+
+const Vote = styled(VoteIcon)`
+  /* width: 100%; */
+  /* height: 100%; */
+  left: 15px;
+  top: 3px;
+  position: absolute;
+  z-index: 1000;
+  &:hover {
+    cursor: pointer;
+    path:nth-child(1),
+    path:nth-child(2) {
+      stroke: #3a3a59;
+    }
+  }
+`;
