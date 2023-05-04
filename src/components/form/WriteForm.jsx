@@ -10,7 +10,11 @@ import WriteFooter from "../footer/WriteFooter";
 
 const WriteForm = () => {
   const [pollTitle, setPollTitle] = useState(localStorage.getItem("pollTitle"));
-  const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
+  // const [pollType, setPollType] = useState(localStorage.getItem("pollType"));
+
+  // for test
+  const pollType = "proCon";
+  // for test
 
   // ...=_= 로컬스토리지는 앱 상태를 관리하기 위한 API가 아닙니다. 앱 상태를 캐시하고 탭 간의 정보 교환을 위한 API에요.
   // 이 말은 무슨 뜻이냐, 로컬스토리지의 변경 이벤트는 같은 탭에서는 리스닝할 수 없다는 의미입니다.
@@ -33,6 +37,7 @@ const WriteForm = () => {
   //     window.removeEventListener("storage", handleStorageChange);
   //   };
   // }, [window.localStorage]);
+  // // }, []);
 
   // const handleStorageChange = (event) => {
   //   if (event.key === "pollTitle") {
@@ -48,6 +53,19 @@ const WriteForm = () => {
     setMaincategory(x);
     setCategory(y);
   };
+
+  // for test
+  const [a, setA] = useState("");
+  const [b, setB] = useState("");
+
+  const PollCallback = (pollType, pollTitle) => {
+    setA(pollType);
+    setB(pollTitle);
+  };
+
+  console.log("a를 잘 받았니 부모가======>", a);
+  console.log("b를 잘 받았니 부모가======>", b);
+  // for test
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -158,9 +176,14 @@ const WriteForm = () => {
           // ref={FormRef}
         ></St.WriteContent>
       </St.WriteForm>
-      <WriteFooter setImgs={setImgs} />
+      <WriteFooter setImgs={setImgs} parentFunction={PollCallback} />
 
-      {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
+      {/* ======================= ProCon preview ======================= */}
+
+      {/* {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null} */}
+      {a ? <ProCon a={a} b={b} /> : null}
+
+      {/* ======================= ProCon preview ======================= */}
       {/* {pollType === "select" ? (
             <>
               <div>선택형 투표 미리보기입니다.</div>
