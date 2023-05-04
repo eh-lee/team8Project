@@ -1,27 +1,39 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
-import * as St from "./WriteFooter.style";
+import * as St from "./WriteFooter.style"
+import WriteImg from "../img/WriteImg";
 
-const WriteFooter = ({ handleIsWritingImg }) => {
+const WriteFooter = ({ setImgs }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
   // 이미지 관리
-  const [imgs, setImgs] = useState([]);
-  const [preImgs, setPreImgs] = useState([]);
+  const [prevImgs, setPrevImgs] = useState([]);
 
-  const imgOnchangeHandler = (event) => {
-    console.log("이미지 업로드 어떻게 되지요?=======>", event.target.files);
-    const fileList = event.target.files;
-    setImgs(Array.from(fileList));
-    // 최대 4개
-    const filesLength = fileList.length > 4 ? 4 : fileList.length;
-
-    //
-
-    // handleIsWritingImg(true);
+  const imgOnchangeHandler = (e) => {
+    console.log("이미지 업로드 어떻게 되지요?=======>", e.target.files);
+    const files = Array.from(e.target.files).slice(0, 4); // 첨부 가능한 최대 파일 개수를 4개로 제한
+    setImgs(files);
+    
+    // 프리뷰
+    const images = [];
+    for (const file of files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        images.push(e.target.result);
+        if (images.length === files.length) {
+          setPrevImgs(images);
+        }
+      };
+    }
   };
-  console.log("여러장 저장되나?", imgs);
+
+  // 이미지 업로드 취소 버튼 핸들러
+  const CancleHandler = () => {
+    setPrevImgs([]);
+    setImgs([]);
+  }
 
   const pollModalOpenHandler = () => {
     setIsPollModalOpen(true);
@@ -31,6 +43,21 @@ const WriteFooter = ({ handleIsWritingImg }) => {
   };
 
   return (
+    <>
+    {
+      prevImgs.length !== 0 &&
+      <St.PrevImgCont>
+      <St.CancleBtn onClick={CancleHandler}>이미지 업로드 취소</St.CancleBtn>
+        <St.PrevImgs>
+          {
+            prevImgs.map((prevImg, index) => (
+              <WriteImg key={index} prevImg={prevImg} />
+            ))
+          }
+        </St.PrevImgs>
+      </St.PrevImgCont>
+    }
+
     <St.Footer>
       {/* <WriteFooterNav handleIsWritingImg={handleIsWritingImg} /> */}
       <St.Column>
@@ -45,7 +72,6 @@ const WriteFooter = ({ handleIsWritingImg }) => {
               type="file"
               accept="image/*"
               multiple
-              // ref={imgInputRef}
               onChange={imgOnchangeHandler}
             />
             <St.ImageIcon />
@@ -60,6 +86,7 @@ const WriteFooter = ({ handleIsWritingImg }) => {
         </St.ModalCont>
       </ModalPortal>
     </St.Footer>
+    </>
   );
 };
 
