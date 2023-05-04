@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 const PollWriteWrap = styled.div`
   position: fixed;
+  z-index: 1001;
+  /* WriteForm의 poll 아이콘 보다 크게 */
   top: 0;
   width: 400px;
   height: 100vh;
@@ -190,25 +192,25 @@ const Gap = styled.div`
 `;
 
 export {
-    PollWriteWrap,
-    PollWriteHeader,
-    PollWriteHeaderCont,
-    PollWriteCanc,
-    PollWriteCategory,
-    PollWirteTitle,
-    PollMarginRight,
-    PollWriteMain,
-    PollType,
-    PollTypeText,
-    PollRow,
-    PollProConType,
-    PollSelectType,
-    PollTitle,
-    PollTitleText,
-    PollButton,
-    PollInput,
-    PollSelect,
-    PollSelectText,
-    PollCandid,
-    Gap,
+  PollWriteWrap,
+  PollWriteHeader,
+  PollWriteHeaderCont,
+  PollWriteCanc,
+  PollWriteCategory,
+  PollWirteTitle,
+  PollMarginRight,
+  PollWriteMain,
+  PollType,
+  PollTypeText,
+  PollRow,
+  PollProConType,
+  PollSelectType,
+  PollTitle,
+  PollTitleText,
+  PollButton,
+  PollInput,
+  PollSelect,
+  PollSelectText,
+  PollCandid,
+  Gap,
 }

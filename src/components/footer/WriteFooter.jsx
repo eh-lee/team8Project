@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PollModal from "../modal/PollModal";
+// import PollModal from "../modal/PollModal";
 import ModalPortal from "../modal/ModalPortal";
 import * as St from "./WriteFooter.style";
 import WriteImg from "../img/WriteImg";
@@ -8,12 +8,12 @@ import WriteImg from "../img/WriteImg";
 
 // for test
 const WriteFooter = ({ setImgs, parentFunction }) => {
-  const a = "오";
+  const a = "a";
   const b = "투표 제목입니다.";
   parentFunction(a, b);
   // for test
 
-  const [isPollModalOpen, setIsPollModalOpen] = useState(false);
+  // const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
   // 이미지 관리
   const [prevImgs, setPrevImgs] = useState([]);
@@ -43,12 +43,12 @@ const WriteFooter = ({ setImgs, parentFunction }) => {
     setImgs([]);
   };
 
-  const pollModalOpenHandler = () => {
-    setIsPollModalOpen(true);
-  };
-  const pollModalCloseHandler = () => {
-    setIsPollModalOpen(false);
-  };
+  // const pollModalOpenHandler = () => {
+  //   setIsPollModalOpen(true);
+  // };
+  // const pollModalCloseHandler = () => {
+  //   setIsPollModalOpen(false);
+  // };
 
   return (
     <>
@@ -69,10 +69,11 @@ const WriteFooter = ({ setImgs, parentFunction }) => {
         {/* <WriteFooterNav handleIsWritingImg={handleIsWritingImg} /> */}
         <St.Column>
           <St.Nav>
-            <St.Poll onClick={() => pollModalOpenHandler()}>
-              <St.VoteIcon />
-              투표 생성
-            </St.Poll>
+            {/* <St.Poll onClick={() => pollModalOpenHandler()}> */}
+            {/* <St.Poll> */}
+            {/* <St.VoteIcon /> */}
+            &nbsp;
+            {/* </St.Poll> */}
             <St.ImageCont>
               <St.InfoText>이미지는 4장까지 업로드 가능합니다.</St.InfoText>
               <St.ImageInput
@@ -85,13 +86,13 @@ const WriteFooter = ({ setImgs, parentFunction }) => {
             </St.ImageCont>
           </St.Nav>
         </St.Column>
-        <ModalPortal>
+        {/* <ModalPortal>
           <St.ModalCont>
             {isPollModalOpen && (
               <PollModal open={isPollModalOpen} close={pollModalCloseHandler} />
             )}
           </St.ModalCont>
-        </ModalPortal>
+        </ModalPortal> */}
       </St.Footer>
     </>
   );
