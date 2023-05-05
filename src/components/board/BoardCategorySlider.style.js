@@ -9,6 +9,7 @@ const CatSliderWrap = styled.div`
   overflow-x: hidden;
 `;
 const CatLeftButton = styled.button`
+width: 15px;
   color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
@@ -23,6 +24,7 @@ const CatLeftButton = styled.button`
 `;
 
 const CatRightButton = styled.button`
+width: 15px;
   color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
@@ -64,9 +66,10 @@ const CategorySlider = styled.div`
   }
 `;
 
-export { 
-  CatButton, 
-  CatSliderWrap, 
-  CatLeftButton, 
-  CatRightButton, 
-  CategorySlider };
+export {
+  CatButton,
+  CatSliderWrap,
+  CatLeftButton,
+  CatRightButton,
+  CategorySlider
+};

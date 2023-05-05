@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import cancel from "../../assets/icons/common/expand.png";
 import { instance } from "../../api/axios";
 import * as St from "./SearchForm.style";
@@ -15,13 +15,16 @@ const SearchForm = () => {
 
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
+    setInput("");
 
     try {
       const response = await instance.get(`/search/?q=${input}`);
       console.log("response===========>", response.data);
-      setInput("");
       setData(response.data);
     } catch (error) {
+      if (error.message) {
+        alert("검색 서버가 현재 점검 중입니다.");
+      }
       console.error(error);
     }
   };

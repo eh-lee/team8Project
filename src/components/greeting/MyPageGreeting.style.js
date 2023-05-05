@@ -53,7 +53,7 @@ font-size: 10px;
 
 const Wrap = styled.div`
   background-color: #3a3a59;
-  height: 130px;
+  height: 160px;
   border-bottom-right-radius: 40px;
   margin-top: 48px;
   padding: 16px 25px;
