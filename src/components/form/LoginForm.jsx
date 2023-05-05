@@ -1,19 +1,15 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { instance } from "../../api/axios";
 import { cookies } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import * as St from "./LoginForm.style";
 
 const LoginForm = () => {
-  // Handler && axios도 추후에 빼두 되구
   const submitButtonHandler = async (e) => {
     e.preventDefault();
     try {
-      // const response = await instance.post("/auth/login", user);
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/auth/login`,
-        user
-      );
+      const response = await instance.post("/auth/login", user);
+      console.log(response);
       cookies.set("email", user.email, { path: "/" });
       cookies.set("access_token", response.headers.authorization, {
         path: "/",
@@ -22,7 +18,7 @@ const LoginForm = () => {
       cookies.set("isNewbie", "F", { path: "/" });
       navi("/");
     } catch (e) {
-      const errorMsg = e.response.data.msg;
+      const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };

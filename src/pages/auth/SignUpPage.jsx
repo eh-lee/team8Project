@@ -23,7 +23,7 @@ const SignUpPage = () => {
       return { ...prev, [name]: value };
     });
   };
-  
+
   const validLengthHandler = (e) => {
     if (e.target.value.length > 6) {
       e.target.value = e.target.value.slice(0, 6);
@@ -100,7 +100,7 @@ const SignUpPage = () => {
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");
     } catch (e) {
-      const errorMsg = e.response.data.msg;
+      const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };

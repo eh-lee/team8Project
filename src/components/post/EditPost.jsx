@@ -20,7 +20,7 @@ const EditPost = () => {
   const location = useLocation();
 
   const postIdx = location.state.postIdx;
-  
+
   useEffect(() => {
     const getForEditPost = async () => {
       try {
@@ -35,7 +35,6 @@ const EditPost = () => {
     setMaincategory(location.state.detailPostCat.maincategory);
     setCategory(location.state.detailPostCat.category);
   }, [postIdx]);
-
 
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
@@ -61,10 +60,10 @@ const EditPost = () => {
     setCategory(y);
   };
 
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
-  const [maincategory, setMaincategory] = useState('');
-  const [category, setCategory] = useState('');
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [maincategory, setMaincategory] = useState("");
+  const [category, setCategory] = useState("");
   const [tag, setTag] = useState([]);
 
   // 이미지 업로드
@@ -83,18 +82,18 @@ const EditPost = () => {
     formData.append("tag", tag);
 
     for (let i = 0; i < imgs.length; i++) {
-      formData.append('files', imgs[i]);
-    };
+      formData.append("files", imgs[i]);
+    }
 
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
-    };
+    }
 
     if (desc.length < 10 || desc.length > 2000) {
       alert("내용은 10자 이상, 2000자 이하여야 합니다!");
       return;
-    };
+    }
 
     if (maincategory === "카테고리") {
       alert("카테고리를 선택해 주세요.");
@@ -107,11 +106,14 @@ const EditPost = () => {
     }
 
     try {
-      await instanceWithAuth.put(`/postCards/post/createPost/${postIdx}`, formData);
+      await instanceWithAuth.put(
+        `/postCards/post/createPost/${postIdx}`,
+        formData
+      );
       alert("글 수정에 성공하였습니다.");
       navi("/board");
     } catch (e) {
-      const errorMsg = e.response.data.msg;
+      const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };
@@ -137,52 +139,52 @@ const EditPost = () => {
       </Helmet>
       <MobileLayout>
         <>
-        {/* <WriteForm /> */}
-        <St.WriteHeader>
-        <St.WriteHeaderCont>
-          <St.WriteCanc onClick={handleCanc}>취소</St.WriteCanc>
-          <St.WriteCategory>
-            <St.MainCat>{maincategory}</St.MainCat>
-            <St.SubCat>{category}</St.SubCat>
-            <St.IconCont>
-              <St.ArrowDownIcon onClick={categoryModalOpenHandler} />
-            </St.IconCont>
-          </St.WriteCategory>
-          <St.WritePost onClick={submitHandler}>수정</St.WritePost>
-        </St.WriteHeaderCont>
-      </St.WriteHeader>
-      <St.WriteForm
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <St.WriteTitle
-          type="text"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-          autoFocus
-          placeholder="제목"
-        ></St.WriteTitle>
-        <Poll onClick={() => pollModalOpenHandler()}>
-          <Vote />
-          <VoteText>투표 생성</VoteText>
-        </Poll>
-        <St.WriteContent
-          type="text"
-          value={desc}
-          onChange={(e) => {
-            setDesc(e.target.value);
-          }}
-          placeholder="훈수 받고 싶은 내용을 입력하세요."
-        ></St.WriteContent>
-      </St.WriteForm>
-      <WriteFooter setImgs={setImgs} />
+          {/* <WriteForm /> */}
+          <St.WriteHeader>
+            <St.WriteHeaderCont>
+              <St.WriteCanc onClick={handleCanc}>취소</St.WriteCanc>
+              <St.WriteCategory>
+                <St.MainCat>{maincategory}</St.MainCat>
+                <St.SubCat>{category}</St.SubCat>
+                <St.IconCont>
+                  <St.ArrowDownIcon onClick={categoryModalOpenHandler} />
+                </St.IconCont>
+              </St.WriteCategory>
+              <St.WritePost onClick={submitHandler}>수정</St.WritePost>
+            </St.WriteHeaderCont>
+          </St.WriteHeader>
+          <St.WriteForm
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <St.WriteTitle
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              autoFocus
+              placeholder="제목"
+            ></St.WriteTitle>
+            <Poll onClick={() => pollModalOpenHandler()}>
+              <Vote />
+              <VoteText>투표 생성</VoteText>
+            </Poll>
+            <St.WriteContent
+              type="text"
+              value={desc}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+              placeholder="훈수 받고 싶은 내용을 입력하세요."
+            ></St.WriteContent>
+          </St.WriteForm>
+          <WriteFooter setImgs={setImgs} />
 
-      {/* ======================= Poll preview ======================= */}
-      {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
-      {/* {pollType === "select" ? (
+          {/* ======================= Poll preview ======================= */}
+          {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
+          {/* {pollType === "select" ? (
         <>
               <div>선택형 투표 미리보기입니다.</div>
               <div>{pollTitle}</div>
@@ -193,43 +195,42 @@ const EditPost = () => {
             </>
           ) : null} */}
 
-      {/* for test */}
-      {/* <Poll onClick={() => pollModalOpenHandler()}>
+          {/* for test */}
+          {/* <Poll onClick={() => pollModalOpenHandler()}>
         <VoteIcon />
         투표 생성
       </Poll> */}
-      {/* ======================= Poll preview ======================= */}
+          {/* ======================= Poll preview ======================= */}
 
-      <ModalPortal>
-        <St.ModalCont>
-          {isPollModalOpen && (
-            <PollModal
-              open={isPollModalOpen}
-              close={pollModalCloseHandler}
-              parentFunction={PollCallback}
-            />
-          )}
-        </St.ModalCont>
-      </ModalPortal>
-      <ModalPortal>
-        <St.ModalCont>
-          {isCategoryModalOpen && (
-            <CateogryModal
-              open={isCategoryModalOpen}
-              close={categoryModalCloseHandler}
-              parentFunction={WriteCallback}
-            />
-          )}
-        </St.ModalCont>
-      </ModalPortal>
-    </>
+          <ModalPortal>
+            <St.ModalCont>
+              {isPollModalOpen && (
+                <PollModal
+                  open={isPollModalOpen}
+                  close={pollModalCloseHandler}
+                  parentFunction={PollCallback}
+                />
+              )}
+            </St.ModalCont>
+          </ModalPortal>
+          <ModalPortal>
+            <St.ModalCont>
+              {isCategoryModalOpen && (
+                <CateogryModal
+                  open={isCategoryModalOpen}
+                  close={categoryModalCloseHandler}
+                  parentFunction={WriteCallback}
+                />
+              )}
+            </St.ModalCont>
+          </ModalPortal>
+        </>
       </MobileLayout>
     </>
   );
 };
 
 export default EditPost;
-
 
 const VoteText = styled.p`
   position: absolute;
