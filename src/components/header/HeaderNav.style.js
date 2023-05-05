@@ -8,6 +8,7 @@ const Nav = styled.nav`
   `;
 
   const HeaderUl = styled.ul`
+    margin-top: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,7 +26,6 @@ const HeaderLogo = styled.img`
 
 const HeaderBox = styled.div`
   gap: 16px;
-  padding: 0.75rem 0;
   display: flex;
   width: 104px;
   height: 24px;

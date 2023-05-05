@@ -78,18 +78,9 @@ const PostCardContentBox = styled.div`
   /* 최대 2줄 */
   width: 90%;
   margin-top: 2.5%;
-  overflow-y: scroll;
-
   word-wrap: break-word;
   display: flex;
   margin-bottom: 5%;
-
-  /* 스크롤바 숨기기 */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 `;
 
 const PostCardContent = styled.div`

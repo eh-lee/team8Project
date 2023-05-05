@@ -42,14 +42,6 @@ const Title = styled.li`
   font-size: 18px;
   color: #2D2D2D;
   height: 48px;
-
-  overflow-y: scroll;
-  /* 스크롤바 숨기기 */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   word-wrap: break-word;
 `;
 

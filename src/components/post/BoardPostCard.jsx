@@ -99,7 +99,7 @@ const BoardPostCard = ({
       </St.PostCardTitleBox>
 
       <St.PostCardContentBox>
-        <St.PostCardContent>{content}</St.PostCardContent>
+        <St.PostCardContent>{content?.length > 50 ? content.substring(0, 50) + "..." : content}</St.PostCardContent>
       </St.PostCardContentBox>
       <St.PostCardInfoBox>
         <St.DetailPostContent>

@@ -29,7 +29,7 @@ const NewPostCard = ({ postIdx, mainCategory, category, title, content }) => {
         </St.MainCat>
         <St.Title>{title?.length > 20 ? title.substring(0, 20) + "..." : title}</St.Title>
       </St.TitleBox>
-      <St.Content>{content?.length > 25 ? content.substring(0, 25) + "..." : content}</St.Content>
+      <St.Content>{content?.length > 20 ? content.substring(0, 20) + "..." : content}</St.Content>
     </St.Wrap>
   );
 };

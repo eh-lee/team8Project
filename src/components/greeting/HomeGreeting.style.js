@@ -8,18 +8,14 @@ const Wrap = styled.div`
   flex-direction: column;
   border-bottom-right-radius: 40px;
   margin-top: 40px;
-  /* border: 2px solid red; */
 `;
 
 const GreetingCont = styled.div`
   display: flex;
   justify-content: space-between;
-  // postCard와 라인 맞추기 위해 margin값 수정
   margin: 46px 25px 8px 25px;
-  /* HeaderNav padding 좌우 값과 동일 */
   max-width: 400px;
   height: 92px;
-  /* StMobileLayout과 동일 */
 `;
 
 const GreetingText1 = styled.div`
@@ -76,6 +72,7 @@ const GreetingLevelName = styled.div`
   justify-content: center;
   color: #ef3f61;
   font-size: 14px;
+  line-height: 18px;
   font-weight: 600;
 `;
 

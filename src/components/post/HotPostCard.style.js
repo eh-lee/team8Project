@@ -82,16 +82,8 @@ const ContentBox = styled.div`
   margin-left: 16px;
   border-bottom: 1px solid #e1e2e4;
 
-  overflow-y: scroll;
   max-height: 30vh;
   word-wrap: break-word;
-  /* 줄바꿈 기능 */
-  /* 스크롤바 숨기기 */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 `;
 
 const Content = styled.div`
