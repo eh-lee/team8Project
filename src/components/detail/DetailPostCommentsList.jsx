@@ -57,7 +57,7 @@ const DetailPostCommentsList = ({ postIdx }) => {
             <St.Input
               required
               type="text"
-              placeholder="훈수를 남겨주세요.(100자 이내)"
+              placeholder="훈수를 남겨보세요.(100자 이내)"
               value={newComment}
               onChange={(e) => newCommentHandler(e)}
               maxLength="100"

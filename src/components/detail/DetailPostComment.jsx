@@ -195,7 +195,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
               <St.ReplyInput
                 required
                 type="text"
-                placeholder="답훈수를 남겨주세요.(100자 이내)"
+                placeholder="답훈수를 남겨보세요.(100자 이내)"
                 value={newReply}
                 onChange={newReplyHandler}
                 autoFocus
