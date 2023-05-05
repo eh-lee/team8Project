@@ -79,7 +79,9 @@ const DetailProColumn = styled.div`
     cursor: pointer;
   }
 
-  color: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
+  svg path {
+  stroke: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
+  }
 `;
 
 const ProBox = styled.p`
@@ -145,7 +147,9 @@ const DetailConColumn = styled.div`
     cursor: pointer;
   }
 
-  color: ${(props) => (props.isVoted ? "#42c8b7" : "black")};
+  svg path {
+  stroke: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
+  }
 `;
 
 export {

@@ -15,7 +15,6 @@ const DetailPoll = ({ postIdx, detailPoll }) => {
           detailConCount={detailPoll.conCount}
         />
       ) : null}
-      {/* {pollType === select ? <> </> : null} */}
     </St.Wrap>
   );
 };
