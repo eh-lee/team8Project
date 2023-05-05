@@ -1,14 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { cookies } from "../../api/cookies";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
+import { useNavigate } from "react-router-dom";
 import * as St from "./HomeGreeting.style";
 
 const HomeGreeting = () => {
   const navi = useNavigate();
-  const nickname = cookies.get("nickname");
-  const isLogin = cookies.get("access_token") ? true : false;
+  const nickname = localStorage.getItem("nickname");
+  const isLogin = localStorage.getItem("access_token") ? true : false;
 
   const currExp = 0;
   const goalExp = 100;

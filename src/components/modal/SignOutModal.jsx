@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { cookies } from "../../api/cookies";
 import { instanceWithAuth } from "../../api/axios";
 import * as St from "./SignOutModal.style";
 
 const SignOutModal = ({ open, close }) => {
   const navi = useNavigate();
   const modalRef = useRef();
-  const email = cookies.get("email");
+  const email = localStorage.getItem("email");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,13 +31,9 @@ const SignOutModal = ({ open, close }) => {
     } catch (err) {
       console.error(err);
     }
-
-    // 왜 안 되나 체크 4/21 17:44
-    // [Refactor] 인터셉터로 처리하게
-    cookies.remove("access_token");
-    cookies.remove("refresh_token");
-    cookies.remove("nickname");
-    cookies.remove("email");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("email");
   };
 
   return open ? (

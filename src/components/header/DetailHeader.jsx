@@ -3,14 +3,11 @@ import ModalPortal from "../modal/ModalPortal";
 import DetailMenuModal from "../modal/DetailMenuModal";
 import { useNavigate } from "react-router-dom";
 import * as St from "./DetailHeader.style";
-import { cookies } from "../../api/cookies";
 
 const DetailHeader = ({ postIdx, detailPostCat, writerNickname }) => {
   const nav = useNavigate();
-  
   const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
-
-  const nickname = cookies.get('nickname');
+  const nickname = localStorage.getItem("nickname");
 
   const menuModalOpenHandler = () => {
     setIsMenuModalOpen(true);
@@ -34,8 +31,10 @@ const DetailHeader = ({ postIdx, detailPostCat, writerNickname }) => {
           <St.Category>
             {detailPostCat.maincategory}◦{detailPostCat.category}
           </St.Category>
-          <St.MenuBtn >
-            {writerNickname === nickname ? <St.DotsIcon onClick={menuModalOpenHandler}/> : null}
+          <St.MenuBtn>
+            {writerNickname === nickname ? (
+              <St.DotsIcon onClick={menuModalOpenHandler} />
+            ) : null}
           </St.MenuBtn>
         </St.Wrap>
       </St.Header>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { instance } from "../../api/axios";
-import { cookies } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import * as St from "./LoginForm.style";
 
@@ -9,13 +8,10 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await instance.post("/auth/login", user);
-      console.log(response);
-      cookies.set("email", user.email, { path: "/" });
-      cookies.set("access_token", response.headers.authorization, {
-        path: "/",
-      });
-      cookies.set("nickname", response.data.nickname, { path: "/" });
-      cookies.set("isNewbie", "F", { path: "/" });
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("access_token", response.headers.authorization);
+      localStorage.setItem("nickname", response.data.nickname);
+      document.cookie = `isNewbie_test=F; path=/;`;
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.message;

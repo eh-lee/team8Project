@@ -1,5 +1,4 @@
 import axios from "axios";
-import { cookies } from "./cookies";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL
@@ -12,7 +11,7 @@ export const instanceWithAuth = axios.create({
 
 instanceWithAuth.interceptors.request.use(
     function (config) {
-        const access_token = cookies.get("access_token");
+        const access_token = localStorage.getItem("access_token");
         config.headers.Authorization = access_token;
         return config;
     },

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { instance } from "../../api/axios";
-import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
+import AuthButton from "../../components/elem/AuthButton";
 import MobileLayout from "../../layout/MobileLayout";
-import { Helmet } from "react-helmet";
+import { instance } from "../../api/axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const navi = useNavigate();
+  useEffect(() => {
+    document.title = "훈수 - 회원가입";
+  }, []);
 
   const [user, setUser] = useState({
     email: "",
@@ -107,9 +109,6 @@ const SignUpPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>훈수 — 회원가입</title>
-      </Helmet>
       <MobileLayout>
         <Container onSubmit={submitButtonHandler}>
           <div>

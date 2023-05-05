@@ -7,7 +7,6 @@ import WriteFooter from "../footer/WriteFooter";
 import ModalPortal from "../modal/ModalPortal";
 import MobileLayout from "../../layout/MobileLayout";
 import CateogryModal from "../modal/CateogryModal";
-import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
@@ -16,6 +15,10 @@ import * as St from "./EditPost.style";
 
 const EditPost = () => {
   FalseGuard();
+
+  useEffect(() => {
+    document.title = "훈수 - 수정하기";
+  }, []);
 
   const location = useLocation();
 
@@ -134,9 +137,6 @@ const EditPost = () => {
 
   return (
     <>
-      <Helmet>
-        <title>훈수 — 수정하기</title>
-      </Helmet>
       <MobileLayout>
         <>
           {/* <WriteForm /> */}

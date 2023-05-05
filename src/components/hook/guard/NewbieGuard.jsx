@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { cookies } from "../../../api/cookies";
+import getCookie from "../../util/getCookie";
 
 const NewbieGuard = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    const isFirst = cookies.get("isFirst");
+    const isFirst = getCookie("isFirst");
+    console.log(getCookie());
+    console.log(getCookie("isFirst"));
+    console.log("isFirst", isFirst);
+    // const isFirst = document.cookie("isFirst");
     if (!isFirst) {
       nav("/onboarding");
     }

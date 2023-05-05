@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MyPageMenu from "../../components/menu/MyPageMenu";
-import MobileLayout from "../../layout/MobileLayout";
 import MyPageHeader from "../../components/header/MyPageHeader";
+import MobileLayout from "../../layout/MobileLayout";
 import MyPageGreeting from "../../components/greeting/MyPageGreeting";
-import { Helmet } from "react-helmet";
 
 const MyPage = () => {
+  useEffect(() => {
+    document.title = "훈수 - 마이페이지";
+  }, []);
+
   return (
     <>
-      <Helmet>
-        <title>훈수 — 마이페이지</title>
-      </Helmet>
       <MobileLayout>
         <MyPageHeader />
         <MyPageGreeting />

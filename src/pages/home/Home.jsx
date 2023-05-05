@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import NewbieGuard from "../../components/hook/guard/NewbieGuard";
 import HomeGreeting from "../../components/greeting/HomeGreeting";
 import HomeContents from "../../components/post/HomeContents";
 import MobileLayout from "../../layout/MobileLayout";
-import { Helmet } from "react-helmet";
 
 const Home = () => {
   NewbieGuard();
+  useEffect(() => {
+    document.title = "훈수";
+  }, []);
 
   return (
     <>
-      <Helmet>
-        <title>훈수</title>
-      </Helmet>
       <MobileLayout>
         <Header />
         <HomeGreeting />

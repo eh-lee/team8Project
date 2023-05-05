@@ -7,8 +7,7 @@ import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default
 import DetailImgs from "../img/DetailImgs";
 import { ReactComponent as IconComment } from "../../assets/icons/common/comment.svg";
 import { ReactComponent as IconView } from "../../assets/icons/common/eye.svg";
-import * as St from "./DetailPostContents.style"
-import { cookies } from "../../api/cookies";
+import * as St from "./DetailPostContents.style";
 
 const DetailPostContents = () => {
   const { postIdx } = useParams();
@@ -16,7 +15,7 @@ const DetailPostContents = () => {
   const nav = useNavigate();
 
   // 로그인 확인
-  const isLogin = cookies.get('nickname') ? true : false;
+  const isLogin = localStorage.getItem("nickname") ? true : false;
 
   // 상세 게시글을 담을 state
   const [detailPost, setDetailPost] = useState([]);
@@ -45,21 +44,20 @@ const DetailPostContents = () => {
         setCreatedDate(formattingTime);
         setPostLikesCount(+data.post.likesCount);
         setIsLike(data.post.IsLike);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
     getDetailPost();
   }, []);
 
   // 게시글 좋아요 버튼
   const clickPostLike = async () => {
-    if (isLogin){
-    await instanceWithAuth.put(`/postlike/post/${postIdx}`);
-    setIsLike((prev) => !prev);
-    setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
-  } else {
-    alert('로그인 후 이용해주세요!');
-  }
+    if (isLogin) {
+      await instanceWithAuth.put(`/postlike/post/${postIdx}`);
+      setIsLike((prev) => !prev);
+      setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+    } else {
+      alert("로그인 후 이용해주세요!");
+    }
   };
 
   return (
@@ -70,16 +68,10 @@ const DetailPostContents = () => {
         <St.UserInfoLvImg src={level1} />
         <St.InfoCont>
           <St.UserInfoCont>
-            <St.UserInfoNickname>
-              {detailPost.nickname}
-            </St.UserInfoNickname>
-            <St.UserInfoLevel>
-              {detailPost.userLevel}레벨
-            </St.UserInfoLevel>
+            <St.UserInfoNickname>{detailPost.nickname}</St.UserInfoNickname>
+            <St.UserInfoLevel>{detailPost.userLevel}레벨</St.UserInfoLevel>
           </St.UserInfoCont>
-          <St.UserInfoCreatedAt>
-            {createdDate}
-          </St.UserInfoCreatedAt>
+          <St.UserInfoCreatedAt>{createdDate}</St.UserInfoCreatedAt>
         </St.InfoCont>
       </St.InfoWrap>
       {/* 게시글 내용 */}
@@ -94,15 +86,10 @@ const DetailPostContents = () => {
         <St.ContentInfo>
           {/* 좋아요 버튼, 개수 */}
           <St.ContentIconCont>
-            <St.ContentIconCont
-              onClick={() => clickPostLike()}
-              pointerOn="on"
-            >
+            <St.ContentIconCont onClick={() => clickPostLike()} pointerOn="on">
               <Like isLike={isLike} />
             </St.ContentIconCont>
-            <St.ContentCount>
-              {postLikesCount}
-            </St.ContentCount>
+            <St.ContentCount>{postLikesCount}</St.ContentCount>
           </St.ContentIconCont>
           {/* 조회수 */}
           <St.ContentIconCont>
@@ -110,9 +97,7 @@ const DetailPostContents = () => {
               {/* <StDetailPostContentImg src={view} /> */}
               <IconView />
             </St.ContentIcon>
-            <St.ContentCount>
-              {detailPost.postViewCount}
-            </St.ContentCount>
+            <St.ContentCount>{detailPost.postViewCount}</St.ContentCount>
           </St.ContentIconCont>
           {/* 댓글 개수 */}
           <St.ContentIconCont>
@@ -120,9 +105,7 @@ const DetailPostContents = () => {
               {/* <StDetailPostContentImg src={comment} /> */}
               <IconComment />
             </St.ContentIcon>
-            <St.ContentCount>
-              {+detailPost.commentCount}
-            </St.ContentCount>
+            <St.ContentCount>{+detailPost.commentCount}</St.ContentCount>
           </St.ContentIconCont>
         </St.ContentInfo>
       </St.ContentWrap>

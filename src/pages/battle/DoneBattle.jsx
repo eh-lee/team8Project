@@ -1,27 +1,27 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import MobileLayout from "../../layout/MobileLayout";
 import styled from "styled-components";
-import FooterNav from "../../components/footer/FooterNav";
-import { useEffect } from "react";
-import { instance } from "../../api/axios";
 import ChatCard from "../../components/chat/ChatCard";
-import { Helmet } from "react-helmet";
+import FooterNav from "../../components/footer/FooterNav";
+import MobileLayout from "../../layout/MobileLayout";
+import { instance } from "../../api/axios";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Battle = () => {
   const nav = useNavigate();
+  useEffect(() => {
+    document.title = "훈수 - 지난 배틀";
+  }, []);
 
   const [chattingList, setChattingList] = useState([]);
-  
+
   const isRealTime = false;
 
   useEffect(() => {
     const doneChatGet = async () => {
       try {
-        const res = await instance.get(
-          "/chat/doneChat"
-        );
-        
+        const res = await instance.get("/chat/doneChat");
+
         // setChattingList(res.data.sth)
         // setChatSaveIdx(res.data.sth.sth);
       } catch (error) {
@@ -31,12 +31,8 @@ const Battle = () => {
     doneChatGet();
   }, []);
 
-
-
   // 1. 전체 채팅 목록 (roomName, chatSaveIndx) => doneBattle
   // /api/chat/doneChat
-
-
 
   // maxParty: number,
   // nickname: string,
@@ -47,9 +43,6 @@ const Battle = () => {
 
   return (
     <>
-      <Helmet>
-        <title>훈수 — 훈수배틀</title>
-      </Helmet>
       <MobileLayout>
         {/* 배틀 페이지 헤더 */}
         <StBattleHeaderWrap>
@@ -63,8 +56,7 @@ const Battle = () => {
                 지난 배틀
               </StBattleCategory>
             </StBattleCategoryCont>
-            <StBattleBackground>
-            </StBattleBackground>
+            <StBattleBackground></StBattleBackground>
           </StBattleHeaderSub>
         </StBattleHeaderWrap>
         {/* 배틀 페이지 헤더 */}
