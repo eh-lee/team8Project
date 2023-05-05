@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Like from "../like/Like";
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
 import DetailPostCommentReply from "./DetailPostCommentReply";
 import { instanceWithAuth } from "../../api/axios";
 import { useFormattingDate } from "../hook/useFormattingDate";
-import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
-import * as St  from "./DetailPostComment.style";
-import { cookies } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
+import * as St from "./DetailPostComment.style";
 
 const DetailPostComment = ({ comment, isComment, setIsComment }) => {
-
-  const curNickname = cookies.get('nickname');
+  const curNickname = localStorage.getItem("nickname");
 
   const nav = useNavigate();
 
@@ -46,19 +44,18 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
 
   // 댓글 좋아요 버튼
   const clickCommentLike = () => {
-    if(curNickname){
-    instanceWithAuth.put(
-      `/commentLike/${comment.postIdx}/${comment.commentIdx}`
-    );
-    setIsLike((prev) => !prev);
-    setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
-  } else {
-    alert('로그인 후 이용해주세요!');
-  }
+    if (curNickname) {
+      instanceWithAuth.put(
+        `/commentLike/${comment.postIdx}/${comment.commentIdx}`
+      );
+      setIsLike((prev) => !prev);
+      setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+    } else {
+      alert("로그인 후 이용해주세요!");
+    }
   };
 
   // =============================================== 답훈수 ===============================================
-
 
   // 답훈수 관리 state
   const [replyList, setReplyList] = useState([]);
@@ -71,7 +68,6 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
   const [newReply, setNewReply] = useState();
   const [curCommentIdx, setCurCommentIdx] = useState("초기값");
 
-
   // 답훈수 get요청
   useEffect(() => {
     const getReplyList = async () => {
@@ -82,7 +78,6 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
     };
     getReplyList();
   }, [comment]);
-
 
   // 답훈수 달기 버튼 핸들러
   const replyCreateHandler = () => {
@@ -106,13 +101,16 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
     e.preventDefault();
 
     try {
-      const {data} = await instanceWithAuth.post(`/reply/${comment.postIdx}/${curCommentIdx}`, { comment: newReply });
+      const { data } = await instanceWithAuth.post(
+        `/reply/${comment.postIdx}/${curCommentIdx}`,
+        { comment: newReply }
+      );
       setIsComment(!isComment);
       setReplyList((prev) => [...prev, data]);
       setNewReply("");
-    } catch(error) {
-        console.error("답훈수작성", error);
-      };
+    } catch (error) {
+      console.error("답훈수작성", error);
+    }
   };
 
   return (
@@ -140,7 +138,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
             <St.CommentInfoUserInfoCreatedAt>
               {createdDate}
               <St.CommentDelete onClick={deleteCommentHandler}>
-                { comment.nickname === curNickname ? <St.IconTrash /> : null }
+                {comment.nickname === curNickname ? <St.IconTrash /> : null}
               </St.CommentDelete>
             </St.CommentInfoUserInfoCreatedAt>
           </St.CommentInfoUserInfoWrap>
@@ -150,7 +148,6 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
         <St.CommentWrap>
           <St.Comment> {comment.comment} </St.Comment>
           <St.CommentLikeCont>
-
             <St.CommentLikeIcon pointerOn="on" onClick={clickCommentLike}>
               <Like isLike={isLike} size={16} />
             </St.CommentLikeIcon>
@@ -180,7 +177,11 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
           {replyisActive && (
             <St.ReplyListCont>
               {replyList?.map((reply) => (
-                <DetailPostCommentReply key={reply.replyIdx} reply={reply} curNickname={curNickname} />
+                <DetailPostCommentReply
+                  key={reply.replyIdx}
+                  reply={reply}
+                  curNickname={curNickname}
+                />
               ))}
             </St.ReplyListCont>
           )}
@@ -190,9 +191,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
         {/* ========================== 답글 입력 푸터 ========================== */}
         {curCommentIdx !== "초기값" && !isComment ? (
           <St.Footer>
-            <St.ReplyInputCont
-              onSubmit={newReplysubmitHandler}
-            >
+            <St.ReplyInputCont onSubmit={newReplysubmitHandler}>
               <St.ReplyInput
                 required
                 type="text"
@@ -202,9 +201,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
                 autoFocus
                 maxLength="100"
               />
-              <St.ReplyInputBtn type="submit">
-                등록
-              </St.ReplyInputBtn>
+              <St.ReplyInputBtn type="submit">등록</St.ReplyInputBtn>
             </St.ReplyInputCont>
           </St.Footer>
         ) : null}

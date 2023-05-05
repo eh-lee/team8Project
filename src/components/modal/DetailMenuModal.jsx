@@ -36,7 +36,7 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
     instanceWithAuth
       .delete(`/postCards/post/createPost/${postIdx}`)
       .then((response) => {
-        alert(response.data.msg);
+        alert(response.data.message);
         nav("/board");
       })
       .catch((error) => {

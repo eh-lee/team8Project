@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { instance } from "../../api/axios";
-import AuthButton from "../../components/elem/AuthButton";
 import AuthInput from "../../components/elem/AuthInput";
+import AuthButton from "../../components/elem/AuthButton";
 import MobileLayout from "../../layout/MobileLayout";
-import { Helmet } from "react-helmet";
+import { instance } from "../../api/axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const navi = useNavigate();
+  useEffect(() => {
+    document.title = "훈수 - 회원가입";
+  }, []);
 
   const [user, setUser] = useState({
     email: "",
@@ -23,7 +25,7 @@ const SignUpPage = () => {
       return { ...prev, [name]: value };
     });
   };
-  
+
   const validLengthHandler = (e) => {
     if (e.target.value.length > 6) {
       e.target.value = e.target.value.slice(0, 6);
@@ -100,16 +102,13 @@ const SignUpPage = () => {
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");
     } catch (e) {
-      const errorMsg = e.response.data.msg;
+      const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };
 
   return (
     <>
-      <Helmet>
-        <title>훈수 — 회원가입</title>
-      </Helmet>
       <MobileLayout>
         <Container onSubmit={submitButtonHandler}>
           <div>

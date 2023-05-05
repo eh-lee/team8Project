@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import MobileLayout from "../../layout/MobileLayout";
 import styled from "styled-components";
+import ChatCard from "../../components/chat/ChatCard";
 import FooterNav from "../../components/footer/FooterNav";
 import ModalPortal from "../../components/modal/ModalPortal";
-import CreateChatModal from "../../components/modal/CreateChatModal";
-import { useEffect } from "react";
-import { instance } from "../../api/axios";
-import ChatCard from "../../components/chat/ChatCard";
-import { Helmet } from "react-helmet";
 import battleCreate from "../../assets/battle/battleCreate.png";
+import MobileLayout from "../../layout/MobileLayout";
+import CreateChatModal from "../../components/modal/CreateChatModal";
+import { instance } from "../../api/axios";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Battle = () => {
   const nav = useNavigate();
+  useEffect(() => {
+    document.title = "훈수 - 실시간 배틀";
+  }, []);
 
   const [chattingList, setChattingList] = useState([]);
 
@@ -53,9 +55,6 @@ const Battle = () => {
 
   return (
     <>
-      <Helmet>
-        <title>훈수 — 훈수배틀</title>
-      </Helmet>
       <MobileLayout>
         {/* 배틀 페이지 헤더 */}
         <StBattleHeaderWrap>

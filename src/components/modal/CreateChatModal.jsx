@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
-import { cookies } from "../../api/cookies";
-import {ReactComponent as BackIcon} from "../../assets/icons/common/back.svg"
-import * as St from "./CreateChatModal.style"
+import { ReactComponent as BackIcon } from "../../assets/icons/common/back.svg";
+import * as St from "./CreateChatModal.style";
 
 const CreateChatModal = ({ open, close }) => {
   const [room, setRoom] = useState("");
@@ -11,8 +10,7 @@ const CreateChatModal = ({ open, close }) => {
   // ======================= join 옮기는 중 ============================
   const modalRef = useRef();
   const navi = useNavigate();
-
-  const nickname = cookies.get("nickname");
+  const nickname = localStorage.getItem("nickname");
 
   const [chatRoom, setChatRoom] = useState({
     // roomName: "",
@@ -36,7 +34,7 @@ const CreateChatModal = ({ open, close }) => {
 
   const createChatHandler = async (e) => {
     e.preventDefault();
-    alert('현재 점검 중인 기능입니다.')
+    alert("현재 점검 중인 기능입니다.");
 
     // if (!room) {
     //   return alert("방 제목을 입력해 주세요.");
@@ -150,13 +148,13 @@ export default CreateChatModal;
 // import { useNavigate } from "react-router-dom";
 // import styled from "styled-components";
 // import { instanceWithAuth } from "../../api/axios";
-// import { cookies } from "../../api/cookies";
 
 // const CreateChatModal = ({ open, close }) => {
 //   const modalRef = useRef();
 //   const navi = useNavigate();
 
 //   const nickname = cookies.get("nickname");
+//   const nickname = localStorage.getItem("nickname");
 
 //   const [chatRoom, setChatRoom] = useState({
 //     roomName: "",

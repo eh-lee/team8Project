@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { cookies } from "../../../api/cookies";
+import getCookie from "../../util/getCookie";
 
 const OldbieGuard = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    const isNewbie = cookies.get("isNewbie");
+    const isNewbie = getCookie("isNewbie");
+    // const isNewbie = document.cookie("isNewbie");
     if (isNewbie) {
       nav("/");
     }

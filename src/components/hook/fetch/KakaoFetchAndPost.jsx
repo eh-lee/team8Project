@@ -1,5 +1,4 @@
 import axios from "axios";
-import { cookies } from "../../../api/cookies";
 import { instance } from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -41,12 +40,10 @@ const KakaoFetchAndPost = ({ code }) => {
           }
         );
         if (await response) {
-          cookies.set("access_token", response.headers.authorization, {
-            path: "/",
-          });
-          cookies.set("nickname", response.data.nickname, { path: "/" });
-          cookies.set("email", response.data.email, { path: "/" });
-          cookies.set("isNewbie", "F", { path: "/" });
+          localStorage.setItem("email", response.data.email);
+          localStorage.setItem("access_token", response.headers.authorization);
+          localStorage.setItem("nickname", response.data.nickname);
+          document.cookie = `isNewbie=F; path=/;`;
         }
         return navi("/");
       } catch (err) {

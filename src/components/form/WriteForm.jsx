@@ -58,18 +58,18 @@ const WriteForm = () => {
     formData.append("tag", tag);
 
     for (let i = 0; i < imgs.length; i++) {
-      formData.append('files', imgs[i]);
-    };
+      formData.append("files", imgs[i]);
+    }
 
     if (title.length < 3 || title.length > 25) {
       alert("제목은 3자 이상, 25자 이하여야 합니다!");
       return;
-    };
+    }
 
     if (desc.length < 10 || desc.length > 2000) {
       alert("내용은 10자 이상, 2000자 이하여야 합니다!");
       return;
-    };
+    }
 
     if (maincategory === "카테고리") {
       alert("카테고리를 선택해 주세요.");
@@ -86,7 +86,7 @@ const WriteForm = () => {
       alert("글 작성에 성공하였습니다.");
       navi("/board");
     } catch (e) {
-      const errorMsg = e.response.data.msg;
+      const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };

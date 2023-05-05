@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from "react";
-import queryString from "query-string";
 import io from "socket.io-client";
 import Messages from "../../components/messages/Messages";
 import Input from "../../components/input/Input";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { instanceWithAuth } from "../../api/axios";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
 import ModalPortal from "../../components/modal/ModalPortal";
 import ChatEndModal from "../../components/modal/ChatEndModal";
 import MobileLayout from "../../layout/MobileLayout";
-import { cookies } from "../../api/cookies";
+import { useNavigate } from "react-router-dom";
+import { instanceWithAuth } from "../../api/axios";
 
 const ENDPOINT = "http://localhost:4000";
 // const ENDPOINT = "http://43.201.45.82:3000";
 let socket;
 
-
 const Chat = () => {
   const nav = useNavigate();
-  const curNickname = cookies.get("nickname");
+  const curNickname = localStorage.getItem("nickname");
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
@@ -49,10 +46,13 @@ const Chat = () => {
   // }, []);
   // for test
 
-
   // 룸 입장
   useEffect(() => {
-    const { name, room, maxParty } = queryString.parse(window.location.search);
+    // const { name, room, maxParty } = queryString.parse(window.location.search);
+    const searchParams = new URLSearchParams(window.location.search);
+    const name = searchParams.get("name");
+    const room = searchParams.get("room");
+    const maxParty = searchParams.get("maxParty");
 
     socket = io(ENDPOINT);
 
@@ -61,7 +61,6 @@ const Chat = () => {
     setMaxParty(maxParty);
 
     socket.emit("join", { name, room, maxParty }, (error) => {
-
       if (error) {
         alert(error);
       }
@@ -98,7 +97,6 @@ const Chat = () => {
     // console.log("모달이 닫힌거임!");
     setIsChatEndModalOpen(false);
   };
-
 
   return (
     <>

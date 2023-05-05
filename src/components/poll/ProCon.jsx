@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { cookies } from "../../api/cookies";
 import { instanceWithAuth } from "../../api/axios";
-import {ReactComponent as ThumbsUp} from "../../assets/icons/common/thumbs-up.svg"
+import { ReactComponent as ThumbsUp } from "../../assets/icons/common/thumbs-up.svg";
+import { ColoredExperienceBar } from "../greeting/HomeGreeting.style";
 import * as St from "./ProCon.style";
 
 const ProCon = ({
@@ -14,7 +14,6 @@ const ProCon = ({
   parentProInputValue,
   parentConInputValue,
 }) => {
-
   const [pollType, setPollType] = useState("proCon");
 
   const [pollClose, setPollClose] = useState(true);
@@ -23,8 +22,7 @@ const ProCon = ({
     setPollClose(false);
   };
 
-
-  const nickname = cookies.get("nickname");
+  const nickname = localStorage.getItem("nickname");
   const [proCount, setProCount] = useState(detailProCount);
   const [conCount, setConCount] = useState(detailConCount);
 
@@ -36,7 +34,6 @@ const ProCon = ({
 
   const [proInputValue, setProInputValue] = useState(parentProInputValue);
   const [conInputValue, setConInputValue] = useState(parentConInputValue);
-
 
   const voteProHandler = () => {
     if (nickname) {
@@ -78,14 +75,12 @@ const ProCon = ({
     }
   };
 
-
-
   useEffect(() => {
     const putVote = async () => {
       await instanceWithAuth.put(`/prefer/post/${detailPostIdx}`, {
         proInputValue,
-     
-       conInputValue,
+
+        conInputValue,
       });
     };
     putVote();
@@ -155,7 +150,6 @@ const ProCon = ({
             </St.ProConColumn>
           ) : (
             // onClick 걸고 state 관리
-
             <St.DetailConColumn
               onClick={voteConHandler}
               isVoted={conInputValue}

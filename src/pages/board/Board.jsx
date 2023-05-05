@@ -6,11 +6,13 @@ import BoardPostCard from "../../components/post/BoardPostCard";
 import InfiniteScroll from "../../components/hook/scroll/InfiniteScroll";
 import BoardMainCategory from "../../components/board/BoardMainCategory";
 import BoardCategorySlider from "../../components/board/BoardCategorySlider";
-import { Helmet } from "react-helmet";
 import { instance } from "../../api/axios";
 import * as St from "../../components/board/Board.style";
 
 const Board = () => {
+  useEffect(() => {
+    document.title = "훈수 - 게시판";
+  }, []);
   const BoardCallback = (x, y, z) => {
     setPrevCategory(x);
     setCategory(y);
@@ -56,9 +58,6 @@ const Board = () => {
 
   return (
     <>
-      <Helmet>
-        <title>훈수게시판</title>
-      </Helmet>
       <MobileLayout>
         <St.Header>
           <St.Wrap>

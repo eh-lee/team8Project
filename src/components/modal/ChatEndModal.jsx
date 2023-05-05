@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import io from "socket.io-client";
-import { cookies } from "../../api/cookies";
-import * as St from "./ChatEndModal.style"
+import * as St from "./ChatEndModal.style";
 
 const ENDPOINT = "http://localhost:4000";
 let socket;
@@ -11,7 +10,7 @@ let socket;
 // const ChatEndModal = ({ open, close, isAdmin, room, messages }) => {
 const ChatEndModal = ({ open, close, room, messages }) => {
   // nickname: 방을 만든 사람의 nickname
-  const nickname = cookies.get("nickname");
+  const nickname = localStorage.getItem("nickname");
 
   const nav = useNavigate();
 
@@ -131,7 +130,6 @@ const ChatEndModal = ({ open, close, room, messages }) => {
 };
 
 export default ChatEndModal;
-
 
 // // ====
 // <StFooBG onClick={close} ref={modalRef}>

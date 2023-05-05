@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { instance } from "../../api/axios";
-import { cookies } from "../../api/cookies";
 import * as St from "./LiveBattleCard.style";
 
 const LiveBattleCard = () => {
   const nav = useNavigate();
   const [roomName, setRoomName] = useState("");
-  const nickname = cookies.get("nickname");
 
   useEffect(() => {
     const getLiveBattle = async () => {
@@ -23,7 +21,7 @@ const LiveBattleCard = () => {
   }, []);
 
   const battleInHandler = () => {
-    alert('현재 점검 중인 기능입니다.')
+    alert("현재 점검 중인 기능입니다.");
     // nav(`/battle/chat?name=${nickname}&room=${roomName}`);
   };
 

@@ -3,13 +3,12 @@ import myPageMenu from "../../assets/icons/common/myPageMenu.png";
 import ModalPortal from "../../components/modal/ModalPortal";
 import LogoutModal from "../../components/modal/LogoutModal";
 import SignOutModal from "../../components/modal/SignOutModal";
-import { cookies } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import * as St from "./MyPageMenu.style";
 
 const MyPageMenu = () => {
   const navi = useNavigate();
-  const nickname = cookies.get("nickname");
+  const nickname = localStorage.getItem("nickname");
 
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
@@ -52,7 +51,7 @@ const MyPageMenu = () => {
       </ModalPortal>
 
       <St.Wrap>
-        <St.Menu onClick={()=> alert('아직 구현중인 기능입니다.')}>
+        <St.Menu onClick={() => alert("아직 구현중인 기능입니다.")}>
           <St.Sub>서비스 정보</St.Sub>
           <St.Icon src={myPageMenu} />
         </St.Menu>
@@ -75,12 +74,12 @@ const MyPageMenu = () => {
             </St.Menu>
           </>
         )}
-        {nickname ?
-          (<St.Menu onClick={SignOutModalOpenHandler}>
+        {nickname ? (
+          <St.Menu onClick={SignOutModalOpenHandler}>
             <St.Sub>회원 탈퇴</St.Sub>
             <St.Icon src={myPageMenu} />
-          </St.Menu>)
-          : null}
+          </St.Menu>
+        ) : null}
       </St.Wrap>
     </>
   );

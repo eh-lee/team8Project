@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Messages from "../../components/messages/Messages";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
+import Messages from "../../components/messages/Messages";
 import MobileLayout from "../../layout/MobileLayout";
-import { cookies } from "../../api/cookies";
 import { instance } from "../../api/axios";
-
+import { useNavigate } from "react-router-dom";
 
 // 프롭스: {chatSaveIdx, room} 요 놈들.. 내려주는  페이지 나중에 확인해서 잡기..
 const Chat = ({ chatSaveIdx, room }) => {
   const nav = useNavigate();
-  const curNickname = cookies.get("nickname");
+  const curNickname = localStorage.getItem("nickname");
 
   // const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
@@ -37,7 +35,7 @@ const Chat = ({ chatSaveIdx, room }) => {
       <MobileLayout>
         <StChatHeader>
           <StChatHeaderCont>
-            <StChatClose  onClick={()=>nav(-1)}>
+            <StChatClose onClick={() => nav(-1)}>
               <StChatCloseImg src={closeBtn} />
             </StChatClose>
             <StChatInfo>

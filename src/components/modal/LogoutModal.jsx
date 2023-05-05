@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { cookies } from "../../api/cookies";
-import * as St from "./LogoutModal.style"
+import * as St from "./LogoutModal.style";
 
 const LogoutModal = ({ open, close }) => {
   const navi = useNavigate();
@@ -23,12 +22,9 @@ const LogoutModal = ({ open, close }) => {
   }, [modalRef, open, close]);
 
   const logout = () => {
-    const userLogout = ["access_token", "nickname", "email"];
-
-    userLogout.forEach((name) => {
-      cookies.remove(name, { path: "/" });
-    });
-
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("email");
     alert("로그아웃 되었습니다.");
     navi("/");
   };

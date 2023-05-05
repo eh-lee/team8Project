@@ -1,12 +1,12 @@
 import React from "react";
-import { cookies } from "../../api/cookies";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png";
 import * as St from "./MyPageGreeting.style";
 
 const MyPageGreeting = () => {
-  const nickname = cookies.get("nickname");
-  const email = cookies.get("email");
+  const email = localStorage.getItem("email");
+  const nickname = localStorage.getItem("nickname");
+
   const currExp = 10;
   const goalExp = 100;
   const exp = (currExp / goalExp) * 100;

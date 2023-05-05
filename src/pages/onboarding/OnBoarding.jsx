@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import OldbieGuard from "../../components/hook/guard/OldbieGuard";
 import MobileLayout from "../../layout/MobileLayout";
 import OnBoardingContents from "../../components/onboarding/OnBoadingContents";
-import { Helmet } from "react-helmet";
-import { cookies } from "../../api/cookies";
 
 const OnBoarding = () => {
   OldbieGuard();
-  cookies.set("isFirst", "F", { path: "/" });
+  document.cookie = `isFirst=F; path=/;`;
+
+  useEffect(() => {
+    document.title = "훈수 - 온보딩";
+  }, []);
 
   return (
     <>
-      <Helmet>
-        <title>훈수 — 온보딩</title>
-      </Helmet>
       <MobileLayout>
         <OnBoardingContents />
       </MobileLayout>
