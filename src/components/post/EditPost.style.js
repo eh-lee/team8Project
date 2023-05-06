@@ -9,6 +9,10 @@ const WriteHeader = styled.div`
   top: 0;
   width: 100%;
   max-width: 400px;
+  height: 64px;
+  width: 400px;
+  display: flex;
+  align-items: center;
   color: rgb(70, 70, 70);
 `;
 
@@ -16,18 +20,18 @@ const WriteHeaderCont = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-  // *============ HEADER 높이 ===============*
-  padding-bottom: 2vh;
-  height: 5vh;
-  // *============ HEADER 높이 ===============*
+  align-items: center;
+  border-bottom: 0.1rem solid #E1E2E4;
+  height: 100%;
+  width: 100%;
 `;
 
 const WriteCanc = styled.div`
   margin-left: 7.5%;
-  color: rgb(180, 180, 180);
-  font-size: 0.9rem;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #DCDCDC;
   &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
@@ -35,10 +39,11 @@ const WriteCanc = styled.div`
 `;
 
 const WriteCategory = styled.div`
-  gap: 0.25rem;
+  gap: 8px;
   display: flex;
-  font-size: 0.95rem;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
 `;
 
 const MainCat = styled.div``;
@@ -69,8 +74,10 @@ const ArrowDownIcon = styled(ArrowDown)`
 
 const WritePost = styled.div`
   margin-right: 7.5%;
-  color: rgb(180, 180, 180);
-  font-size: 0.9rem;
+  color: #DCDCDC;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
   &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
@@ -78,8 +85,8 @@ const WritePost = styled.div`
 `;
 
 const WriteForm = styled.form`
-  margin-top: 3.5rem;
-  padding-top: 1rem;
+  padding: 8px 0;
+  margin-top: 64px;
   display: flex;
   width: 100%;
   max-width: 400px;
@@ -89,12 +96,16 @@ const WriteForm = styled.form`
 `;
 
 const WriteTitle = styled.input`
-  font-size: 1.3rem;
-  margin: 1rem 0;
-  padding: 0.5rem 1rem;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.023em;
+  padding: 16px 8px;
   width: 80%;
+  height: 64px;
   border: none;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  margin-bottom: 16px;
+  border-bottom: 0.1rem solid #F4F4F5;
 
   &:focus {
     outline: none;
@@ -107,10 +118,12 @@ const WriteTitle = styled.input`
 `;
 
 const WriteContent = styled.textarea`
-  font-size: 0.85rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.0056em;
   width: 80%;
-  padding: 0 1rem 1rem 1rem;
-  /* scroll issue */
+  padding: 8px;
   border: none;
   min-height: 40vh;
   overflow-y: scroll;
@@ -129,7 +142,7 @@ const WriteContent = styled.textarea`
   }
 
   ::placeholder {
-    color: rgb(180, 180, 180);
+    color: #F4F4F5;
     white-space: pre-wrap;
   }
 `;

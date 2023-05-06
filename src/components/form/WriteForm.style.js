@@ -11,9 +11,9 @@ const VoteText = styled.p`
   left: 45px;
   top: 7px;
 `;
+
 const Poll = styled.button`
   gap: 0.25rem;
-  /* display: flex; */
   justify-content: center;
   align-items: center;
   min-height: 32px;
@@ -75,12 +75,14 @@ const ModalCont = styled.div`
 `;
 
 const WriteTitle = styled.input`
-  font-size: 1.3rem;
-  margin: 1rem 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
   padding: 0.5rem 1rem;
   width: 80%;
+  height: 64px;
   border: none;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  border-bottom: 0.1rem solid #E1E2E4;
 
   &:focus {
     outline: none;
@@ -88,11 +90,12 @@ const WriteTitle = styled.input`
   }
 
   ::placeholder {
-    color: rgb(180, 180, 180);
+    color: #DCDCDC;
   }
 `;
 
-const MainCat = styled.div``;
+const MainCat = styled.div`
+`;
 
 const SubCat = styled.div`
   color: rgb(180, 180, 180);
@@ -119,15 +122,14 @@ const WriteContent = styled.textarea`
   }
 
   ::placeholder {
-    color: rgb(180, 180, 180);
+    color: #DCDCDC;
     white-space: pre-wrap;
   }
 `;
 
 const WriteForm = styled.form`
-/* margin-top: 3.5rem; */
-margin-top: 70px;
-  padding-top: 1rem;
+  margin-top: 48px;
+  padding-top: 16px;
   display: flex;
   width: 100%;
   max-width: 400px;
@@ -141,9 +143,10 @@ const PageWithFooterWrapper = styled.div`
 `;
 
 const WriteCanc = styled.div`
+  line-height: 24px;
   margin-left: 7.5%;
   color: rgb(180, 180, 180);
-  font-size: 0.9rem;
+  font-size: 18px;
   &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
@@ -151,9 +154,10 @@ const WriteCanc = styled.div`
 `;
 
 const WritePost = styled.div`
+  line-height: 24px;
   margin-right: 7.5%;
   color: rgb(180, 180, 180);
-  font-size: 0.9rem;
+  font-size: 18px;
   &:hover {
     cursor: pointer;
     color: rgb(70, 70, 70);
@@ -166,25 +170,25 @@ const WriteHeader = styled.div`
   top: 0;
   width: 100%;
   max-width: 400px;
+  height: 64px;
   color: rgb(70, 70, 70);
-  /* margin-top:16px; */
 `;
 
 const WriteHeaderCont = styled.div`
-padding-top:61px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
-  padding-bottom: 2vh;
-  height: 5vh;
-`;
+  align-items: center;
+  border-bottom: 0.1rem solid #E1E2E4;
+  height: 64px;
+  `;
 
 const WriteCategory = styled.div`
-  gap: 0.25rem;
+  gap: 8px;
   display: flex;
-  font-size: 0.95rem;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
   font-weight: bold;
 `;
 

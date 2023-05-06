@@ -16,39 +16,37 @@ const PollWriteHeader = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
+  height: 64px;
   max-width: 400px;
   color: rgb(70, 70, 70);
 `;
 
 const PollWriteHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  border-bottom: 0.1rem solid #E1E2E4;
   // *============ HEADER 높이 ===============*
   padding-bottom: 2vh;
-  height: 5vh;
+  height: 64px;
   // *============ HEADER 높이 ===============*
 `;
 
 const PollWriteCanc = styled.div`
-  /* border: 1px solid red; */
   margin-left: 7.5%;
+  height: 24px;
 
   &:hover {
     cursor: pointer;
-    color: rgb(175, 175, 175);
   }
 `;
 
 const PollWriteCategory = styled.div`
-  /* border: 1px solid gray; */
-  gap: 0.25rem;
   display: flex;
-  font-size: 0.95rem;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
 `;
 
 const PollWirteTitle = styled.div`
@@ -118,21 +116,24 @@ const PollSelectType = styled.div`
   }
 `;
 
-const PollTitle = styled.div``;
+const PollTitle = styled.div`
+`;
 
 const PollTitleText = styled.div`
   margin: 10px 20px;
 `;
 
 const PollButton = styled.button`
-  /* margin-top: 50%; */
   position: fixed;
-  /* width: 47.8%; */
   width: 360px;
+  height: 56px;
   bottom: 0;
   padding: 16px 8px;
   margin: 20px;
   color: white;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ef3f61;
   border-radius: 10px;
   outline: none;

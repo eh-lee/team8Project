@@ -40,8 +40,9 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
         nav("/board");
       })
       .catch((error) => {
-        console.error("게시글 삭제", error);
-      });
+        const errorMsg = error.response.data.message;
+        alert(`${errorMsg}`);
+      })
   };
 
   return open ? (

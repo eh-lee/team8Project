@@ -34,6 +34,7 @@ const PostCardRow = styled.div`
 `;
 
 const PostCardCatBtn = styled.button`
+  height: 18px;
   color: white;
   background: #3a3a59;
   border-radius: 100px;

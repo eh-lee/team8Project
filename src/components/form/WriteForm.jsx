@@ -84,6 +84,7 @@ const WriteForm = () => {
       alert("글 작성에 성공하였습니다.");
       navi("/board");
     } catch (e) {
+      // alert('현재 해당 기능 점검 중에 있습니다.')
       const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }

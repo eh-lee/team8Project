@@ -30,6 +30,7 @@ const MainCat = styled.li`
 `;
 
 const CatLabel = styled.button`
+  height: 18px;
   color: white;
   background: #3a3a59;
   border-radius: 100px;

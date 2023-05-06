@@ -11,6 +11,7 @@ const Column = styled.div`
 `;
 
 const Nav = styled.nav`
+  height: 80px;
   display: flex;
   flex-direction: row;
   padding: 0 1rem;
@@ -24,20 +25,22 @@ const FooterUl = styled.ul`
 `;
 
 const FooterBox = styled.div`
-  border: 1px solid green;
-  padding: 1.5rem 0;
   display: flex;
   width: 25%;
   text-align: center;
   justify-content: space-evenly;
+  align-items: center;
   &:hover {
     color: #3A3A59;
     cursor: pointer;
     path {
           stroke: #3A3A59;
+          fill: ${props => props.fill ? '#3A3A59' : 'none'};
         }
   }
 `;
+
+
 
 const FooterBoxColumn = styled.div`
   /* border: 1px solid green; */
@@ -56,6 +59,7 @@ const FooterNavIcon = styled.svg.attrs(props => ({
 }))`
   width: 24px;
   height: 24px;
+
 `;
 
 export {
@@ -64,5 +68,6 @@ export {
     FooterUl,
     FooterBox,
     FooterBoxColumn,
-    FooterNavIcon
+    FooterNavIcon,
+    
 }
