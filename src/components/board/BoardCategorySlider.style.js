@@ -39,9 +39,9 @@ width: 15px;
 `;
 
 const CategorySlider = styled.div`
-  padding: 5% 0;
+  padding: 16px 0;
   width: 1600px;
-  background-color: rgb(220, 220, 220, 0.35);
+  background-color: rgb(242, 242, 247);
   transform: translateX(${(props) => props.currentPosition}px);
   transition: transform 0.5s ease-in-out;
 
@@ -56,9 +56,10 @@ const CategorySlider = styled.div`
 
   & > button:focus {
     background-color: rgb(239, 63, 97);
+    border-color: rgb(239, 63, 97);
     /* theme color */
     color: white;
-    border: none;
+    
   }
 
   ::-webkit-scrollbar {

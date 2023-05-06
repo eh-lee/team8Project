@@ -56,6 +56,8 @@ const Column = styled.div`
   min-height: 30px;
   height: 7vh;
   align-items: center;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  border-top: none;
 `;
 
 const Nav = styled.nav`
@@ -163,7 +165,6 @@ export {
 // PollModal.style
 const PollWriteWrap = styled.div`
   position: fixed;
-  z-index: 1001;
   /* WriteForm의 poll 아이콘 보다 크게 */
   top: 0;
   width: 400px;

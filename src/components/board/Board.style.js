@@ -9,6 +9,8 @@ const Header = styled.div`
   max-width: 400px;
   font-size: 1.25rem;
   color: rgb(70, 70, 70);
+  margin-top: 16px;
+  /* margin: 16px 0; */
 `;
 
 const Wrap = styled.div`

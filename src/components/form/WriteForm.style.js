@@ -1,7 +1,53 @@
 import styled from "styled-components";
 import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
+import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
 import { ReactComponent as ArrowDown } from "../../assets/icons/common/arrowdown.svg";
 
+const VoteText = styled.p`
+  position: absolute;
+  z-index: 1;
+  color: #3a3a59;
+  font-size: 14px;
+  left: 45px;
+  top: 7px;
+`;
+const Poll = styled.button`
+  gap: 0.25rem;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  min-height: 32px;
+  min-width: 113px;
+  padding: 3px 5px;
+  border: 1px solid #c4c4c4;
+  border-radius: 2rem;
+  background-color: white;
+
+  &:hover {
+    color: white;
+    outline: none;
+    cursor: pointer;
+  }
+  position: absolute;
+  z-index: 1;
+  bottom: 12px;
+  /* 이걸로 버튼 전체 높이 조정 */
+  left: 30px;
+`;
+
+const Vote = styled(VoteIcon)`
+  left: 15px;
+  top: 3px;
+  position: absolute;
+  z-index: 1;
+  &:hover {
+    cursor: pointer;
+    path:nth-child(1),
+    path:nth-child(2) {
+      stroke: #3a3a59;
+    }
+  }
+`;
 
 
 const IconArrowDown = styled(ArrowDown)`
@@ -79,7 +125,8 @@ const WriteContent = styled.textarea`
 `;
 
 const WriteForm = styled.form`
-margin-top: 3.5rem;
+/* margin-top: 3.5rem; */
+margin-top: 70px;
   padding-top: 1rem;
   display: flex;
   width: 100%;
@@ -120,10 +167,11 @@ const WriteHeader = styled.div`
   width: 100%;
   max-width: 400px;
   color: rgb(70, 70, 70);
+  /* margin-top:16px; */
 `;
 
 const WriteHeaderCont = styled.div`
-padding-top:45px;
+padding-top:61px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -149,4 +197,4 @@ const IconCont = styled.div`
   }
 `;
 
-export { IconArrowDown, IconCont, IconTrash, MainCat, ModalCont, PageWithFooterWrapper, SubCat, WriteCanc, WriteCategory, WriteContent, WriteForm, WriteHeader, WriteHeaderCont, WritePost, WriteTitle, }
+export { VoteText, Poll, Vote, IconArrowDown, IconCont, IconTrash, MainCat, ModalCont, PageWithFooterWrapper, SubCat, WriteCanc, WriteCategory, WriteContent, WriteForm, WriteHeader, WriteHeaderCont, WritePost, WriteTitle, }

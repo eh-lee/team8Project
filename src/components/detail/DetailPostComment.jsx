@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Like from "../like/Like";
-import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import DetailPostCommentReply from "./DetailPostCommentReply";
 import { instanceWithAuth } from "../../api/axios";
 import { useFormattingDate } from "../hook/useFormattingDate";
@@ -169,7 +169,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
               isHidden={isHidden}
               isActive={replyisActive}
             >
-              ----- 답훈수 더 보기
+              ――― 답훈수 더 보기
             </St.ReplyMore>
           )}
 

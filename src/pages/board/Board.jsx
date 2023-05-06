@@ -90,7 +90,7 @@ const Board = () => {
 
 // for useRef
 const PostCardList = styled.div`
-  margin-top: 10rem;
+  margin-top: 170px;
   height: 45.28rem;
   overflow-y: scroll;
   ::-webkit-scrollbar {

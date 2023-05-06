@@ -20,7 +20,7 @@ const SearchForm = () => {
     try {
       const response = await instance.get(`/search/?q=${input}`);
       console.log("response===========>", response.data);
-      setData(response.data);
+      // setData(response.data);
     } catch (error) {
       if (error.message) {
         alert("검색 서버가 현재 점검 중입니다.");
@@ -56,7 +56,7 @@ const SearchForm = () => {
           검색
         </St.InputBtn>
       </St.Form>
-      <SearchCardList>
+      {/* <SearchCardList>
         {data?.map((item) => (
           <BoardPostCard
             key={item.postIdx}
@@ -71,7 +71,7 @@ const SearchForm = () => {
             category={item.category}
           />
         ))}
-      </SearchCardList>
+      </SearchCardList> */}
     </St.Wrap>
   );
 };

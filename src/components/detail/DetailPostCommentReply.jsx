@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { instanceWithAuth } from "../../api/axios";
 import { useFormattingDate } from "../hook/useFormattingDate";
-import level1 from "../../assets/icons/userLevel/level icon=초보, size=18.png";
-import * as St from "./DetailPostCommentReply.style"
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
+import * as St from "./DetailPostCommentReply.style";
 
 const DetailPostCommentReply = ({ reply, curNickname }) => {
-  
   // 답훈수 삭제 관리
   const [isDelete, setIsDelete] = useState(false);
 
@@ -38,16 +37,13 @@ const DetailPostCommentReply = ({ reply, curNickname }) => {
           </St.InfoProfileCont>
           <St.UserInfoWrap>
             <St.UserInfoCont>
-              <St.InfoNickname>
-                {" "}
-                {reply.nickname}{" "}
-              </St.InfoNickname>
+              <St.InfoNickname> {reply.nickname} </St.InfoNickname>
               <St.InfoUserLevel> 레벨 </St.InfoUserLevel>
             </St.UserInfoCont>
             <St.UserInfoCreatedAt>
               {createdDate}
               <St.ReplyDelete onClick={deleteReplytHandler}>
-                { reply.nickname === curNickname ? <St.IconTrash /> : null }
+                {reply.nickname === curNickname ? <St.IconTrash /> : null}
               </St.ReplyDelete>
             </St.UserInfoCreatedAt>
           </St.UserInfoWrap>

@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProCon from "../poll/ProCon";
+import PollModal from "../modal/PollModal";
+import WriteFooter from "../footer/WriteFooter";
 import ModalPortal from "../modal/ModalPortal";
 import CateogryModal from "../modal/CateogryModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import * as St from "./WriteForm.style";
-import WriteFooter from "../footer/WriteFooter";
-import PollModal from "../modal/PollModal";
-import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
-import styled from "styled-components";
 
 const WriteForm = () => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
@@ -134,10 +132,10 @@ const WriteForm = () => {
           autoFocus
           placeholder="제목"
         ></St.WriteTitle>
-        <Poll onClick={() => pollModalOpenHandler()}>
-          <Vote />
-          <VoteText>투표 생성</VoteText>
-        </Poll>
+        <St.Poll onClick={() => pollModalOpenHandler()}>
+          <St.Vote />
+          <St.VoteText>투표 생성</St.VoteText>
+        </St.Poll>
         <St.WriteContent
           type="text"
           value={desc}
@@ -196,66 +194,3 @@ const WriteForm = () => {
 };
 
 export default WriteForm;
-
-// for test
-
-const VoteText = styled.p`
-  position: absolute;
-  z-index: 1000;
-  color: #3a3a59;
-  font-size: 14px;
-  left: 45px;
-  top: 7px;
-`;
-const Poll = styled.button`
-  gap: 0.25rem;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  min-height: 32px;
-  min-width: 113px;
-  padding: 3px 5px;
-  border: 1px solid #c4c4c4;
-  border-radius: 2rem;
-  background-color: white;
-
-  &:hover {
-    color: white;
-    /* background-color: #3a3a59; */
-    outline: none;
-    cursor: pointer;
-    path {
-      /* stroke: white; */
-    }
-  }
-
-  position: absolute;
-  z-index: 1000;
-  /* PollModal에 더 큰 인덱스 주기 */
-  /* width: 100px; */
-  /* height: 100px; */
-  bottom: 12px;
-  /* 이걸로 버튼 전체 높이 조정 */
-  left: 30px;
-  /* left: 15px; */
-  /* top: -15px; */
-  /* background-color: red; */
-  /* border: 2px solid red; */
-`;
-// for test
-
-const Vote = styled(VoteIcon)`
-  /* width: 100%; */
-  /* height: 100%; */
-  left: 15px;
-  top: 3px;
-  position: absolute;
-  z-index: 1000;
-  &:hover {
-    cursor: pointer;
-    path:nth-child(1),
-    path:nth-child(2) {
-      stroke: #3a3a59;
-    }
-  }
-`;
