@@ -16,7 +16,7 @@ let socket;
 
 const Chat = () => {
   const nav = useNavigate();
-  const curNickname = localStorage.getItem("nickname");
+  const curNickname = localStorage.getItem("hoonsoo_nickname");
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");

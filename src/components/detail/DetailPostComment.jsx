@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import * as St from "./DetailPostComment.style";
 
 const DetailPostComment = ({ comment, isComment, setIsComment }) => {
-  const curNickname = localStorage.getItem("nickname");
+  const curNickname = localStorage.getItem("hoonsoo_nickname");
 
   const nav = useNavigate();
 

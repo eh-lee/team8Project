@@ -40,10 +40,13 @@ const KakaoFetchAndPost = ({ code }) => {
           }
         );
         if (await response) {
-          localStorage.setItem("email", response.data.email);
-          localStorage.setItem("access_token", response.headers.authorization);
-          localStorage.setItem("nickname", response.data.nickname);
-          document.cookie = `isNewbie=F; path=/;`;
+          localStorage.setItem("hoonsoo_email", response.data.email);
+          localStorage.setItem(
+            "hoonsoo_access_token",
+            response.headers.authorization
+          );
+          localStorage.setItem("hoonsoo_nickname", response.data.nickname);
+          document.cookie = `hoonsoo_isNewbie=F; path=/;`;
         }
         return navi("/");
       } catch (err) {

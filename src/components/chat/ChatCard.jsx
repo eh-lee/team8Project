@@ -7,7 +7,7 @@ import * as St from "./ChatCard.style";
 
 const ChatCard = ({ idx, roomName, maxParty, isRealTime }) => {
   const navigate = useNavigate();
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
 
   return (
     <St.ChatCardWrap

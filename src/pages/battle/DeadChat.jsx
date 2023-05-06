@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 // 프롭스: {chatSaveIdx, room} 요 놈들.. 내려주는  페이지 나중에 확인해서 잡기..
 const Chat = ({ chatSaveIdx, room }) => {
   const nav = useNavigate();
-  const curNickname = localStorage.getItem("nickname");
+  const curNickname = localStorage.getItem("hoonsoo_nickname");
 
   // const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);

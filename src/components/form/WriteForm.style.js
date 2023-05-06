@@ -123,6 +123,7 @@ const WriteHeader = styled.div`
 `;
 
 const WriteHeaderCont = styled.div`
+padding-top:45px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

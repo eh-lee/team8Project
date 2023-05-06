@@ -7,7 +7,7 @@ import * as St from "./DetailHeader.style";
 const DetailHeader = ({ postIdx, detailPostCat, writerNickname }) => {
   const nav = useNavigate();
   const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
 
   const menuModalOpenHandler = () => {
     setIsMenuModalOpen(true);
