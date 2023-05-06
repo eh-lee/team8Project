@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Categories from "../elem/WholeCategories";
 import { useRef } from "react";
 import * as St from "./BoardCategorySlider.style";
@@ -6,17 +6,23 @@ import * as St from "./BoardCategorySlider.style";
 const BoardCategorySlider = ({ parentFunction }) => {
   const [prevCategory, setPrevCategory] = useState("전체");
   const [category, setCategory] = useState("전체");
-  const [page, setPage] = useState(1);
 
   const categories = Categories;
 
   const handleCategoryClick = (category) => {
     setPrevCategory(prevCategory);
     setCategory(category);
-    setPage(1);
   };
 
-  parentFunction(prevCategory, category, page);
+  // parentFunction(prevCategory, category);
+
+  useEffect(() => {
+    setPrevCategory(category);
+  }, [category]);
+
+  useEffect(() => {
+    parentFunction(category, prevCategory);
+  }, [category]);
 
   const categorySliderRef = useRef(null);
 

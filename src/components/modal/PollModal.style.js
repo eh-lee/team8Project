@@ -50,7 +50,6 @@ const PollWriteCategory = styled.div`
 `;
 
 const PollWirteTitle = styled.div`
-  height: 24px;
   font-weight: 600;
   font-size: 18px;
 `;
