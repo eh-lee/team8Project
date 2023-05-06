@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { ReactComponent as BackIcon } from "../../assets/icons/common/back.svg";
 import * as St from "./PollModal.style";
 
-//  이거를 라이트푸터랑 합쳐 근데 라이트폼에서 폴모달에 오픈 클로즈를 프롭스로 내리고 있어
-
 const PollModal = ({ open, close, parentFunction }) => {
   const [isProConClicked, setIsProConClicked] = useState(false);
   const [isSelectClicked, setIsSelectClicked] = useState(false);

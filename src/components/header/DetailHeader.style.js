@@ -20,14 +20,18 @@ const Header = styled.header`
   width: 100%;
   min-width: 200px;
   max-width: 400px;
-  height: 48px;
+  height: 64px;
+  width: 400px;
+  display: flex;
+  align-items: center;
   z-index: 1;
-  border-bottom: 0.1rem solid rgb(180, 180, 180);
+  border-bottom: 0.1rem solid #E1E2E4;
 `;
 
 const Wrap = styled.div`
   display: flex;
   height: 48px;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

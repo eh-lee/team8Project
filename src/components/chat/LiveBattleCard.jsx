@@ -14,6 +14,7 @@ const LiveBattleCard = () => {
         const { data } = await instance.get("chat/hunsuChat/live");
         setRoomName(data.roomName);
       } catch (error) {
+        const errorMsg = error.response.data.message;
         console.error("LiveBattle Get", error);
       }
     };
