@@ -43,8 +43,8 @@ const BoardPostCard = ({
     const fetchImgs = async () => {
       try {
         const res = await instance.get(`/postCards/post/imgs/${postIdx}`);
-        if(res) {
-          setIsImgs(true)
+        if (res.data.imgs[0]) {
+          setIsImgs(true);
         }
       } catch (error) {
         console.error(error);
@@ -52,8 +52,6 @@ const BoardPostCard = ({
     };
     fetchImgs();
   }, []);
-  
-  
 
   const categories = Categories;
   const icons = Icons;
@@ -80,7 +78,7 @@ const BoardPostCard = ({
         <St.PostCardRow>
           <St.PostCardTitle>{title}</St.PostCardTitle>
           <St.PostCardTitleIcon></St.PostCardTitleIcon>
-          {isImgs === true ? (
+          {isImgs ? (
             <>
               <St.PostCardTitleIcon>
                 <St.IconImg />
@@ -95,11 +93,12 @@ const BoardPostCard = ({
             </>
           ) : null}
         </St.PostCardRow>
-        
       </St.PostCardTitleBox>
 
       <St.PostCardContentBox>
-        <St.PostCardContent>{content?.length > 50 ? content.substring(0, 50) + "..." : content}</St.PostCardContent>
+        <St.PostCardContent>
+          {content?.length > 50 ? content.substring(0, 50) + "..." : content}
+        </St.PostCardContent>
       </St.PostCardContentBox>
       <St.PostCardInfoBox>
         <St.DetailPostContent>
