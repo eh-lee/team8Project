@@ -29,18 +29,18 @@ const Wrap = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
+  height: 64px;
   max-width: 400px;
   color: rgb(70, 70, 70);
 `;
 
 const Cont = styled.div`
-  /* border: 1px solid tomato; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.1rem solid rgba(180, 180, 180, 0.5);
-  height: 48px;
+  border-bottom: 1px solid #E1E2E4;
+  height: 64px;
 `;
 
 const Flex = styled.div`
