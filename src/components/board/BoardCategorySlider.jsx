@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Categories from "../elem/WholeCategories";
 import { useRef } from "react";
 import * as St from "./BoardCategorySlider.style";
@@ -14,7 +14,15 @@ const BoardCategorySlider = ({ parentFunction }) => {
     setCategory(category);
   };
 
-  parentFunction(prevCategory, category);
+  // parentFunction(prevCategory, category);
+
+  useEffect(() => {
+    setPrevCategory(category);
+  }, [category]);
+
+  useEffect(() => {
+    parentFunction(category, prevCategory);
+  }, [category]);
 
   const categorySliderRef = useRef(null);
 
