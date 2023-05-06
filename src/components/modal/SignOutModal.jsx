@@ -31,9 +31,9 @@ const SignOutModal = ({ open, close }) => {
     } catch (err) {
       console.error(err);
     }
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("nickname");
-    localStorage.removeItem("email");
+    localStorage.removeItem("hoonsoo_access_token");
+    localStorage.removeItem("hoonsoo_nickname");
+    localStorage.removeItem("hoonsoo_email");
   };
 
   return open ? (
