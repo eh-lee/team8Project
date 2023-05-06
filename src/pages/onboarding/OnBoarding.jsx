@@ -5,7 +5,7 @@ import OnBoardingContents from "../../components/onboarding/OnBoadingContents";
 
 const OnBoarding = () => {
   OldbieGuard();
-  document.cookie = `isFirst=F; path=/;`;
+  document.cookie = `hoonsoo_isFirst=F; path=/;`;
 
   useEffect(() => {
     document.title = "훈수 - 온보딩";

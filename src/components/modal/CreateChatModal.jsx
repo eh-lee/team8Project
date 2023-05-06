@@ -10,7 +10,7 @@ const CreateChatModal = ({ open, close }) => {
   // ======================= join 옮기는 중 ============================
   const modalRef = useRef();
   const navi = useNavigate();
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
 
   const [chatRoom, setChatRoom] = useState({
     // roomName: "",
@@ -153,8 +153,7 @@ export default CreateChatModal;
 //   const modalRef = useRef();
 //   const navi = useNavigate();
 
-//   const nickname = cookies.get("nickname");
-//   const nickname = localStorage.getItem("nickname");
+//   const nickname = localStorage.getItem("hoonsoo_nickname");
 
 //   const [chatRoom, setChatRoom] = useState({
 //     roomName: "",

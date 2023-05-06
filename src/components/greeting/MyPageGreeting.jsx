@@ -4,8 +4,8 @@ import level2 from "../../assets/icons/userLevel/level icon=하수, size=72.png"
 import * as St from "./MyPageGreeting.style";
 
 const MyPageGreeting = () => {
-  const email = localStorage.getItem("email");
-  const nickname = localStorage.getItem("nickname");
+  const email = localStorage.getItem("hoonsoo_email");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
 
   const currExp = 10;
   const goalExp = 100;

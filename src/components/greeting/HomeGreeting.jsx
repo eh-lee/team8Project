@@ -6,8 +6,8 @@ import * as St from "./HomeGreeting.style";
 
 const HomeGreeting = () => {
   const navi = useNavigate();
-  const nickname = localStorage.getItem("nickname");
-  const isLogin = localStorage.getItem("access_token") ? true : false;
+  const nickname = localStorage.getItem("hoonsoo_nickname");
+  const isLogin = localStorage.getItem("hoonsoo_access_token") ? true : false;
 
   const currExp = 0;
   const goalExp = 100;

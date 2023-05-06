@@ -9,6 +9,8 @@ const Header = styled.div`
   font-size: 18px;
   line-height: 24px;
   color: rgb(70, 70, 70);
+  margin-top: 16px;
+  /* margin: 16px 0; */
 `;
 
 const Wrap = styled.div`

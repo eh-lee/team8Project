@@ -11,28 +11,14 @@ const FooBG = styled.div`
 
 const CategoryModalOverlay = styled.div`
   position: fixed;
+  z-index: 3;
   bottom: 0;
   width: 400px;
   box-shadow: 0.05rem 0.02rem 0.25rem rgba(0, 0, 0, 0.3);
 
-  /* for test */
   height: 40rem;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  /* transition: transform 0.2s ease-in-out;
-
-  ${({ open }) =>
-    open &&
-    `
-    transform: translateY(0%);
-  `}
-
-  ${({ open, close }) =>
-    !open &&
-    close &&
-    `
-    transform: translateY(100%);
-  `} */
 `;
 
 const CategoryModalRow = styled.div`
@@ -48,7 +34,7 @@ const ModalMainCat = styled.div`
   background-color: rgb(245, 245, 245);
 `;
 
-const MainCat = styled.div`
+const MainCat = styled.div` 
   width: 100%;
   height: 2.85rem;
   display: flex;
@@ -107,11 +93,11 @@ const SubCat = styled.div`
 `;
 
 export {
-    FooBG,
-    CategoryModalOverlay,
-    CategoryModalRow,
-    ModalMainCat,
-    MainCat,
-    ModalSubCat,
-    SubCat,
+  FooBG,
+  CategoryModalOverlay,
+  CategoryModalRow,
+  ModalMainCat,
+  MainCat,
+  ModalSubCat,
+  SubCat,
 }

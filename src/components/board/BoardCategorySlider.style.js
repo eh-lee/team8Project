@@ -9,6 +9,7 @@ const CatSliderWrap = styled.div`
   overflow-x: hidden;
 `;
 const CatLeftButton = styled.button`
+width: 15px;
   color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
@@ -23,6 +24,7 @@ const CatLeftButton = styled.button`
 `;
 
 const CatRightButton = styled.button`
+width: 15px;
   color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
@@ -37,9 +39,9 @@ const CatRightButton = styled.button`
 `;
 
 const CategorySlider = styled.div`
-  padding: 5% 0;
+  padding: 16px 0;
   width: 1600px;
-  background-color: rgb(220, 220, 220, 0.35);
+  background-color: rgb(242, 242, 247);
   transform: translateX(${(props) => props.currentPosition}px);
   transition: transform 0.5s ease-in-out;
 
@@ -54,9 +56,10 @@ const CategorySlider = styled.div`
 
   & > button:focus {
     background-color: rgb(239, 63, 97);
+    border-color: rgb(239, 63, 97);
     /* theme color */
     color: white;
-    border: none;
+    
   }
 
   ::-webkit-scrollbar {
@@ -64,9 +67,10 @@ const CategorySlider = styled.div`
   }
 `;
 
-export { 
-  CatButton, 
-  CatSliderWrap, 
-  CatLeftButton, 
-  CatRightButton, 
-  CategorySlider };
+export {
+  CatButton,
+  CatSliderWrap,
+  CatLeftButton,
+  CatRightButton,
+  CategorySlider
+};

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
-import level1 from "../../assets/icons/userLevel/level icon=초보, size=Default.png";
+import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
 import DetailImgs from "../img/DetailImgs";
 import { ReactComponent as IconComment } from "../../assets/icons/common/comment.svg";
 import { ReactComponent as IconView } from "../../assets/icons/common/eye.svg";
@@ -15,7 +15,7 @@ const DetailPostContents = () => {
   const nav = useNavigate();
 
   // 로그인 확인
-  const isLogin = localStorage.getItem("nickname") ? true : false;
+  const isLogin = localStorage.getItem("hoonsoo_nickname") ? true : false;
 
   // 상세 게시글을 담을 state
   const [detailPost, setDetailPost] = useState([]);

@@ -6,7 +6,7 @@ import * as St from "./SignOutModal.style";
 const SignOutModal = ({ open, close }) => {
   const navi = useNavigate();
   const modalRef = useRef();
-  const email = localStorage.getItem("email");
+  const email = localStorage.getItem("hoonsoo_email");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -31,9 +31,9 @@ const SignOutModal = ({ open, close }) => {
     } catch (err) {
       console.error(err);
     }
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("nickname");
-    localStorage.removeItem("email");
+    localStorage.removeItem("hoonsoo_access_token");
+    localStorage.removeItem("hoonsoo_nickname");
+    localStorage.removeItem("hoonsoo_email");
   };
 
   return open ? (
