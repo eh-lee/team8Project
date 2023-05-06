@@ -22,7 +22,7 @@ const ProCon = ({
     setPollClose(false);
   };
 
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
   const [proCount, setProCount] = useState(detailProCount);
   const [conCount, setConCount] = useState(detailConCount);
 

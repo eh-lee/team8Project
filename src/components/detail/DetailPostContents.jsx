@@ -15,7 +15,7 @@ const DetailPostContents = () => {
   const nav = useNavigate();
 
   // 로그인 확인
-  const isLogin = localStorage.getItem("nickname") ? true : false;
+  const isLogin = localStorage.getItem("hoonsoo_nickname") ? true : false;
 
   // 상세 게시글을 담을 state
   const [detailPost, setDetailPost] = useState([]);

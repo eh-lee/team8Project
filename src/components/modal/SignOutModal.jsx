@@ -6,7 +6,7 @@ import * as St from "./SignOutModal.style";
 const SignOutModal = ({ open, close }) => {
   const navi = useNavigate();
   const modalRef = useRef();
-  const email = localStorage.getItem("email");
+  const email = localStorage.getItem("hoonsoo_email");
 
   useEffect(() => {
     const handleClickOutside = (event) => {

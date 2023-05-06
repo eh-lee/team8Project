@@ -10,7 +10,7 @@ let socket;
 // const ChatEndModal = ({ open, close, isAdmin, room, messages }) => {
 const ChatEndModal = ({ open, close, room, messages }) => {
   // nickname: 방을 만든 사람의 nickname
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
 
   const nav = useNavigate();
 

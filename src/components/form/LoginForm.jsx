@@ -8,10 +8,13 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await instance.post("/auth/login", user);
-      localStorage.setItem("email", user.email);
-      localStorage.setItem("access_token", response.headers.authorization);
-      localStorage.setItem("nickname", response.data.nickname);
-      document.cookie = `isNewbie_test=F; path=/;`;
+      localStorage.setItem("hoonsoo_email", user.email);
+      localStorage.setItem(
+        "hoonsoo_access_token",
+        response.headers.authorization
+      );
+      localStorage.setItem("hoonsoo_nickname", response.data.nickname);
+      document.cookie = `hoonsoo_isNewbie=F; path=/;`;
       navi("/");
     } catch (e) {
       const errorMsg = e.response.data.message;

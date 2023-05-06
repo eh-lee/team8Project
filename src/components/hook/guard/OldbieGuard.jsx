@@ -6,8 +6,7 @@ const OldbieGuard = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    const isNewbie = getCookie("isNewbie");
-    // const isNewbie = document.cookie("isNewbie");
+    const isNewbie = getCookie("hoonsoo_isNewbie");
     if (isNewbie) {
       nav("/");
     }

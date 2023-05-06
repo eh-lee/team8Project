@@ -8,7 +8,7 @@ import * as St from "./MyPageMenu.style";
 
 const MyPageMenu = () => {
   const navi = useNavigate();
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("hoonsoo_nickname");
 
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);

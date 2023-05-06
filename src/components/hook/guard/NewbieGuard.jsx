@@ -6,11 +6,7 @@ const NewbieGuard = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    const isFirst = getCookie("isFirst");
-    console.log(getCookie());
-    console.log(getCookie("isFirst"));
-    console.log("isFirst", isFirst);
-    // const isFirst = document.cookie("isFirst");
+    const isFirst = getCookie("hoonsoo_isFirst");
     if (!isFirst) {
       nav("/onboarding");
     }
