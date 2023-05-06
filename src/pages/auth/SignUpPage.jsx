@@ -179,19 +179,22 @@ const SignUpPage = () => {
               </Validation>
             </div>
           </div>
-          <div style={{ marginTop: "1.5rem" }}>
+          <MarginTop>
             <AuthButton text={"회원가입 완료"} />
             <LoginContainer>
               <LoginP>이미 계정이 있나요?</LoginP>
               <StyledLink to="/login">로그인</StyledLink>
             </LoginContainer>
-          </div>
+          </MarginTop>
         </Container>
       </MobileLayout>
     </>
   );
 };
 
+const MarginTop = styled.div`
+  margin-top: 1.5rem;
+`;
 const Margin = styled.div`
   margin-top: 10px;
   margin-bottom: 5px;

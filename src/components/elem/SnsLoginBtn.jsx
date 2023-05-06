@@ -1,5 +1,5 @@
 import React from "react";
-import { KAKAO_LOGIN_URL } from "../../api/login";
+import { KAKAO_LOGIN_URL_CODE } from "../../api/login";
 import kakao from "../../assets/icons/socialLogin/kakao-icon.png";
 import google from "../../assets/icons/socialLogin/google-icon.png";
 import naver from "../../assets/icons/socialLogin/naver-icon.png";
@@ -9,7 +9,7 @@ function SnsLoginBtn({ type }) {
   const snsType = {
     Kakao: {
       imgUrl: kakao,
-      loginUrl: KAKAO_LOGIN_URL,
+      loginUrl: KAKAO_LOGIN_URL_CODE,
       filter: false,
       size: 100,
     },
