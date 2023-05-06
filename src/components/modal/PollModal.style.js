@@ -21,14 +21,12 @@ const PollWriteHeader = styled.div`
 `;
 
 const PollWriteHeaderCont = styled.div`
-  /* border: 1px solid tomato; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   border-bottom: 0.1rem solid rgb(180, 180, 180);
   // *============ HEADER 높이 ===============*
-  padding-bottom: 2vh;
   height: 5vh;
   // *============ HEADER 높이 ===============*
 `;
@@ -44,7 +42,6 @@ const PollWriteCanc = styled.div`
 `;
 
 const PollWriteCategory = styled.div`
-  /* border: 1px solid gray; */
   gap: 0.25rem;
   display: flex;
   font-size: 0.95rem;
@@ -52,7 +49,6 @@ const PollWriteCategory = styled.div`
 `;
 
 const PollWirteTitle = styled.div`
-  height: 24px;
   font-weight: 600;
   font-size: 18px;
 `;
