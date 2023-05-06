@@ -13,10 +13,9 @@ const Board = () => {
   useEffect(() => {
     document.title = "훈수 - 게시판";
   }, []);
-  const BoardCallback = (x, y, z) => {
+  const BoardCallback = (x, y) => {
     setPrevCategory(x);
     setCategory(y);
-    setPage(z);
   };
 
   const MainCatCallback = (x) => {
@@ -54,6 +53,7 @@ const Board = () => {
   }, [prevCategory, maincategory, category, page]);
 
   const postCardContRef = useRef(null);
+
   InfiniteScroll({ postCardContRef, setPage });
 
   return (

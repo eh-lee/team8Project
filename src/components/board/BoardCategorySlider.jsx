@@ -6,17 +6,15 @@ import * as St from "./BoardCategorySlider.style";
 const BoardCategorySlider = ({ parentFunction }) => {
   const [prevCategory, setPrevCategory] = useState("전체");
   const [category, setCategory] = useState("전체");
-  const [page, setPage] = useState(1);
 
   const categories = Categories;
 
   const handleCategoryClick = (category) => {
     setPrevCategory(prevCategory);
     setCategory(category);
-    setPage(1);
   };
 
-  parentFunction(prevCategory, category, page);
+  parentFunction(prevCategory, category);
 
   const categorySliderRef = useRef(null);
 
