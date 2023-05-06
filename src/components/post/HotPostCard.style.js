@@ -123,16 +123,12 @@ const InfoContentIcon = styled.div`
 `;
 
 const IconLike = styled(Like)`
-  width: 12px;
-  height: 11px;
   path:nth-child(1) {
     stroke: #8a8a8a;
   }
 `;
 
 const IconView = styled(View)`
-  width: 14px;
-  height: 10px;
   path:nth-child(1),
   path:nth-child(2) {
     stroke: #8a8a8a;
@@ -140,8 +136,6 @@ const IconView = styled(View)`
 `;
 
 const IconComment = styled(Comment)`
-  width: 12px;
-  height: 12px;
   path:nth-child(1) {
     stroke: #8a8a8a;
   }

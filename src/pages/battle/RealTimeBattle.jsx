@@ -124,11 +124,9 @@ const Battle = () => {
 export default Battle;
 
 const ChatCardCont = styled.div`
-  /* margin-top: 48px; */
   margin-top: 146px;
   /* === 헤더 높이 === */
   height: 45.28rem;
-  /* height: 70vh; */
   overflow-y: scroll;
   /* 스크롤바 숨기기 */
   ::-webkit-scrollbar {
@@ -144,7 +142,6 @@ const ModalCont = styled.div`
 `;
 
 const BtnCont = styled.div`
-  /* border: 1px solid tomato; */
   bottom: 100px;
   position: fixed;
   max-width: 400px;
@@ -185,16 +182,15 @@ const StBattleHeaderWrap = styled.header`
   background-color: white;
   position: fixed;
   top: 0;
-  padding-top: 0.75rem;
+  padding-top: 16px;
   width: 100%;
-  /* width: 100vw; */
   max-width: 400px;
   font-size: 18px;
+  line-height: 24px;
   color: rgb(70, 70, 70);
 `;
 
 const StBattleHeaderSub = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   font-weight: bold;
@@ -202,15 +198,15 @@ const StBattleHeaderSub = styled.div`
 `;
 
 const StBattleTitle = styled.div`
-  /* border: 1px solid tomato; */
-  padding-bottom: 2rem;
-  /* margin-bottom: 30px; */
+  height: 48px;
+  border-bottom: 1px solid #E1E2E4;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const StBattleCategoryCont = styled.div`
-  /* border: 1px solid green; */
+  height: 40px;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -218,9 +214,10 @@ const StBattleCategoryCont = styled.div`
 
 const StBattleCategory = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
-  padding-bottom: 0.75rem;
+  height: 40px;
   text-decoration: none;
 
   color: ${(props) =>
@@ -244,5 +241,5 @@ const StBattleBackground = styled.div`
   padding: 5% 0;
   width: 400px;
   height: 12px;
-  background-color: rgb(220, 220, 220, 0.35);
+  background-color: #F2F2F7;
 `;

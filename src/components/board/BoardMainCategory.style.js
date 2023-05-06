@@ -4,13 +4,14 @@ const Around = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
+  height: 40px;
 `;
 
 const MainCategory = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  padding-bottom: 0.75rem;
   text-decoration: none;
 
   color: ${(props) =>

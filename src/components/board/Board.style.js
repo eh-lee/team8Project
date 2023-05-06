@@ -4,10 +4,10 @@ const Header = styled.div`
   background-color: white;
   position: fixed;
   top: 0;
-  padding-top: 0.75rem;
   width: 100%;
   max-width: 400px;
-  font-size: 1.25rem;
+  font-size: 18px;
+  line-height: 24px;
   color: rgb(70, 70, 70);
 `;
 
@@ -19,9 +19,11 @@ const Wrap = styled.div`
 `;
 
 const Main = styled.div`
-  padding-bottom: 2rem;
+  height: 48px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #E1E2E4;
 `;
 
 export { Header, Wrap, Main }

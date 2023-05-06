@@ -53,7 +53,7 @@ font-size: 10px;
 
 const Wrap = styled.div`
   background-color: #3a3a59;
-  height: 130px;
+  height: 160px;
   border-bottom-right-radius: 40px;
   margin-top: 48px;
   padding: 16px 25px;
@@ -86,6 +86,8 @@ const Cont = styled.div`
 display: flex;
 justify-content: row;
 align-items: center;
+height: 18px;
+margin-bottom: 4px;
 `;
 
 const LvImgBox = styled.div`
@@ -107,12 +109,14 @@ border: none;
 const Text1 = styled.div`
 margin-left: 4px;
 font-size: 14px;
+line-height: 18px;
 font-weight: bold;
 color: #ef3f61;
 `;
 
 const Text2 = styled.div`
 font-size: 14px;
+line-height: 18px;
 color: #f4f4f5;
 letter-spacing: 0rem;
 `;
@@ -140,6 +144,7 @@ width: ${(props) => props.exp}%;
 `;
 
 const Baseline = styled.div`
+height: 34px;
 display: flex;
 align-items: baseline;
 `;

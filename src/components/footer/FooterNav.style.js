@@ -24,6 +24,7 @@ const FooterUl = styled.ul`
 `;
 
 const FooterBox = styled.div`
+  border: 1px solid green;
   padding: 1.5rem 0;
   display: flex;
   width: 25%;
@@ -39,6 +40,7 @@ const FooterBox = styled.div`
 `;
 
 const FooterBoxColumn = styled.div`
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
