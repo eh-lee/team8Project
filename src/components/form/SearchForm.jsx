@@ -8,7 +8,7 @@ import BoardPostCard from "../post/BoardPostCard";
 const SearchForm = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
-  const [searched ,setSearched] = useState("");
+  const [searched, setSearched] = useState("");
 
   const inputHandler = (e) => {
     setInput(e.target.value);
@@ -16,7 +16,7 @@ const SearchForm = () => {
 
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
-    setSearched(input)
+    setSearched(input);
     setInput("");
 
     try {
@@ -27,7 +27,7 @@ const SearchForm = () => {
         alert("검색 서버가 현재 점검 중입니다.");
       }
       console.error(error);
-    };
+    }
   };
 
   const initValueHandler = () => {
@@ -75,11 +75,8 @@ const SearchForm = () => {
               key={item.postIdx}
               postIdx={item.postIdx}
               title={item.title}
-              // nickname={item.nickname}
               content={item.desc}
-              // likesCount={item.likesCount}
               viewCount={item.postViewCount}
-              // commentCount={item.commentCount}
               mainCategory={item.maincategory}
               category={item.category}
             />

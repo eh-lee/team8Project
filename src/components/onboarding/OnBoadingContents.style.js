@@ -115,7 +115,8 @@ const DescSubP = styled.p`
   font-weight: 600;
   display: flex;
   justify-content: center;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
 `;
 
 const AuthBtn = styled.button`

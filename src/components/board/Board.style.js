@@ -51,7 +51,6 @@ const Main = styled.div`
 `;
 
 const PostCardList = styled.div`
-  border: 1px solid red;
   margin-top: 170px;
   height: 45.28rem;
   overflow-y: scroll;
