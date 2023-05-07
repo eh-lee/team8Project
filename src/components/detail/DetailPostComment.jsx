@@ -40,7 +40,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
   const [commentLikesCount, setCommentLikesCount] = useState(
     comment.likesCount
   );
-  const [isLike, setIsLike] = useState(comment.isLiked);
+  const [islike, setIslike] = useState(comment.isLiked);
 
   // 댓글 좋아요 버튼
   const clickCommentLike = () => {
@@ -48,8 +48,8 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
       instanceWithAuth.put(
         `/commentLike/${comment.postIdx}/${comment.commentIdx}`
       );
-      setIsLike((prev) => !prev);
-      setCommentLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+      setIslike((prev) => !prev);
+      setCommentLikesCount((prev) => (islike ? prev - 1 : prev + 1));
     } else {
       alert("로그인 후 이용해주세요!");
     }
@@ -120,7 +120,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
         {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
         <St.CommentInfoWrap>
           <St.CommentInfoProfileCont>
-            <St.CommentInfoUserLvImg src={level1} />
+            <St.CommentInfoUserLvImg src={level1} alt="댓글 작성 유저 레벨 이미지" />
             {comment.proInputValue ? (
               <St.CommentInfoUserSide>찬성</St.CommentInfoUserSide>
             ) : comment.conInputValue ? (
@@ -149,7 +149,7 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
           <St.Comment> {comment.comment} </St.Comment>
           <St.CommentLikeCont>
             <St.CommentLikeIcon pointerOn="on" onClick={clickCommentLike}>
-              <Like isLike={isLike} size={16} />
+              <Like islike={islike} size={16} />
             </St.CommentLikeIcon>
             <St.CommentLikeCount>{commentLikesCount}</St.CommentLikeCount>
           </St.CommentLikeCont>

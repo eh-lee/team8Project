@@ -24,7 +24,7 @@ const FooterUl = styled.ul`
   gap: 0.1rem;
 `;
 
-const FooterBox = styled.div`
+const FooterBox = styled.li`
   display: flex;
   width: 25%;
   text-align: center;

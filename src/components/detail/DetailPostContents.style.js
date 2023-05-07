@@ -16,7 +16,7 @@ const UserInfoLvImg = styled.img`
   height: 32px;
 `;
 
-const InfoCont = styled.ul`
+const InfoCont = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,9 +38,9 @@ const UserInfoLevel = styled.li`
   color: red;
 `;
 
-const UserInfoCreatedAt = styled.li`
+const UserInfoCreatedAt = styled.div`
   font-size: 10px;
-  color: gray;
+  color: rgb(100, 100, 100);
 `;
 
 // ========= 상세 게시글 내용 =========
@@ -72,7 +72,7 @@ const ImgWrap = styled.li`
   margin-bottom: 16px;
 `;
 
-const ContentInfo = styled.ul`
+const ContentInfo = styled.li`
   display: flex;
   height: 24px;
   flex-direction: row;
@@ -80,11 +80,12 @@ const ContentInfo = styled.ul`
   justify-content: flex-end;
 `;
 
-const ContentIconCont = styled.li`
+const ContentIconCont = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
 `;
 
 const ContentIcon = styled.div`

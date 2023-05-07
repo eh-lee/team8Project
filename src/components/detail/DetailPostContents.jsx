@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import Like from "../like/Like";
 import { instanceWithAuth } from "../../api/axios";
 import level1 from "../../assets/icons/userLevel/level icon=초보, size=72.png";
@@ -25,7 +24,7 @@ const DetailPostContents = () => {
 
   // 게시글 좋아요 관리 state
   const [postLikesCount, setPostLikesCount] = useState(null);
-  const [isLike, setIsLike] = useState(null);
+  const [islike, setIslike] = useState(null);
 
   // 상세 게시글 정보 불러오기
   useEffect(() => {
@@ -43,7 +42,7 @@ const DetailPostContents = () => {
 
         setCreatedDate(formattingTime);
         setPostLikesCount(+data.post.likesCount);
-        setIsLike(data.post.IsLike);
+        setIslike(data.post.IsLike);
       } catch (error) {}
     };
     getDetailPost();
@@ -53,8 +52,8 @@ const DetailPostContents = () => {
   const clickPostLike = async () => {
     if (isLogin) {
       await instanceWithAuth.put(`/postlike/post/${postIdx}`);
-      setIsLike((prev) => !prev);
-      setPostLikesCount((prev) => (isLike ? prev - 1 : prev + 1));
+      setIslike((prev) => !prev);
+      setPostLikesCount((prev) => (islike ? prev - 1 : prev + 1));
     } else {
       alert("로그인 후 이용해주세요!");
     }
@@ -65,7 +64,7 @@ const DetailPostContents = () => {
       {/* 상세 게시글 정보 */}
       <St.InfoWrap>
         {/* 차후에 User Lv image 들어갈 예정 */}
-        <St.UserInfoLvImg src={level1} />
+        <St.UserInfoLvImg src={level1} alt="게시글 작성 유저 레벨 이미지"/>
         <St.InfoCont>
           <St.UserInfoCont>
             <St.UserInfoNickname>{detailPost.nickname}</St.UserInfoNickname>
@@ -87,14 +86,13 @@ const DetailPostContents = () => {
           {/* 좋아요 버튼, 개수 */}
           <St.ContentIconCont>
             <St.ContentIconCont onClick={() => clickPostLike()} pointerOn="on">
-              <Like isLike={isLike} />
+              <Like islike={islike} />
             </St.ContentIconCont>
             <St.ContentCount>{postLikesCount}</St.ContentCount>
           </St.ContentIconCont>
           {/* 조회수 */}
           <St.ContentIconCont>
             <St.ContentIcon>
-              {/* <StDetailPostContentImg src={view} /> */}
               <IconView />
             </St.ContentIcon>
             <St.ContentCount>{detailPost.postViewCount}</St.ContentCount>
@@ -102,7 +100,6 @@ const DetailPostContents = () => {
           {/* 댓글 개수 */}
           <St.ContentIconCont>
             <St.ContentIcon>
-              {/* <StDetailPostContentImg src={comment} /> */}
               <IconComment />
             </St.ContentIcon>
             <St.ContentCount>{+detailPost.commentCount}</St.ContentCount>

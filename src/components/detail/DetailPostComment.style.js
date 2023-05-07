@@ -65,16 +65,17 @@ const CommentInfoUserLevel = styled.li`
   color: #f26581;
 `;
 
-const CommentInfoUserInfoCreatedAt = styled.ul`
+const CommentInfoUserInfoCreatedAt = styled.div`
   font-size: 10px;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
 
-const CommentDelete = styled.li`
+const CommentDelete = styled.div`
   display: flex;
   font-size: 10px;
   cursor: pointer;
@@ -117,7 +118,8 @@ const CommentLikeCont = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
 `;
 
 const CommentLikeIcon = styled.div`
@@ -155,7 +157,8 @@ const ReplyCreateToggle = styled.div`
   width: 100px;
   font-size: 12px;
   display: flex;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
   margin: 10px 0 20px 40px;
   cursor: pointer;
   &:active {
@@ -167,7 +170,8 @@ const ReplyMore = styled.div`
   width: 110px;
   font-size: 12px;
   display: flex;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
   margin: 10px 0 0 40px;
   cursor: pointer;
   /* &:active {

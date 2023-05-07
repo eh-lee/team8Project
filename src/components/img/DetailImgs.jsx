@@ -24,16 +24,6 @@ const DetailImgs = ({ postIdx }) => {
     <>
       {detailImgs.length === 1 && detailImgs[0] === "" ? null : (
         <>
-          {/* {[...Array(4)].map((_, i) => (
-            <St.ImgBox
-              key={i}
-              src={
-               i < detailImgs.length
-               ? `${process.env.REACT_APP_IMG_URL}/${detailImgs[i]}`
-               : none
-              }
-            />
-          ))} */}
           {detailImgs.map((img, i) => (
             <St.ImgBox
               key={i}

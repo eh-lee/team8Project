@@ -61,7 +61,8 @@ const Input = styled.textarea`
 const InputBtn = styled.button`
   border: none;
   background-color: transparent;
-  color: #bdbdc9;
+  /* color: #bdbdc9; */
+  color: rgb(100, 100, 100);
   width: 32px;
   height: 24px;
 

@@ -33,7 +33,7 @@ const DetailPostCommentReply = ({ reply, curNickname }) => {
         {/* 유저정보(프로필사진, 닉네임, 레벨, 작성시간 */}
         <St.ReplyInfoWrap>
           <St.InfoProfileCont>
-            <St.InfoUserLvImg src={level1} />
+            <St.InfoUserLvImg src={level1} alt="답글 작성 유저 레벨 이미지" />
           </St.InfoProfileCont>
           <St.UserInfoWrap>
             <St.UserInfoCont>

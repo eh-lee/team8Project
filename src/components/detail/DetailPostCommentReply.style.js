@@ -51,7 +51,8 @@ const InfoUserLevel = styled.li`
 
 const UserInfoCreatedAt = styled.li`
   font-size: 10px;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
   display: flex;
   flex-direction: row;
   justify-content: space-between;

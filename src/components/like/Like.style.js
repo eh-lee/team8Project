@@ -1,20 +1,20 @@
 import styled, { css } from 'styled-components'
 import {ReactComponent as LikeIcon} from "../../assets/icons/common/like.svg"
 
-export const LikeImg = styled(LikeIcon)`
+const LikeImgBox = styled.div`
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: rgb(100, 100, 100);
 
   &:hover {
     cursor: pointer;
   }
 
-
-  ${({isLike}) => {
-    if (isLike) {
+  ${({islike}) => {
+    if (islike) {
       return css`
         path {
           stroke: #F26581;
@@ -23,8 +23,12 @@ export const LikeImg = styled(LikeIcon)`
     }
   }};
 
-${({size}) => {
-    if(size) {
+
+`;
+
+const LikeImg = styled(LikeIcon)`
+${({ size }) => {
+    if (size) {
       return css`
         width: ${size}px;
         height: ${size}px;
@@ -33,3 +37,5 @@ ${({size}) => {
     }
   }}
 `;
+
+export { LikeImgBox, LikeImg }

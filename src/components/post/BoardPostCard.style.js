@@ -27,7 +27,7 @@ const PostCardTitleBox = styled.ul`
   gap: 0.5rem;
 `;
 
-const PostCardRow = styled.div`
+const PostCardRow = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -43,7 +43,7 @@ const PostCardCatBtn = styled.button`
   font-size: 0.5rem;
 `;
 
-const PostCardTitle = styled.li`
+const PostCardTitle = styled.div`
   width: 80%;
   font-size: 1.25rem;
 `;
@@ -89,14 +89,14 @@ const PostCardContent = styled.div`
   display: flex;
 `;
 
-const PostCardInfoBox = styled.ul`
+const PostCardInfoBox = styled.div`
   width: 50%;
   display: flex;
   justify-content: space-between;
   color: gray;
 `;
 
-const DetailPostContent = styled.li`
+const DetailPostContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,14 +160,3 @@ export {
     IconComment,
     DetailPostContentCount,
 }
-
-// const PostCardMainCategory = styled.li`
-//   font-size: 0.75rem;
-//   color: gray;
-//   max-width: 20%;
-// `;
-
-// const PostCardCount = styled.li`
-//   /* border: 1px solid black; */
-//   height: 15%;
-// `;

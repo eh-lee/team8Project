@@ -1,12 +1,12 @@
 import React from 'react'
 import * as St from "./Like.style"
 
-const Like = ({ isLike, size }) => {
+const Like = ({ islike, size }) => {
   return (
-    <div >
-        <St.LikeImg isLike={isLike} size={size} />
-    </div>
+    <St.LikeImgBox islike={islike} >
+        <St.LikeImg  size={size} />
+    </St.LikeImgBox>
   )
-}
+};
 
 export default Like;

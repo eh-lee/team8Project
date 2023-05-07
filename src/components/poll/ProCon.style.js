@@ -86,7 +86,8 @@ const DetailProColumn = styled.div`
 
 const ProBox = styled.p`
   /* border: 1px solid black; */
-  color: #c4c4c4;
+  /* color: #c4c4c4; */
+  color: rgb(100, 100, 100);
 `;
 
 const PollGraph = styled.div`
@@ -134,7 +135,8 @@ const ThumbsDown = styled(ThumbsUp)`
 
 const ConBox = styled.div`
   /* border: 1px solid black; */
-  color: #c4c4c4;
+  /* color: #c4c4c4; */
+  color: rgb(100, 100, 100);
 `;
 
 const DetailConColumn = styled.div`
