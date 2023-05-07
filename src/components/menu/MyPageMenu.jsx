@@ -53,13 +53,13 @@ const MyPageMenu = () => {
       <St.Wrap>
         <St.Menu onClick={() => alert("아직 구현중인 기능입니다.")}>
           <St.Sub>서비스 정보</St.Sub>
-          <St.Icon src={myPageMenu} />
+          <St.Icon src={myPageMenu} alt="서비스 정보" />
         </St.Menu>
         {nickname ? (
           <>
             <St.Menu onClick={LogoutModalOpenHandler}>
               <St.Sub isLogout>로그아웃</St.Sub>
-              <St.Icon src={myPageMenu} />
+              <St.Icon src={myPageMenu} alt="로그아웃" />
             </St.Menu>
           </>
         ) : (
@@ -70,14 +70,14 @@ const MyPageMenu = () => {
               }}
             >
               <St.Sub>로그인</St.Sub>
-              <St.Icon src={myPageMenu} />
+              <St.Icon src={myPageMenu} alt="로그인" />
             </St.Menu>
           </>
         )}
         {nickname ? (
           <St.Menu onClick={SignOutModalOpenHandler}>
             <St.Sub>회원 탈퇴</St.Sub>
-            <St.Icon src={myPageMenu} />
+            <St.Icon src={myPageMenu} alt="회원 탈퇴" />
           </St.Menu>
         ) : null}
       </St.Wrap>

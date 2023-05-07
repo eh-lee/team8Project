@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import cancel from "../../assets/icons/common/closeBtn.png";
+import { useNavigate } from "react-router-dom";
 import * as St from "./OnBoadingContents.style";
 
 const OnBoardingContents = () => {
@@ -19,11 +19,12 @@ const OnBoardingContents = () => {
             navi("/");
           }}
           src={cancel}
+          alt="창 닫기"
         />
       </St.FooRight>
       {[1, 2, 3].map((pageNumber) =>
         page === pageNumber ? (
-          <>
+          <React.Fragment key={pageNumber}>
             <St.Wrap>
               <St.Content onboarding2={page === 2} onboarding3={page === 3} />
               <St.DescCont>
@@ -55,20 +56,27 @@ const OnBoardingContents = () => {
             <St.Dot dot2={page === 1} dot1={page === 2 || 3} />
             <St.Dot dot3={page === 1 || 2} dot4={page === 3} />
             <St.CurrDot dot1={page === 1} dot2={page === 2} dot3={page === 3} />
-          </>
+          </React.Fragment>
         ) : null
       )}
       <St.AuthBtn onClick={() => navi("/login")}>
         로그인하고 훈수 시작하기
       </St.AuthBtn>
-      <St.Btn
+
+      <St.OnBoardingButton
         dir="left"
         onClick={() => handlePageChange(page === 1 ? 3 : page - 1)}
-      />
-      <St.Btn
+        alt="이전 이미지로"
+      >
+        ❮
+      </St.OnBoardingButton>
+      <St.OnBoardingButton
         dir="right"
         onClick={() => handlePageChange(page === 3 ? 1 : page + 1)}
-      />
+        alt="다음 이미지로"
+      >
+        ❯
+      </St.OnBoardingButton>
     </>
   );
 };

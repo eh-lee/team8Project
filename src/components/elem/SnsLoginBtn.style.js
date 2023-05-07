@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SnsButton = styled.button`
+export const SnsLogin = styled.button`
   border: none;
   width: 5vh;
   height: 5vh;
