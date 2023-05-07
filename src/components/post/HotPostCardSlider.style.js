@@ -7,26 +7,26 @@ margin-top: 16px;
 `;
 
 const InfoCont = ({ colored, title, more, on }) => {
-    const nav = useNavigate();
-    return (
-        <Info>
-            <Title>
-                <span className="colored">{colored}</span>
-                {title}
-            </Title>
-            <More
-                onClick={() => {
-                    if (on !== "on") {
-                        nav("/board");
-                    } else {
-                        nav("/battle");
-                    }
-                }}
-            >
-                {more}
-            </More>
-        </Info>
-    );
+  const nav = useNavigate();
+  return (
+    <Info>
+      <Title>
+        <span className="colored">{colored}</span>
+        {title}
+      </Title>
+      <More
+        onClick={() => {
+          if (on !== "on") {
+            nav("/board");
+          } else {
+            nav("/battle");
+          }
+        }}
+      >
+        {more}
+      </More>
+    </Info>
+  );
 };
 
 
@@ -71,24 +71,24 @@ const Cards = styled.div`
     gap: 8px;
   
     ${({ animate }) => {
-        if (animate.on) {
-            return css`
+    if (animate.on) {
+      return css`
           transform: translate(${({ animate }) => animate.value});
           // 350 > 애니메이션이 시작되기 전 대기 350
           // ease-in-out > 처음과 끝은 느리게 중간은 빠르게 변화
           transition: transform 350ms ease-in-out;
         `;
-        }
-    }};
+    }
+  }};
   `;
 
 // 버튼
 const Btn = ({ dir, onClick }) => {
-    return (
-        <StButton dir={dir} onClick={onClick}>
-            <ButtonImg src={sliderBtnLeft} />
-        </StButton>
-    );
+  return (
+    <StButton dir={dir} onClick={onClick}>
+      <ButtonImg src={sliderBtnLeft} alt="이동" />
+    </StButton>
+  );
 };
 
 const StButton = styled.button`
@@ -106,22 +106,22 @@ const StButton = styled.button`
     background: rgba(46, 46, 71, 0.4);
   
     ${({ dir }) => {
-        if (dir === "left") {
-            return css`
+    if (dir === "left") {
+      return css`
           left: 25px;
           top: 50%;
           transform: translateY(-50%);
         `;
-        }
+    }
 
-        if (dir === "right") {
-            return css`
+    if (dir === "right") {
+      return css`
           right: 25px;
           top: 50%;
           transform: translateY(-50%) scaleX(-1);
         `;
-        }
-    }}
+    }
+  }}
   `;
 
 const ButtonImg = styled.img`

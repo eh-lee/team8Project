@@ -15,7 +15,7 @@ const SignUp = styled(Link)`
 `;
 
 const Question = styled.div`
-  color: rgb(180, 180, 180);
+  color: rgb(100, 100, 100);
 `;
 
 export { Cont, SignUp, Question }
