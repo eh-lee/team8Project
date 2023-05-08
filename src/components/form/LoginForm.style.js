@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AuthInput from "../elem/AuthInput"
 import AuthButton from "../elem/AuthButton";
-import SnsLoginBtn from "../elem/SnsLoginBtn"
+import SocialLogin from "../elem/SnsLoginBtn"
 
 const Row = styled.div`
   display: flex;
@@ -31,4 +31,4 @@ const Column = styled.div`
   margin-bottom: 1vh;
 `;
 
-export { AuthInput, AuthButton, SnsLoginBtn, Wrap, Row, Column, Cont }
+export { AuthInput, AuthButton, SocialLogin, Wrap, Row, Column, Cont }

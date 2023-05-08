@@ -36,7 +36,7 @@ const HomeGreeting = () => {
 
         <St.Column>
           <St.GreetingLevelImgCont>
-            <St.GreetingLevelImg src={level1} />
+            <St.GreetingLevelImg src={level1} alt="현재 레벨" />
           </St.GreetingLevelImgCont>
           <St.GreetingLevelName>
             {isLogin ? "훈수 초보" : "훈수 초보"}
@@ -49,7 +49,7 @@ const HomeGreeting = () => {
           <St.GreetingText2>
             <St.GreetingLvContSub>
               <St.GreetingLevelImgCont2>
-                <St.GreetingLevelImg2 src={level2} />
+                <St.GreetingLevelImg2 src={level2} alt="다음 레벨" />
               </St.GreetingLevelImgCont2>
               <St.GreetingLvText1>훈수 하수</St.GreetingLvText1>
               <St.GreetingLvText2>까지 앞으로</St.GreetingLvText2>

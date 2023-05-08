@@ -57,9 +57,9 @@ const LoginForm = () => {
       <St.Cont>
         <St.AuthButton text={"로그인"} />
         <St.Row>
-          <St.SnsLoginBtn type="Naver" />
-          <St.SnsLoginBtn type="Kakao" />
-          <St.SnsLoginBtn type="Google" />
+          <St.SocialLogin type="Naver" aria-label="네이버로그인" />
+          <St.SocialLogin type="Kakao" aria-label="카카오로그인" />
+          <St.SocialLogin type="Google" aria-label="구글로그인" />
         </St.Row>
       </St.Cont>
     </St.Wrap>

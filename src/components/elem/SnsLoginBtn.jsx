@@ -22,7 +22,7 @@ function SnsLoginBtn({ type }) {
   };
 
   return (
-    <St.SnsButton
+    <St.SnsLogin
       onClick={snsLoginHandler}
       imgUrl={snsType[type].imgUrl}
       size={snsType[type].size}

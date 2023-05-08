@@ -41,7 +41,8 @@ font-size: 24px;
 `;
 
 const Level = styled.li`
-color: #f26581;
+/* color: #f26581; */
+color: rgb(255, 10, 10);
 font-size: 14px;
 font-weight: bold;
 `;
@@ -111,7 +112,8 @@ margin-left: 4px;
 font-size: 14px;
 line-height: 18px;
 font-weight: bold;
-color: #ef3f61;
+/* color: #ef3f61; */
+color: rgb(255, 40, 10);
 `;
 
 const Text2 = styled.div`

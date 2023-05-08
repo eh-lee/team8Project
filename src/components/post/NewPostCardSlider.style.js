@@ -85,7 +85,7 @@ const Cards = styled.div`
 const Btn = ({ dir, onClick }) => {
   return (
     <Stbutton dir={dir} onClick={onClick}>
-      <ButtonImg src={sliderBtnLeft} />
+      <ButtonImg src={sliderBtnLeft} alt="이동" />
     </Stbutton>
   );
 };

@@ -145,7 +145,7 @@ const PageWithFooterWrapper = styled.div`
 const WriteCanc = styled.div`
   line-height: 24px;
   margin-left: 7.5%;
-  color: rgb(180, 180, 180);
+  color: rgb(100, 100, 100);
   font-size: 18px;
   &:hover {
     cursor: pointer;
@@ -156,7 +156,7 @@ const WriteCanc = styled.div`
 const WritePost = styled.div`
   line-height: 24px;
   margin-right: 7.5%;
-  color: rgb(180, 180, 180);
+  color: rgb(100, 100, 100);
   font-size: 18px;
   &:hover {
     cursor: pointer;

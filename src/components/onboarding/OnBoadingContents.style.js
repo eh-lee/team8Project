@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { css } from "styled-components";
 import vector from "../../assets/icons/common/vector.png";
 import onboarding1 from "../../assets/onboarding/onboarding1.png";
@@ -53,56 +52,6 @@ const CurrDot = styled.div`
     `}
 `
 
-const Btn = ({ dir, onClick }) => {
-  return (
-    <Stbutton dir={dir} onClick={onClick}>
-      <ButtonImg src={vector} />
-    </Stbutton>
-  );
-};
-
-const Stbutton = styled.button`
-  background-color: transparent;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-  background: rgba(242, 242, 247, 0.6);
-  ${({ dir }) => {
-    if (dir === "left") {
-      return css`
-        left: 2.5rem;
-        top: 40%;
-        transform: translateY(-50%);
-      `;
-    }
-
-    if (dir === "right") {
-      return css`
-        right: 2.5rem;
-        top: 40%;
-        transform: translateY(-50%) scaleX(-1);
-      `;
-    }
-  }};
-
-  &:hover {
-    background: rgb(220, 220, 220);
-  }
-`;
-
-const ButtonImg = styled.img`
-  width: 6.4px;
-  height: 12.8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 const DescP = styled.p`
   font-size: 28px;
   font-weight: 700;
@@ -115,7 +64,8 @@ const DescSubP = styled.p`
   font-weight: 600;
   display: flex;
   justify-content: center;
-  color: #8a8a8a;
+  /* color: #8a8a8a; */
+  color: rgb(100, 100, 100);
 `;
 
 const AuthBtn = styled.button`
@@ -123,7 +73,8 @@ const AuthBtn = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: #ef3f61;
+  /* background-color: #ef3f61; */
+  background-color: #3A3A59;
   color: white;
   border-radius: 10px;
   min-width: 342px;
@@ -201,8 +152,8 @@ const FooRight = styled.div`
 `;
 
 const Cancel = styled.img`
-  min-width: 12px;
-  min-height: 12px;
+  width: 12px;
+  height: 12px;
   color: #3a3a59;
 
   font-size: 0.9rem;
@@ -211,4 +162,40 @@ const Cancel = styled.img`
   }
 `;
 
-export { AuthBtn, Btn, ButtonImg, Cancel, Content, CurrDot, Desc, DescCont, DescP, DescSub, DescSubP, Dot, FooRight, onboarding1, onboarding2, onboarding3, Stbutton, vector, Wrap }
+
+const OnBoardingButton = styled.button`
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  background: rgba(242, 242, 247, 0.6);
+  ${({ dir }) => {
+    if (dir === "left") {
+      return css`
+        left: 2.5rem;
+        top: 40%;
+        transform: translateY(-50%);
+      `;
+    }
+
+    if (dir === "right") {
+      return css`
+        right: 2.5rem;
+        top: 40%;
+        transform: translateY(-50%);
+      `;
+    }
+  }};
+
+  &:hover {
+    background: rgb(220, 220, 220);
+  }
+`;
+
+export { OnBoardingButton, AuthBtn, Cancel, Content, CurrDot, Desc, DescCont, DescP, DescSub, DescSubP, Dot, FooRight, onboarding1, onboarding2, onboarding3, vector, Wrap }

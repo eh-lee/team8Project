@@ -1,5 +1,27 @@
 import styled from "styled-components";
 
+const NoSearchCont = styled.div`
+  margin-top: 74px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NoSearchImg = styled.img`
+  width: 94.49px;
+  height: 81.33px;
+  margin-bottom: 16px;
+`;
+
+const NoSearchText = styled.span`
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+`;
+
+
 const Header = styled.div`
   background-color: white;
   position: fixed;
@@ -28,4 +50,15 @@ const Main = styled.div`
   border-bottom: 1px solid #E1E2E4;
 `;
 
-export { Header, Wrap, Main }
+const PostCardList = styled.div`
+  margin-top: 170px;
+  height: 45.28rem;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+`;
+
+export { Header, Wrap, Main, NoSearchCont, NoSearchImg, NoSearchText, PostCardList }

@@ -25,9 +25,10 @@ cursor: pointer;
 const Sub = styled.div`
 margin-left: 24px;
 ${({ isLogout }) =>
-        isLogout &&
-        css`
-    color: #ef3f61;
+    isLogout &&
+    css`
+    /* color: #ef3f61; */
+    color: rgb(255, 10, 10);
   `};
 `;
 

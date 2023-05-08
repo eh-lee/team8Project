@@ -16,7 +16,7 @@ const MyPageGreeting = () => {
       <St.Between>
         <St.Column>
           <St.ImgBox>
-            <St.LevelImg src={level1} />
+            <St.LevelImg src={level1} alt="현재 유저 레벨" />
           </St.ImgBox>
           <St.UserInfoCont>
             <St.Nickname>{nickname}</St.Nickname>
@@ -30,7 +30,7 @@ const MyPageGreeting = () => {
           <St.Text>
             <St.Cont>
               <St.LvImgBox>
-                <St.Img src={level2} />
+                <St.Img src={level2} alt="다음 유저 레벨" />
               </St.LvImgBox>
               <St.Text1>훈수 하수</St.Text1>
               <St.Text2>까지 앞으로</St.Text2>
