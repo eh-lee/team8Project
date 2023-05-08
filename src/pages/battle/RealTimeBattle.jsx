@@ -160,6 +160,7 @@ const StBattleCreateBtn = styled.button`
   border: none;
   cursor: pointer;
   outline: none;
+  margin-right: 20px;
 `;
 
 const StyledFooter = styled.div`
