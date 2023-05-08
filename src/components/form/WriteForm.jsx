@@ -5,11 +5,11 @@ import WriteFooter from "../footer/WriteFooter";
 import ModalPortal from "../modal/ModalPortal";
 import CateogryModal from "../modal/CateogryModal";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import * as St from "./WriteForm.style";
+import { useNavigate } from "react-router-dom";
 
-const WriteForm = () => {
+const WriteForm = ({setLoading}) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
   const pollModalOpenHandler = () => {
@@ -43,8 +43,10 @@ const WriteForm = () => {
   // 이미지 업로드
   const [imgs, setImgs] = useState([]);
 
+  // 게시글 등록 핸들러
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const formData = new FormData();
     formData.append("title", title);
@@ -81,6 +83,7 @@ const WriteForm = () => {
 
     try {
       await instanceWithAuth.post("/postCards/post/createPost", formData);
+      setLoading(false);
       alert("글 작성에 성공하였습니다.");
       navi("/board");
     } catch (e) {

@@ -31,7 +31,7 @@ const LiveBattleCard = () => {
       <XXXPostCardSliderInfo title="실시간 훈수 배틀" more="더 보기" on="on" />
       <St.LiveBattleCardWrap>
         <St.TitleCont>
-          <St.TitleText>Q. {roomName.slice(0, 20)}</St.TitleText>
+          <St.TitleText>Q. {roomName? roomName.slice(0, 20) : "상큼하게 터져볼래?"}</St.TitleText>
         </St.TitleCont>
         <St.BtnCont>
           <St.Btn onClick={battleInHandler}>참여하기</St.Btn>

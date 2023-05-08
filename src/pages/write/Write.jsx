@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import WriteForm from "../../components/form/WriteForm";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import MobileLayout from "../../layout/MobileLayout";
+import { Loading } from "../../components/onboarding/Loading";
 
 const Write = () => {
   FalseGuard();
@@ -9,10 +10,13 @@ const Write = () => {
     document.title = "훈수 — 글쓰기";
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
+      {loading ? <Loading /> : null}
       <MobileLayout>
-        <WriteForm />
+        <WriteForm setLoading={setLoading} />
       </MobileLayout>
     </>
   );
