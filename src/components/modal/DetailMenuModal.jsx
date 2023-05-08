@@ -36,13 +36,13 @@ const DetailMenuModal = ({ open, close, postIdx, detailPostCat }) => {
     instanceWithAuth
       .delete(`/postCards/post/createPost/${postIdx}`)
       .then((response) => {
-        alert(response.data.message);
+        alert("삭제되었습니다.");
         nav("/board");
       })
       .catch((error) => {
         const errorMsg = error.response.data.message;
         alert(`${errorMsg}`);
-      })
+      });
   };
 
   return open ? (

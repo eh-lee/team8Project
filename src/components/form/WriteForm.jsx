@@ -9,7 +9,7 @@ import { instanceWithAuth } from "../../api/axios";
 import * as St from "./WriteForm.style";
 import { useNavigate } from "react-router-dom";
 
-const WriteForm = ({setLoading}) => {
+const WriteForm = ({ setLoading }) => {
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
   const pollModalOpenHandler = () => {
@@ -46,7 +46,6 @@ const WriteForm = ({setLoading}) => {
   // 게시글 등록 핸들러
   const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     const formData = new FormData();
     formData.append("title", title);
@@ -80,6 +79,8 @@ const WriteForm = ({setLoading}) => {
       alert("상세 카테고리를 선택해 주세요.");
       return;
     }
+
+    setLoading(true);
 
     try {
       await instanceWithAuth.post("/postCards/post/createPost", formData);
