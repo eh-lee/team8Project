@@ -167,7 +167,7 @@ const ReplyCreateToggle = styled.div`
 `;
 
 const ReplyMore = styled.div`
-  width: 110px;
+  width: 120px;
   font-size: 12px;
   display: flex;
   /* color: #8a8a8a; */

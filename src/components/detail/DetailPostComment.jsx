@@ -120,7 +120,10 @@ const DetailPostComment = ({ comment, isComment, setIsComment }) => {
         {/* 유저정보(프로필사진, 찬반여부, 닉네임, 레벨, 작성시간 */}
         <St.CommentInfoWrap>
           <St.CommentInfoProfileCont>
-            <St.CommentInfoUserLvImg src={level1} alt="댓글 작성 유저 레벨 이미지" />
+            <St.CommentInfoUserLvImg
+              src={level1}
+              alt="댓글 작성 유저 레벨 이미지"
+            />
             {comment.proInputValue ? (
               <St.CommentInfoUserSide>찬성</St.CommentInfoUserSide>
             ) : comment.conInputValue ? (
