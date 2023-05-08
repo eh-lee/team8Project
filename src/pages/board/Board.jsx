@@ -31,6 +31,7 @@ const Board = () => {
   const MainCatCallback = (x) => {
     setMaincategory(x);
     setPage(1);
+    setData([]);
   };
 
   useEffect(() => {
