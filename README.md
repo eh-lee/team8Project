@@ -18,36 +18,12 @@
 
 > **팀원**
 
-<style>
-  table {
-    text-align: center;
-    margin: auto;
-    width: 90%;
-  }
+</br>
 
-  th, td {
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    border-bottom: 1px solid black;
-  }
-
-</style>
-
-<table>
-  <tr>
-    <th>이름</th>
-    <th>깃허브</th>
-  </tr>
-  <tr>
-    <td>김은영</td>
-    <td>https://github.com/yeooong</td>
-  </tr>
-  <tr>
-    <td>이은형</td>
-    <td>https://github.com/eh-lee</td>
-  </tr>
-</table>
+| 이름    | 깃허브                     |
+|----------------------------------------|------------------------------------------------------------|
+| 김은영 | [https://github.com/yeooong](https://github.com/yeooong) |
+| 이은형 | [https://github.com/eh-lee](https://github.com/eh-lee)   |
 
 </br>
 
