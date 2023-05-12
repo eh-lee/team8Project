@@ -31,14 +31,13 @@
 
 </br>
 
-[<p align="center"><img width="60%" src="https://github.com/eh-lee/team8Project/assets/123234702/3580fe17-0217-4336-b7ff-d797b2f77440">](https://www.notion.so/8-8f51c41203834fbfbaa12f02046ee418?pvs=4)
-
-[<p align="center"><img width="60%" src="https://github.com/eh-lee/team8Project/assets/123234702/99ee3999-150a-4502-ab94-ece18bca7d87">](https://newstack.notion.site/8-02da5a061a03402ba51b8ed632ddb6c4)
-
-[<p align="center"><img width="60%" src="https://github.com/eh-lee/team8Project/assets/123234702/58c0b634-65ca-4d6d-a89d-73370ecd6ed9">](https://newstack.notion.site/8-5319f4307c384da095cc919c4c62f358)
-
-[<p align="center"><img width="60%" src="https://github.com/eh-lee/team8Project/assets/123234702/af4bdfe0-5cba-4ea0-b581-a7940c1c0926">](https://newstack.notion.site/8-2a624148223c449c8c76fb628a9acb4f)
-
-[<p align="center"><img width="60%" src="https://github.com/eh-lee/team8Project/assets/123234702/3b9f59d2-7384-483d-a430-7aadffdfd914">](https://newstack.notion.site/8-fa3e9239fd994a0b94ac52be5863ec39)
+| 노션    |
+|----------------------------------------|
+| [8조 팀 노션](https://www.notion.so/8-8f51c41203834fbfbaa12f02046ee418?pvs=4) |
+| [8조 프론트엔드 트러블 슈팅](https://newstack.notion.site/8-02da5a061a03402ba51b8ed632ddb6c4) |
+| [8조 프론트엔드 버전 관리](https://newstack.notion.site/8-5319f4307c384da095cc919c4c62f358) |
+| [8조 프론트엔드 리팩토링](https://newstack.notion.site/8-2a624148223c449c8c76fb628a9acb4f)  |
+| [8조 프론트엔드 일정](https://newstack.notion.site/8-fa3e9239fd994a0b94ac52be5863ec39) |
 
 </br>
+
