@@ -4,6 +4,14 @@
 
 </br>
 
+> **프로젝트 소개**
+
+<p align="center"> '훈수'는 자유롭게 서로에게 훈수를 두는, AI 참여형 소셜네트워크 서비스입니다.
+
+<p align="center"><img width="95%" style="border-radius: 10px;" src="https://github.com/eh-lee/team8Project/assets/121739975/50366d83-1d31-4611-956b-74d4c01eed60">
+
+</br>
+
 > **아키텍처**
 
 <p align="center"><img width="95%" style="border-radius: 10px;" src="https://github.com/eh-lee/team8Project/assets/123234702/939c2622-8b15-4392-b860-a50ba8454acb">
@@ -31,13 +39,22 @@
 
 </br>
 
-| 노션    |
-|----------------------------------------|
-| [8조 팀 노션](https://www.notion.so/8-8f51c41203834fbfbaa12f02046ee418?pvs=4) |
-| [8조 프론트엔드 트러블 슈팅](https://newstack.notion.site/8-02da5a061a03402ba51b8ed632ddb6c4) |
-| [8조 프론트엔드 버전 관리](https://newstack.notion.site/8-5319f4307c384da095cc919c4c62f358) |
-| [8조 프론트엔드 리팩토링](https://newstack.notion.site/8-2a624148223c449c8c76fb628a9acb4f)  |
-| [8조 프론트엔드 일정](https://newstack.notion.site/8-fa3e9239fd994a0b94ac52be5863ec39) |
+### [8조 팀 노션](https://www.notion.so/8-8f51c41203834fbfbaa12f02046ee418?pvs=4)
+
+### [8조 프론트엔드 트러블 슈팅](https://newstack.notion.site/8-02da5a061a03402ba51b8ed632ddb6c4)
+* [ 댓글∘답글 기능 ]의 [ 전역 상태 ] 제거
+* [ 투표 기능 ]의 [ 전역 상태 ] 제거
+* [ 이미지 업로드 ] 구현
+
+
+### [8조 프론트엔드 버전 관리](https://newstack.notion.site/8-5319f4307c384da095cc919c4c62f358)
+* 자체 컨벤션에 따른 main, dev, page 별 버전 관리
+
+### [8조 프론트엔드 리팩토링](https://newstack.notion.site/8-2a624148223c449c8c76fb628a9acb4f)
+*
+*
+
+### [8조 프론트엔드 일정](https://newstack.notion.site/8-fa3e9239fd994a0b94ac52be5863ec39)
 
 </br>
 
