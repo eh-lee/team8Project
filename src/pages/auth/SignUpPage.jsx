@@ -5,6 +5,7 @@ import AuthButton from "../../components/elem/AuthButton";
 import MobileLayout from "../../layout/MobileLayout";
 import { instance } from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
+import sanitizeInput from "../../components/util/sanitizeInput";
 
 const SignUpPage = () => {
   const navi = useNavigate();
@@ -97,8 +98,17 @@ const SignUpPage = () => {
       alert("빈 칸을 작성해 주세요.");
       return;
     }
+
+    const sanitizedUser = {
+      username: sanitizeInput(user.username),
+      password: sanitizeInput(user.password),
+      passwordCheck: sanitizeInput(user.passwordCheck),
+      nickname: sanitizeInput(user.nickname),
+      email: sanitizeInput(user.email),
+    };
+
     try {
-      await instance.post("/user/signup", user);
+      await instance.post("/user/signup", sanitizedUser);
       alert(`${user.nickname} 님 회원가입에 성공하였습니다.`);
       navi("/login");
     } catch (e) {
