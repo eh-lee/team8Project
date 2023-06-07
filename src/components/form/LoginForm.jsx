@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { instance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import { sanitizeInput } from "../util/sanitizeInput";
 import * as St from "./LoginForm.style";
 
 const LoginForm = () => {
   const submitButtonHandler = async (e) => {
     e.preventDefault();
+    const sanitizedUser = {
+      email: sanitizeInput(user.email),
+      password: sanitizeInput(user.password),
+    };
     try {
-      const response = await instance.post("/auth/login", user);
-      localStorage.setItem("hoonsoo_email", user.email);
+      const response = await instance.post("/auth/login", sanitizedUser);
+      localStorage.setItem("hoonsoo_email", sanitizedUser.email);
       localStorage.setItem(
         "hoonsoo_access_token",
         response.headers.authorization
