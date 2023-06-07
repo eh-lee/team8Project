@@ -3,16 +3,23 @@ import { instance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { sanitizeInput } from "../util/sanitizeInput";
 import * as St from "./LoginForm.style";
+import { fetchCsrfToken } from "../util/fetchCsrfToken";
 
 const LoginForm = () => {
   const submitButtonHandler = async (e) => {
     e.preventDefault();
+    const csrfToken = await fetchCsrfToken();
     const sanitizedUser = {
       email: sanitizeInput(user.email),
       password: sanitizeInput(user.password),
     };
+
     try {
-      const response = await instance.post("/auth/login", sanitizedUser);
+      const response = await instance.post("/auth/login", sanitizedUser, {
+        headers: {
+          "X-CSRF-Token": csrfToken,
+        },
+      });
       localStorage.setItem("hoonsoo_email", sanitizedUser.email);
       localStorage.setItem(
         "hoonsoo_access_token",
