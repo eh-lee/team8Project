@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { instance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-import { sanitizeInput } from "../util/sanitizeInput";
+import sanitizeInput from "../util/sanitizeInput";
 import * as St from "./LoginForm.style";
 import { fetchCsrfToken } from "../util/fetchCsrfToken";
 

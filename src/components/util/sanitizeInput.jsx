@@ -12,4 +12,4 @@ const sanitizeInput = (input) => {
   return input.replace(regex, (match) => entities[match]);
 };
 
-export default sanitizeInput();
+export default sanitizeInput;
