@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import styled from "styled-components";
 import AuthInput from "../../components/elem/AuthInput";
 import AuthButton from "../../components/elem/AuthButton";
@@ -7,27 +7,34 @@ import { instance } from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import sanitizeInput from "../../components/util/sanitizeInput";
 
+interface User {
+  email: string;
+  nickname: string;
+  password: string;
+  passwordConfirm: string;
+}
+
 const SignUpPage = () => {
   const navi = useNavigate();
   useEffect(() => {
     document.title = "훈수 - 회원가입";
   }, []);
 
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     email: "",
     nickname: "",
     password: "",
     passwordConfirm: "",
   });
 
-  const changeInputHandler = (e) => {
+  const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setUser((prev) => {
       return { ...prev, [name]: value };
     });
   };
 
-  const validLengthHandler = (e) => {
+  const validLengthHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 6) {
       e.target.value = e.target.value.slice(0, 6);
     }
@@ -35,7 +42,7 @@ const SignUpPage = () => {
 
   // ================ 비밀번호 유효성 검사 ===================
   const [passwordMsg, setPasswordMsg] = useState("");
-  const validPassword = (e) => {
+  const validPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value;
     const isValidPassword = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$/.test(password);
     if (isValidPassword) {
@@ -49,7 +56,7 @@ const SignUpPage = () => {
 
   //================== 이메일 유효성 검사 ===================
   const [emailMsg, setEmailMsg] = useState("");
-  const validEmail = (e) => {
+  const validEmail = (e: ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
     const isValidEmail =
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -62,7 +69,7 @@ const SignUpPage = () => {
 
   //================== 닉네임 유효성 검사 ===================
   const [nicknameMsg, setNicknameMsg] = useState("");
-  const validNickname = (e) => {
+  const validNickname = (e: ChangeEvent<HTMLInputElement>) => {
     const nickname = e.target.value;
     const isValidNickname = /^[가-힣a-zA-Z0-9]{2,6}$/.test(nickname);
     if (isValidNickname) {
@@ -74,7 +81,7 @@ const SignUpPage = () => {
 
   // ================= 비밀번호 일치 검사 ====================
   const [confirmPwMsg, setConfirmPwMsg] = useState("");
-  const onChangeConfirmPw = (e) => {
+  const onChangeConfirmPw = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const checkPw = e.target.value;
 
@@ -85,14 +92,14 @@ const SignUpPage = () => {
       setConfirmPwMsg("비밀번호가 일치합니다.");
     }
   };
-  const submitButtonHandler = async (e) => {
+  const submitButtonHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // =============== 인풋 공백 검사 ======================
     if (
       user.nickname === "" ||
       user.password === "" ||
-      user.passwordConfrim === "" ||
+      user.passwordConfirm === "" ||
       user.email === ""
     ) {
       alert("빈 칸을 작성해 주세요.");
@@ -100,9 +107,9 @@ const SignUpPage = () => {
     }
 
     const sanitizedUser = {
-      username: sanitizeInput(user.username),
+      username: sanitizeInput(user.nickname),
       password: sanitizeInput(user.password),
-      passwordCheck: sanitizeInput(user.passwordCheck),
+      passwordCheck: sanitizeInput(user.passwordConfirm),
       nickname: sanitizeInput(user.nickname),
       email: sanitizeInput(user.email),
     };
@@ -177,10 +184,10 @@ const SignUpPage = () => {
                 type="text"
                 value={user.nickname}
                 name="nickname"
-                onInput={validLengthHandler}
                 onChange={(e) => {
                   changeInputHandler(e);
                   validNickname(e);
+                  validLengthHandler(e);
                 }}
                 placeholder="닉네임을 입력해 주세요."
               />
@@ -235,7 +242,7 @@ const StyledLink = styled(Link)`
   color: inherit;
 `;
 
-const Validation = styled.p`
+const Validation = styled.p<{ match: boolean }>`
   font-size: 0.6rem;
   color: ${({ match }) => (match ? "black" : "red")};
 `;

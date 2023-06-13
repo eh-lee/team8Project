@@ -1,19 +1,19 @@
 import React from "react";
-import * as St from "./AuthButton.style"
+import * as St from "./AuthButton.style";
 
 export default function Button({
-  borderColor,
-  backgroundColor,
+  // borderColor,
+  // backgroundColor,
   text,
-  onClick,
+  // onClick,
 }) {
   return (
     <St.AuthButton
-      borderColor={borderColor}
-      backgroundColor={backgroundColor}
-      onClick={onClick}
+    // borderColor={borderColor}
+    // backgroundColor={backgroundColor}
+    // onClick={onClick}
     >
       {text}
     </St.AuthButton>
   );
-};
+}

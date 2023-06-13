@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 
-const MobileLayout = ({ title, children }) => {
+const MobileLayout = ({ children }) => {
   const setScreenSize = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -13,11 +13,7 @@ const MobileLayout = ({ title, children }) => {
     return () => window.removeEventListener("resize", setScreenSize);
   });
 
-  return (
-    <StMobileLayout>
-      {children}
-    </StMobileLayout>
-  );
+  return <StMobileLayout>{children}</StMobileLayout>;
 };
 
 export default MobileLayout;
