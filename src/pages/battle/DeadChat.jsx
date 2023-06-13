@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
 import Messages from "../../components/messages/Messages";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import { instance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 

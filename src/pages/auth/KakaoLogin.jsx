@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import KakaoFetchAndPost from "../../components/hook/fetch/KakaoFetchAndPost";
 import * as St from "../../components/login/KakaoLogin.style";
 import TrueGuard from "../../components/hook/guard/TrueGuard";

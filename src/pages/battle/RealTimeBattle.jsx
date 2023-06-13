@@ -4,7 +4,7 @@ import ChatCard from "../../components/chat/ChatCard";
 import FooterNav from "../../components/footer/FooterNav";
 import ModalPortal from "../../components/modal/ModalPortal";
 import battleCreate from "../../assets/battle/battleCreate.png";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import CreateChatModal from "../../components/modal/CreateChatModal";
 import { instance } from "../../api/axios";
 import { useEffect } from "react";
@@ -200,7 +200,7 @@ const StBattleHeaderSub = styled.div`
 
 const StBattleTitle = styled.div`
   height: 48px;
-  border-bottom: 1px solid #E1E2E4;
+  border-bottom: 1px solid #e1e2e4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,5 +242,5 @@ const StBattleBackground = styled.div`
   padding: 5% 0;
   width: 400px;
   height: 12px;
-  background-color: #F2F2F7;
+  background-color: #f2f2f7;
 `;

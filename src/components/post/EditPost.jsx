@@ -5,7 +5,7 @@ import PollModal from "../modal/PollModal";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
 import WriteFooter from "../footer/WriteFooter";
 import ModalPortal from "../modal/ModalPortal";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import CateogryModal from "../modal/CateogryModal";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

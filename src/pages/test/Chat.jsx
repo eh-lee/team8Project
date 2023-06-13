@@ -6,7 +6,7 @@ import styled from "styled-components";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
 import ModalPortal from "../../components/modal/ModalPortal";
 import ChatEndModal from "../../components/modal/ChatEndModal";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 

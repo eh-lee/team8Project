@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 
 const ProfileEditPage = () => {
   useEffect(() => {

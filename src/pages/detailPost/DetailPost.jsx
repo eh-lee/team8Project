@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DetailPoll from "../../components/detail/DetailPoll";
 import DetailHeader from "../../components/header/DetailHeader";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import DetailPostContents from "../../components/detail/DetailPostContents";
 import DetailPostCommentsList from "../../components/detail/DetailPostCommentsList";
 import { useParams } from "react-router-dom";
@@ -10,13 +10,11 @@ import { instance, instanceWithAuth } from "../../api/axios";
 const DetailPost = () => {
   const { postIdx } = useParams();
   const [detailPostCat, setDetailPostCat] = useState([]);
-  const [writerNickname, setWriterNickname] = useState([]); 
+  const [writerNickname, setWriterNickname] = useState([]);
 
   useEffect(() => {
     const getDetailPost = async () => {
-      const { data } = await instanceWithAuth.get(
-        `/postCards/post/${postIdx}`
-      );
+      const { data } = await instanceWithAuth.get(`/postCards/post/${postIdx}`);
       setWriterNickname(data.post.nickname);
     };
     getDetailPost();
@@ -47,7 +45,11 @@ const DetailPost = () => {
   return (
     <>
       <MobileLayout>
-        <DetailHeader postIdx={postIdx} detailPostCat={detailPostCat} writerNickname={writerNickname}/>
+        <DetailHeader
+          postIdx={postIdx}
+          detailPostCat={detailPostCat}
+          writerNickname={writerNickname}
+        />
         <DetailPostContents />
         <DetailPoll postIdx={postIdx} detailPoll={detailPoll} />
         <DetailPostCommentsList postIdx={postIdx} />

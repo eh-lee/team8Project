@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ChatCard from "../../components/chat/ChatCard";
 import FooterNav from "../../components/footer/FooterNav";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import { instance } from "../../api/axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -86,7 +86,6 @@ const Battle = () => {
 
 export default Battle;
 
-
 const ChatCardCont = styled.div`
   margin-top: 146px;
   /* === 헤더 높이 === */
@@ -137,7 +136,7 @@ const StBattleHeaderSub = styled.div`
 
 const StBattleTitle = styled.div`
   height: 48px;
-  border-bottom: 1px solid #E1E2E4;
+  border-bottom: 1px solid #e1e2e4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,5 +178,5 @@ const StBattleBackground = styled.div`
   padding: 5% 0;
   width: 400px;
   height: 12px;
-  background-color: #F2F2F7;
+  background-color: #f2f2f7;
 `;

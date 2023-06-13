@@ -3,7 +3,7 @@ import TrueGuard from "../../components/hook/guard/TrueGuard";
 import LoginForm from "../../components/form/LoginForm";
 import LoginFooter from "../../components/footer/LoginFooter";
 import LoginHeader from "../../components/header/LoginHeader";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 
 const LogInPage = () => {
   TrueGuard();

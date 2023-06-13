@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import OldbieGuard from "../../components/hook/guard/OldbieGuard";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import OnBoardingContents from "../../components/onboarding/OnBoadingContents";
 
 const OnBoarding = () => {

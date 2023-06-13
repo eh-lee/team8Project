@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WriteForm from "../../components/form/WriteForm";
 import FalseGuard from "../../components/hook/guard/FalseGuard";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import { Loading } from "../../components/onboarding/Loading";
 
 const Write = () => {

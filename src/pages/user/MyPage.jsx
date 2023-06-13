@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MyPageMenu from "../../components/menu/MyPageMenu";
 import MyPageHeader from "../../components/header/MyPageHeader";
-import MobileLayout from "../../layout/MobileLayout";
+import MobileLayout from "../../layout/MobileLayout.tsx";
 import MyPageGreeting from "../../components/greeting/MyPageGreeting";
 
 const MyPage = () => {
