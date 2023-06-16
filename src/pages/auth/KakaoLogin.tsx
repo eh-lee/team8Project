@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import KakaoFetchAndPost from "../../components/hook/fetch/KakaoFetchAndPost";
 import * as St from "../../components/login/KakaoLogin.style";
 import TrueGuard from "../../components/hook/guard/TrueGuard";
 
-const KakaoLogin = () => {
+const KakaoLogin: React.FC = () => {
   TrueGuard();
   useEffect(() => {
     document.title = "훈수 - 카카오로그인";
