@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import SearchForm from "../../components/form/SearchForm";
 import SearchHeader from "../../components/header/SearchHeader";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import styled from "styled-components";
 
-const Search = () => {
+const Search: React.FC = () => {
   useEffect(() => {
     document.title = "훈수 - 검색";
   }, []);
