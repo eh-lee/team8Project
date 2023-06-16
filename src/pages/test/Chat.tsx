@@ -6,29 +6,38 @@ import styled from "styled-components";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
 import ModalPortal from "../../components/modal/ModalPortal";
 import ChatEndModal from "../../components/modal/ChatEndModal";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import { useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 
 const ENDPOINT = "http://localhost:4000";
-// const ENDPOINT = "http://43.201.45.82:3000";
 let socket;
 
-const Chat = () => {
+interface Party {
+  numUsers: number;
+  maxParty: number;
+  room: string;
+}
+
+const Chat: React.FC = () => {
   const nav = useNavigate();
   const curNickname = localStorage.getItem("hoonsoo_nickname");
 
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
-  const [users, setUsers] = useState("");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [name, setName] = useState<string>("");
+  const [room, setRoom] = useState<string>("");
+  const [users, setUsers] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [messages, setMessages] = useState<string[]>([]);
 
-  const [maxParty, setMaxParty] = useState(0);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [maxParty, setMaxParty] = useState<number>(0);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-  const [prevMessages, setPrevMessages] = useState([]);
-  const [currParty, setCurrParty] = useState({});
+  const [prevMessages, setPrevMessages] = useState<string[]>([]);
+  const [currParty, setCurrParty] = useState<Party>({
+    numUsers: 0,
+    maxParty: 0,
+    room: "",
+  });
 
   // for test
   // useEffect(() => {
@@ -56,11 +65,11 @@ const Chat = () => {
 
     socket = io(ENDPOINT);
 
-    setRoom(room);
-    setName(name);
-    setMaxParty(maxParty);
+    setRoom(room || "");
+    setName(name || "");
+    setMaxParty(Number(maxParty));
 
-    socket.emit("join", { name, room, maxParty }, (error) => {
+    socket.emit("join", { name, room, maxParty }, (error: string) => {
       if (error) {
         alert(error);
       }
@@ -69,18 +78,18 @@ const Chat = () => {
 
   // 서버에서 messages받아오는 코드
   useEffect(() => {
-    socket.on("message", (message) => {
+    socket.on("message", (message: string) => {
       setMessages((messages) => [...messages, message]);
     });
 
     // ================ socket server와 통신하기 ==================
-    socket.on("currParty", ({ numUsers, maxParty, room }) => {
+    socket.on("currParty", ({ numUsers, maxParty, room }: Party) => {
       setCurrParty({ numUsers, maxParty, room });
     });
     // ================ socket server와 통신하기 ==================
   }, []);
 
-  const sendMessage = (event) => {
+  const sendMessage = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (message) {

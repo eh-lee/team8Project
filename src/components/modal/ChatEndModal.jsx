@@ -7,8 +7,7 @@ import * as St from "./ChatEndModal.style";
 const ENDPOINT = "http://localhost:4000";
 let socket;
 
-// const ChatEndModal = ({ open, close, isAdmin, room, messages }) => {
-const ChatEndModal = ({ open, close, room, messages }) => {
+const ChatEndModal = ({ open, close, isAdmin, room, messages }) => {
   // nickname: 방을 만든 사람의 nickname
   const nickname = localStorage.getItem("hoonsoo_nickname");
 
@@ -62,7 +61,7 @@ const ChatEndModal = ({ open, close, room, messages }) => {
     nav("/battle");
   };
 
-  const isAdmin = true;
+  // const isAdmin = true;
   //   const isAdmin = false;
 
   //   useEffect(()=>{
