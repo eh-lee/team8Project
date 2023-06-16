@@ -4,9 +4,9 @@ import Footer from "../../components/footer/Footer";
 import NewbieGuard from "../../components/hook/guard/NewbieGuard";
 import HomeGreeting from "../../components/greeting/HomeGreeting";
 import HomeContents from "../../components/post/HomeContents";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 
-const Home = () => {
+const Home: React.FC = () => {
   NewbieGuard();
   useEffect(() => {
     document.title = "훈수";
