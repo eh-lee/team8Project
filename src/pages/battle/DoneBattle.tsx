@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatCard from "../../components/chat/ChatCard";
 import FooterNav from "../../components/footer/FooterNav";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import { instance } from "../../api/axios";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Battle = () => {
+interface ChattingList {
+  chatSaveIdx: number;
+  roomName: string;
+  maxParty: number;
+  isRealTime: boolean;
+  idx: string;
+}
+
+const Battle: React.FC = () => {
   const nav = useNavigate();
   useEffect(() => {
     document.title = "훈수 - 지난 배틀";
   }, []);
 
-  const [chattingList, setChattingList] = useState([]);
+  const [chattingList, setChattingList] = useState<ChattingList[]>([]);
 
   const isRealTime = false;
 
@@ -30,16 +37,6 @@ const Battle = () => {
     };
     doneChatGet();
   }, []);
-
-  // 1. 전체 채팅 목록 (roomName, chatSaveIndx) => doneBattle
-  // /api/chat/doneChat
-
-  // maxParty: number,
-  // nickname: string,
-  // roomName: string,
-  // chatIdx: UUID
-
-  // /chat/hunsuChat/{chatIdx}
 
   return (
     <>
@@ -66,9 +63,10 @@ const Battle = () => {
           {chattingList?.map((item, idx) => (
             <ChatCard
               key={idx}
-              idx={idx}
-              chatSaveIdx={item.chatSaveIdx}
+              idx={item.idx}
               roomName={item.roomName}
+              maxParty={item.maxParty}
+              isRealTime={item.isRealTime}
             />
           ))}
         </ChatCardCont>
@@ -109,8 +107,6 @@ const StyledFooter = styled.div`
   font-size: 0.75rem;
   font-weight: bold;
   background-color: rgba(255, 255, 255);
-  /* opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0)}; */
-  /* transition: opacity 0.3s ease-in-out; */
 `;
 
 // ================= header ====================
@@ -149,7 +145,7 @@ const StBattleCategoryCont = styled.div`
   width: 100%;
 `;
 
-const StBattleCategory = styled.div`
+const StBattleCategory = styled.div<{ isActive?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
