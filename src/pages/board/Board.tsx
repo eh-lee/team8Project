@@ -1,34 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../../components/footer/Footer";
 import noSearch from "../../assets/imgs/detail/noSearch.png";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import BoardPostCard from "../../components/post/BoardPostCard";
 import BoardMainCategory from "../../components/board/BoardMainCategory";
 import BoardCategorySlider from "../../components/board/BoardCategorySlider";
 import { instance } from "../../api/axios";
-import { useState, useEffect, useRef } from "react";
 import * as St from "../../components/board/Board.style";
 
-const Board = () => {
+const Board = (): JSX.Element => {
   useEffect(() => {
     document.title = "훈수 - 게시판";
   }, []);
 
-  const postCardContRef = useRef(null);
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  const [category, setCategory] = useState("전체");
-  const [prevCategory, setPrevCategory] = useState("전체");
-  const [maincategory, setMaincategory] = useState("전체");
+  const postCardContRef = useRef<HTMLDivElement | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [data, setData] = useState<any[]>([]);
+  const [category, setCategory] = useState<string>("전체");
+  const [prevCategory, setPrevCategory] = useState<string>("전체");
+  const [maincategory, setMaincategory] = useState<string>("전체");
 
-  const SubCatCallback = (x, y) => {
+  const SubCatCallback = (x: string, y: string) => {
     setCategory(x);
     setPrevCategory(y);
     setPage(1);
     setData([]);
   };
 
-  const MainCatCallback = (x) => {
+  const MainCatCallback = (x: string) => {
     setMaincategory(x);
     setPage(1);
     setData([]);
