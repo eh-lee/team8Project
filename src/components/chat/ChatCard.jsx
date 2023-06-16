@@ -1,13 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import battle1 from "../../assets/battle/battle1.png";
 import battle2 from "../../assets/battle/battle2.png";
 import { ReactComponent as MaxParty } from "../../assets/icons/common/maxParty.svg";
 import * as St from "./ChatCard.style";
 
 const ChatCard = ({ idx, roomName, maxParty, isRealTime }) => {
-  const navigate = useNavigate();
-  const nickname = localStorage.getItem("hoonsoo_nickname");
+  // const navigate = useNavigate();
+  // const nickname = localStorage.getItem("hoonsoo_nickname");
 
   return (
     <St.ChatCardWrap

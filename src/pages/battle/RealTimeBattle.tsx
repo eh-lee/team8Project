@@ -4,19 +4,27 @@ import ChatCard from "../../components/chat/ChatCard";
 import FooterNav from "../../components/footer/FooterNav";
 import ModalPortal from "../../components/modal/ModalPortal";
 import battleCreate from "../../assets/battle/battleCreate.png";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import CreateChatModal from "../../components/modal/CreateChatModal";
 import { instance } from "../../api/axios";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Battle = () => {
+interface ChattingList {
+  chatSaveIdx: number;
+  roomName: string;
+  maxParty: number;
+  isRealTime: boolean;
+  idx: string;
+}
+
+const Battle: React.FC = () => {
   const nav = useNavigate();
   useEffect(() => {
     document.title = "훈수 - 실시간 배틀";
   }, []);
 
-  const [chattingList, setChattingList] = useState([]);
+  const [chattingList, setChattingList] = useState<ChattingList[]>([]);
 
   const [isCreateChatModalOpen, setIsCreateChatModalOpen] = useState(false);
 
@@ -45,13 +53,6 @@ const Battle = () => {
     };
     chatInfoGet();
   }, []);
-
-  // maxParty: number,
-  // nickname: string,
-  // roomName: string,
-  // chatIdx: UUID
-
-  // /chat/hunsuChat/{chatIdx}
 
   return (
     <>
@@ -84,7 +85,7 @@ const Battle = () => {
               roomName={item.roomName}
               idx={idx}
               maxParty={item.maxParty}
-              // isFirst={idx === 0}
+              isRealTime={item.isRealTime}
             />
           ))}
         </ChatCardCont>
@@ -173,8 +174,6 @@ const StyledFooter = styled.div`
   font-size: 0.75rem;
   font-weight: bold;
   background-color: rgba(255, 255, 255);
-  /* opacity: ${({ isOpaque }) => (isOpaque ? 1 : 0)}; */
-  /* transition: opacity 0.3s ease-in-out; */
 `;
 
 // ================= header ====================
@@ -213,7 +212,7 @@ const StBattleCategoryCont = styled.div`
   width: 100%;
 `;
 
-const StBattleCategory = styled.div`
+const StBattleCategory = styled.div<{ isActive?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
