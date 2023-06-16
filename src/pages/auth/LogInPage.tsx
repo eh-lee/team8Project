@@ -3,9 +3,9 @@ import TrueGuard from "../../components/hook/guard/TrueGuard";
 import LoginForm from "../../components/form/LoginForm";
 import LoginFooter from "../../components/footer/LoginFooter";
 import LoginHeader from "../../components/header/LoginHeader";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 
-const LogInPage = () => {
+const LogInPage: React.FC = () => {
   TrueGuard();
   useEffect(() => {
     document.title = "훈수 - 로그인";
