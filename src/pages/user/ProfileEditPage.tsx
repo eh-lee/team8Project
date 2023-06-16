@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 
-const ProfileEditPage = () => {
+const ProfileEditPage: React.FC = () => {
   useEffect(() => {
     document.title = "훈수 - 회원 정보 수정";
   }, []);
