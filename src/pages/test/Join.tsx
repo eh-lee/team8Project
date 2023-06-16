@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import "./Join.css";
 
 const Join: React.FC = () => {
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+  const [name, setName] = useState<string>("");
+  const [room, setRoom] = useState<string>("");
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);

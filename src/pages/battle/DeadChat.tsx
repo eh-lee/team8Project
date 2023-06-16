@@ -2,17 +2,22 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import closeBtn from "../../assets/icons/common/closeBtn.png";
 import Messages from "../../components/messages/Messages";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import { instance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
+interface ChatProps {
+  chatSaveIdx: number;
+  room: string;
+  name: string;
+}
+
 // 프롭스: {chatSaveIdx, room} 요 놈들.. 내려주는  페이지 나중에 확인해서 잡기..
-const Chat = ({ chatSaveIdx, room }) => {
+const Chat: React.FC<ChatProps> = ({ chatSaveIdx, room, name }) => {
   const nav = useNavigate();
   const curNickname = localStorage.getItem("hoonsoo_nickname");
 
-  // const [room, setRoom] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
     const getDoneChat = async () => {
@@ -46,7 +51,7 @@ const Chat = ({ chatSaveIdx, room }) => {
             </StChatSave>
           </StChatHeaderCont>
         </StChatHeader>
-        <Messages messages={messages} />
+        <Messages messages={messages} name={name} />
       </MobileLayout>
     </>
   );
