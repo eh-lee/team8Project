@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { GlobalStyles } from "./GlobalStyles";
 import Router from "./shared/Router";
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <GlobalStyles />
@@ -12,7 +12,7 @@ function App() {
       </ResponsiveContainer>
     </>
   );
-}
+};
 
 const ResponsiveContainer = styled.div`
   display: flex;
