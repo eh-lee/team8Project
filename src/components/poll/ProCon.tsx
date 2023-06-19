@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { instanceWithAuth } from "../../api/axios";
 import { ReactComponent as ThumbsUp } from "../../assets/icons/common/thumbs-up.svg";
-import { ColoredExperienceBar } from "../greeting/HomeGreeting.style";
 import * as St from "./ProCon.style";
 
-const ProCon = ({
+interface ProConProps {
+  pollTitle: string;
+  detailPollTitle: string;
+  detailProCount: number;
+  detailConCount: number;
+  detailPostIdx: number;
+  parentProInputValue: boolean;
+  parentConInputValue: boolean;
+  width: number;
+}
+
+const ProCon: React.FC<ProConProps> = ({
   pollTitle,
   detailPollTitle,
   detailProCount,
@@ -13,27 +22,29 @@ const ProCon = ({
   detailPostIdx,
   parentProInputValue,
   parentConInputValue,
+  width,
 }) => {
-  const [pollType, setPollType] = useState("proCon");
-
-  const [pollClose, setPollClose] = useState(true);
+  // const [pollType, setPollType] = useState<string>("proCon");
+  const [pollClose, setPollClose] = useState<boolean>(true);
 
   const proConDelHandler = () => {
     setPollClose(false);
   };
 
   const nickname = localStorage.getItem("hoonsoo_nickname");
-  const [proCount, setProCount] = useState(detailProCount);
-  const [conCount, setConCount] = useState(detailConCount);
+  const [proCount, setProCount] = useState<number>(detailProCount);
+  const [conCount, setConCount] = useState<number>(detailConCount);
 
-  const proPerc = Math.round((proCount / (proCount + conCount)) * 100);
-  const conPerc = 100 - proPerc;
+  const proPerc: number = Math.round((proCount / (proCount + conCount)) * 100);
+  const conPerc: number = 100 - proPerc;
 
-  const proCountWidth = isNaN(proPerc) ? 50 : proPerc;
-  const conCountWidth = isNaN(conPerc) ? 50 : conPerc;
+  const proCountWidth: number = isNaN(proPerc) ? 50 : proPerc;
+  const conCountWidth: number = isNaN(conPerc) ? 50 : conPerc;
 
-  const [proInputValue, setProInputValue] = useState(parentProInputValue);
-  const [conInputValue, setConInputValue] = useState(parentConInputValue);
+  const [proInputValue, setProInputValue] =
+    useState<boolean>(parentProInputValue);
+  const [conInputValue, setConInputValue] =
+    useState<boolean>(parentConInputValue);
 
   const voteProHandler = () => {
     if (nickname) {
@@ -79,7 +90,6 @@ const ProCon = ({
     const putVote = async () => {
       await instanceWithAuth.put(`/prefer/post/${detailPostIdx}`, {
         proInputValue,
-
         conInputValue,
       });
     };
@@ -120,7 +130,7 @@ const ProCon = ({
             // onClick 걸고 state 관리
             <St.DetailProColumn
               onClick={voteProHandler}
-              isVoted={proInputValue}
+              // isVoted={proInputValue}
             >
               <ThumbsUp />
               <St.ProBox>찬성 투표</St.ProBox>
@@ -152,7 +162,7 @@ const ProCon = ({
             // onClick 걸고 state 관리
             <St.DetailConColumn
               onClick={voteConHandler}
-              isVoted={conInputValue}
+              // isVoted={conInputValue}
             >
               <St.ThumbsDown />
               <St.ConBox>반대 투표</St.ConBox>
