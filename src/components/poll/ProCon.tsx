@@ -11,7 +11,6 @@ interface ProConProps {
   detailPostIdx: number;
   parentProInputValue: boolean;
   parentConInputValue: boolean;
-  width: number;
 }
 
 const ProCon: React.FC<ProConProps> = ({
@@ -22,7 +21,6 @@ const ProCon: React.FC<ProConProps> = ({
   detailPostIdx,
   parentProInputValue,
   parentConInputValue,
-  width,
 }) => {
   // const [pollType, setPollType] = useState<string>("proCon");
   const [pollClose, setPollClose] = useState<boolean>(true);
@@ -130,7 +128,7 @@ const ProCon: React.FC<ProConProps> = ({
             // onClick 걸고 state 관리
             <St.DetailProColumn
               onClick={voteProHandler}
-              // isVoted={proInputValue}
+              isVoted={proInputValue}
             >
               <ThumbsUp />
               <St.ProBox>찬성 투표</St.ProBox>
@@ -162,7 +160,7 @@ const ProCon: React.FC<ProConProps> = ({
             // onClick 걸고 state 관리
             <St.DetailConColumn
               onClick={voteConHandler}
-              // isVoted={conInputValue}
+              isVoted={conInputValue}
             >
               <St.ThumbsDown />
               <St.ConBox>반대 투표</St.ConBox>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Trash } from "../../assets/icons/common/trash.svg";
-import {ReactComponent as ThumbsUp} from "../../assets/icons/common/thumbs-up.svg"
+import { ReactComponent as ThumbsUp } from "../../assets/icons/common/thumbs-up.svg";
 
 const ProConWrap = styled.div`
   padding: 5% 7.5%;
@@ -68,8 +68,11 @@ const ProConColumn = styled.div`
   line-height: 14px;
 `;
 
+type TDetailProColumn = {
+  isVoted: boolean;
+};
 
-const DetailProColumn = styled.div`
+const DetailProColumn = styled.div<TDetailProColumn>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +83,7 @@ const DetailProColumn = styled.div`
   }
 
   svg path {
-  stroke: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
+    stroke: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
   }
 `;
 
@@ -99,7 +102,11 @@ const PollGraph = styled.div`
   height: 65%;
 `;
 
-const ProCount = styled.div`
+type TProCount = {
+  width: number;
+};
+
+const ProCount = styled.div<TProCount>`
   padding-left: 5px;
   text-align: start;
   display: flex;
@@ -114,7 +121,11 @@ const ProCount = styled.div`
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
-const ConCount = styled.div`
+type TConCount = {
+  width: number;
+};
+
+const ConCount = styled.div<TConCount>`
   padding-right: 5px;
   display: flex;
   justify-content: flex-end;
@@ -139,7 +150,11 @@ const ConBox = styled.div`
   color: rgb(100, 100, 100);
 `;
 
-const DetailConColumn = styled.div`
+type TDetailConColumn = {
+  isVoted: boolean;
+};
+
+const DetailConColumn = styled.div<TDetailConColumn>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -150,25 +165,25 @@ const DetailConColumn = styled.div`
   }
 
   svg path {
-  stroke: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
+    stroke: ${(props) => (props.isVoted ? "#ef3f61" : "black")};
   }
 `;
 
 export {
-    ProConWrap,
-    ProConHeader,
-    ProConTitle,
-    ProConIcon,
-    ProConDelete,
-    IconTrash,
-    ProConBody,
-    ProConColumn,
-    DetailProColumn,
-    ProBox,
-    PollGraph,
-    ProCount,
-    ConCount,
-    ThumbsDown,
-    ConBox,
-    DetailConColumn,
-}
+  ProConWrap,
+  ProConHeader,
+  ProConTitle,
+  ProConIcon,
+  ProConDelete,
+  IconTrash,
+  ProConBody,
+  ProConColumn,
+  DetailProColumn,
+  ProBox,
+  PollGraph,
+  ProCount,
+  ConCount,
+  ThumbsDown,
+  ConBox,
+  DetailConColumn,
+};
