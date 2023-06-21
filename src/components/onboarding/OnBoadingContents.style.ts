@@ -4,7 +4,13 @@ import onboarding1 from "../../assets/onboarding/onboarding1.png";
 import onboarding2 from "../../assets/onboarding/onboarding2.png";
 import onboarding3 from "../../assets/onboarding/onboarding3.png";
 
-const Dot = styled.div`
+type TDot = {
+  dot2: number;
+  dot3: number;
+  dot4: number;
+};
+
+const Dot = styled.div<TDot>`
   width: 8px;
   height: 8px;
   border-radius: 4px;
@@ -31,7 +37,12 @@ const Dot = styled.div`
     `}
 `;
 
-const CurrDot = styled.div`
+type TCurrDot = {
+  dot2: number;
+  dot3: number;
+};
+
+const CurrDot = styled.div<TCurrDot>`
   width: 16px;
   height: 8px;
   border-radius: 4px;
@@ -50,7 +61,7 @@ const CurrDot = styled.div`
     css`
       left: 211px;
     `}
-`
+`;
 
 const DescP = styled.p`
   font-size: 28px;
@@ -68,13 +79,17 @@ const DescSubP = styled.p`
   color: rgb(100, 100, 100);
 `;
 
-const AuthBtn = styled.button`
+type TAuthBtn = {
+  borderColor: string;
+};
+
+const AuthBtn = styled.button<TAuthBtn>`
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   /* background-color: #ef3f61; */
-  background-color: #3A3A59;
+  background-color: #3a3a59;
   color: white;
   border-radius: 10px;
   min-width: 342px;
@@ -108,7 +123,13 @@ const Desc = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Content = styled.div`
+
+type TContent = {
+  onboarding2: number;
+  onboarding3: number;
+};
+
+const Content = styled.div<TContent>`
   min-width: 340px;
   min-height: 340px;
   background-image: url(${onboarding1});
@@ -162,7 +183,6 @@ const Cancel = styled.img`
   }
 `;
 
-
 const OnBoardingButton = styled.button`
   background-color: transparent;
   width: 32px;
@@ -198,4 +218,22 @@ const OnBoardingButton = styled.button`
   }
 `;
 
-export { OnBoardingButton, AuthBtn, Cancel, Content, CurrDot, Desc, DescCont, DescP, DescSub, DescSubP, Dot, FooRight, onboarding1, onboarding2, onboarding3, vector, Wrap }
+export {
+  OnBoardingButton,
+  AuthBtn,
+  Cancel,
+  Content,
+  CurrDot,
+  Desc,
+  DescCont,
+  DescP,
+  DescSub,
+  DescSubP,
+  Dot,
+  FooRight,
+  onboarding1,
+  onboarding2,
+  onboarding3,
+  vector,
+  Wrap,
+};
