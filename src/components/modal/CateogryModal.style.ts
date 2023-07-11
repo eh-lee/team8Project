@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const FooBG = styled.div`
   position: fixed;
   top: 0;
@@ -34,7 +33,13 @@ const ModalMainCat = styled.div`
   background-color: rgb(245, 245, 245);
 `;
 
-const MainCat = styled.div` 
+type TMainCat = {
+  mainCatIdx: boolean;
+  isFirst: boolean;
+  isClicked: boolean;
+};
+
+const MainCat = styled.div<TMainCat>`
   width: 100%;
   height: 2.85rem;
   display: flex;
@@ -69,7 +74,13 @@ const ModalSubCat = styled.div`
   height: 100vh;
 `;
 
-const SubCat = styled.div`
+type TSubCat = {
+  subCatIdx: boolean;
+  isFirst: boolean;
+  isClicked: boolean;
+};
+
+const SubCat = styled.div<TSubCat>`
   max-width: 100%;
   height: 2.85rem;
   display: flex;
@@ -100,4 +111,4 @@ export {
   MainCat,
   ModalSubCat,
   SubCat,
-}
+};

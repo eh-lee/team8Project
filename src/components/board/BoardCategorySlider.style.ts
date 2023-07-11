@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+// type TCatButton = {
+//   index: string;
+// };
+
+// const CatButton = styled.button<TCatButton>`
 const CatButton = styled.button`
   margin-left: ${(props) => (props.index === 0 ? "30px" : "10px")};
 `;
@@ -9,7 +14,7 @@ const CatSliderWrap = styled.div`
   overflow-x: hidden;
 `;
 const CatLeftButton = styled.button`
-width: 15px;
+  width: 15px;
   color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
@@ -24,7 +29,7 @@ width: 15px;
 `;
 
 const CatRightButton = styled.button`
-width: 15px;
+  width: 15px;
   color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
@@ -38,7 +43,11 @@ width: 15px;
   }
 `;
 
-const CategorySlider = styled.div`
+type TCategorySlider = {
+  currentPosition: number;
+};
+
+const CategorySlider = styled.div<TCategorySlider>`
   padding: 16px 0;
   width: 1600px;
   background-color: rgb(242, 242, 247);
@@ -59,7 +68,6 @@ const CategorySlider = styled.div`
     border-color: rgb(239, 63, 97);
     /* theme color */
     color: white;
-    
   }
 
   ::-webkit-scrollbar {
@@ -72,5 +80,5 @@ export {
   CatSliderWrap,
   CatLeftButton,
   CatRightButton,
-  CategorySlider
+  CategorySlider,
 };

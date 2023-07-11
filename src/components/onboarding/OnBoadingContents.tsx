@@ -3,11 +3,11 @@ import cancel from "../../assets/icons/common/closeBtn.png";
 import { useNavigate } from "react-router-dom";
 import * as St from "./OnBoadingContents.style";
 
-const OnBoardingContents = () => {
+const OnBoardingContents: React.FC = () => {
   const navi = useNavigate();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
 

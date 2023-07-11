@@ -5,13 +5,13 @@ import onboarding2 from "../../assets/onboarding/onboarding2.png";
 import onboarding3 from "../../assets/onboarding/onboarding3.png";
 
 const Content: React.FC = () => {
-  return <ContentBox onboarding2={0} onboarding3={0} />;
+  return <ContentBox onboarding2={true} onboarding3={true} />;
 };
 // onboarding props type이 boolean 아닌가? 나중에 확인해서 적용해.
 
 type TContentBox = {
-  onboarding2: number;
-  onboarding3: number;
+  onboarding2: boolean;
+  onboarding3: boolean;
 };
 
 const ContentBox = styled.div<TContentBox>`

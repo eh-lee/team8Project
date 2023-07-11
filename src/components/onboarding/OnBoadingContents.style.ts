@@ -5,9 +5,10 @@ import onboarding2 from "../../assets/onboarding/onboarding2.png";
 import onboarding3 from "../../assets/onboarding/onboarding3.png";
 
 type TDot = {
-  dot2: number;
-  dot3: number;
-  dot4: number;
+  dot1: boolean;
+  dot2: boolean;
+  dot3: boolean;
+  dot4: boolean;
 };
 
 const Dot = styled.div<TDot>`
@@ -38,8 +39,9 @@ const Dot = styled.div<TDot>`
 `;
 
 type TCurrDot = {
-  dot2: number;
-  dot3: number;
+  dot1: boolean;
+  dot2: boolean;
+  dot3: boolean;
 };
 
 const CurrDot = styled.div<TCurrDot>`
@@ -125,8 +127,8 @@ const Desc = styled.div`
 `;
 
 type TContent = {
-  onboarding2: number;
-  onboarding3: number;
+  onboarding2: boolean;
+  onboarding3: boolean;
 };
 
 const Content = styled.div<TContent>`
