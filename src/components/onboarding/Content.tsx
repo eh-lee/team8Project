@@ -10,8 +10,8 @@ const Content: React.FC = () => {
 // onboarding props type이 boolean 아닌가? 나중에 확인해서 적용해.
 
 type TContentBox = {
-  onboarding2: boolean;
-  onboarding3: boolean;
+  onboarding2?: boolean;
+  onboarding3?: boolean;
 };
 
 const ContentBox = styled.div<TContentBox>`
