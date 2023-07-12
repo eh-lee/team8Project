@@ -16,6 +16,7 @@
 
 - 개발 : 3월 31일 ~ 5월 12일(6주)
 - 유저 테스트 : 5월 4일 12시 ~ 5월 7일 22시
+- 보안 강화 및 TS 마이그레이션 : 6월 8일 ~
 
 </br>
 
@@ -27,16 +28,16 @@
 
 > **기술 스택**
 
-<p align="center"><img style="border-radius: 10px;" src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white">&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+<p align="center"><img style="border-radius: 10px;" src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/>&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white">&nbsp;&nbsp;<img style="border-radius: 10px;" src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
 
 </br>
 
 > **팀원**
 
-| 이름   | 깃허브                                                   |
-| ------ | -------------------------------------------------------- |
-| 김은영 | [https://github.com/yeooong](https://github.com/yeooong) |
-| 이은형 | [https://github.com/eh-lee](https://github.com/eh-lee)   |
+| 이름         | 깃허브                                                   |
+| ------------ | -------------------------------------------------------- |
+| 김은영       | [https://github.com/yeooong](https://github.com/yeooong) |
+| 이은형(팀장) | [https://github.com/eh-lee](https://github.com/eh-lee)   |
 
 </br>
 
