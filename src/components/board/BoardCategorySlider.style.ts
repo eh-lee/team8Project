@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-// type TCatButton = {
-//   index: string;
-// };
-
-// const CatButton = styled.button<TCatButton>`
 const CatButton = styled.button`
   margin-left: ${(props) => (props.index === 0 ? "30px" : "10px")};
 `;

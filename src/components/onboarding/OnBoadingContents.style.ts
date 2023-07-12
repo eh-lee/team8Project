@@ -4,14 +4,14 @@ import onboarding1 from "../../assets/onboarding/onboarding1.png";
 import onboarding2 from "../../assets/onboarding/onboarding2.png";
 import onboarding3 from "../../assets/onboarding/onboarding3.png";
 
-type TDot = {
-  dot1: boolean;
-  dot2: boolean;
-  dot3: boolean;
-  dot4: boolean;
+type DotsType = {
+  dot1?: boolean | number;
+  dot2?: boolean | number;
+  dot3?: boolean | number;
+  dot4?: boolean | number;
 };
 
-const Dot = styled.div<TDot>`
+const Dot = styled.div<DotsType>`
   width: 8px;
   height: 8px;
   border-radius: 4px;
@@ -38,13 +38,7 @@ const Dot = styled.div<TDot>`
     `}
 `;
 
-type TCurrDot = {
-  dot1: boolean;
-  dot2: boolean;
-  dot3: boolean;
-};
-
-const CurrDot = styled.div<TCurrDot>`
+const CurrDot = styled.div<DotsType>`
   width: 16px;
   height: 8px;
   border-radius: 4px;
@@ -82,7 +76,7 @@ const DescSubP = styled.p`
 `;
 
 type TAuthBtn = {
-  borderColor: string;
+  borderColor?: string | undefined;
 };
 
 const AuthBtn = styled.button<TAuthBtn>`

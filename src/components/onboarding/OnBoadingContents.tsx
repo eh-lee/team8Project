@@ -66,14 +66,12 @@ const OnBoardingContents: React.FC = () => {
       <St.OnBoardingButton
         dir="left"
         onClick={() => handlePageChange(page === 1 ? 3 : page - 1)}
-        alt="이전 이미지로"
       >
         ❮
       </St.OnBoardingButton>
       <St.OnBoardingButton
         dir="right"
         onClick={() => handlePageChange(page === 3 ? 1 : page + 1)}
-        alt="다음 이미지로"
       >
         ❯
       </St.OnBoardingButton>
