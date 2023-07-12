@@ -16,6 +16,7 @@
 
 - 개발 : 3월 31일 ~ 5월 12일(6주)
 - 유저 테스트 : 5월 4일 12시 ~ 5월 7일 22시
+- 보안 강화(XSS, CSRF) : 6월 8일 ~ 9일
 
 </br>
 
@@ -33,10 +34,10 @@
 
 > **팀원**
 
-| 이름   | 깃허브                                                   |
-| ------ | -------------------------------------------------------- |
-| 김은영 | [https://github.com/yeooong](https://github.com/yeooong) |
-| 이은형 | [https://github.com/eh-lee](https://github.com/eh-lee)   |
+| 이름         | 깃허브                                                   |
+| ------------ | -------------------------------------------------------- |
+| 김은영       | [https://github.com/yeooong](https://github.com/yeooong) |
+| 이은형(팀장) | [https://github.com/eh-lee](https://github.com/eh-lee)   |
 
 </br>
 
