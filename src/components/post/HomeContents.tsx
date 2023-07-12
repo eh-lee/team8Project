@@ -7,15 +7,9 @@ import * as St from "./HomeContents.style";
 const HomeContents = () => {
   return (
     <St.XXXPostCardSliders>
-      {/* <li> */}
       <HotPostCardSlider />
-      {/* </li> */}
-      {/* <li> */}
       <LiveBattleCard />
-      {/* </li> */}
-      {/* <li> */}
       <NewPostCardSlider />
-      {/* </li> */}
     </St.XXXPostCardSliders>
   );
 };

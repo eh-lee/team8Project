@@ -5,15 +5,12 @@ import { ReactComponent as Like } from "../../assets/icons/common/like.svg";
 import { ReactComponent as Comment } from "../../assets/icons/common/comment.svg";
 import { ReactComponent as Img } from "../../assets/icons/common/img.svg";
 
-
-
 const PostCardWrap = styled.div`
   background-color: white;
   padding: 8% 0 5% 7%;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  ${({ isFirst }) => isFirst && `border-top-radius: 1rem;`};
 
   &:hover {
     cursor: pointer;
@@ -142,21 +139,21 @@ const DetailPostContentCount = styled.div`
 `;
 
 export {
-    PostCardWrap,
-    PostCardTitleBox,
-    PostCardRow,
-    PostCardCatBtn,
-    PostCardTitle,
-    PostCardTitleIcon,
-    IconVote,
-    IconImg,
-    PostCardContentBox,
-    PostCardContent,
-    PostCardInfoBox,
-    DetailPostContent,
-    DetailPostContentIcon,
-    IconLike,
-    IconView,
-    IconComment,
-    DetailPostContentCount,
-}
+  PostCardWrap,
+  PostCardTitleBox,
+  PostCardRow,
+  PostCardCatBtn,
+  PostCardTitle,
+  PostCardTitleIcon,
+  IconVote,
+  IconImg,
+  PostCardContentBox,
+  PostCardContent,
+  PostCardInfoBox,
+  DetailPostContent,
+  DetailPostContentIcon,
+  IconLike,
+  IconView,
+  IconComment,
+  DetailPostContentCount,
+};

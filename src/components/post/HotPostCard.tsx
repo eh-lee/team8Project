@@ -4,7 +4,19 @@ import Categories from "../elem/Categories";
 import Icons from "../elem/Icons";
 import * as St from "./HotPostCard.style";
 
-const HotPostCard = ({
+interface HotPostCardProps {
+  mainCategory: string;
+  category: string;
+  title: string;
+  content: string;
+  likesCount: number;
+  viewCount: number;
+  commentCount: number;
+  postIdx: number;
+  isImg: boolean;
+}
+
+const HotPostCard: React.FC<HotPostCardProps> = ({
   mainCategory,
   category,
   title,
@@ -20,19 +32,19 @@ const HotPostCard = ({
   const categories = Categories;
   const icons = Icons;
 
-  const categoryIconsMap = categories.reduce((acc, cur, idx) => {
-    acc[cur] = icons[idx];
-    return acc;
-  }, {});
+  const categoryIconsMap: Record<string, React.ReactNode> = categories.reduce(
+    (acc, cur, idx) => {
+      acc[cur] = icons[idx];
+      return acc;
+    },
+    {}
+  );
 
   return (
     <St.PostCardWrap
-      mainCategory={mainCategory}
-      category={category}
       onClick={() => {
         navigate(`/board/${postIdx}`);
       }}
-      // className="no-hover"
     >
       <St.PostCardCont>
         <St.TitleBox>
@@ -46,12 +58,14 @@ const HotPostCard = ({
           </St.MainCategory>
           <St.Title>
             {title?.length > 20 ? title.substring(0, 20) + "..." : title}
-            {isImg ? <St.IconImg/> : null}
+            {isImg ? <St.IconImg /> : null}
           </St.Title>
         </St.TitleBox>
 
         <St.ContentBox>
-          <St.Content>{content?.length > 50 ? content.substring(0, 50) + "..." : content}</St.Content>
+          <St.Content>
+            {content?.length > 50 ? content.substring(0, 50) + "..." : content}
+          </St.Content>
         </St.ContentBox>
         <St.InfoBox>
           {/* 좋아요수 */}

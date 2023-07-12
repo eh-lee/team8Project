@@ -15,13 +15,10 @@ const BoardPostCard = ({
   postIdx,
   likesCount,
   nickname,
-  // isFirst,
-  // 자식의 자식이 돼 벌임
 }) => {
   const navigate = useNavigate();
 
   //  포스트 투표 등 GET
-
   const [pollData, setPollData] = useState({});
   const [pollType, setPollType] = useState("");
   const [isImgs, setIsImgs] = useState(false);
@@ -37,7 +34,7 @@ const BoardPostCard = ({
       }
     };
     fetchPoll();
-  }, []);
+  }, [postIdx]);
 
   useEffect(() => {
     const fetchImgs = async () => {
@@ -51,7 +48,7 @@ const BoardPostCard = ({
       }
     };
     fetchImgs();
-  }, []);
+  }, [postIdx]);
 
   const categories = Categories;
   const icons = Icons;

@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProCon from "../poll/ProCon";
 import PollModal from "../modal/PollModal";
-import FalseGuard from "../../components/hook/guard/FalseGuard";
+import FalseGuard from "../hook/guard/FalseGuard";
 import WriteFooter from "../footer/WriteFooter";
 import ModalPortal from "../modal/ModalPortal";
-import MobileLayout from "../../layout/MobileLayout.tsx";
+import MobileLayout from "../../layout/MobileLayout";
 import CateogryModal from "../modal/CateogryModal";
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { instanceWithAuth } from "../../api/axios";
 import { ReactComponent as VoteIcon } from "../../assets/icons/common/vote.svg";
 import * as St from "./EditPost.style";
 
-const EditPost = () => {
+const EditPost: React.FC = () => {
   FalseGuard();
 
   useEffect(() => {
@@ -37,7 +36,11 @@ const EditPost = () => {
     getForEditPost();
     setMaincategory(location.state.detailPostCat.maincategory);
     setCategory(location.state.detailPostCat.category);
-  }, [postIdx]);
+  }, [
+    postIdx,
+    location.state.detailPostCat.maincategory,
+    location.state.detailPostCat.category,
+  ]);
 
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
@@ -50,15 +53,21 @@ const EditPost = () => {
 
   const [pollTitle, setPollTitle] = useState("");
   const [pollType, setPollType] = useState("");
+  const detailPollTitle: string = "";
+  const detailProCount: number = 0;
+  const detailConCount: number = 0;
+  const detailPostIdx: number = 0;
+  const parentProInputValue: boolean = false;
+  const parentConInputValue: boolean = false;
 
-  const PollCallback = (pollType, pollTitle) => {
+  const PollCallback = (pollType: string, pollTitle: string) => {
     setPollType(pollType);
     setPollTitle(pollTitle);
   };
 
   const navi = useNavigate();
 
-  const WriteCallback = (x, y) => {
+  const WriteCallback = (x: string, y: string) => {
     setMaincategory(x);
     setCategory(y);
   };
@@ -67,12 +76,12 @@ const EditPost = () => {
   const [desc, setDesc] = useState("");
   const [maincategory, setMaincategory] = useState("");
   const [category, setCategory] = useState("");
-  const [tag, setTag] = useState([]);
+  const tag: string[] = [];
 
   // 이미지 업로드
-  const [imgs, setImgs] = useState([]);
+  const [imgs, setImgs] = useState<File[]>([]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -82,7 +91,7 @@ const EditPost = () => {
     formData.append("category", category);
     formData.append("pollType", pollType);
     formData.append("pollTitle", pollTitle);
-    formData.append("tag", tag);
+    formData.append("tag", tag.join(","));
 
     for (let i = 0; i < imgs.length; i++) {
       formData.append("files", imgs[i]);
@@ -172,7 +181,6 @@ const EditPost = () => {
               <VoteText>투표 생성</VoteText>
             </Poll>
             <St.WriteContent
-              type="text"
               value={desc}
               onChange={(e) => {
                 setDesc(e.target.value);
@@ -182,25 +190,19 @@ const EditPost = () => {
           </St.WriteForm>
           <WriteFooter setImgs={setImgs} />
 
-          {/* ======================= Poll preview ======================= */}
-          {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
-          {/* {pollType === "select" ? (
-        <>
-              <div>선택형 투표 미리보기입니다.</div>
-              <div>{pollTitle}</div>
-              <div>{tag}</div>
-              <div>
-                <St.StIconTrash onClick={proConDelHandler} />
-              </div>
-            </>
-          ) : null} */}
+          {/* {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null} */}
 
-          {/* for test */}
-          {/* <Poll onClick={() => pollModalOpenHandler()}>
-        <VoteIcon />
-        투표 생성
-      </Poll> */}
-          {/* ======================= Poll preview ======================= */}
+          {pollType === "proCon" ? (
+            <ProCon
+              pollTitle={pollTitle}
+              detailPollTitle={detailPollTitle}
+              detailProCount={detailProCount}
+              detailConCount={detailConCount}
+              detailPostIdx={detailPostIdx}
+              parentProInputValue={parentProInputValue}
+              parentConInputValue={parentConInputValue}
+            />
+          ) : null}
 
           <ModalPortal>
             <St.ModalCont>

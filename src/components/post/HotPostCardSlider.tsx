@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import HotPostCard from "./HotPostCard";
+import HotPostCard, { HotPostCardProps } from "./HotPostCard";
 import { instance } from "../../api/axios";
 import * as St from "./HotPostCardSlider.style";
 
-const HotPostCardSlider = () => {
+interface HotPostCardSliderProps {}
+
+const HotPostCardSlider: React.FC<HotPostCardSliderProps> = () => {
   useEffect(() => {
     const getHotPost = async () => {
       const response = await instance.get("/postCards/hotPostCard");
@@ -12,25 +14,25 @@ const HotPostCardSlider = () => {
     getHotPost();
   }, []);
 
-  const [postCards, setPostCards] = useState([]);
+  const [postCards, setPostCards] = useState<HotPostCardProps[]>([]);
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
     value: "348px",
   });
 
-  const genPostCardsArray = (target) => {
+  const genPostCardsArray = (target: number) => {
     if (target === 3) {
-      return [1, 2, target, 4, 0].map((el) => postCards?.at(el));
+      return [1, 2, target, 4, 0].map((el) => postCards?.[el]);
     }
     if (target === 4) {
-      return [2, 3, target, 0, 1].map((el) => postCards?.at(el));
+      return [2, 3, target, 0, 1].map((el) => postCards?.[el]);
     }
     if (target === -4) {
-      return [-1, 0, target, -3, -2].map((el) => postCards?.at(el));
+      return [-1, 0, target, -3, -2].map((el) => postCards?.[el]);
     }
-    return [target - 2, target - 1, target, target + 1, target + 2].map((el) =>
-      postCards?.at(el)
+    return [target - 2, target - 1, target, target + 1, target + 2].map(
+      (el) => postCards?.[el]
     );
     // 예) target idx = 0 => [postCards[4], postCards[0], postCards[1]]
   };
@@ -68,12 +70,12 @@ const HotPostCardSlider = () => {
             <HotPostCard
               key={el?.postIdx}
               postIdx={el?.postIdx}
-              mainCategory={el?.maincategory}
+              mainCategory={el?.mainCategory}
               category={el?.category}
               title={el?.title}
-              content={el?.desc}
+              content={el?.content}
               likesCount={el?.likesCount}
-              viewCount={el?.postViewCount}
+              viewCount={el?.viewCount}
               commentCount={el?.commentCount}
               isImg={el?.isImg}
             />
