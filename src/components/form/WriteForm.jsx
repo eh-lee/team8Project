@@ -43,6 +43,24 @@ const WriteForm = ({ setLoading }) => {
   // 이미지 업로드
   const [imgs, setImgs] = useState([]);
 
+  // 이미지 선택 시 base64 인코딩 적용
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const encodedImgs = [];
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        encodedImgs.push(base64String);
+        if (encodedImgs.length === files.length) {
+          setImgs(encodedImgs);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   // 게시글 등록 핸들러
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -57,7 +75,9 @@ const WriteForm = ({ setLoading }) => {
     formData.append("tag", tag);
 
     for (let i = 0; i < imgs.length; i++) {
-      formData.append("files", imgs[i]);
+      // 이미지를 base64로 디코딩하여 Blob 객체로 변환
+      const blob = await fetch(imgs[i]).then((res) => res.blob());
+      formData.append("files", blob, `image_${i}`);
     }
 
     if (title.length < 3 || title.length > 25) {
@@ -150,7 +170,7 @@ const WriteForm = ({ setLoading }) => {
           placeholder="훈수 받고 싶은 내용을 입력하세요."
         ></St.WriteContent>
       </St.WriteForm>
-      <WriteFooter setImgs={setImgs} />
+      <WriteFooter setImgs={setImgs} handleImageUpload={handleImageUpload} />
 
       {/* ======================= Poll preview ======================= */}
       {pollType === "proCon" ? <ProCon pollTitle={pollTitle} /> : null}
