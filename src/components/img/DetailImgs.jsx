@@ -28,6 +28,7 @@ const DetailImgs = ({ postIdx }) => {
             <St.ImgBox
               key={i}
               src={`${process.env.REACT_APP_IMG_URL}/${img}`}
+              loading="lazy"
               alt={none}
             />
           ))}
