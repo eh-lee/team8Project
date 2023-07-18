@@ -79,7 +79,6 @@ const ProCon = ({
     const putVote = async () => {
       await instanceWithAuth.put(`/prefer/post/${detailPostIdx}`, {
         proInputValue,
-
         conInputValue,
       });
     };
